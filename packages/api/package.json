@@ -1,0 +1,22 @@
+{
+  "name": "@bifrost-network/api",
+  "version": "1.0.6",
+  "description": "Bifrost JS API",
+  "main": "index.js",
+  "author": "Edwin Wang <lark930@gmail.com>",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": "https://github.com/bifrost-codes/bifrost.js.git",
+  "bugs": {
+    "url": "https://github.com/bifrost-codes/bifrost.js/issues"
+  },
+  "homepage": "https://github.com/bifrost-codes/bifrost.js",
+  "dependencies": {
+    "@bifrost-network/types": "1.0.6",
+    "@babel/runtime": "^7.8.0",
+    "@polkadot/api": "^1.33.0"
+  }
+}
