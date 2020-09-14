@@ -1,32 +1,43 @@
 {
-  "name": "@bifrost-network/types",
+  "name": "@bifrost-finance/types",
   "version": "1.0.7",
   "description": "Bifrost JS types",
   "main": "index.js",
+  "keywords": [
+    "Polkadot",
+    "Bifrost",
+    "JsonRPC"
+  ],
   "author": "Edwin Wang <lark930@gmail.com>",
+  "maintainers": [
+    "Edwin Wang <lark930@gmail.com>"
+  ],
+  "contributors": [],
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "repository": "https://github.com/bifrost-codes/bifrost.js.git",
-  "bugs": {
-    "url": "https://github.com/bifrost-codes/bifrost.js/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bifrost-finance/bifrost.js.git"
   },
-  "homepage": "https://github.com/bifrost-codes/bifrost.js",
+  "bugs": {
+    "url": "https://github.com/bifrost-finance/bifrost.js/issues"
+  },
+  "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/types#readme",
   "dependencies": {
-    "@babel/runtime": "^7.8.0",
-    "@polkadot/api": "^1.33.0"
+    "@babel/runtime": "^7.11.2",
+    "@polkadot/metadata": "1.33.0-beta.0",
+    "@polkadot/util": "^3.4.1",
+    "@polkadot/util-crypto": "^3.4.1",
+    "@types/bn.js": "^4.11.6",
+    "bn.js": "^5.1.3",
+    "memoizee": "^0.4.14",
+    "rxjs": "^6.6.2"
   },
   "devDependencies": {
-    "@polkadot/typegen": "^1.33.0",
-    "ts-node": "^8.6.2",
-    "typescript": "^3.8.2"
-  },
-  "scripts": {
-    "build": "yarn generate:defs && yarn generate:meta",
-    "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package sample-polkadotjs-typegen/interfaces --input ./src/interfaces",
-    "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package sample-polkadotjs-typegen/interfaces --endpoint ./bifrost.json --output ./src/interfaces --strict",
-    "lint": "tsc --noEmit --pretty"
+    "@polkadot/keyring": "^3.4.1",
+    "@types/memoizee": "^0.4.4"
   }
 }

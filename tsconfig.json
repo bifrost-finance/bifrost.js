@@ -8,8 +8,10 @@
       "baseUrl": ".",
       "paths":
       {
-        "@bifrost-network/types": ["packages/types/src"],
-        "@bifrost-network/types/*": ["packages/types/src/*"]
+        "@bifrost-finance/api": ["packages/api/src"],
+        "@bifrost-finance/api/*": ["packages/api/src/*"],
+        "@bifrost-finance/types": ["packages/types/src"],
+        "@bifrost-finance/types/*": ["packages/types/src/*"]
       },
       "skipLibCheck": true,
       "typeRoots": [
