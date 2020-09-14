@@ -72,6 +72,7 @@ export interface BlockNumber extends u32 {}
 export interface BlockSigningAuthority extends ITuple<[UnsignedInt, BlockSigningAuthorityV0]> {}
 
 /** @name BlockSigningAuthorityV0 */
+// @ts-ignore
 export interface BlockSigningAuthorityV0 extends Struct {
   readonly threshold: u32;
   readonly keys: Vec<KeyWeight>;

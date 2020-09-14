@@ -4,6 +4,7 @@
 import { AnyNumber, ITuple } from '@polkadot/types/types';
 import { Compact, Option, U8aFixed, Vec } from '@polkadot/types/codec';
 import { Bytes, Data, bool, u128, u16, u32, u64, u8 } from '@polkadot/types/primitive';
+import { Action, ActionReceipt, Checksum256, ConvertPrice, IncrementalMerkle, ProducerAuthoritySchedule, RatePerBlock, SignedBlockHeader, TokenSymbol, TxOut } from '@bifrost-finance/types/interfaces/primitives';
 import { BabeEquivocationProof } from '@polkadot/types/interfaces/babe';
 import { MemberCount, ProposalIndex } from '@polkadot/types/interfaces/collective';
 import { AccountVote, Conviction, PropIndex, Proposal, ReferendumIndex } from '@polkadot/types/interfaces/democracy';
@@ -21,7 +22,6 @@ import { CompactAssignments, ElectionScore, ElectionSize, EraIndex, RewardDestin
 import { Key } from '@polkadot/types/interfaces/system';
 import { Timepoint } from '@polkadot/types/interfaces/utility';
 import { VestingInfo } from '@polkadot/types/interfaces/vesting';
-import { Action, ActionReceipt, Checksum256, ConvertPrice, IncrementalMerkle, ProducerAuthoritySchedule, RatePerBlock, SignedBlockHeader, TokenSymbol, TxOut } from 'sample-polkadotjs-typegen/interfaces/primitives';
 import { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/submittable' {

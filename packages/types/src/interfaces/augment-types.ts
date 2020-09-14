@@ -3,6 +3,7 @@
 
 import { Compact, Option, Raw, Vec } from '@polkadot/types/codec';
 import { BitVec, Bytes, Data, DoNotConstruct, Null, StorageKey, Text, Type, U256, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types/primitive';
+import { AccountAsset, AccountName, Action, ActionName, ActionReceipt, AssetConfig, BlockHeader, BlockSigningAuthority, BlockSigningAuthorityV0, BlockTimestamp, BlockchainType, BridgeAssetSymbol, Checksum256, ConvertPool, ConvertPrice, Cost, DataVersion, Extension, Fail, Fee, FlatMap, InVariantPool, Income, IncrementalMerkle, InvariantValue, KeyWeight, MultiSig, MultiSigTx, PermissionLevel, PermissionName, PoolWeight, Precision, Price, Processing, ProducerAuthority, ProducerAuthoritySchedule, ProducerKey, ProducerSchedule, ProxyValidatorRegister, PublicKey, RatePerBlock, RequestIdentifier, SignedBlockHeader, SpecIndex, Token, TokenPool, TokenSymbol, TxOut, TxSig, UnsignedInt, VTokenPool, VersionId } from '@bifrost-finance/types/interfaces/primitives';
 import { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
 import { RawAuraPreDigest } from '@polkadot/types/interfaces/aura';
 import { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -47,7 +48,6 @@ import { OpenTip, OpenTipFinderTo225, OpenTipTip, OpenTipTo225, TreasuryProposal
 import { Multiplier } from '@polkadot/types/interfaces/txpayment';
 import { Multisig, Timepoint } from '@polkadot/types/interfaces/utility';
 import { VestingInfo } from '@polkadot/types/interfaces/vesting';
-import { AccountAsset, AccountName, Action, ActionName, ActionReceipt, AssetConfig, BlockHeader, BlockSigningAuthority, BlockSigningAuthorityV0, BlockTimestamp, BlockchainType, BridgeAssetSymbol, Checksum256, ConvertPool, ConvertPrice, Cost, DataVersion, Extension, Fail, Fee, FlatMap, InVariantPool, Income, IncrementalMerkle, InvariantValue, KeyWeight, MultiSig, MultiSigTx, PermissionLevel, PermissionName, PoolWeight, Precision, Price, Processing, ProducerAuthority, ProducerAuthoritySchedule, ProducerKey, ProducerSchedule, ProxyValidatorRegister, PublicKey, RatePerBlock, RequestIdentifier, SignedBlockHeader, SpecIndex, Token, TokenPool, TokenSymbol, TxOut, TxSig, UnsignedInt, VTokenPool, VersionId } from 'sample-polkadotjs-typegen/interfaces/primitives';
 
 declare module '@polkadot/types/types/registry' {
   export interface InterfaceTypes {
@@ -2081,12 +2081,12 @@ declare module '@polkadot/types/types/registry' {
     BlockSigningAuthority: BlockSigningAuthority;
     'Option<BlockSigningAuthority>': Option<BlockSigningAuthority>;
     'Vec<BlockSigningAuthority>': Vec<BlockSigningAuthority>;
-    BlockSigningAuthorityV0: BlockSigningAuthorityV0;
-    'Option<BlockSigningAuthorityV0>': Option<BlockSigningAuthorityV0>;
-    'Vec<BlockSigningAuthorityV0>': Vec<BlockSigningAuthorityV0>;
     KeyWeight: KeyWeight;
     'Option<KeyWeight>': Option<KeyWeight>;
     'Vec<KeyWeight>': Vec<KeyWeight>;
+    BlockSigningAuthorityV0: BlockSigningAuthorityV0;
+    'Option<BlockSigningAuthorityV0>': Option<BlockSigningAuthorityV0>;
+    'Vec<BlockSigningAuthorityV0>': Vec<BlockSigningAuthorityV0>;
     InvariantValue: InvariantValue;
     'Option<InvariantValue>': Option<InvariantValue>;
     'Vec<InvariantValue>': Vec<InvariantValue>;

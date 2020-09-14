@@ -1,20 +1,26 @@
+// Copyright 2020 @bifrost-finance/types authors & contributors
+// This software may be modified and distributed under the terms
+// of the Apache-2.0 license. See the LICENSE file for details.
+
+/* eslint-disable sort-keys */
+
 export default {
   types: {
     Token: {
       symbol: 'Vec<u8>',
       precision: 'u16',
-      totalSupply: 'u128',
+      totalSupply: 'u128'
     },
     VersionId: 'u32',
     Action: {
       account: 'AccountName',
       name: 'ActionName',
       authorization: 'Vec<PermissionLevel>',
-      data: 'Vec<u8>',
+      data: 'Vec<u8>'
     },
     PermissionLevel: {
       actor: 'AccountName',
-      permission: 'PermissionName',
+      permission: 'PermissionName'
     },
     PermissionName: 'u64',
     ActionReceipt: {
@@ -24,43 +30,43 @@ export default {
       recv_sequence: 'u64',
       auth_sequence: 'FlatMap<AccountName, u64>',
       code_sequence: 'UnsignedInt',
-      abi_sequence: 'UnsignedInt',
+      abi_sequence: 'UnsignedInt'
     },
     Checksum256: '([u8;32])',
     BlockchainType: {
       _enum: [
         'BIFROST',
-        'EOS',
+        'EOS'
       ]
     },
     Precision: 'u32',
     BridgeAssetSymbol: {
       blockchain: 'BlockchainType',
       symbol: 'Vec<u8>',
-      precision: 'Precision',
+      precision: 'Precision'
     },
     ProducerSchedule: {
       version: 'u32',
-      producers: 'Vec<ProducerKey>',
+      producers: 'Vec<ProducerKey>'
     },
     ProducerKey: {
       producer_name: 'AccountName',
-      block_signing_key: 'PublicKey',
+      block_signing_key: 'PublicKey'
     },
     AccountName: 'u64',
     ActionName: 'u64',
     PublicKey: {
       type_: 'UnsignedInt',
-      data: '[u8;33]',
+      data: '[u8;33]'
     },
     UnsignedInt: 'u32',
     Signature: {
       type_: 'UnsignedInt',
-      data: '[u8;65]',
+      data: '[u8;65]'
     },
     SignedBlockHeader: {
       block_header: 'BlockHeader',
-      producer_signature: 'Signature',
+      producer_signature: 'Signature'
     },
     BlockHeader: {
       timestamp: 'BlockTimestamp',
@@ -71,7 +77,7 @@ export default {
       action_mroot: 'Checksum256',
       schedule_version: 'u32',
       new_producers: 'Option<ProducerSchedule>',
-      header_extensions: 'Vec<Extension>',
+      header_extensions: 'Vec<Extension>'
     },
     BlockTimestamp: '(u32)',
     Extension: '(u16, Vec<u8>)',
@@ -80,15 +86,15 @@ export default {
       _active_nodes: 'Vec<Checksum256>'
     },
     FlatMap: {
-      map: 'Vec<(ActionName, u64)>',
+      map: 'Vec<(ActionName, u64)>'
     },
     TxSig: {
       signature: 'Vec<u8>',
-      author: 'AccountId',
+      author: 'AccountId'
     },
     MultiSig: {
       signatures: 'Vec<TxSig>',
-      threshold: 'u8',
+      threshold: 'u8'
     },
     MultiSigTx: {
       chain_id: 'Vec<u8>',
@@ -96,16 +102,16 @@ export default {
       multi_sig: 'MultiSig',
       action: 'Action',
       from: 'AccountId',
-      token_symbol: 'TokenSymbol',
+      token_symbol: 'TokenSymbol'
     },
     Processing: {
       tx_id: 'Vec<u8>',
-      multi_sig_tx: 'MultiSigTx',
+      multi_sig_tx: 'MultiSigTx'
     },
     Fail: {
       tx_id: 'Vec<u8>',
       reason: 'Vec<u8>',
-      tx: 'MultiSigTx',
+      tx: 'MultiSigTx'
     },
     TxOut: {
       _enum: {
@@ -114,7 +120,7 @@ export default {
         Signed: 'MultiSigTx',
         Processing: 'Processing',
         Success: 'Vec<u8>',
-        Fail: 'Fail',
+        Fail: 'Fail'
       }
     },
     ConvertPrice: 'u128',
@@ -134,7 +140,7 @@ export default {
       locked: 'Balance',
       available: 'Balance',
       cost: 'Cost',
-      income: 'Income',
+      income: 'Income'
     },
     SpecIndex: 'u32',
     RequestIdentifier: 'u64',
@@ -143,15 +149,15 @@ export default {
       token_pool: 'Balance',
       vtoken_pool: 'Balance',
       current_reward: 'Balance',
-      pending_reward: 'Balance',
+      pending_reward: 'Balance'
     },
     ProducerAuthoritySchedule: {
       version: 'u32',
-      producers: 'Vec<ProducerAuthority>',
+      producers: 'Vec<ProducerAuthority>'
     },
     ProducerAuthority: {
       producer_name: 'ActionName',
-      authority: 'BlockSigningAuthority',
+      authority: 'BlockSigningAuthority'
     },
     BlockSigningAuthority: '(UnsignedInt, BlockSigningAuthorityV0)',
     BlockSigningAuthorityV0: {
@@ -160,13 +166,13 @@ export default {
     },
     KeyWeight: {
       key: 'PublicKey',
-      weight: 'u16',
+      weight: 'u16'
     },
     InvariantValue: 'Balance',
     PoolWeight: 'Balance',
     AssetConfig: {
       redeem_duration: 'BlockNumber',
-      min_reward_per_block: 'Balance',
+      min_reward_per_block: 'Balance'
     },
     ProxyValidatorRegister: {
       last_block: 'BlockNumber',
@@ -174,8 +180,8 @@ export default {
       need: 'Balance',
       staking: 'Balance',
       reward_per_block: 'Balance',
-      validator_address: 'Vec<u8>',
+      validator_address: 'Vec<u8>'
     },
-    BlockNumber: 'u32',
+    BlockNumber: 'u32'
   }
 };

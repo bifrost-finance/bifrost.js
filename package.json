@@ -23,20 +23,22 @@
     "test": "polkadot-dev-run-test --coverage --runInBand --testPathIgnorePatterns e2e",
     "test:one": "polkadot-dev-run-test",
     "test:watch": "polkadot-dev-run-test --watch",
-    "generate:defs": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-defs --package @bifrost-finance/types/interfaces --input ./packages/types/src/interfaces",
-    "generate:meta": "ts-node --skip-project node_modules/@polkadot/typegen/scripts/polkadot-types-from-chain --package @bifrost-finance/types/interfaces --endpoint ./packages/types/bifrost.json --output ./packages/types/src/interfaces"
+    "generate": "yarn generate:defs && yarn generate:meta",
+    "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package @bifrost-finance/types/interfaces --input ./packages/types/src/interfaces",
+    "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package @bifrost-finance/types/interfaces --endpoint ./packages/types/bifrost.json --output ./packages/types/src/interfaces --strict"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/register": "^7.11.5",
     "@babel/runtime": "^7.11.2",
-    "@polkadot/dev": "^0.55.47",
+    "@polkadot/dev": "=0.32.17",
     "@polkadot/ts": "^0.3.43",
     "@polkadot/typegen": "workspace:packages/typegen",
     "@types/jest": "^26.0.13",
     "@vuepress/plugin-search": "^1.5.4",
     "copyfiles": "^2.3.0",
     "typedoc": "^0.19.1",
+    "ts-node": "^9.0.0",
     "typedoc-plugin-markdown": "^2.4.2",
     "typedoc-plugin-no-inherit": "^1.1.10"
   },

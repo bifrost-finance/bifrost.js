@@ -11,7 +11,9 @@
         "@bifrost-finance/api": ["packages/api/src"],
         "@bifrost-finance/api/*": ["packages/api/src/*"],
         "@bifrost-finance/types": ["packages/types/src"],
-        "@bifrost-finance/types/*": ["packages/types/src/*"]
+        "@bifrost-finance/types/*": ["packages/types/src/*"],
+        "@polkadot/api/augment": ["packages/types/src/interfaces/augment-api.ts"],
+        "@polkadot/types/augment": ["packages/types/src/interfaces/augment-types.ts"]
       },
       "skipLibCheck": true,
       "typeRoots": [

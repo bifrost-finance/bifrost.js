@@ -3,11 +3,11 @@
 
 import { Vec } from '@polkadot/types/codec';
 import { u16, u32, u64 } from '@polkadot/types/primitive';
+import { ConvertPrice, Fee } from '@bifrost-finance/types/interfaces/primitives';
 import { Balance, BalanceOf, BlockNumber, LockIdentifier, ModuleId, Moment, Perbill, Percent, Permill, RuntimeDbWeight, Weight } from '@polkadot/types/interfaces/runtime';
 import { SessionIndex } from '@polkadot/types/interfaces/session';
 import { EraIndex } from '@polkadot/types/interfaces/staking';
 import { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support';
-import { ConvertPrice, Fee } from 'sample-polkadotjs-typegen/interfaces/primitives';
 import { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/consts' {
