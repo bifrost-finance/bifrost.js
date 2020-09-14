@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-network/types",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Bifrost JS types",
   "main": "index.js",
   "author": "Edwin Wang <lark930@gmail.com>",
