@@ -162,7 +162,7 @@ export default {
     BlockSigningAuthority: '(UnsignedInt, BlockSigningAuthorityV0)',
     BlockSigningAuthorityV0: {
       threshold: 'u32',
-      keys: 'Vec<KeyWeight>',
+      keys: 'Vec<KeyWeight>'
     },
     KeyWeight: {
       key: 'PublicKey',
