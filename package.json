@@ -42,5 +42,8 @@
     "typedoc-plugin-markdown": "^2.4.2",
     "typedoc-plugin-no-inherit": "^1.1.10"
   },
-  "version": "1.0.7"
+  "version": "1.0.7",
+  "dependencies": {
+    "@bifrost-finance/api": "^1.0.12"
+  }
 }

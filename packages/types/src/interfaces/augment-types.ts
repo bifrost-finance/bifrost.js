@@ -2081,12 +2081,12 @@ declare module '@polkadot/types/types/registry' {
     BlockSigningAuthority: BlockSigningAuthority;
     'Option<BlockSigningAuthority>': Option<BlockSigningAuthority>;
     'Vec<BlockSigningAuthority>': Vec<BlockSigningAuthority>;
-    KeyWeight: KeyWeight;
-    'Option<KeyWeight>': Option<KeyWeight>;
-    'Vec<KeyWeight>': Vec<KeyWeight>;
     BlockSigningAuthorityV0: BlockSigningAuthorityV0;
     'Option<BlockSigningAuthorityV0>': Option<BlockSigningAuthorityV0>;
     'Vec<BlockSigningAuthorityV0>': Vec<BlockSigningAuthorityV0>;
+    KeyWeight: KeyWeight;
+    'Option<KeyWeight>': Option<KeyWeight>;
+    'Vec<KeyWeight>': Vec<KeyWeight>;
     InvariantValue: InvariantValue;
     'Option<InvariantValue>': Option<InvariantValue>;
     'Vec<InvariantValue>': Vec<InvariantValue>;
