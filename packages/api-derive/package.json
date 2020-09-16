@@ -1,31 +1,30 @@
 {
-    "name": "@bifrost-finance/api-derive",
-    "version": "1.0.12",
-    "description": "Additional polkadot.js derives for Bifrost",
-    "main": "index.js",
-    "author": "Edwin Wang <lark930@gmail.com>",
-    "license": "Apache-2.0",
-    "publishConfig": {
-      "access": "public",
-      "registry": "https://registry.npmjs.org"
+  "name": "@bifrost-finance/api-derive",
+  "version": "1.0.12",
+  "description": "Additional polkadot.js derives for Bifrost",
+  "main": "index.js",
+  "author": "Edwin Wang <lark930@gmail.com>",
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/bifrost-finance/bifrost.js.git"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/bifrost-finance/bifrost.js.git"
-      },
-      "bugs": {
-        "url": "https://github.com/bifrost-finance/bifrost.js/issues"
-      },
-      "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/api#readme",
-    "dependencies": {
-      "@bifrost-finance/types": "1.0.12",
-      "@babel/runtime": "^7.10.2",
-      "@polkadot/rpc-core": "^1.27.1",
-      "memoizee": "^0.4.14",
-      "rxjs": "^6.5.5"
+    "bugs": {
+      "url": "https://github.com/bifrost-finance/bifrost.js/issues"
     },
-    "devDependencies": {
-      "@types/memoizee": "^0.4.3"
-    }
+    "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/api#readme",
+  "dependencies": {
+    "@bifrost-finance/types": "1.0.12",
+    "@babel/runtime": "^7.10.2",
+    "@polkadot/rpc-core": "^1.27.1",
+    "memoizee": "^0.4.14",
+    "rxjs": "^6.5.5"
+  },
+  "devDependencies": {
+    "@types/memoizee": "^0.4.3"
   }
-  
+}
