@@ -29,6 +29,7 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "@bifrost-finance/types": "^1.0.0",
+    "@bifrost-finance/api-derive": "^1.0.0",
     "@polkadot/api-derive": "1.33.0-beta.0",
     "@polkadot/keyring": "^3.4.1",
     "@polkadot/metadata": "1.33.0-beta.0",

@@ -9,7 +9,7 @@ export default {
     Token: {
       symbol: 'Vec<u8>',
       precision: 'u16',
-      totalSupply: 'u128'
+      totalSupply: 'Balance'
     },
     VersionId: 'u32',
     Action: {
@@ -162,7 +162,7 @@ export default {
     BlockSigningAuthority: '(UnsignedInt, BlockSigningAuthorityV0)',
     BlockSigningAuthorityV0: {
       threshold: 'u32',
-      keys: 'Vec<KeyWeight>',
+      keys: 'Vec<KeyWeight>'
     },
     KeyWeight: {
       key: 'PublicKey',

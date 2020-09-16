@@ -252,7 +252,7 @@ export interface SpecIndex extends u32 {}
 export interface Token extends Struct {
   readonly symbol: Bytes;
   readonly precision: u16;
-  readonly totalSupply: u128;
+  readonly totalSupply: Balance;
 }
 
 /** @name TokenPool */
