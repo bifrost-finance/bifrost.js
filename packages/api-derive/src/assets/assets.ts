@@ -6,18 +6,38 @@ import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Token, TokenSymbol } from '@bifrost-finance/types/interfaces';
-import { memo } from '../util/memo';
+import { Balance } from '@polkadot/types/interfaces/runtime';
+import { memo } from '../util';
 
 /**
- * @name assets
- * @description get assets information
+ * @name getTokenInfo
+ * @description get Token information
  * @param instanceId
  * @param api
  */
-export function assets (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol) => Observable<Token> {
+export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol) => Observable<Token> {
   return memo(instanceId, (tokenSymbol: TokenSymbol) => {
     return api.query.assets.tokens(tokenSymbol).pipe(
       map((result: Token) => result)
+    );
+  });
+}
+
+/**
+ * @name getTokenSupply
+ * @description get Token total supply information
+ * @param instanceId
+ * @param api
+ */
+export function getTokenSupply (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol) => Observable<Balance> {
+  return memo(instanceId, (tokenSymbol: TokenSymbol):any => {
+    const getTokenInfoQuery = getTokenInfo(instanceId, api);
+
+    return getTokenInfoQuery(tokenSymbol).pipe(
+      map((result) => {
+        return result.totalSupply;
+      }
+      )
     );
   });
 }

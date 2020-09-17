@@ -3,5 +3,6 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import * as assets from './assets';
+import * as convert from './convert';
 
-export const derive = { assets };
+export const derive = { assets, convert };
