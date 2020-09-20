@@ -9,6 +9,7 @@ import { ConvertPool, TokenSymbol } from '@bifrost-finance/types/interfaces';
 import { BlockHash } from '@polkadot/types/interfaces/chain';
 import { memo, getDesignatedBlockHash } from '../util';
 import BN from 'bn.js';
+import { vToken } from '../type';
 
 /**
  * @name getPoolInfo
@@ -24,8 +25,8 @@ import BN from 'bn.js';
 * The returned function's input parameters are tokenSymbol and preBlockHash, and output is a Observable<ConvertPool> type.
 */
 
-export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol, preBlockHash?: BlockHash) => Observable<ConvertPool> {
-  return memo(instanceId, (tokenSymbol: TokenSymbol, preBlockHash?: BlockHash) => {
+export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array, preBlockHash?: BlockHash) => Observable<ConvertPool> {
+  return memo(instanceId, (tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array, preBlockHash?: BlockHash) => {
     if (preBlockHash === undefined) {
       return api.query.convert.pool(tokenSymbol);
     } else {
@@ -35,13 +36,35 @@ export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSym
 }
 
 /**
+ * @name getAllVtokenConvertInfo
+ * @description get all vToken convertPool information
+ * @param instanceId
+ * @param api
+ */
+export function getAllVtokenConvertInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<ConvertPool[]> {
+  return memo(instanceId, (vTokenArray?:vToken[]):any => {
+    let vTokenList: vToken[];
+
+    if (vTokenArray === undefined) {
+      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+    } else {
+      vTokenList = vTokenArray;
+    }
+
+    const getPoolInfoQuery = getPoolInfo(instanceId, api);
+
+    return combineLatest(vTokenList.map((vtk) => getPoolInfoQuery(vtk)));
+  });
+}
+
+/**
  * @name getConvertPriceInfo
  * @description get single Token/vToken convert price information
  * @param instanceId
  * @param api
  */
-export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol, preBlockHash?: BlockHash) => Observable<BN> {
-  return memo(instanceId, (tokenSymbol: TokenSymbol, preBlockHash?: BlockHash) => {
+export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array, preBlockHash?: BlockHash) => Observable<BN> {
+  return memo(instanceId, (tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array, preBlockHash?: BlockHash) => {
     const convertPoolQuery = getPoolInfo(instanceId, api);
 
     return convertPoolQuery(tokenSymbol, preBlockHash).pipe(
@@ -57,13 +80,35 @@ export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (
 }
 
 /**
+ * @name getAllConvertPriceInfo
+ * @description get all vToken current convert price information
+ * @param instanceId
+ * @param api
+ */
+export function getAllConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
+  return memo(instanceId, (vTokenArray?:vToken[]):any => {
+    let vTokenList: vToken[];
+
+    if (vTokenArray === undefined) {
+      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+    } else {
+      vTokenList = vTokenArray;
+    }
+
+    const getConvertPriceInfoQuery = getConvertPriceInfo(instanceId, api);
+
+    return combineLatest(vTokenList.map((vtk) => getConvertPriceInfoQuery(vtk)));
+  });
+}
+
+/**
  * @name getAnnualizedRate
  * @description get Single Token Annualized Rate information
  * @param instanceId
  * @param api
  */
-export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol) => Observable<BN> {
-  return memo(instanceId, (tokenSymbol: TokenSymbol) => {
+export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<BN> {
+  return memo(instanceId, (tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => {
     const convertPriceQuery = getConvertPriceInfo(instanceId, api);
 
     // Query the convert price of current block
@@ -72,13 +117,13 @@ export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (to
     // Query the convert price of the designated block
     const preBlockHashQuery = getDesignatedBlockHash(instanceId, api);
     const historicalPrice$ = preBlockHashQuery().pipe(
-      mergeMap((result) => { // mergeMap operator is used to flattern the two levels of Oberverbles into one.
+      mergeMap((result) => { // mergeMap operator is used to flatten the two levels of Observables into one.
         return convertPriceQuery(tokenSymbol, result);
       }
       )
     );
 
-    // combine two Observables togeter, destruct the values we need, and do necessary calculations before retrunning the results.
+    // combine two Observables together, destruct the values we need, and do necessary calculations before returning the results.
     return combineLatest([
       currentPrice$,
       historicalPrice$
@@ -92,4 +137,26 @@ export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (to
     );
   }
   );
+}
+
+/**
+ * @name getAllAnnualizedRate
+ * @description get all vToken Annualized Rate information
+ * @param instanceId
+ * @param api
+ */
+export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
+  return memo(instanceId, (vTokenArray?:vToken[]):any => {
+    let vTokenList: vToken[];
+
+    if (vTokenArray === undefined) {
+      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+    } else {
+      vTokenList = vTokenArray;
+    }
+
+    const getAnnualizedRateQuery = getAnnualizedRate(instanceId, api);
+
+    return combineLatest(vTokenList.map((vtk) => getAnnualizedRateQuery(vtk)));
+  });
 }
