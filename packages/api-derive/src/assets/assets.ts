@@ -5,7 +5,7 @@
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
-import { Token, TokenSymbol } from '@bifrost-finance/types/interfaces';
+import { Token } from '@bifrost-finance/types/interfaces';
 import { memo } from '../util';
 import { vToken } from '../type';
 
@@ -15,8 +15,8 @@ import { vToken } from '../type';
  * @param instanceId
  * @param api
  */
-export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<Token> {
-  return memo(instanceId, (tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => {
+export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<Token> {
+  return memo(instanceId, (tokenSymbol: vToken) => {
     return api.query.assets.tokens(tokenSymbol).pipe(
       map((result: Token) => result)
     );
@@ -44,22 +44,3 @@ export function getAllTokenInfo (instanceId: string, api: ApiInterfaceRx): (vTok
     return combineLatest(vTokenList.map((vtk) => getTokenInfoQuery(vtk)));
   });
 }
-
-// /**
-//  * @name getTokenSupply
-//  * @description get Token total supply information
-//  * @param instanceId
-//  * @param api
-//  */
-// export function getTokenSupply (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: TokenSymbol) => Observable<Balance> {
-//   return memo(instanceId, (tokenSymbol: TokenSymbol):any => {
-//     const getTokenInfoQuery = getTokenInfo(instanceId, api);
-
-//     return getTokenInfoQuery(tokenSymbol).pipe(
-//       map((result) => {
-//         return result.totalSupply;
-//       }
-//       )
-//     );
-//   });
-// }

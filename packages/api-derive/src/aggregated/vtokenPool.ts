@@ -40,13 +40,13 @@ export function getAllTokenPoolInfo (instanceId: string, api: ApiInterfaceRx): (
       ]
     ).pipe(
       map(([assetsInfo, convertInfo, convertPriceInfo, annualizedRateInfo]) => {
-        assetsInfo.forEach((vtk, i) => {
+        return assetsInfo.map((vtk, i) => {
           return {
             annualizedRate: annualizedRateInfo[i],
             convertPrice: convertPriceInfo[i],
             symbol: vtk.symbol.toString(),
             tokenPool: convertInfo[i].token_pool,
-            totalSupply: assetsInfo[i].totalSupply
+            totalSupply: vtk.totalSupply
           };
         });
       })

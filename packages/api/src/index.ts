@@ -3,7 +3,7 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import { types as bifrostTypes } from '@bifrost-finance/types';
-import { derive as bifrostDerives } from '@bifrost-finance/api-derive/src';
+import { derive as bifrostDerives } from '@bifrost-finance/api-derive';
 import { ApiOptions } from '@polkadot/api/types';
 
 export const defaultOptions: ApiOptions = {
