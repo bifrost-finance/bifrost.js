@@ -4,6 +4,7 @@
 
 import { DeriveVtokenAssetsInfo } from '../assets/types';
 import { DeriveVtokenConvertInfo } from '../convert/types';
+import BN from 'bn.js';
 
 // interface that aggregates DeriveVtokenPoolInfo from asset types and DeriveVtokenConvertInfo from convert types
 export interface DeriveVtokenPoolInfo extends DeriveVtokenAssetsInfo, DeriveVtokenConvertInfo {
@@ -16,3 +17,9 @@ export interface DeriveVtokenPoolInfo extends DeriveVtokenAssetsInfo, DeriveVtok
 
 export type vToken = 'vDOT' | 'vKSM' | 'vEOS';
 
+
+export interface timestampAndConvertPrice {
+    timestampList: number[],
+    convertPriceList: BN[]
+    }
+    

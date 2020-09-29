@@ -25,7 +25,7 @@ import { vToken } from '../type';
 * The returned function's input parameters are tokenSymbol and preBlockHash, and output is a Observable<ConvertPool> type.
 */
 
-export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<ConvertPool> {
+export function getPoolInfo(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<ConvertPool> {
   return memo(instanceId, (tokenSymbol: vToken, preBlockHash?: BlockHash) => {
     if (preBlockHash === undefined) {
       return api.query.convert.pool(tokenSymbol);
@@ -41,7 +41,7 @@ export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSym
  * @param instanceId
  * @param api
  */
-export function getAllVtokenConvertInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<ConvertPool[]> {
+export function getAllVtokenConvertInfo(instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<ConvertPool[]> {
   return memo(instanceId, (vTokenArray?:vToken[]):any => {
     let vTokenList: vToken[];
 
@@ -63,7 +63,7 @@ export function getAllVtokenConvertInfo (instanceId: string, api: ApiInterfaceRx
  * @param instanceId
  * @param api
  */
-export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<BN> {
+export function getConvertPriceInfo(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<BN> {
   return memo(instanceId, (tokenSymbol: vToken, preBlockHash?: BlockHash) => {
     const convertPoolQuery = getPoolInfo(instanceId, api);
 
@@ -92,7 +92,7 @@ export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (
  * @param instanceId
  * @param api
  */
-export function getAllConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
+export function getAllConvertPriceInfo(instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
   return memo(instanceId, (vTokenArray?:vToken[]):any => {
     let vTokenList: vToken[];
 
@@ -114,7 +114,7 @@ export function getAllConvertPriceInfo (instanceId: string, api: ApiInterfaceRx)
  * @param instanceId
  * @param api
  */
-export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getAnnualizedRate(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
   return memo(instanceId, (tokenSymbol: vToken) => {
     const convertPriceQuery = getConvertPriceInfo(instanceId, api);
 
@@ -162,7 +162,7 @@ export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (to
  * @param instanceId
  * @param api
  */
-export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
+export function getAllAnnualizedRate(instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
   return memo(instanceId, (vTokenArray?:vToken[]):any => {
     let vTokenList: vToken[];
 
@@ -176,5 +176,25 @@ export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): 
 
     return combineLatest(vTokenList.map((vtk) => getAnnualizedRateQuery(vtk)));
   });
+}
+
+/**
+ * @name getBatchConvertPrice
+ * @description get the header information of current block
+ * @param instanceId
+ * @param api
+ */
+
+export function getBatchConvertPrice(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>) => Observable<BN[]> {
+  return memo(instanceId, (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>): any => {
+    
+    const getConvertPriceInfoQuery = getConvertPriceInfo(instanceId, api);
+    return blockHashArray.pipe(mergeMap((blockHashList)=>{
+      return combineLatest(blockHashList.map((blockHash)=>{
+        return getConvertPriceInfoQuery(tokenSymbol, blockHash);
+      }));
+    }));
+  }
+  );
 }
 

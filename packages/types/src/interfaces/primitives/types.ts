@@ -252,7 +252,7 @@ export interface SpecIndex extends u32 {}
 export interface Token extends Struct {
   readonly symbol: Bytes;
   readonly precision: u16;
-  readonly totalSupply: Balance;
+  readonly totalSupply: u128;
 }
 
 /** @name TokenPool */
@@ -267,6 +267,16 @@ export interface TokenSymbol extends Enum {
   readonly isVKsm: boolean;
   readonly isEos: boolean;
   readonly isVEos: boolean;
+}
+
+/** @name TrxStatus */
+export interface TrxStatus extends Enum {
+  readonly isInitial: boolean;
+  readonly isGenerated: boolean;
+  readonly isSigned: boolean;
+  readonly isProcessing: boolean;
+  readonly isSuccess: boolean;
+  readonly isFail: boolean;
 }
 
 /** @name TxOut */

@@ -4,12 +4,12 @@
 
 import { DeriveVtokenPoolInfo } from '../type/index';
 import { ApiInterfaceRx } from '@polkadot/api/types';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
-import { memo } from '../util';
-import { vToken } from '../type';
+import { memo, generateBachBlockHeightList, getBatchBlockHash } from '../util';
+import { vToken, timestampAndConvertPrice } from '../type';
 import { getAllTokenInfo } from '../assets';
-import { getAllVtokenConvertInfo, getAllConvertPriceInfo, getAllAnnualizedRate } from '../convert';
+import { getAllVtokenConvertInfo, getAllConvertPriceInfo, getAllAnnualizedRate, getBatchConvertPrice } from '../convert';
 
 /**
  * @name getAllTokenPoolInfo
@@ -17,8 +17,8 @@ import { getAllVtokenConvertInfo, getAllConvertPriceInfo, getAllAnnualizedRate }
  * @param instanceId
  * @param api
  */
-export function getAllTokenPoolInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<DeriveVtokenPoolInfo[]> {
-  return memo(instanceId, (vTokenArray?:vToken[]):any => {
+export function getAllTokenPoolInfo(instanceId: string, api: ApiInterfaceRx): (vTokenArray?: vToken[]) => Observable<DeriveVtokenPoolInfo[]> {
+  return memo(instanceId, (vTokenArray?: vToken[]): any => {
     let vTokenList: vToken[];
 
     if (vTokenArray === undefined) {
@@ -34,9 +34,9 @@ export function getAllTokenPoolInfo (instanceId: string, api: ApiInterfaceRx): (
 
     return combineLatest(
       [getTokenInfoQuery(vTokenList),
-        getAllVtokenConvertInfoQuery(vTokenList),
-        getAllConvertPriceInfoQuery(vTokenList),
-        getAllAnnualizedRateQuery(vTokenList)
+      getAllVtokenConvertInfoQuery(vTokenList),
+      getAllConvertPriceInfoQuery(vTokenList),
+      getAllAnnualizedRateQuery(vTokenList)
       ]
     ).pipe(
       map(([assetsInfo, convertInfo, convertPriceInfo, annualizedRateInfo]) => {
@@ -44,7 +44,7 @@ export function getAllTokenPoolInfo (instanceId: string, api: ApiInterfaceRx): (
           return {
             annualizedRate: annualizedRateInfo[i],
             convertPrice: convertPriceInfo[i],
-            symbol: vtk.symbol.toString(),
+            symbol: vTokenList[i],
             tokenPool: convertInfo[i].token_pool,
             totalSupply: vtk.totalSupply
           };
@@ -52,4 +52,42 @@ export function getAllTokenPoolInfo (instanceId: string, api: ApiInterfaceRx): (
       })
     );
   });
+}
+
+/**
+ * @name getVtokneConvertPriceHistory
+ * @description get the header information of current block
+ * @param instanceId
+ * @param api
+ */
+
+export function getVtokenConvertPriceHistory(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, intervalBlocks?: number, totalHistoryBlockNumber?: number) => Observable<timestampAndConvertPrice> {
+  return memo(instanceId, (tokenSymbol: vToken, intervalBlocks?: number, totalHistoryBlockNumber?: number): any => {
+
+    const generateBachBlockHeightListQuery = generateBachBlockHeightList(instanceId, api);
+    const getBatchConvertPriceQuery = getBatchConvertPrice(instanceId, api);
+    const getBatchBlockHashQuery = getBatchBlockHash(instanceId, api);
+
+    let result = generateBachBlockHeightListQuery(intervalBlocks, totalHistoryBlockNumber);
+
+    return result.pipe(mergeMap((resultSet) => {
+
+      const timestampList = resultSet.timestampList;
+      const blockHeightList = resultSet.blockHeightList;
+
+      const blockHashArray = getBatchBlockHashQuery(blockHeightList)
+
+      const convertPriceArray = getBatchConvertPriceQuery(tokenSymbol, blockHashArray);
+
+      return convertPriceArray.pipe((map((convertPriceList) => {
+        return {
+          timestampList: timestampList,
+          convertPriceList: convertPriceList
+        }
+      })));
+
+    }));
+
+  }
+  );
 }

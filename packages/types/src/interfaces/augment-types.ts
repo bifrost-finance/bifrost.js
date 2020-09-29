@@ -3,7 +3,7 @@
 
 import { Compact, Option, Raw, Vec } from '@polkadot/types/codec';
 import { BitVec, Bytes, Data, DoNotConstruct, Null, StorageKey, Text, Type, U256, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types/primitive';
-import { AccountAsset, AccountName, Action, ActionName, ActionReceipt, AssetConfig, BlockHeader, BlockSigningAuthority, BlockSigningAuthorityV0, BlockTimestamp, BlockchainType, Bounty, BountyIndex, BountyStatus, BountyStatusActive, BountyStatusCuratorProposed, BountyStatusPendingPayout, BridgeAssetSymbol, Checksum256, ConvertPool, ConvertPrice, Cost, DataVersion, Extension, Fail, Fee, FlatMap, InVariantPool, Income, IncrementalMerkle, InvariantValue, KeyWeight, MultiSig, MultiSigTx, PermissionLevel, PermissionName, PoolWeight, Precision, Price, Processing, ProducerAuthority, ProducerAuthoritySchedule, ProducerKey, ProducerSchedule, ProxyValidatorRegister, PublicKey, RatePerBlock, RequestIdentifier, SignedBlockHeader, SpecIndex, Token, TokenPool, TokenSymbol, TrxStatus, TxOut, TxSig, UnsignedInt, VTokenPool, VersionId } from '@bifrost-finance/types/interfaces/primitives';
+import { AccountAsset, AccountName, Action, ActionName, ActionReceipt, AssetConfig, BlockHeader, BlockSigningAuthority, BlockSigningAuthorityV0, BlockTimestamp, BlockchainType, BridgeAssetSymbol, Checksum256, ConvertPool, ConvertPrice, Cost, DataVersion, Extension, Fail, Fee, FlatMap, InVariantPool, Income, IncrementalMerkle, InvariantValue, KeyWeight, MultiSig, MultiSigTx, PermissionLevel, PermissionName, PoolWeight, Precision, Price, Processing, ProducerAuthority, ProducerAuthoritySchedule, ProducerKey, ProducerSchedule, ProxyValidatorRegister, PublicKey, RatePerBlock, RequestIdentifier, SignedBlockHeader, SpecIndex, Token, TokenPool, TokenSymbol, TrxStatus, TxOut, TxSig, UnsignedInt, VTokenPool, VersionId } from '@bifrost-finance/types/interfaces/primitives';
 import { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
 import { RawAuraPreDigest } from '@polkadot/types/interfaces/aura';
 import { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -2102,24 +2102,5 @@ declare module '@polkadot/types/types/registry' {
     ProxyValidatorRegister: ProxyValidatorRegister;
     'Option<ProxyValidatorRegister>': Option<ProxyValidatorRegister>;
     'Vec<ProxyValidatorRegister>': Vec<ProxyValidatorRegister>;
-    Bounty: Bounty;
-    'Option<Bounty>': Option<Bounty>;
-    'Vec<Bounty>': Vec<Bounty>;
-    BountyIndex: BountyIndex;
-    'Compact<BountyIndex>': Compact<BountyIndex>;
-    'Option<BountyIndex>': Option<BountyIndex>;
-    'Vec<BountyIndex>': Vec<BountyIndex>;
-    BountyStatus: BountyStatus;
-    'Option<BountyStatus>': Option<BountyStatus>;
-    'Vec<BountyStatus>': Vec<BountyStatus>;
-    BountyStatusActive: BountyStatusActive;
-    'Option<BountyStatusActive>': Option<BountyStatusActive>;
-    'Vec<BountyStatusActive>': Vec<BountyStatusActive>;
-    BountyStatusCuratorProposed: BountyStatusCuratorProposed;
-    'Option<BountyStatusCuratorProposed>': Option<BountyStatusCuratorProposed>;
-    'Vec<BountyStatusCuratorProposed>': Vec<BountyStatusCuratorProposed>;
-    BountyStatusPendingPayout: BountyStatusPendingPayout;
-    'Option<BountyStatusPendingPayout>': Option<BountyStatusPendingPayout>;
-    'Vec<BountyStatusPendingPayout>': Vec<BountyStatusPendingPayout>;
   }
 }
