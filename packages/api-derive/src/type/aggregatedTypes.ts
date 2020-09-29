@@ -15,3 +15,4 @@ export interface DeriveVtokenPoolInfo extends DeriveVtokenAssetsInfo, DeriveVtok
 }
 
 export type vToken = 'vDOT' | 'vKSM' | 'vEOS';
+

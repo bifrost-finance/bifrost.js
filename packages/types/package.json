@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/types",
-  "version": "1.0.28",
+  "version": "1.0.32",
   "description": "Bifrost JS types",
   "main": "index.js",
   "keywords": [
@@ -28,7 +28,7 @@
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/types#readme",
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@polkadot/metadata": "1.33.0-beta.0",
+    "@polkadot/metadata": "^1.35.0-beta.5",
     "@polkadot/util": "^3.4.1",
     "@polkadot/util-crypto": "^3.4.1",
     "@types/bn.js": "^4.11.6",

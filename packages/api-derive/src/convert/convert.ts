@@ -177,3 +177,4 @@ export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): 
     return combineLatest(vTokenList.map((vtk) => getAnnualizedRateQuery(vtk)));
   });
 }
+
