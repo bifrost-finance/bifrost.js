@@ -3,14 +3,16 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import { ApiInterfaceRx } from '@polkadot/api/types';
-import { map } from 'rxjs/operators';
+import { mergeMap, map } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
-import { Token } from '@bifrost-finance/types/interfaces';
 import { memo, getHeader } from '../util';
-import { vToken } from '../type';
+import { allTokens } from '../type';
 import { accountsAssetInfo, assetInfo } from './types';
 import { AccountId } from '@polkadot/types/interfaces/runtime';
 import { BlockHash } from '@polkadot/types/interfaces/chain';
+import BN from 'bn.js';
+import { timestampListAndBlockHeightList } from '../util/types';
+import { Token } from '@bifrost-finance/types/interfaces';
 
 /**
  * @name getTokenInfo
@@ -18,8 +20,8 @@ import { BlockHash } from '@polkadot/types/interfaces/chain';
  * @param instanceId
  * @param api
  */
-export function getTokenInfo(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<Token> {
-  return memo(instanceId, (tokenSymbol: vToken) => {
+export function getTokenInfo(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: allTokens) => Observable<Token> {
+  return memo(instanceId, (tokenSymbol: allTokens) => {
     return api.query.assets.tokens(tokenSymbol).pipe(
       map((result: Token) => result)
     );
@@ -32,19 +34,19 @@ export function getTokenInfo(instanceId: string, api: ApiInterfaceRx): (tokenSym
  * @param instanceId
  * @param api
  */
-export function getAllTokenInfo(instanceId: string, api: ApiInterfaceRx): (vTokenArray?: vToken[]) => Observable<Token[]> {
-  return memo(instanceId, (vTokenArray?: vToken[]): any => {
-    let vTokenList: vToken[];
+export function getAllTokenInfo(instanceId: string, api: ApiInterfaceRx): (tokenArray?: allTokens[]) => Observable<Token[]> {
+  return memo(instanceId, (tokenArray?: allTokens[]): any => {
+    let tokenList: allTokens[];
 
-    if (vTokenArray === undefined) {
-      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+    if (tokenArray === undefined) {
+      tokenList = ['vDOT', 'vKSM', 'vEOS', 'DOT', 'KSM', 'EOS', 'aUSD'];
     } else {
-      vTokenList = vTokenArray;
+      tokenList = tokenArray;
     }
 
     const getTokenInfoQuery = getTokenInfo(instanceId, api);
 
-    return combineLatest(vTokenList.map((vtk) => getTokenInfoQuery(vtk)));
+    return combineLatest(tokenList.map((tk) => getTokenInfoQuery(tk)));
   });
 }
 
@@ -54,12 +56,12 @@ export function getAllTokenInfo(instanceId: string, api: ApiInterfaceRx): (vToke
  * @param instanceId
  * @param api
  */
-export function getSingleAccountAsset(instanceId: string, api: ApiInterfaceRx): (accountName: AccountId, tokenSymbol: vToken) => Observable<assetInfo> {
-  return memo(instanceId, (accountName: AccountId, tokenSymbol: vToken) => {
+export function getSingleAccountAsset(instanceId: string, api: ApiInterfaceRx): (accountName: AccountId, tokenSymbol: allTokens) => Observable<assetInfo> {
+  return memo(instanceId, (accountName: AccountId, tokenSymbol: allTokens) => {
     const result = api.query.assets.accountAssets([tokenSymbol, accountName]);
     return result.pipe(map((result)=>{
       return {
-        vtokenName: tokenSymbol,
+        tokenName: tokenSymbol,
         assetInfo: result
       };
     }));
@@ -68,27 +70,27 @@ export function getSingleAccountAsset(instanceId: string, api: ApiInterfaceRx): 
 
 /**
  * @name getAccountAssets
- * @description get one account all vtoken Assets Info
+ * @description get one account all token Assets Info
  * @param instanceId
  * @param api
  */
-export function getAccountAssets(instanceId: string, api: ApiInterfaceRx): (accountName: AccountId, vTokenArray?: vToken[]) => Observable<accountsAssetInfo> {
-  return memo(instanceId, (accountName: AccountId, vTokenArray?: vToken[]) => {
-    let vTokenList: vToken[];
+export function getAccountAssets(instanceId: string, api: ApiInterfaceRx): (accountName: AccountId, tokenArray?: allTokens[]) => Observable<accountsAssetInfo> {
+  return memo(instanceId, (accountName: AccountId, tokenArray?: allTokens[]) => {
+    let tokenList: allTokens[];
 
-    if (vTokenArray === undefined) {
-      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+    if (tokenArray === undefined) {
+      tokenList = ['vDOT', 'vKSM', 'vEOS', 'DOT', 'KSM', 'EOS', 'aUSD'];
     } else {
-      vTokenList = vTokenArray;
+      tokenList = tokenArray;
     }
 
     const getSingleAccountAssetQuery = getSingleAccountAsset(instanceId, api);
-    const result = combineLatest(vTokenList.map((vtk) => getSingleAccountAssetQuery(accountName, vtk)));
+    const result = combineLatest(tokenList.map((tk) => getSingleAccountAssetQuery(accountName, tk)));
 
     return result.pipe(map((result) => {
       return {
         accountName: accountName,
-        vAssetsInfo: result
+        assetsInfo: result
       };
     }));
   });
@@ -96,23 +98,23 @@ export function getAccountAssets(instanceId: string, api: ApiInterfaceRx): (acco
 
 /**
  * @name getManyAccountsAssets
- * @description get many account all vtoken Assets Info
+ * @description get many account all token Assets Info
  * @param instanceId
  * @param api
  */
-export function getManyAccountsAssets(instanceId: string, api: ApiInterfaceRx): (accountNameArray: AccountId[], vTokenArray?: vToken[]) => Observable<accountsAssetInfo[]> {
-  return memo(instanceId, (accountNameArray: AccountId[], vTokenArray?: vToken[]) => {
-    let vTokenList: vToken[];
+export function getManyAccountsAssets(instanceId: string, api: ApiInterfaceRx): (accountNameArray: AccountId[], tokenArray?: allTokens[]) => Observable<accountsAssetInfo[]> {
+  return memo(instanceId, (accountNameArray: AccountId[], tokenArray?: allTokens[]) => {
+    let tokenList: allTokens[];
 
-    if (vTokenArray === undefined) {
-      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+    if (tokenArray === undefined) {
+      tokenList = ['vDOT', 'vKSM', 'vEOS', 'DOT', 'KSM', 'EOS', 'aUSD'];
     } else {
-      vTokenList = vTokenArray;
+      tokenList = tokenArray;
     }
 
     const getAccountAssetsQuery = getAccountAssets(instanceId, api);
 
-    return combineLatest(accountNameArray.map((accountName) => getAccountAssetsQuery(accountName, vTokenList)));
+    return combineLatest(accountNameArray.map((accountName) => getAccountAssetsQuery(accountName, tokenList)));
 
   });
 }
@@ -147,3 +149,135 @@ export function getDesignatedBlockHash(instanceId: string, api: ApiInterfaceRx):
   }
   );
 }
+
+/**
+ * @name calCurrentDateHourZeroBlockHeight
+ * @description Calculate the block height of time 00:00:00 of current date.
+ * @param instanceId
+ * @param api
+ * @param var date = new Date(2016, 6, 27, 13, 30, 0);
+ */
+
+export function calCurrentDateHourZeroBlockHeight(instanceId: string, api: ApiInterfaceRx): () => Observable<BN> {
+  return memo(instanceId, (): any => {
+    const BLOCK_INTERVAL = 6; // 6 seconds to generate a block
+    const getHeaderQuery = getHeader(instanceId, api);
+    const currentBlockNumber = getHeaderQuery().pipe(
+      map((result) => {
+        return  result.number.unwrap();
+      }));
+
+    const currentTime = new Date();
+    const currentTimestamp = currentTime.getTime();
+
+    const currentDateHourZero = currentTime;
+    currentDateHourZero.setHours(0,0,0);
+    const currentDateHourZeroTimestamp = currentDateHourZero.getTime();
+
+    const blockDifference =  Math.floor((currentTimestamp-currentDateHourZeroTimestamp)/1000/BLOCK_INTERVAL);
+
+    const hourZeroBlockNumber = currentBlockNumber.pipe(
+      map((blockNum) => {
+        return  blockNum.subn(blockDifference);
+      }));
+
+    return hourZeroBlockNumber;
+  }
+  );
+}
+
+/**
+ * @name generateBachBlockHeightList
+ * @description According to the set rule, generate a list of block heights, ending time is time 00:00:00 of current date.
+ * @param instanceId
+ * @param api
+ */
+
+export function generateBachBlockHeightList(instanceId: string, api: ApiInterfaceRx): (intervalBlocks?: number, totalNumber?: number) => Observable<timestampListAndBlockHeightList> {
+  return memo(instanceId, (intervalBlocks?: number, totalNumber?: number): any => {
+    const BLOCK_INTERVAL = 6; // 6 seconds to generate a block
+    const ONE_DAY_BLOCKS = 60 * 60 * 24 / BLOCK_INTERVAL;
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+
+    let interValBlockNum: number;
+    let totalNum: number;
+
+    const currentDate = new Date();
+    const currentTimestamp = currentDate.getTime();
+    const calCurrentDateHourZeroBlockHeightQuery = calCurrentDateHourZeroBlockHeight(instanceId, api);
+    let blockNum = calCurrentDateHourZeroBlockHeightQuery();
+
+    if (intervalBlocks == undefined) {
+      interValBlockNum = ONE_DAY_BLOCKS;
+    } else {
+      interValBlockNum = intervalBlocks;
+    }
+
+    if(totalNumber == undefined) {
+      totalNum = 30;
+    } else {
+      totalNum = totalNumber;
+    }
+
+    let calTimestamp = currentTimestamp;
+    let calBlockHeight = blockNum;
+    let timestampList = [];
+
+
+
+
+    
+      let listLen = totalNum;
+      let blkNumList = calBlockHeight.pipe(map((result)=>{
+        let blockHeightList = [];
+        let temp = result;
+        for(let i = 0; i< totalNum; i++) {
+          blockHeightList.push(temp);
+          temp = temp.subn(interValBlockNum);
+          if (temp.toNumber() <0){
+            break;
+          }
+        }
+        listLen = blockHeightList.length;
+        return blockHeightList;
+      })); ;
+    
+
+      for(let i = 0; i< listLen; i++) {
+        timestampList.push(calTimestamp);
+        calTimestamp = calTimestamp - MILLISECONDS_PER_DAY;
+      }
+
+    return {
+      timestampList: timestampList,
+      blockHeightList: blkNumList
+    }
+  }
+  );
+}
+
+/**
+ * @name getBatchBlockHash
+ * @description get the header information of current block
+ * @param instanceId
+ * @param api
+ */
+
+export function getBatchBlockHash(instanceId: string, api: ApiInterfaceRx): (blockHeightList: Observable<BN[]>) => Observable<BlockHash[]> {
+  return memo(instanceId, (blockHeightList: Observable<BN[]>): any => {
+    
+    const getDesignatedBlockHashQuery = getDesignatedBlockHash(instanceId, api);
+
+    return blockHeightList.pipe(mergeMap((blockHeightArray)=>{
+     return combineLatest(blockHeightArray.map((blockHeight)=>{
+        return getDesignatedBlockHashQuery(blockHeight.toNumber());
+
+      }));
+      }));
+  }
+  );
+}
+
+
+
+

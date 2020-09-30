@@ -16,7 +16,7 @@ export interface DeriveVtokenPoolInfo extends DeriveVtokenAssetsInfo, DeriveVtok
 }
 
 export type vToken = 'vDOT' | 'vKSM' | 'vEOS';
-
+export type allTokens = 'vDOT' | 'vKSM' | 'vEOS'| 'DOT' | 'KSM' | 'EOS' | 'aUSD';
 
 export interface timestampAndConvertPrice {
     timestampList: number[],

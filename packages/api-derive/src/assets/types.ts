@@ -4,7 +4,7 @@
 
 import { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
 import { AccountAsset } from '@bifrost-finance/types/interfaces';
-import { vToken } from '../type';
+import { allTokens } from '../type';
 
 export interface DeriveVtokenAssetsInfo{
   symbol: string,
@@ -12,11 +12,11 @@ export interface DeriveVtokenAssetsInfo{
 }
 
 export interface assetInfo{
-  vtokenName: vToken,
+  tokenName: allTokens,
   assetInfo: AccountAsset
 }
 
 export interface accountsAssetInfo{
   accountName: AccountId,
-  vAssetsInfo: assetInfo[]
+  assetsInfo: assetInfo[]
 }

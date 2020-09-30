@@ -6,10 +6,12 @@ import { DeriveVtokenPoolInfo } from '../type/index';
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map, mergeMap } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
-import { memo, generateBachBlockHeightList, getBatchBlockHash } from '../util';
+import { memo } from '../util';
 import { vToken, timestampAndConvertPrice } from '../type';
 import { getAllTokenInfo } from '../assets';
 import { getAllVtokenConvertInfo, getAllConvertPriceInfo, getAllAnnualizedRate, getBatchConvertPrice } from '../convert';
+import { generateBachBlockHeightList, getBatchBlockHash } from '../assets';
+import BN from 'bn.js';
 
 /**
  * @name getAllTokenPoolInfo
@@ -91,3 +93,55 @@ export function getVtokenConvertPriceHistory(instanceId: string, api: ApiInterfa
   }
   );
 }
+
+/**
+ * @name getVtokenMarketPriceValue
+ * @description get vToken market Price
+ * @param instanceId
+ * @param api
+ */
+export function getVtokenMarketPriceValue(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+  return memo(instanceId, ():any => {
+    return new BN(0);
+      
+  });
+}
+
+
+/**
+ * @name getVtokenConvertPriceValue
+ * @description get vToken market Price
+ * @param instanceId
+ * @param api
+ */
+export function getVtokenConvertPriceValue(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+  return memo(instanceId, ():any => {
+    return new BN(0);
+      
+  });
+}
+
+/**
+ * @name getVtokenPriceDiff
+ * @description get the difference between current convert price and market price of vtoken.
+ * @param instanceId
+ * @param api
+ */
+export function getVtokenPriceDiff(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+  return memo(instanceId, (tokenSymbol: vToken):any => {
+    // const getVtokenMarketPriceQuery = getVtokenMarketPrice(instanceId, api);
+    // const currentMarketPrice = getVtokenMarketPriceQuery(tokenSymbol);
+
+    // const getConvertPriceInfoQuery = getConvertPriceInfo(instanceId, api);
+    // const currentConvertPrice = getConvertPriceInfoQuery(tokenSymbol);
+
+    // return combineLatest([currentMarketPrice, currentConvertPrice]).pipe((map(([marketPrice, convertPrice])=>{
+    //   return convertPrice.sub(marketPrice);
+    // })))
+
+    return new BN(0);
+      
+  });
+}
+
+

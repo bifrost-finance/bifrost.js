@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/api",
-  "version": "1.0.44",
+  "version": "1.0.49",
   "description": "Promise and RxJS wrappers around the Bifrost JS RPC",
   "main": "index.js",
   "keywords": [
@@ -28,8 +28,8 @@
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/api#readme",
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@bifrost-finance/api-derive": "^1.0.44",
-    "@bifrost-finance/types": "^1.0.44",
+    "@bifrost-finance/api-derive": "^1.0.49",
+    "@bifrost-finance/types": "^1.0.49",
     "@polkadot/api-derive": "1.35.0-beta.5",
     "@polkadot/keyring": "^3.4.1",
     "@polkadot/metadata": "1.35.0-beta.5",
