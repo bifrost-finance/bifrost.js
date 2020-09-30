@@ -4,14 +4,14 @@
 
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { mergeMap, map } from 'rxjs/operators';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { memo, getHeader } from '../util';
 import { allTokens } from '../type';
 import { accountsAssetInfo, assetInfo } from './types';
 import { AccountId } from '@polkadot/types/interfaces/runtime';
 import { BlockHash } from '@polkadot/types/interfaces/chain';
 import BN from 'bn.js';
-import { timestampListAndBlockHeightList } from '../util/types';
+import { timestampListAndBlockHeightList, timestampListAndBlockHeight } from '../util/types';
 import { Token } from '@bifrost-finance/types/interfaces';
 
 /**
@@ -59,7 +59,7 @@ export function getAllTokenInfo(instanceId: string, api: ApiInterfaceRx): (token
 export function getSingleAccountAsset(instanceId: string, api: ApiInterfaceRx): (accountName: AccountId, tokenSymbol: allTokens) => Observable<assetInfo> {
   return memo(instanceId, (accountName: AccountId, tokenSymbol: allTokens) => {
     const result = api.query.assets.accountAssets([tokenSymbol, accountName]);
-    return result.pipe(map((result)=>{
+    return result.pipe(map((result) => {
       return {
         tokenName: tokenSymbol,
         assetInfo: result
@@ -158,30 +158,33 @@ export function getDesignatedBlockHash(instanceId: string, api: ApiInterfaceRx):
  * @param var date = new Date(2016, 6, 27, 13, 30, 0);
  */
 
-export function calCurrentDateHourZeroBlockHeight(instanceId: string, api: ApiInterfaceRx): () => Observable<BN> {
+export function calCurrentDateHourZeroBlockHeight(instanceId: string, api: ApiInterfaceRx): () => Observable<timestampListAndBlockHeight> {
   return memo(instanceId, (): any => {
     const BLOCK_INTERVAL = 6; // 6 seconds to generate a block
     const getHeaderQuery = getHeader(instanceId, api);
     const currentBlockNumber = getHeaderQuery().pipe(
       map((result) => {
-        return  result.number.unwrap();
+        return result.number.unwrap();
       }));
 
     const currentTime = new Date();
     const currentTimestamp = currentTime.getTime();
 
     const currentDateHourZero = currentTime;
-    currentDateHourZero.setHours(0,0,0);
+    currentDateHourZero.setHours(0, 0, 0);
     const currentDateHourZeroTimestamp = currentDateHourZero.getTime();
 
-    const blockDifference =  Math.floor((currentTimestamp-currentDateHourZeroTimestamp)/1000/BLOCK_INTERVAL);
+    const blockDifference = Math.floor((currentTimestamp - currentDateHourZeroTimestamp) / 1000 / BLOCK_INTERVAL);
 
     const hourZeroBlockNumber = currentBlockNumber.pipe(
       map((blockNum) => {
-        return  blockNum.subn(blockDifference);
+        return blockNum.subn(blockDifference);
       }));
 
-    return hourZeroBlockNumber;
+    return of({
+      timestamp: currentDateHourZeroTimestamp,
+      blockHeight: hourZeroBlockNumber
+    });
   }
   );
 }
@@ -202,10 +205,8 @@ export function generateBachBlockHeightList(instanceId: string, api: ApiInterfac
     let interValBlockNum: number;
     let totalNum: number;
 
-    const currentDate = new Date();
-    const currentTimestamp = currentDate.getTime();
     const calCurrentDateHourZeroBlockHeightQuery = calCurrentDateHourZeroBlockHeight(instanceId, api);
-    let blockNum = calCurrentDateHourZeroBlockHeightQuery();
+    let zeroBlockInfo = calCurrentDateHourZeroBlockHeightQuery();
 
     if (intervalBlocks == undefined) {
       interValBlockNum = ONE_DAY_BLOCKS;
@@ -213,45 +214,41 @@ export function generateBachBlockHeightList(instanceId: string, api: ApiInterfac
       interValBlockNum = intervalBlocks;
     }
 
-    if(totalNumber == undefined) {
+    if (totalNumber == undefined) {
       totalNum = 30;
     } else {
       totalNum = totalNumber;
     }
 
-    let calTimestamp = currentTimestamp;
-    let calBlockHeight = blockNum;
-    let timestampList = [];
+    return zeroBlockInfo.pipe(mergeMap((result) => {
+      let timestampList = [];
+      let blockHeightList = [];
+      let calTimestamp =result.timestamp;
+      let calBlockHeight = result.blockHeight;
+      let breakFlag = 0;
 
-
-
-
-    
-      let listLen = totalNum;
-      let blkNumList = calBlockHeight.pipe(map((result)=>{
-        let blockHeightList = [];
-        let temp = result;
-        for(let i = 0; i< totalNum; i++) {
-          blockHeightList.push(temp);
-          temp = temp.subn(interValBlockNum);
-          if (temp.toNumber() <0){
-            break;
-          }
-        }
-        listLen = blockHeightList.length;
-        return blockHeightList;
-      })); ;
-    
-
-      for(let i = 0; i< listLen; i++) {
+      for (let i = 0; i < totalNum; i++) {
         timestampList.push(calTimestamp);
+        blockHeightList.push(calBlockHeight);
         calTimestamp = calTimestamp - MILLISECONDS_PER_DAY;
+        calBlockHeight = calBlockHeight.pipe(map((blkHeight)=>{
+          let diff = blkHeight.subn(interValBlockNum);
+          if (diff.toNumber() <0){
+            breakFlag = 1;
+          }
+          return diff;
+        }));
+        if (breakFlag == 1){
+          break;
+        }
       }
+      
+      return of({
+        timestampList: timestampList,
+        blockHeightList: combineLatest(blockHeightList)
+      })
+    }));;
 
-    return {
-      timestampList: timestampList,
-      blockHeightList: blkNumList
-    }
   }
   );
 }
@@ -265,15 +262,15 @@ export function generateBachBlockHeightList(instanceId: string, api: ApiInterfac
 
 export function getBatchBlockHash(instanceId: string, api: ApiInterfaceRx): (blockHeightList: Observable<BN[]>) => Observable<BlockHash[]> {
   return memo(instanceId, (blockHeightList: Observable<BN[]>): any => {
-    
+
     const getDesignatedBlockHashQuery = getDesignatedBlockHash(instanceId, api);
 
-    return blockHeightList.pipe(mergeMap((blockHeightArray)=>{
-     return combineLatest(blockHeightArray.map((blockHeight)=>{
+    return blockHeightList.pipe(mergeMap((blockHeightArray) => {
+      return combineLatest(blockHeightArray.map((blockHeight) => {
         return getDesignatedBlockHashQuery(blockHeight.toNumber());
 
       }));
-      }));
+    }));
   }
   );
 }

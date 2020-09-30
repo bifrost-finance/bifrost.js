@@ -5,7 +5,7 @@
 import { DeriveVtokenPoolInfo } from '../type/index';
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map, mergeMap } from 'rxjs/operators';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { memo } from '../util';
 import { vToken, timestampAndConvertPrice } from '../type';
 import { getAllTokenInfo } from '../assets';
@@ -82,10 +82,10 @@ export function getVtokenConvertPriceHistory(instanceId: string, api: ApiInterfa
       const convertPriceArray = getBatchConvertPriceQuery(tokenSymbol, blockHashArray);
 
       return convertPriceArray.pipe((map((convertPriceList) => {
-        return {
+        return of({
           timestampList: timestampList,
           convertPriceList: convertPriceList
-        }
+        })
       })));
 
     }));
@@ -102,7 +102,7 @@ export function getVtokenConvertPriceHistory(instanceId: string, api: ApiInterfa
  */
 export function getVtokenMarketPriceValue(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
   return memo(instanceId, ():any => {
-    return new BN(0);
+    return of(new BN(0));
       
   });
 }
@@ -116,7 +116,7 @@ export function getVtokenMarketPriceValue(instanceId: string, api: ApiInterfaceR
  */
 export function getVtokenConvertPriceValue(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
   return memo(instanceId, ():any => {
-    return new BN(0);
+    return of(new BN(0));
       
   });
 }
@@ -139,7 +139,7 @@ export function getVtokenPriceDiff(instanceId: string, api: ApiInterfaceRx): (to
     //   return convertPrice.sub(marketPrice);
     // })))
 
-    return new BN(0);
+    return of(new BN(0));
       
   });
 }

@@ -7,6 +7,12 @@ import BN from 'bn.js';
 import { Observable } from 'rxjs';
 import { Token } from '@bifrost-finance/types/interfaces';
 
+export interface timestampListAndBlockHeight{
+  timestamp: number,
+  blockHeight: Observable<BN>
+}
+
+
 export interface timestampListAndBlockHeightList{
     timestampList: number[],
     blockHeightList: Observable<BN[]>
