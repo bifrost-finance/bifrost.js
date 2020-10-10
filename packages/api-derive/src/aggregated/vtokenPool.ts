@@ -6,11 +6,10 @@ import { DeriveVtokenPoolInfo } from '../type/index';
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map, mergeMap } from 'rxjs/operators';
 import { Observable, combineLatest, of } from 'rxjs';
-import { memo } from '../util';
 import { vToken, timestampAndConvertPrice } from '../type';
-import { getAllTokenInfo } from '../assets';
 import { getAllVtokenConvertInfo, getAllConvertPriceInfo, getAllAnnualizedRate, getBatchConvertPrice } from '../convert';
-import { generateBachBlockHeightList, getBatchBlockHash } from '../assets';
+import { getAllTokenInfo } from '../assets';
+import { memo, generateBachBlockHeightList, getBatchBlockHash } from '../util';
 import BN from 'bn.js';
 
 /**
@@ -19,8 +18,8 @@ import BN from 'bn.js';
  * @param instanceId
  * @param api
  */
-export function getAllTokenPoolInfo(instanceId: string, api: ApiInterfaceRx): (vTokenArray?: vToken[]) => Observable<DeriveVtokenPoolInfo[]> {
-  return memo(instanceId, (vTokenArray?: vToken[]): any => {
+export function getAllTokenPoolInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?: vToken[]) => Observable<DeriveVtokenPoolInfo[]> {
+  return memo(instanceId, (vTokenArray?: vToken[]) => {
     let vTokenList: vToken[];
 
     if (vTokenArray === undefined) {
@@ -36,9 +35,9 @@ export function getAllTokenPoolInfo(instanceId: string, api: ApiInterfaceRx): (v
 
     return combineLatest(
       [getTokenInfoQuery(vTokenList),
-      getAllVtokenConvertInfoQuery(vTokenList),
-      getAllConvertPriceInfoQuery(vTokenList),
-      getAllAnnualizedRateQuery(vTokenList)
+        getAllVtokenConvertInfoQuery(vTokenList),
+        getAllConvertPriceInfoQuery(vTokenList),
+        getAllAnnualizedRateQuery(vTokenList)
       ]
     ).pipe(
       map(([assetsInfo, convertInfo, convertPriceInfo, annualizedRateInfo]) => {
@@ -63,35 +62,28 @@ export function getAllTokenPoolInfo(instanceId: string, api: ApiInterfaceRx): (v
  * @param api
  */
 
-export function getVtokenConvertPriceHistory(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, intervalBlocks?: number, totalHistoryBlockNumber?: number) => Observable<timestampAndConvertPrice> {
-  return memo(instanceId, (tokenSymbol: vToken, intervalBlocks?: number, totalHistoryBlockNumber?: number): any => {
-
+export function getVtokenConvertPriceHistory (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, intervalBlocks?: number, totalHistoryBlockNumber?: number) => Observable<timestampAndConvertPrice> {
+  return memo(instanceId, (tokenSymbol: vToken, intervalBlocks?: number, totalHistoryBlockNumber?: number) => {
     const generateBachBlockHeightListQuery = generateBachBlockHeightList(instanceId, api);
     const getBatchConvertPriceQuery = getBatchConvertPrice(instanceId, api);
     const getBatchBlockHashQuery = getBatchBlockHash(instanceId, api);
 
-    let result = generateBachBlockHeightListQuery(intervalBlocks, totalHistoryBlockNumber);
+    const result = generateBachBlockHeightListQuery(intervalBlocks, totalHistoryBlockNumber);
 
     return result.pipe(mergeMap((resultSet) => {
-
       const timestampList = resultSet.timestampList;
       const blockHeightList = resultSet.blockHeightList;
-
-      const blockHashArray = getBatchBlockHashQuery(blockHeightList)
-
+      const blockHashArray = getBatchBlockHashQuery(blockHeightList);
       const convertPriceArray = getBatchConvertPriceQuery(tokenSymbol, blockHashArray);
 
       return convertPriceArray.pipe((map((convertPriceList) => {
-        return of({
-          timestampList: timestampList,
-          convertPriceList: convertPriceList
-        })
+        return {
+          convertPriceList: convertPriceList,
+          timestampList: timestampList
+        };
       })));
-
-    }));
-
-  }
-  );
+    }))
+  });
 }
 
 /**
@@ -100,13 +92,11 @@ export function getVtokenConvertPriceHistory(instanceId: string, api: ApiInterfa
  * @param instanceId
  * @param api
  */
-export function getVtokenMarketPriceValue(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getVtokenMarketPriceValue (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
   return memo(instanceId, ():any => {
     return of(new BN(0));
-      
   });
 }
-
 
 /**
  * @name getVtokenConvertPriceValue
@@ -114,10 +104,9 @@ export function getVtokenMarketPriceValue(instanceId: string, api: ApiInterfaceR
  * @param instanceId
  * @param api
  */
-export function getVtokenConvertPriceValue(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getVtokenConvertPriceValue (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
   return memo(instanceId, ():any => {
     return of(new BN(0));
-      
   });
 }
 
@@ -127,7 +116,7 @@ export function getVtokenConvertPriceValue(instanceId: string, api: ApiInterface
  * @param instanceId
  * @param api
  */
-export function getVtokenPriceDiff(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getVtokenPriceDiff (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
   return memo(instanceId, (tokenSymbol: vToken):any => {
     // const getVtokenMarketPriceQuery = getVtokenMarketPrice(instanceId, api);
     // const currentMarketPrice = getVtokenMarketPriceQuery(tokenSymbol);
@@ -140,8 +129,5 @@ export function getVtokenPriceDiff(instanceId: string, api: ApiInterfaceRx): (to
     // })))
 
     return of(new BN(0));
-      
   });
 }
-
-

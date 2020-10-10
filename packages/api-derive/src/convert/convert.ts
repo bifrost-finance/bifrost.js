@@ -4,7 +4,7 @@
 
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map, mergeMap } from 'rxjs/operators';
-import { Observable, combineLatest, of } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { ConvertPool } from '@bifrost-finance/types/interfaces';
 import { BlockHash } from '@polkadot/types/interfaces/chain';
 import { memo, getDesignatedBlockHash } from '../util';
@@ -25,7 +25,7 @@ import { vToken } from '../type';
 * The returned function's input parameters are tokenSymbol and preBlockHash, and output is a Observable<ConvertPool> type.
 */
 
-export function getPoolInfo(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<ConvertPool> {
+export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<ConvertPool> {
   return memo(instanceId, (tokenSymbol: vToken, preBlockHash?: BlockHash) => {
     if (preBlockHash === undefined) {
       return api.query.convert.pool(tokenSymbol);
@@ -41,8 +41,8 @@ export function getPoolInfo(instanceId: string, api: ApiInterfaceRx): (tokenSymb
  * @param instanceId
  * @param api
  */
-export function getAllVtokenConvertInfo(instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<ConvertPool[]> {
-  return memo(instanceId, (vTokenArray?:vToken[]):any => {
+export function getAllVtokenConvertInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<ConvertPool[]> {
+  return memo(instanceId, (vTokenArray?:vToken[]) => {
     let vTokenList: vToken[];
 
     if (vTokenArray === undefined) {
@@ -63,7 +63,7 @@ export function getAllVtokenConvertInfo(instanceId: string, api: ApiInterfaceRx)
  * @param instanceId
  * @param api
  */
-export function getConvertPriceInfo(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<BN> {
+export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<BN> {
   return memo(instanceId, (tokenSymbol: vToken, preBlockHash?: BlockHash) => {
     const convertPoolQuery = getPoolInfo(instanceId, api);
 
@@ -92,8 +92,8 @@ export function getConvertPriceInfo(instanceId: string, api: ApiInterfaceRx): (t
  * @param instanceId
  * @param api
  */
-export function getAllConvertPriceInfo(instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
-  return memo(instanceId, (vTokenArray?:vToken[]):any => {
+export function getAllConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
+  return memo(instanceId, (vTokenArray?:vToken[]) => {
     let vTokenList: vToken[];
 
     if (vTokenArray === undefined) {
@@ -114,7 +114,7 @@ export function getAllConvertPriceInfo(instanceId: string, api: ApiInterfaceRx):
  * @param instanceId
  * @param api
  */
-export function getAnnualizedRate(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
   return memo(instanceId, (tokenSymbol: vToken) => {
     const convertPriceQuery = getConvertPriceInfo(instanceId, api);
 
@@ -124,12 +124,8 @@ export function getAnnualizedRate(instanceId: string, api: ApiInterfaceRx): (tok
     // Query the convert price of the designated block
     const preBlockHashQuery = getDesignatedBlockHash(instanceId, api);
     const historicalPrice$ = preBlockHashQuery().pipe(
-      mergeMap((result) => { // mergeMap operator is used to flatten the two levels of Observables into one.
-        if (result === undefined) {
-          return of(new BN(0));
-        } else {
-          return convertPriceQuery(tokenSymbol, result);
-        }
+      mergeMap((preHash) => { // mergeMap operator is used to flatten the two levels of Observables into one.
+        return convertPriceQuery(tokenSymbol, preHash);
       }
       )
     );
@@ -162,8 +158,8 @@ export function getAnnualizedRate(instanceId: string, api: ApiInterfaceRx): (tok
  * @param instanceId
  * @param api
  */
-export function getAllAnnualizedRate(instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
-  return memo(instanceId, (vTokenArray?:vToken[]):any => {
+export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
+  return memo(instanceId, (vTokenArray?:vToken[]) => {
     let vTokenList: vToken[];
 
     if (vTokenArray === undefined) {
@@ -185,16 +181,15 @@ export function getAllAnnualizedRate(instanceId: string, api: ApiInterfaceRx): (
  * @param api
  */
 
-export function getBatchConvertPrice(instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>) => Observable<BN[]> {
-  return memo(instanceId, (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>): any => {
-    
+export function getBatchConvertPrice (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>) => Observable<BN[]> {
+  return memo(instanceId, (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>) => {
     const getConvertPriceInfoQuery = getConvertPriceInfo(instanceId, api);
-    return blockHashArray.pipe(mergeMap((blockHashList)=>{
-      return combineLatest(blockHashList.map((blockHash)=>{
+
+    return blockHashArray.pipe(mergeMap((blockHashList) => {
+      return combineLatest(blockHashList.map((blockHash) => {
         return getConvertPriceInfoQuery(tokenSymbol, blockHash);
       }));
     }));
   }
   );
 }
-

@@ -19,7 +19,6 @@ export type vToken = 'vDOT' | 'vKSM' | 'vEOS';
 export type allTokens = 'vDOT' | 'vKSM' | 'vEOS'| 'DOT' | 'KSM' | 'EOS' | 'aUSD';
 
 export interface timestampAndConvertPrice {
-    timestampList: number[],
-    convertPriceList: BN[]
-    }
-    
+  timestampList: number[],
+  convertPriceList: BN[]
+}
