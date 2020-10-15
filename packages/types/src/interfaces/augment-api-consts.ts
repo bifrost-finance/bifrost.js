@@ -3,7 +3,7 @@
 
 import { Vec } from '@polkadot/types/codec';
 import { u16, u32, u64 } from '@polkadot/types/primitive';
-import { ConvertPrice, Fee } from '@bifrost-finance/types/interfaces/primitives';
+import { Fee } from '@bifrost-finance/types/interfaces/primitives';
 import { Balance, BalanceOf, BlockNumber, LockIdentifier, ModuleId, Moment, Perbill, Percent, Permill, RuntimeDbWeight, Weight } from '@polkadot/types/interfaces/runtime';
 import { SessionIndex } from '@polkadot/types/interfaces/session';
 import { EraIndex } from '@polkadot/types/interfaces/staking';
@@ -35,7 +35,6 @@ declare module '@polkadot/api/types/consts' {
     };
     convert: {
       convertDuration: BlockNumber & AugmentedConst<ApiType>;
-      convertPricePrecision: ConvertPrice & AugmentedConst<ApiType>;
     };
     democracy: {
       /**
@@ -123,7 +122,40 @@ declare module '@polkadot/api/types/consts' {
        **/
       subAccountDeposit: BalanceOf & AugmentedConst<ApiType>;
     };
+    indices: {
+      /**
+       * The deposit needed for reserving an index.
+       **/
+      deposit: BalanceOf & AugmentedConst<ApiType>;
+    };
+    multisig: {
+      /**
+       * The base amount of currency needed to reserve for creating a multisig execution or to store
+       * a dispatch call for later.
+       **/
+      depositBase: BalanceOf & AugmentedConst<ApiType>;
+      /**
+       * The amount of currency needed per unit threshold when creating a multisig execution.
+       **/
+      depositFactor: BalanceOf & AugmentedConst<ApiType>;
+      /**
+       * The maximum amount of signatories allowed for a given multisig.
+       **/
+      maxSignatories: u16 & AugmentedConst<ApiType>;
+    };
     proxy: {
+      /**
+       * `AnnouncementDepositBase` metadata shadow.
+       **/
+      announcementDepositBase: BalanceOf & AugmentedConst<ApiType>;
+      /**
+       * `AnnouncementDepositFactor` metadata shadow.
+       **/
+      announcementDepositFactor: BalanceOf & AugmentedConst<ApiType>;
+      /**
+       * `MaxPending` metadata shadow.
+       **/
+      maxPending: u32 & AugmentedConst<ApiType>;
       /**
        * The maximum amount of proxies allowed for a single account.
        **/
@@ -287,9 +319,30 @@ declare module '@polkadot/api/types/consts' {
     };
     treasury: {
       /**
+       * Percentage of the curator fee that will be reserved upfront as deposit for bounty curator.
+       **/
+      bountyCuratorDeposit: Permill & AugmentedConst<ApiType>;
+      /**
+       * The amount held on deposit for placing a bounty proposal.
+       **/
+      bountyDepositBase: BalanceOf & AugmentedConst<ApiType>;
+      /**
+       * The delay period for which a bounty beneficiary need to wait before claim the payout.
+       **/
+      bountyDepositPayoutDelay: BlockNumber & AugmentedConst<ApiType>;
+      bountyValueMinimum: BalanceOf & AugmentedConst<ApiType>;
+      /**
        * Percentage of spare funds (if any) that are burnt per spend period.
        **/
       burn: Permill & AugmentedConst<ApiType>;
+      /**
+       * The amount held on deposit per byte within the tip report reason or bounty description.
+       **/
+      dataDepositPerByte: BalanceOf & AugmentedConst<ApiType>;
+      /**
+       * Maximum acceptable reason length.
+       **/
+      maximumReasonLength: u32 & AugmentedConst<ApiType>;
       /**
        * The treasury's module id, used for deriving its sovereign account ID.
        **/
@@ -319,10 +372,6 @@ declare module '@polkadot/api/types/consts' {
        * The amount held on deposit for placing a tip report.
        **/
       tipReportDepositBase: BalanceOf & AugmentedConst<ApiType>;
-      /**
-       * The amount held on deposit per byte within the tip report reason.
-       **/
-      tipReportDepositPerByte: BalanceOf & AugmentedConst<ApiType>;
     };
     vesting: {
       /**

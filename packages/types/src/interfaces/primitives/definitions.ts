@@ -86,10 +86,11 @@ export default {
   InVariantPool: 'Balance',
   TokenSymbol: {
     _enum: [
-      'aUSD', 'DOT',
-      'vDOT', 'KSM',
-      'vKSM', 'EOS',
-      'vEOS'
+      'aUSD',  'DOT',
+      'vDOT',  'KSM',
+      'vKSM',  'EOS',
+      'vEOS',  'IOST',
+      'vIOST'
     ]
   },
   TrxStatus: {

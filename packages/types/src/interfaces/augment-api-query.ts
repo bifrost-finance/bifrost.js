@@ -4,7 +4,7 @@
 import { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
 import { BTreeMap, Option, U8aFixed, Vec } from '@polkadot/types/codec';
 import { Bytes, Data, bool, u128, u32, u64, u8 } from '@polkadot/types/primitive';
-import { AccountAsset, Action, ActionReceipt, AssetConfig, Checksum256, ConvertPool, ConvertPrice, Fee, InvariantValue, PoolWeight, Price, ProducerAuthority, ProducerAuthoritySchedule, ProxyValidatorRegister, RatePerBlock, Token, TokenSymbol, TxOut, VersionId } from '@bifrost-finance/types/interfaces/primitives';
+import { AccountAsset, Action, ActionReceipt, AssetConfig, Checksum256, ConvertPool, ConvertPrice, Fee, InvariantValue, PoolWeight, Price, ProducerAuthority, ProducerAuthoritySchedule, ProxyValidatorRegister, RatePerBlock, Token, TokenSymbol, TrxStatus, TxOut, VersionId } from '@bifrost-finance/types/interfaces/primitives';
 import { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
 import { BabeAuthorityWeight, MaybeRandomness, NextConfigDescriptor, Randomness } from '@polkadot/types/interfaces/babe';
 import { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
@@ -16,7 +16,7 @@ import { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfa
 import { RegistrarInfo, Registration } from '@polkadot/types/interfaces/identity';
 import { AuthIndex } from '@polkadot/types/interfaces/imOnline';
 import { DeferredOffenceOf, Kind, OffenceDetails, OpaqueTimeSlot, ReportIdOf } from '@polkadot/types/interfaces/offences';
-import { ProxyType } from '@polkadot/types/interfaces/proxy';
+import { ProxyAnnouncement, ProxyDefinition } from '@polkadot/types/interfaces/proxy';
 import { ActiveRecovery, RecoveryConfig } from '@polkadot/types/interfaces/recovery';
 import { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, ExtrinsicsWeight, Hash, KeyTypeId, Moment, OpaqueCall, Perbill, Releases, ValidatorId } from '@polkadot/types/interfaces/runtime';
 import { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
@@ -24,7 +24,7 @@ import { Keys, SessionIndex } from '@polkadot/types/interfaces/session';
 import { Bid, BidKind, SocietyVote, StrikeCount, VouchingStatus } from '@polkadot/types/interfaces/society';
 import { ActiveEraInfo, ElectionResult, ElectionScore, ElectionStatus, EraIndex, EraRewardPoints, Exposure, Forcing, Nominations, RewardDestination, SlashingSpans, SpanIndex, SpanRecord, StakingLedger, UnappliedSlash, ValidatorPrefs } from '@polkadot/types/interfaces/staking';
 import { AccountInfo, DigestOf, EventIndex, EventRecord, LastRuntimeUpgradeInfo, Phase } from '@polkadot/types/interfaces/system';
-import { OpenTip, TreasuryProposal } from '@polkadot/types/interfaces/treasury';
+import { Bounty, BountyIndex, OpenTip, TreasuryProposal } from '@polkadot/types/interfaces/treasury';
 import { Multiplier } from '@polkadot/types/interfaces/txpayment';
 import { Multisig } from '@polkadot/types/interfaces/utility';
 import { VestingInfo } from '@polkadot/types/interfaces/vesting';
@@ -40,7 +40,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * The number of units of assets held by any given asset ans given account.
        **/
-      accountAssets: AugmentedQuery<ApiType, (arg: ITuple<[TokenSymbol, AccountId]> | [TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | number | Uint8Array, AccountId | string | Uint8Array]) => Observable<AccountAsset>>;
+      accountAssets: AugmentedQuery<ApiType, (arg: ITuple<[TokenSymbol, AccountId]> | [TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array, AccountId | string | Uint8Array]) => Observable<AccountAsset>>;
       /**
        * The next asset identifier up for grabs.
        **/
@@ -48,11 +48,11 @@ declare module '@polkadot/api/types/storage' {
       /**
        * The number of units of prices held by any given asset.
        **/
-      prices: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<Price>>;
+      prices: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<Price>>;
       /**
        * Details of the token corresponding to an asset id.
        **/
-      tokens: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<Token>>;
+      tokens: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<Token>>;
     };
     authorship: {
       /**
@@ -183,6 +183,7 @@ declare module '@polkadot/api/types/storage' {
        * Transaction ID is unique on EOS
        **/
       bridgeTransactionId: AugmentedQuery<ApiType, (arg: Checksum256 | string | Uint8Array) => Observable<ActionReceipt>>;
+      bridgeTrxStatus: AugmentedQuery<ApiType, (arg: TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array) => Observable<TrxStatus>>;
       /**
        * Transaction sent to Eos blockchain
        **/
@@ -196,6 +197,10 @@ declare module '@polkadot/api/types/storage' {
        **/
       initializeSchedule: AugmentedQuery<ApiType, () => Observable<ProducerAuthoritySchedule>>;
       /**
+       * Set low limit amount of EOS for cross transaction, if it's bigger than this, count one.
+       **/
+      lowLimitOnCrossChain: AugmentedQuery<ApiType, () => Observable<Balance>>;
+      /**
        * The current set of notary keys that may send bridge transactions to Eos chain.
        **/
       notaryKeys: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
@@ -204,6 +209,10 @@ declare module '@polkadot/api/types/storage' {
        **/
       pendingScheduleVersion: AugmentedQuery<ApiType, () => Observable<VersionId>>;
       /**
+       * According trx id to find processing trx
+       **/
+      processingBridgeTrx: AugmentedQuery<ApiType, (arg: Checksum256 | string | Uint8Array) => Observable<TxOut>>;
+      /**
        * Eos producer list and hash which in specific version id
        **/
       producerSchedules: AugmentedQuery<ApiType, (arg: VersionId | AnyNumber | Uint8Array) => Observable<ITuple<[Vec<ProducerAuthority>, Checksum256]>>>;
@@ -211,6 +220,40 @@ declare module '@polkadot/api/types/storage' {
        * Record times of cross-chain trade, (EOS => Bifrost, Bifrost => EOS)
        **/
       timesOfCrossChainTrade: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[u32, u32]>>>;
+    };
+    bridgeIost: {
+      /**
+       * How many address has the privilege sign transaction between EOS and Bifrost
+       **/
+      allAddressesHaveCrossChainPrivilege: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
+      /**
+       * Account where Eos bridge contract deployed, (Account, Signature threshold)
+       **/
+      bridgeContractAccount: AugmentedQuery<ApiType, () => Observable<ITuple<[Bytes, u8]>>>;
+      /**
+       * Config to enable/disable this runtime
+       **/
+      bridgeEnable: AugmentedQuery<ApiType, () => Observable<bool>>;
+      /**
+       * Transaction sent to Eos blockchain
+       **/
+      bridgeTxOuts: AugmentedQuery<ApiType, () => Observable<Vec<TxOut>>>;
+      /**
+       * Who has the privilege to call transaction between Bifrost and EOS
+       **/
+      crossChainPrivilege: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<bool>>;
+      /**
+       * The current set of notary keys that may send bridge transactions to Iost chain.
+       **/
+      notaryKeys: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
+      /**
+       * Eos producer list and hash which in specific version id
+       * Initialize a producer schedule while starting a node.
+       * Save all unique transactions
+       * Every transaction has different action receipt, but can have the same action
+       * Current pending schedule version
+       **/
+      pendingScheduleVersion: AugmentedQuery<ApiType, () => Observable<VersionId>>;
     };
     chainlink: {
     };
@@ -222,15 +265,15 @@ declare module '@polkadot/api/types/storage' {
       /**
        * convert price between two tokens, vtoken => (token, convert_price)
        **/
-      convertPrice: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<ConvertPrice>>;
+      convertPrice: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<ConvertPrice>>;
       /**
        * Convert pool
        **/
-      pool: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<ConvertPool>>;
+      pool: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<ConvertPool>>;
       /**
        * change rate per block, vtoken => (token, rate_per_block)
        **/
-      ratePerBlock: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<RatePerBlock>>;
+      ratePerBlock: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<RatePerBlock>>;
       /**
        * collect referrer, converter => ([(referrer1, 1000), (referrer2, 2000), ...], total_point)
        * total_point = 1000 + 2000 + ...
@@ -245,8 +288,7 @@ declare module '@polkadot/api/types/storage' {
        **/
       members: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
       /**
-       * The member who provides the default vote for any other members that do not vote before
-       * the timeout. If None, then no member has that privilege.
+       * The prime member that helps determine the default vote behavior in case of absentations.
        **/
       prime: AugmentedQuery<ApiType, () => Observable<Option<AccountId>>>;
       /**
@@ -493,20 +535,24 @@ declare module '@polkadot/api/types/storage' {
     };
     proxy: {
       /**
+       * The announcements made by the proxy (key).
+       **/
+      announcements: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ProxyAnnouncement>, BalanceOf]>>>;
+      /**
        * The set of account proxies. Maps the account which has delegated to the accounts
        * which are being delegated to, together with the amount held on deposit.
        **/
-      proxies: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ITuple<[AccountId, ProxyType]>>, BalanceOf]>>>;
+      proxies: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ProxyDefinition>, BalanceOf]>>>;
     };
     proxyValidator: {
       /**
        * Asset config data.
        **/
-      assetConfigs: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<AssetConfig>>;
+      assetConfigs: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<AssetConfig>>;
       /**
        * The total amount of asset has been locked for staking.
        **/
-      assetLockedBalances: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<Balance>>;
+      assetLockedBalances: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<Balance>>;
       /**
        * The locked amount of asset of account for staking.
        **/
@@ -514,7 +560,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * The proxy validators registered from cross chain.
        **/
-      proxyValidators: AugmentedQueryDoubleMap<ApiType, (key1: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<ProxyValidatorRegister>>;
+      proxyValidators: AugmentedQueryDoubleMap<ApiType, (key1: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<ProxyValidatorRegister>>;
     };
     randomnessCollectiveFlip: {
       /**
@@ -888,7 +934,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Each token's weight
        **/
-      tokenWeight: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS' | number | Uint8Array) => Observable<PoolWeight>>;
+      tokenWeight: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<PoolWeight>>;
       /**
        * Total weights
        **/
@@ -900,7 +946,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * User may add a single asst to liquidity
        **/
-      userSinglePool: AugmentedQuery<ApiType, (arg: ITuple<[AccountId, TokenSymbol]> | [AccountId | string | Uint8Array, TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | number | Uint8Array]) => Observable<ITuple<[Balance, Balance]>>>;
+      userSinglePool: AugmentedQuery<ApiType, (arg: ITuple<[AccountId, TokenSymbol]> | [AccountId | string | Uint8Array, TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array]) => Observable<ITuple<[Balance, Balance]>>>;
     };
     system: {
       /**
@@ -972,6 +1018,10 @@ declare module '@polkadot/api/types/storage' {
        * Hash of the previous block.
        **/
       parentHash: AugmentedQuery<ApiType, () => Observable<Hash>>;
+      /**
+       * True if we have upgraded so that `type RefCount` is `u32`. False (default) if not.
+       **/
+      upgradedToU32RefCount: AugmentedQuery<ApiType, () => Observable<bool>>;
     };
     technicalCommittee: {
       /**
@@ -979,8 +1029,7 @@ declare module '@polkadot/api/types/storage' {
        **/
       members: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
       /**
-       * The member who provides the default vote for any other members that do not vote before
-       * the timeout. If None, then no member has that privilege.
+       * The prime member that helps determine the default vote behavior in case of absentations.
        **/
       prime: AugmentedQuery<ApiType, () => Observable<Option<AccountId>>>;
       /**
@@ -1029,6 +1078,22 @@ declare module '@polkadot/api/types/storage' {
        * Proposal indices that have been approved but not yet awarded.
        **/
       approvals: AugmentedQuery<ApiType, () => Observable<Vec<ProposalIndex>>>;
+      /**
+       * Bounties that have been made.
+       **/
+      bounties: AugmentedQuery<ApiType, (arg: BountyIndex | AnyNumber | Uint8Array) => Observable<Option<Bounty>>>;
+      /**
+       * Bounty indices that have been approved but not yet funded.
+       **/
+      bountyApprovals: AugmentedQuery<ApiType, () => Observable<Vec<BountyIndex>>>;
+      /**
+       * Number of bounty proposals that have been made.
+       **/
+      bountyCount: AugmentedQuery<ApiType, () => Observable<BountyIndex>>;
+      /**
+       * The description of each bounty.
+       **/
+      bountyDescriptions: AugmentedQuery<ApiType, (arg: BountyIndex | AnyNumber | Uint8Array) => Observable<Option<Bytes>>>;
       /**
        * Number of proposals that have been made.
        **/

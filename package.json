@@ -32,7 +32,7 @@
     "@babel/runtime": "^7.11.2",
     "@polkadot/dev": "^0.55.53",
     "@polkadot/ts": "^0.3.47",
-    "@polkadot/typegen": "workspace:packages/typegen",
+    "@polkadot/typegen": "1.35.0-beta.5",
     "@types/jest": "^26.0.13",
     "@vuepress/plugin-search": "^1.5.4",
     "copyfiles": "^2.3.0",

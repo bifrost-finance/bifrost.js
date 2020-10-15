@@ -267,6 +267,8 @@ export interface TokenSymbol extends Enum {
   readonly isVKsm: boolean;
   readonly isEos: boolean;
   readonly isVEos: boolean;
+  readonly isIost: boolean;
+  readonly isVIost: boolean;
 }
 
 /** @name TrxStatus */
