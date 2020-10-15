@@ -5,5 +5,6 @@
 import * as aggregated from './aggregated';
 import * as assets from './assets';
 import * as convert from './convert';
+import * as swap from './swap';
 
-export const derive = { aggregated, assets, convert };
+export const derive = { aggregated, assets, convert, swap };

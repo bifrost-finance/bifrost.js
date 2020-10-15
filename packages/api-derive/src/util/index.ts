@@ -4,3 +4,5 @@
 
 export * from './getHeader';
 export * from './memo';
+export * from './getCEXTokenPrice';
+export * from './types';

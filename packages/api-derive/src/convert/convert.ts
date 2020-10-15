@@ -5,11 +5,11 @@
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map, mergeMap } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
-import { ConvertPool } from '@bifrost-finance/types/interfaces';
 import { BlockHash } from '@polkadot/types/interfaces/chain';
 import { memo, getDesignatedBlockHash } from '../util';
 import BN from 'bn.js';
-import { vToken } from '../type';
+import { vToken, bifrostVtokenList } from '../type';
+import { convertPool } from './types';
 
 /**
  * @name getPoolInfo
@@ -25,13 +25,23 @@ import { vToken } from '../type';
 * The returned function's input parameters are tokenSymbol and preBlockHash, and output is a Observable<ConvertPool> type.
 */
 
-export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<ConvertPool> {
+export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<convertPool> {
   return memo(instanceId, (tokenSymbol: vToken, preBlockHash?: BlockHash) => {
+    let result;
     if (preBlockHash === undefined) {
-      return api.query.convert.pool(tokenSymbol);
+      result = api.query.convert.pool(tokenSymbol);
     } else {
-      return api.query.convert.pool.at(preBlockHash, tokenSymbol);
+      result = api.query.convert.pool.at(preBlockHash, tokenSymbol);
     }
+
+    return result.pipe(map((res) => {
+      return {
+        token_pool: new BN(res['token_pool']),
+        vtoken_pool: new BN(res['vtoken_pool']),
+        current_reward: new BN(res['current_reward']),
+        pending_reward: new BN(res['pending_reward'])
+      }
+    }));
   });
 }
 
@@ -41,12 +51,12 @@ export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSym
  * @param instanceId
  * @param api
  */
-export function getAllVtokenConvertInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<ConvertPool[]> {
+export function getAllVtokenConvertInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<convertPool[]> {
   return memo(instanceId, (vTokenArray?:vToken[]) => {
     let vTokenList: vToken[];
 
     if (vTokenArray === undefined) {
-      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+      vTokenList = bifrostVtokenList as vToken[];
     } else {
       vTokenList = vTokenArray;
     }
@@ -97,7 +107,7 @@ export function getAllConvertPriceInfo (instanceId: string, api: ApiInterfaceRx)
     let vTokenList: vToken[];
 
     if (vTokenArray === undefined) {
-      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+      vTokenList = bifrostVtokenList as vToken[];
     } else {
       vTokenList = vTokenArray;
     }
@@ -163,7 +173,7 @@ export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): 
     let vTokenList: vToken[];
 
     if (vTokenArray === undefined) {
-      vTokenList = ['vDOT', 'vKSM', 'vEOS'];
+      vTokenList = bifrostVtokenList as vToken[];
     } else {
       vTokenList = vTokenArray;
     }

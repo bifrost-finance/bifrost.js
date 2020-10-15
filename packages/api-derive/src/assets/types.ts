@@ -2,21 +2,34 @@
 // This software may be modified and distributed under the terms
 // of the Apache-2.0 license. See the LICENSE file for details.
 
-import { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
-import { AccountAsset } from '@bifrost-finance/types/interfaces';
 import { allTokens } from '../type';
+import BN from 'bn.js';
 
 export interface DeriveVtokenAssetsInfo{
   symbol: string,
-  totalSupply: Balance
+  totalSupply: BN
+}
+
+export interface accountAsset{
+  balance: BN,
+  locked: BN,
+  available: BN,
+  cost: BN,
+  income: BN
 }
 
 export interface assetInfo{
   tokenName: allTokens,
-  assetInfo: AccountAsset
+  assetInfo: accountAsset
 }
 
 export interface accountsAssetInfo{
-  accountName: AccountId,
+  accountName: string,
   assetsInfo: assetInfo[]
+}
+
+export interface tokenInformation{
+  symbol: string,
+  precision: BN,
+  totalSupply: BN
 }

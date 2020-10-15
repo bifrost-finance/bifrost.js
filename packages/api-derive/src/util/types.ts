@@ -3,7 +3,7 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import BN from 'bn.js';
-import { Token } from '@bifrost-finance/types/interfaces';
+import { allTokens } from '../type';
 
 export interface timestampListAndBlockHeight{
   timestamp: number,
@@ -15,14 +15,7 @@ export interface timestampListAndBlockHeightList{
   blockHeightList: BN[]
 }
 
-export type CEXName = 'binance' | 'huobi' | 'okex';
-
-export interface CEXTokenPrice{
-  symbol: Token,
-  price: number
-}
-
-export interface symbolUSDValue{
-  symbol: Token,
-  usdValue: number
+export interface cexTokenPrice{
+  symbol: allTokens;
+  price: BN;
 }

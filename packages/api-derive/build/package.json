@@ -19,11 +19,11 @@
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/api#readme",
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "@bifrost-finance/types": "^1.0.59",
-    "@polkadot/rpc-core": "2.2.1",
+    "@bifrost-finance/types": "^1.0.63",
+    "@polkadot/rpc-core": "1.35.0-beta.5",
+    "ccxt": "^1.36.2",
     "memoizee": "^0.4.14",
-    "rxjs": "^6.5.5",
-    "ccxt": "^1.36.45"
+    "rxjs": "^6.5.5"
   },
   "devDependencies": {
     "@types/memoizee": "^0.4.3"

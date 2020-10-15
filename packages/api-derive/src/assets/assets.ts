@@ -6,11 +6,10 @@ import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
 import { memo } from '../util';
-import { allTokens } from '../type';
-import { accountsAssetInfo, assetInfo } from './types';
-import { AccountId } from '@polkadot/types/interfaces/runtime';
-
-import { Token } from '@bifrost-finance/types/interfaces';
+import { allTokens, bifrostAllTokenList } from '../type';
+import { accountsAssetInfo, assetInfo, tokenInformation } from './types';
+import BN from 'bn.js';
+import { u8aToString } from '@polkadot/util';
 
 /**
  * @name getTokenInfo
@@ -18,10 +17,16 @@ import { Token } from '@bifrost-finance/types/interfaces';
  * @param instanceId
  * @param api
  */
-export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: allTokens) => Observable<Token> {
+export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: allTokens) => Observable<tokenInformation> {
   return memo(instanceId, (tokenSymbol: allTokens) => {
     return api.query.assets.tokens(tokenSymbol).pipe(
-      map((result: Token) => result)
+      map((result) => {
+        return {
+          symbol: u8aToString(result['symbol']),
+          precision: new BN(result['precision']),
+          totalSupply: new BN(result['totalSupply'])
+        };
+      })
     );
   });
 }
@@ -32,12 +37,12 @@ export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSy
  * @param instanceId
  * @param api
  */
-export function getAllTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenArray?: allTokens[]) => Observable<Token[]> {
+export function getAllTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenArray?: allTokens[]) => Observable<tokenInformation[]> {
   return memo(instanceId, (tokenArray?: allTokens[]) => {
     let tokenList: allTokens[];
 
     if (tokenArray === undefined) {
-      tokenList = ['vDOT', 'vKSM', 'vEOS', 'DOT', 'KSM', 'EOS', 'aUSD'];
+      tokenList = bifrostAllTokenList as allTokens[];
     } else {
       tokenList = tokenArray;
     }
@@ -54,13 +59,21 @@ export function getAllTokenInfo (instanceId: string, api: ApiInterfaceRx): (toke
  * @param instanceId
  * @param api
  */
-export function getSingleAccountAsset (instanceId: string, api: ApiInterfaceRx): (accountName: AccountId, tokenSymbol: allTokens) => Observable<assetInfo> {
-  return memo(instanceId, (accountName: AccountId, tokenSymbol: allTokens) => {
+export function getSingleAccountAsset (instanceId: string, api: ApiInterfaceRx): (accountName: string, tokenSymbol: allTokens) => Observable<assetInfo> {
+  return memo(instanceId, (accountName: string, tokenSymbol: allTokens) => {
     const result = api.query.assets.accountAssets([tokenSymbol, accountName]);
 
     return result.pipe(map((result) => {
+      const asstInfo = {
+        balance: new BN(result['balance']),
+        locked: new BN(result['locked']),
+        available: new BN(result['available']),
+        cost: new BN(result['cost']),
+        income: new BN(result['income'])
+      }
+
       return {
-        assetInfo: result,
+        assetInfo: asstInfo,
         tokenName: tokenSymbol
       };
     }));
@@ -73,12 +86,12 @@ export function getSingleAccountAsset (instanceId: string, api: ApiInterfaceRx):
  * @param instanceId
  * @param api
  */
-export function getAccountAssets (instanceId: string, api: ApiInterfaceRx): (accountName: AccountId, tokenArray?: allTokens[]) => Observable<accountsAssetInfo> {
-  return memo(instanceId, (accountName: AccountId, tokenArray?: allTokens[]) => {
+export function getAccountAssets (instanceId: string, api: ApiInterfaceRx): (accountName: string, tokenArray?: allTokens[]) => Observable<accountsAssetInfo> {
+  return memo(instanceId, (accountName: string, tokenArray?: allTokens[]) => {
     let tokenList: allTokens[];
 
     if (tokenArray === undefined) {
-      tokenList = ['vDOT', 'vKSM', 'vEOS', 'DOT', 'KSM', 'EOS', 'aUSD'];
+      tokenList = bifrostAllTokenList as allTokens[];
     } else {
       tokenList = tokenArray;
     }
@@ -101,12 +114,12 @@ export function getAccountAssets (instanceId: string, api: ApiInterfaceRx): (acc
  * @param instanceId
  * @param api
  */
-export function getManyAccountsAssets (instanceId: string, api: ApiInterfaceRx): (accountNameArray: AccountId[], tokenArray?: allTokens[]) => Observable<accountsAssetInfo[]> {
-  return memo(instanceId, (accountNameArray: AccountId[], tokenArray?: allTokens[]) => {
+export function getManyAccountsAssets (instanceId: string, api: ApiInterfaceRx): (accountNameArray: string[], tokenArray?: allTokens[]) => Observable<accountsAssetInfo[]> {
+  return memo(instanceId, (accountNameArray: string[], tokenArray?: allTokens[]) => {
     let tokenList: allTokens[];
 
     if (tokenArray === undefined) {
-      tokenList = ['vDOT', 'vKSM', 'vEOS', 'DOT', 'KSM', 'EOS', 'aUSD'];
+      tokenList = bifrostAllTokenList as allTokens[];
     } else {
       tokenList = tokenArray;
     }
