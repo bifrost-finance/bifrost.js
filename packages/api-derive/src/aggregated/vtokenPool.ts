@@ -9,7 +9,8 @@ import { Observable, combineLatest, of } from 'rxjs';
 import { vToken, timestampAndConvertPrice } from '../type';
 import { getAllVtokenConvertInfo, getAllConvertPriceInfo, getAllAnnualizedRate, getBatchConvertPrice, getConvertPriceInfo } from '../convert';
 import { getAllTokenInfo } from '../assets';
-import { memo, generateBachBlockHeightList, getBatchBlockHash } from '../util';
+import { generateBachBlockHeightList, getBatchBlockHash } from '../util';
+import { memo } from '@polkadot/api-derive/util';
 import BN from 'bn.js';
 import { getBalancerPoolTokenPairQuotePrice } from '../swap';
 

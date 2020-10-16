@@ -5,7 +5,7 @@
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { mergeMap, map } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
-import { memo } from './memo';
+import { memo } from '@polkadot/api-derive/util';
 import { BlockHash } from '@polkadot/types/interfaces/chain';
 import { Header } from '@polkadot/types/interfaces';
 import { timestampListAndBlockHeightList, timestampListAndBlockHeight } from './types';

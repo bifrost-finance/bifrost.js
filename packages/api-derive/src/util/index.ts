@@ -3,6 +3,5 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 export * from './getHeader';
-export * from './memo';
 export * from './getCEXTokenPrice';
 export * from './types';

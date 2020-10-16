@@ -46,6 +46,10 @@ declare module '@polkadot/api/types/submittable' {
        * Move some assets from one holder to another.
        **/
       transfer: AugmentedSubmittable<(tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, target: LookupSource | Address | AccountId | AccountIndex | LookupSource | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;
+      /**
+       * Issue any amount of fungible assets.
+       **/
+      unlock: AugmentedSubmittable<(tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, target: LookupSource | Address | AccountId | AccountIndex | LookupSource | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;
     };
     authorship: {
       /**
@@ -151,9 +155,9 @@ declare module '@polkadot/api/types/submittable' {
     };
     bridgeEos: {
       bridgeEnable: AugmentedSubmittable<(enable: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      bridgeTxReport: AugmentedSubmittable<(txList: Vec<TxOut> | (TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>>;
       changeSchedule: AugmentedSubmittable<(legacyScheduleHash: Checksum256 | string | Uint8Array, newSchedule: ProducerAuthoritySchedule | { version?: any; producers?: any } | string | Uint8Array, merkle: IncrementalMerkle | { _node_count?: any; _active_nodes?: any } | string | Uint8Array, blockHeaders: Vec<SignedBlockHeader> | (SignedBlockHeader | { block_header?: any; producer_signature?: any } | string | Uint8Array)[], blockIdsList: Vec<Vec<Checksum256>>) => SubmittableExtrinsic<ApiType>>;
       clearCrossTradeTimes: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>>;
+      crossChainBackEnable: AugmentedSubmittable<(enable: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       crossToEos: AugmentedSubmittable<(to: Bytes | string | Uint8Array, tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array, memo: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       grantCrosschainPrivilege: AugmentedSubmittable<(target: AccountId | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       initSchedule: AugmentedSubmittable<(ps: ProducerAuthoritySchedule | { version?: any; producers?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
@@ -161,19 +165,10 @@ declare module '@polkadot/api/types/submittable' {
       removeCrosschainPrivilege: AugmentedSubmittable<(target: AccountId | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       saveProducerSchedule: AugmentedSubmittable<(ps: ProducerAuthoritySchedule | { version?: any; producers?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       setContractAccounts: AugmentedSubmittable<(account: Bytes | string | Uint8Array, threthold: u8 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      trialOnTrxStatus: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>>;
-      updateBridgeTrxStatus: AugmentedSubmittable<(changedTrxs: Vec<ITuple<[TxOut, TrxStatus, TxOut, Option<Checksum256>]>> | ([TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array, TrxStatus | 'Initial' | 'Generated' | 'Signed' | 'Processing' | 'Success' | 'Fail' | number | Uint8Array, TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array, Option<Checksum256> | null | object | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>>;
-    };
-    bridgeIost: {
-      bridgeEnable: AugmentedSubmittable<(enable: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      bridgeTxReport: AugmentedSubmittable<(txList: Vec<TxOut> | (TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>>;
-      crossToIost: AugmentedSubmittable<(to: Bytes | string | Uint8Array, tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array, memo: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      grantCrosschainPrivilege: AugmentedSubmittable<(target: AccountId | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      proveAction: AugmentedSubmittable<(action: Action | { account?: any; name?: any; authorization?: any; data?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      removeCrosschainPrivilege: AugmentedSubmittable<(target: AccountId | string | Uint8Array) => SubmittableExtrinsic<ApiType>>;
-      setContractAccounts: AugmentedSubmittable<(account: Bytes | string | Uint8Array, threthold: u8 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;
+      updateBridgeTrxStatus: AugmentedSubmittable<(changedTrxs: Vec<ITuple<[ITuple<[TxOut, u64]>, TrxStatus, ITuple<[TxOut, u64]>, Option<Checksum256>]>> | ([([TxOut,u64]) | [TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array, u64 | AnyNumber | Uint8Array], TrxStatus | 'Initial' | 'Generated' | 'Signed' | 'Processing' | 'Success' | 'Fail' | number | Uint8Array, ([TxOut,u64]) | [TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array, u64 | AnyNumber | Uint8Array], Option<Checksum256> | null | object | string | Uint8Array])[]) => SubmittableExtrinsic<ApiType>>;
     };
     convert: {
+      setConvertPool: AugmentedSubmittable<(tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, newTokenPool: Compact<Balance> | AnyNumber | Uint8Array, newVtokenPool: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       setConvertPrice: AugmentedSubmittable<(tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, convertPrice: ConvertPrice | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       setPricePerBlock: AugmentedSubmittable<(tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, ratePerBlock: RatePerBlock | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;
       toToken: AugmentedSubmittable<(tokenSymbol: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, vtokenAmount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>>;

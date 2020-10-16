@@ -165,7 +165,6 @@ declare module '@polkadot/api/types/storage' {
        * How many address has the privilege sign transaction between EOS and Bifrost
        **/
       allAddressesHaveCrossChainPrivilege: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
-      bigBlockNumber: AugmentedQuery<ApiType, () => Observable<u32>>;
       /**
        * Save all unique transactions
        * Every transaction has different action receipt, but can have the same action
@@ -183,15 +182,22 @@ declare module '@polkadot/api/types/storage' {
        * Transaction ID is unique on EOS
        **/
       bridgeTransactionId: AugmentedQuery<ApiType, (arg: Checksum256 | string | Uint8Array) => Observable<ActionReceipt>>;
-      bridgeTrxStatus: AugmentedQuery<ApiType, (arg: TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array) => Observable<TrxStatus>>;
       /**
        * Transaction sent to Eos blockchain
        **/
-      bridgeTxOuts: AugmentedQuery<ApiType, () => Observable<Vec<TxOut>>>;
+      bridgeTrxStatus: AugmentedQuery<ApiType, (arg: TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array) => Observable<TrxStatus>>;
+      bridgeTrxStatusV1: AugmentedQuery<ApiType, (arg: ITuple<[TxOut, u64]> | [TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array, u64 | AnyNumber | Uint8Array]) => Observable<TrxStatus>>;
+      /**
+       * Cross transaction back enable or not
+       **/
+      crossChainBackEnable: AugmentedQuery<ApiType, () => Observable<bool>>;
       /**
        * Who has the privilege to call transaction between Bifrost and EOS
        **/
       crossChainPrivilege: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<bool>>;
+      crossIndexRelatedEosBalance: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<ITuple<[Balance, AccountId, TokenSymbol]>>>;
+      crossTradeIndex: AugmentedQuery<ApiType, () => Observable<u64>>;
+      crossTradeStatus: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<bool>>;
       /**
        * Initialize a producer schedule while starting a node.
        **/
@@ -220,40 +226,6 @@ declare module '@polkadot/api/types/storage' {
        * Record times of cross-chain trade, (EOS => Bifrost, Bifrost => EOS)
        **/
       timesOfCrossChainTrade: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[u32, u32]>>>;
-    };
-    bridgeIost: {
-      /**
-       * How many address has the privilege sign transaction between EOS and Bifrost
-       **/
-      allAddressesHaveCrossChainPrivilege: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
-      /**
-       * Account where Eos bridge contract deployed, (Account, Signature threshold)
-       **/
-      bridgeContractAccount: AugmentedQuery<ApiType, () => Observable<ITuple<[Bytes, u8]>>>;
-      /**
-       * Config to enable/disable this runtime
-       **/
-      bridgeEnable: AugmentedQuery<ApiType, () => Observable<bool>>;
-      /**
-       * Transaction sent to Eos blockchain
-       **/
-      bridgeTxOuts: AugmentedQuery<ApiType, () => Observable<Vec<TxOut>>>;
-      /**
-       * Who has the privilege to call transaction between Bifrost and EOS
-       **/
-      crossChainPrivilege: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<bool>>;
-      /**
-       * The current set of notary keys that may send bridge transactions to Iost chain.
-       **/
-      notaryKeys: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
-      /**
-       * Eos producer list and hash which in specific version id
-       * Initialize a producer schedule while starting a node.
-       * Save all unique transactions
-       * Every transaction has different action receipt, but can have the same action
-       * Current pending schedule version
-       **/
-      pendingScheduleVersion: AugmentedQuery<ApiType, () => Observable<VersionId>>;
     };
     chainlink: {
     };

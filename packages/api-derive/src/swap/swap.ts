@@ -5,7 +5,7 @@
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { memo } from '../util';
+import { memo } from '@polkadot/api-derive/util';
 import BN from 'bn.js';
 import { allTokens } from '../type';
 import { BalancerPoolGlobalAllInfo, BalancerPoolGlobalTokenInfo, BalancerPoolTokenPairInfo } from './types';

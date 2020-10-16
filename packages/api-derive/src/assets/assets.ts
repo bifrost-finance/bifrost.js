@@ -5,7 +5,7 @@
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
-import { memo } from '../util';
+import { memo } from '@polkadot/api-derive/util';
 import { allTokens, bifrostAllTokenList } from '../type';
 import { accountsAssetInfo, assetInfo, tokenInformation } from './types';
 import BN from 'bn.js';
