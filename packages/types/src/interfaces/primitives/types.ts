@@ -50,6 +50,7 @@ export interface AssetConfig extends Struct {
 export interface BlockchainType extends Enum {
   readonly isBifrost: boolean;
   readonly isEos: boolean;
+  readonly isIost: boolean;
 }
 
 /** @name BlockHeader */
@@ -140,6 +141,13 @@ export interface InVariantPool extends Balance {}
 
 /** @name InvariantValue */
 export interface InvariantValue extends Balance {}
+
+/** @name IostAction */
+export interface IostAction extends Struct {
+  readonly contract: Bytes;
+  readonly action_name: Bytes;
+  readonly data: Bytes;
+}
 
 /** @name KeyWeight */
 export interface KeyWeight extends Struct {

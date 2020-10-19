@@ -14,6 +14,7 @@ export default {
     authorization: 'Vec<PermissionLevel>',
     data: 'Vec<u8>'
   },
+  IostAction: { contract: 'Vec<u8>', action_name: 'Vec<u8>', data: 'Vec<u8>' },
   PermissionLevel: { actor: 'AccountName', permission: 'PermissionName' },
   PermissionName: 'u64',
   ActionReceipt: {
@@ -26,7 +27,7 @@ export default {
     abi_sequence: 'UnsignedInt'
   },
   Checksum256: '([u8;32])',
-  BlockchainType: { _enum: [ 'BIFROST', 'EOS' ] },
+  BlockchainType: { _enum: [ 'BIFROST', 'EOS', 'IOST' ] },
   Precision: 'u32',
   BridgeAssetSymbol: {
     blockchain: 'BlockchainType',

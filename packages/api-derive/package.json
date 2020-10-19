@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/api-derive",
-  "version": "1.0.63",
+  "version": "1.0.65",
   "description": "Additional polkadot.js derives for Bifrost",
   "main": "index.js",
   "author": "Edwin Wang <lark930@gmail.com>",
@@ -19,11 +19,11 @@
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/api#readme",
   "dependencies": {
     "@babel/runtime": "^7.10.2",
-    "@bifrost-finance/types": "^1.0.59",
+    "@bifrost-finance/types": "^1.0.65",
     "@polkadot/rpc-core": "2.2.1",
+    "ccxt": "^1.36.45",
     "memoizee": "^0.4.14",
-    "rxjs": "^6.5.5",
-    "ccxt": "^1.36.45"
+    "rxjs": "^6.5.5"
   },
   "devDependencies": {
     "@types/memoizee": "^0.4.3"

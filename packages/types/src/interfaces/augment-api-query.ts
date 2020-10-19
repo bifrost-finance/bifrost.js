@@ -227,6 +227,40 @@ declare module '@polkadot/api/types/storage' {
        **/
       timesOfCrossChainTrade: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[u32, u32]>>>;
     };
+    bridgeIost: {
+      /**
+       * How many address has the privilege sign transaction between EOS and Bifrost
+       **/
+      allAddressesHaveCrossChainPrivilege: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
+      /**
+       * Account where Eos bridge contract deployed, (Account, Signature threshold)
+       **/
+      bridgeContractAccount: AugmentedQuery<ApiType, () => Observable<ITuple<[Bytes, u8]>>>;
+      /**
+       * Config to enable/disable this runtime
+       **/
+      bridgeEnable: AugmentedQuery<ApiType, () => Observable<bool>>;
+      /**
+       * Transaction sent to Eos blockchain
+       **/
+      bridgeTxOuts: AugmentedQuery<ApiType, () => Observable<Vec<TxOut>>>;
+      /**
+       * Who has the privilege to call transaction between Bifrost and EOS
+       **/
+      crossChainPrivilege: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<bool>>;
+      /**
+       * The current set of notary keys that may send bridge transactions to Iost chain.
+       **/
+      notaryKeys: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>>;
+      /**
+       * Eos producer list and hash which in specific version id
+       * Initialize a producer schedule while starting a node.
+       * Save all unique transactions
+       * Every transaction has different action receipt, but can have the same action
+       * Current pending schedule version
+       **/
+      pendingScheduleVersion: AugmentedQuery<ApiType, () => Observable<VersionId>>;
+    };
     chainlink: {
     };
     convert: {
