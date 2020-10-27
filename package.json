@@ -32,7 +32,7 @@
     "@babel/runtime": "^7.11.2",
     "@polkadot/dev": "^0.55.53",
     "@polkadot/ts": "^0.3.47",
-    "@polkadot/typegen": "1.35.0-beta.5",
+    "@polkadot/typegen": "^2.4.1",
     "@types/jest": "^26.0.13",
     "@vuepress/plugin-search": "^1.5.4",
     "copyfiles": "^2.3.0",
@@ -42,8 +42,11 @@
     "typedoc-plugin-no-inherit": "^1.2.0",
     "ccxt": "^1.36.2"
   },
-  "version": "1.35.0-beta.5",
+  "version": "1.0.16",
   "dependencies": {
-    "ccxt": "^1.36.2"
+    "ccxt": "^1.36.2",
+    "@polkadot/typegen": "^2.4.1",
+    "@polkadot/types": "^2.4.1",
+    "@polkadot/api": "^2.4.1"
   }
 }

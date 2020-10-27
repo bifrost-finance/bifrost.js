@@ -7,8 +7,8 @@ import BN from 'bn.js';
 export interface DeriveVtokenConvertInfo{
   symbol: string,
   tokenPool: BN;
-  convertPrice: BN;
-  annualizedRate: BN;
+  convertPrice: number;
+  annualizedRate: number;
 }
 
 export interface convertPool {

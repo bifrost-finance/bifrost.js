@@ -29,6 +29,7 @@ import { convertPool } from './types';
 export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<convertPool> {
   return memo(instanceId, (tokenSymbol: vToken, preBlockHash?: BlockHash) => {
     let result;
+
     if (preBlockHash === undefined) {
       result = api.query.convert.pool(tokenSymbol);
     } else {
@@ -37,11 +38,11 @@ export function getPoolInfo (instanceId: string, api: ApiInterfaceRx): (tokenSym
 
     return result.pipe(map((res) => {
       return {
-        token_pool: new BN(res['token_pool']),
-        vtoken_pool: new BN(res['vtoken_pool']),
-        current_reward: new BN(res['current_reward']),
-        pending_reward: new BN(res['pending_reward'])
-      }
+        current_reward: new BN(res.current_reward),
+        pending_reward: new BN(res.pending_reward),
+        token_pool: new BN(res.token_pool),
+        vtoken_pool: new BN(res.vtoken_pool)
+      };
     }));
   });
 }
@@ -74,8 +75,8 @@ export function getAllVtokenConvertInfo (instanceId: string, api: ApiInterfaceRx
  * @param instanceId
  * @param api
  */
-export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<BN> {
-  return memo(instanceId, (tokenSymbol: vToken, preBlockHash?: BlockHash) => {
+export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, preBlockHash?: BlockHash) => Observable<number> {
+  return memo(instanceId, (tokenSymbol: vToken, preBlockHash?: BlockHash):any => {
     const convertPoolQuery = getPoolInfo(instanceId, api);
 
     return convertPoolQuery(tokenSymbol, preBlockHash).pipe(
@@ -88,7 +89,7 @@ export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (
 
           convertPrice = tokenPool.div(vtokenPool);
         } else {
-          convertPrice = new BN(0);
+          convertPrice = 0;
         }
 
         return convertPrice;
@@ -103,7 +104,7 @@ export function getConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (
  * @param instanceId
  * @param api
  */
-export function getAllConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
+export function getAllConvertPriceInfo (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<number[]> {
   return memo(instanceId, (vTokenArray?:vToken[]) => {
     let vTokenList: vToken[];
 
@@ -125,7 +126,7 @@ export function getAllConvertPriceInfo (instanceId: string, api: ApiInterfaceRx)
  * @param instanceId
  * @param api
  */
-export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<number> {
   return memo(instanceId, (tokenSymbol: vToken) => {
     const convertPriceQuery = getConvertPriceInfo(instanceId, api);
 
@@ -146,13 +147,13 @@ export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (to
       currentPrice$,
       historicalPrice$
     ]).pipe(
-      map(([currentPrice, historicalPrice]): BN => {
-        let annualizedRate: BN;
+      map(([currentPrice, historicalPrice]) => {
+        let annualizedRate;
 
-        if (historicalPrice.toNumber() !== 0) {
-          annualizedRate = currentPrice.sub(historicalPrice).div(historicalPrice).div(new BN(7)).mul(new BN(365));
+        if (historicalPrice !== 0) {
+          annualizedRate = (currentPrice - historicalPrice) / (historicalPrice) / 7 * 365;
         } else {
-          annualizedRate = new BN(0);
+          annualizedRate = 0;
         }
 
         return annualizedRate;
@@ -169,7 +170,7 @@ export function getAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (to
  * @param instanceId
  * @param api
  */
-export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<BN[]> {
+export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): (vTokenArray?:vToken[]) => Observable<number[]> {
   return memo(instanceId, (vTokenArray?:vToken[]) => {
     let vTokenList: vToken[];
 
@@ -192,7 +193,7 @@ export function getAllAnnualizedRate (instanceId: string, api: ApiInterfaceRx): 
  * @param api
  */
 
-export function getBatchConvertPrice (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>) => Observable<BN[]> {
+export function getBatchConvertPrice (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>) => Observable<number[]> {
   return memo(instanceId, (tokenSymbol: vToken, blockHashArray: Observable<BlockHash[]>) => {
     const getConvertPriceInfoQuery = getConvertPriceInfo(instanceId, api);
 

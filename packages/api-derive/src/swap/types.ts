@@ -7,15 +7,15 @@ import BN from 'bn.js';
 export interface BalancerPoolGlobalTokenInfo{
   symbol: string;
   balance: BN;
-  poolWeight: BN;
+  poolWeight: number;
 }
 
 export interface BalancerPoolGlobalAllInfo{
-    balancerTokenInfoArray: BalancerPoolGlobalTokenInfo[];
-    invariantValue: BN;
-  }
+  balancerTokenInfoArray: BalancerPoolGlobalTokenInfo[];
+  invariantValue: BN;
+}
 
 export interface BalancerPoolTokenPairInfo{
-    baseTokenInfo: BalancerPoolGlobalTokenInfo;
-    quoteTokenInfo: BalancerPoolGlobalTokenInfo;
+  baseTokenInfo: BalancerPoolGlobalTokenInfo;
+  quoteTokenInfo: BalancerPoolGlobalTokenInfo;
 }

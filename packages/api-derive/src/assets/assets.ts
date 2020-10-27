@@ -22,9 +22,9 @@ export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSy
     return api.query.assets.tokens(tokenSymbol).pipe(
       map((result) => {
         return {
-          symbol: u8aToString(result['symbol']),
-          precision: new BN(result['precision']),
-          totalSupply: new BN(result['totalSupply'])
+          precision: new BN(result.precision),
+          symbol: u8aToString(result.symbol),
+          totalSupply: new BN(result.totalSupply)
         };
       })
     );
@@ -65,12 +65,12 @@ export function getSingleAccountAsset (instanceId: string, api: ApiInterfaceRx):
 
     return result.pipe(map((result) => {
       const asstInfo = {
-        balance: new BN(result['balance']),
-        locked: new BN(result['locked']),
-        available: new BN(result['available']),
-        cost: new BN(result['cost']),
-        income: new BN(result['income'])
-      }
+        available: new BN(result.available),
+        balance: new BN(result.balance),
+        cost: new BN(result.cost),
+        income: new BN(result.income),
+        locked: new BN(result.locked)
+      };
 
       return {
         assetInfo: asstInfo,

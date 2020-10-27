@@ -7,7 +7,7 @@ import { mergeMap, map } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
 import { memo } from '@polkadot/api-derive/util';
 import { BlockHash } from '@polkadot/types/interfaces/chain';
-import { Header } from '@polkadot/types/interfaces';
+import { Header } from '@polkadot/types/interfaces/runtime';
 import { timestampListAndBlockHeightList, timestampListAndBlockHeight } from './types';
 import BN from 'bn.js';
 
@@ -73,7 +73,6 @@ export function getBatchBlockHash (instanceId: string, api: ApiInterfaceRx): (bl
     }));
   });
 }
-
 
 /**
  * @name calCurrentDateHourZeroBlockHeight

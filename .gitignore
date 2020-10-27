@@ -66,3 +66,8 @@ build/
 .idea
 
 .DS_Store
+
+# dependencies of sub-directories
+packages/api/node_modules
+packages/api-derive/node_modules
+packages/types/node_modules

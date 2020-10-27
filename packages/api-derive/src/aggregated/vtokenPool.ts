@@ -84,7 +84,7 @@ export function getVtokenConvertPriceHistory (instanceId: string, api: ApiInterf
           timestampList: timestampList
         };
       })));
-    }))
+    }));
   });
 }
 
@@ -94,24 +94,27 @@ export function getVtokenConvertPriceHistory (instanceId: string, api: ApiInterf
  * @param instanceId
  * @param api
  */
-export function getVtokenMarketPriceValue (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getVtokenMarketPriceValue (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<number> {
   return memo(instanceId, (tokenSymbol: vToken) => {
     let baseTokenSymbol;
 
-    switch (tokenSymbol) {  // Still need to check the exact string pattern of tokenSymbol passed in
-      case 'vEOS' as vToken: baseTokenSymbol = 'EOS';
-      case 'vDOT' as vToken: baseTokenSymbol = 'DOT';
-      case 'vKSM' as vToken: baseTokenSymbol = 'KSM';
+    switch (tokenSymbol) { // Still need to check the exact string pattern of tokenSymbol passed in
+      case 'vEOS' as vToken: { baseTokenSymbol = 'EOS'; break; }
+
+      case 'vDOT' as vToken: { baseTokenSymbol = 'DOT'; break; }
+
+      case 'vKSM' as vToken: { baseTokenSymbol = 'KSM'; break; }
+      
       default: baseTokenSymbol = '';
     }
 
     if (baseTokenSymbol) {
       const getBalancerPoolTokenPairQuotePriceQuery = getBalancerPoolTokenPairQuotePrice(instanceId, api);
-      return getBalancerPoolTokenPairQuotePriceQuery(baseTokenSymbol as allTokens , tokenSymbol);
-    } else {
-      return of(new BN(-1));
-    }
 
+      return getBalancerPoolTokenPairQuotePriceQuery(baseTokenSymbol as allTokens, tokenSymbol);
+    } else {
+      return of(0);
+    }
   });
 }
 
@@ -121,9 +124,10 @@ export function getVtokenMarketPriceValue (instanceId: string, api: ApiInterface
  * @param instanceId
  * @param api
  */
-export function getVtokenConvertPriceValue (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getVtokenConvertPriceValue (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<number> {
   return memo(instanceId, (tokenSymbol: vToken) => {
     const getConvertPriceInfoQuery = getConvertPriceInfo(instanceId, api);
+
     return getConvertPriceInfoQuery(tokenSymbol);
   });
 }
@@ -134,7 +138,7 @@ export function getVtokenConvertPriceValue (instanceId: string, api: ApiInterfac
  * @param instanceId
  * @param api
  */
-export function getVtokenPriceDiff (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<BN> {
+export function getVtokenPriceDiff (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: vToken) => Observable<number> {
   return memo(instanceId, (tokenSymbol: vToken) => {
     const getVtokenMarketPriceQuery = getVtokenMarketPriceValue(instanceId, api);
     const currentMarketPrice = getVtokenMarketPriceQuery(tokenSymbol);
@@ -142,8 +146,8 @@ export function getVtokenPriceDiff (instanceId: string, api: ApiInterfaceRx): (t
     const getConvertPriceInfoQuery = getConvertPriceInfo(instanceId, api);
     const currentConvertPrice = getConvertPriceInfoQuery(tokenSymbol);
 
-    return combineLatest([currentMarketPrice, currentConvertPrice]).pipe((map(([marketPrice, convertPrice])=>{
-      return convertPrice.sub(marketPrice);
-    })))
+    return combineLatest([currentMarketPrice, currentConvertPrice]).pipe((map(([marketPrice, convertPrice]) => {
+      return (convertPrice - marketPrice);
+    })));
   });
 }
