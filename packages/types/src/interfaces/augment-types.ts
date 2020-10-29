@@ -3,7 +3,7 @@
 
 import { Compact, Option, Raw, Vec } from '@polkadot/types/codec';
 import { BitVec, Bytes, Data, DoNotConstruct, Null, StorageKey, Text, Type, U256, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types/primitive';
-import { AccountAsset, AccountName, Action, ActionName, ActionReceipt, AssetConfig, BlockHeader, BlockSigningAuthority, BlockSigningAuthorityV0, BlockTimestamp, BlockchainType, BridgeAssetSymbol, Checksum256, ConvertPool, ConvertPrice, Cost, DataVersion, Extension, Fail, Fee, FlatMap, InVariantPool, Income, IncrementalMerkle, InvariantValue, IostAction, KeyWeight, MultiSig, MultiSigTx, PermissionLevel, PermissionName, PoolWeight, Precision, Price, Processing, ProducerAuthority, ProducerAuthoritySchedule, ProducerKey, ProducerSchedule, ProxyValidatorRegister, PublicKey, RatePerBlock, RequestIdentifier, SignedBlockHeader, SpecIndex, Token, TokenPool, TokenSymbol, TrxStatus, TxOut, TxSig, UnsignedInt, VTokenPool, VersionId } from '@bifrost-finance/types/interfaces/primitives';
+import { AccountAsset, AccountName, Action, ActionName, ActionReceipt, AssetConfig, BlockHeader, BlockSigningAuthority, BlockSigningAuthorityV0, BlockTimestamp, BlockchainType, BridgeAssetSymbol, Checksum256, ConvertPool, ConvertPrice, Cost, DataVersion, Extension, Fail, Failure, Fee, FlatMap, InVariantPool, Income, IncrementalMerkle, InvariantValue, IostAction, KeyWeight, MultiSig, MultiSigTx, PermissionLevel, PermissionName, PoolWeight, Precision, Price, Processing, ProducerAuthority, ProducerAuthoritySchedule, ProducerKey, ProducerSchedule, ProxyValidatorRegister, PublicKey, RatePerBlock, RequestIdentifier, Sent, SignedBlockHeader, SpecIndex, Token, TokenPool, TokenSymbol, TrxStatus, TxOut, TxOutV1, TxSig, UnsignedInt, VTokenPool, VersionId } from '@bifrost-finance/types/interfaces/primitives';
 import { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
 import { RawAuraPreDigest } from '@polkadot/types/interfaces/aura';
 import { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -1860,12 +1860,21 @@ declare module '@polkadot/types/types/registry' {
     Processing: Processing;
     'Option<Processing>': Option<Processing>;
     'Vec<Processing>': Vec<Processing>;
+    Sent: Sent;
+    'Option<Sent>': Option<Sent>;
+    'Vec<Sent>': Vec<Sent>;
     Fail: Fail;
     'Option<Fail>': Option<Fail>;
     'Vec<Fail>': Vec<Fail>;
+    Failure: Failure;
+    'Option<Failure>': Option<Failure>;
+    'Vec<Failure>': Vec<Failure>;
     TxOut: TxOut;
     'Option<TxOut>': Option<TxOut>;
     'Vec<TxOut>': Vec<TxOut>;
+    TxOutV1: TxOutV1;
+    'Option<TxOutV1>': Option<TxOutV1>;
+    'Vec<TxOutV1>': Vec<TxOutV1>;
     ConvertPrice: ConvertPrice;
     'Compact<ConvertPrice>': Compact<ConvertPrice>;
     'Option<ConvertPrice>': Option<ConvertPrice>;

@@ -119,6 +119,12 @@ export interface Fail extends Struct {
   readonly tx: MultiSigTx;
 }
 
+/** @name Failure */
+export interface Failure extends Struct {
+  readonly tx_id: Bytes;
+  readonly reason: Bytes;
+}
+
 /** @name Fee */
 export interface Fee extends u64 {}
 
@@ -241,6 +247,13 @@ export interface RatePerBlock extends u64 {}
 /** @name RequestIdentifier */
 export interface RequestIdentifier extends u64 {}
 
+/** @name Sent */
+export interface Sent extends Struct {
+  readonly tx_id: Bytes;
+  readonly from: AccountId;
+  readonly token_symbol: TokenSymbol;
+}
+
 /** @name Signature */
 export interface Signature extends Struct {
   readonly type_: UnsignedInt;
@@ -303,6 +316,22 @@ export interface TxOut extends Enum {
   readonly asSuccess: Bytes;
   readonly isFail: boolean;
   readonly asFail: Fail;
+}
+
+/** @name TxOutV1 */
+export interface TxOutV1 extends Enum {
+  readonly isInitialized: boolean;
+  readonly asInitialized: MultiSigTx;
+  readonly isCreated: boolean;
+  readonly asCreated: MultiSigTx;
+  readonly isCompleteSigned: boolean;
+  readonly asCompleteSigned: MultiSigTx;
+  readonly isSent: boolean;
+  readonly asSent: Sent;
+  readonly isSucceeded: boolean;
+  readonly asSucceeded: Bytes;
+  readonly isFailure: boolean;
+  readonly asFailure: Failure;
 }
 
 /** @name TxSig */
