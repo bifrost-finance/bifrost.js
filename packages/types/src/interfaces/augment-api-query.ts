@@ -4,7 +4,7 @@
 import { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
 import { BTreeMap, Option, U8aFixed, Vec } from '@polkadot/types/codec';
 import { Bytes, Data, bool, u128, u32, u64, u8 } from '@polkadot/types/primitive';
-import { AccountAsset, Action, ActionReceipt, AssetConfig, Checksum256, ConvertPool, ConvertPrice, Fee, InvariantValue, PoolWeight, Price, ProducerAuthority, ProducerAuthoritySchedule, ProxyValidatorRegister, RatePerBlock, Token, TokenSymbol, TrxStatus, TxOut, VersionId } from '@bifrost-finance/types/interfaces/primitives';
+import { AccountAsset, Action, ActionReceipt, AssetConfig, Checksum256, ConvertPool, ConvertPrice, Fee, InvariantValue, PoolWeight, Price, ProducerAuthority, ProducerAuthoritySchedule, ProxyValidatorRegister, RatePerBlock, Token, TokenSymbol, TrxStatus, TxOut, TxOutV1, VersionId } from '@bifrost-finance/types/interfaces/primitives';
 import { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
 import { BabeAuthorityWeight, MaybeRandomness, NextConfigDescriptor, Randomness } from '@polkadot/types/interfaces/babe';
 import { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
@@ -188,6 +188,11 @@ declare module '@polkadot/api/types/storage' {
       bridgeTrxStatus: AugmentedQuery<ApiType, (arg: TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array) => Observable<TrxStatus>>;
       bridgeTrxStatusV1: AugmentedQuery<ApiType, (arg: ITuple<[TxOut, u64]> | [TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array, u64 | AnyNumber | Uint8Array]) => Observable<TrxStatus>>;
       /**
+       * V2 storage
+       * Transaction sent to Eos blockchain
+       **/
+      bridgeTrxStatusV2: AugmentedQuery<ApiType, (arg: ITuple<[TxOutV1, u64]> | [TxOutV1 | { Initialized: any } | { Created: any } | { CompleteSigned: any } | { Sent: any } | { Succeeded: any } | { Failure: any } | string | Uint8Array, u64 | AnyNumber | Uint8Array]) => Observable<TrxStatus>>;
+      /**
        * Cross transaction back enable or not
        **/
       crossChainBackEnable: AugmentedQuery<ApiType, () => Observable<bool>>;
@@ -196,8 +201,12 @@ declare module '@polkadot/api/types/storage' {
        **/
       crossChainPrivilege: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<bool>>;
       crossIndexRelatedEosBalance: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<ITuple<[Balance, AccountId, TokenSymbol]>>>;
+      crossIndexRelatedEosBalanceV2: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<ITuple<[Balance, AccountId, TokenSymbol]>>>;
       crossTradeIndex: AugmentedQuery<ApiType, () => Observable<u64>>;
+      crossTradeIndexV2: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<u64>>;
       crossTradeStatus: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<bool>>;
+      crossTradeStatusV2: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<bool>>;
+      eosNodeAddress: AugmentedQuery<ApiType, () => Observable<Bytes>>;
       /**
        * Initialize a producer schedule while starting a node.
        **/
@@ -218,6 +227,10 @@ declare module '@polkadot/api/types/storage' {
        * According trx id to find processing trx
        **/
       processingBridgeTrx: AugmentedQuery<ApiType, (arg: Checksum256 | string | Uint8Array) => Observable<TxOut>>;
+      /**
+       * According trx id to find processing trx
+       **/
+      processingBridgeTrxV2: AugmentedQuery<ApiType, (arg: Checksum256 | string | Uint8Array) => Observable<ITuple<[TxOutV1, u64]>>>;
       /**
        * Eos producer list and hash which in specific version id
        **/

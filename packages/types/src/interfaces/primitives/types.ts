@@ -1,10 +1,10 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import { ITuple } from '@polkadot/types/types';
 import { Enum, Option, Struct, U8aFixed, Vec } from '@polkadot/types/codec';
-import { Bytes, u128, u16, u32, u64, u8 } from '@polkadot/types/primitive';
 import { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
+import { Bytes, u128, u16, u32, u64, u8 } from '@polkadot/types/primitive';
+import { ITuple } from '@polkadot/types/types';
 
 /** @name AccountAsset */
 export interface AccountAsset extends Struct {
@@ -92,6 +92,9 @@ export interface BridgeAssetSymbol extends Struct {
 /** @name Checksum256 */
 export interface Checksum256 extends U8aFixed {}
 
+/** @name Checksum256Array */
+export interface Checksum256Array extends Vec<Checksum256> {}
+
 /** @name ConvertPool */
 export interface ConvertPool extends Struct {
   readonly token_pool: Balance;
@@ -139,7 +142,7 @@ export interface Income extends u128 {}
 /** @name IncrementalMerkle */
 export interface IncrementalMerkle extends Struct {
   readonly _node_count: u64;
-  readonly _active_nodes: Vec<Checksum256>;
+  readonly _active_nodes: Checksum256Array;
 }
 
 /** @name InVariantPool */

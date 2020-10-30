@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/types",
-  "version": "1.0.73",
+  "version": "1.0.74",
   "description": "Bifrost JS types",
   "main": "index.js",
   "keywords": [
