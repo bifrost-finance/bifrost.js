@@ -20,7 +20,7 @@
   "dependencies": {
     "@babel/runtime": "^7.10.2",
     "@bifrost-finance/types": "^1.0.76",
-    "@polkadot/rpc-core": "^2.4.1",
+    "@polkadot/rpc-core": "^2.6.1",
     "ccxt": "^1.36.45",
     "memoizee": "^0.4.14",
     "rxjs": "^6.5.5"
