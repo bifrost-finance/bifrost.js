@@ -1,9 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { BTreeMap, Bytes, Data, Option, U8aFixed, Vec, bool, u128, u32, u64, u8 } from '@polkadot/types';
+import type { BTreeMap, Bytes, Data, Option, U8aFixed, Vec, bool, u32, u64, u8 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
-import type { AccountAsset, Action, ActionReceipt, AssetConfig, Checksum256, ConvertPool, ConvertPrice, Fee, InvariantValue, PoolWeight, Price, ProducerAuthority, ProducerAuthoritySchedule, ProxyValidatorRegister, RatePerBlock, Token, TokenSymbol, TrxStatus, TxOut, TxOutV1, VersionId } from '@bifrost-finance/types/interfaces/primitives';
+import type { AccountAsset, Action, ActionReceipt, Checksum256, ConvertPool, ConvertPrice, PoolDetails, PoolId, PoolWeight, Price, ProducerAuthority, ProducerAuthoritySchedule, RatePerBlock, Token, TokenSymbol, TransactionStatus, TxOut, VersionId } from '@bifrost-finance/types/interfaces/primitives';
 import type { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
 import type { BabeAuthorityWeight, MaybeRandomness, NextConfigDescriptor, Randomness } from '@polkadot/types/interfaces/babe';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
@@ -72,6 +72,12 @@ declare module '@polkadot/api/types/storage' {
        * Current epoch authorities.
        **/
       authorities: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AuthorityId, BabeAuthorityWeight]>>>>;
+      /**
+       * Temporary value (cleared at block finalization) that includes the VRF output generated
+       * at this block. This field should always be populated during block processing unless
+       * secondary plain slots are enabled (which don't contain a VRF output).
+       **/
+      authorVrfRandomness: AugmentedQuery<ApiType, () => Observable<MaybeRandomness>>;
       /**
        * Current slot number.
        **/
@@ -184,13 +190,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Transaction sent to Eos blockchain
        **/
-      bridgeTrxStatus: AugmentedQuery<ApiType, (arg: TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array) => Observable<TrxStatus>>;
-      bridgeTrxStatusV1: AugmentedQuery<ApiType, (arg: ITuple<[TxOut, u64]> | [TxOut | { Initial: any } | { Generated: any } | { Signed: any } | { Processing: any } | { Success: any } | { Fail: any } | string | Uint8Array, u64 | AnyNumber | Uint8Array]) => Observable<TrxStatus>>;
-      /**
-       * V2 storage
-       * Transaction sent to Eos blockchain
-       **/
-      bridgeTrxStatusV2: AugmentedQuery<ApiType, (arg: ITuple<[TxOutV1, u64]> | [TxOutV1 | { Initialized: any } | { Created: any } | { CompleteSigned: any } | { Sent: any } | { Succeeded: any } | { Failure: any } | string | Uint8Array, u64 | AnyNumber | Uint8Array]) => Observable<TrxStatus>>;
+      bridgeTrxStatus: AugmentedQuery<ApiType, (arg: ITuple<[TxOut, u64]> | [TxOut | { Initialized: any } | { Created: any } | { SignComplete: any } | { Sent: any } | { Succeeded: any } | { Failed: any } | string | Uint8Array, u64 | AnyNumber | Uint8Array]) => Observable<TransactionStatus>>;
       /**
        * Cross transaction back enable or not
        **/
@@ -200,11 +200,8 @@ declare module '@polkadot/api/types/storage' {
        **/
       crossChainPrivilege: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<bool>>;
       crossIndexRelatedEosBalance: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<ITuple<[Balance, AccountId, TokenSymbol]>>>;
-      crossIndexRelatedEosBalanceV2: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<ITuple<[Balance, AccountId, TokenSymbol]>>>;
-      crossTradeIndex: AugmentedQuery<ApiType, () => Observable<u64>>;
-      crossTradeIndexV2: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<u64>>;
+      crossTradeIndex: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<u64>>;
       crossTradeStatus: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<bool>>;
-      crossTradeStatusV2: AugmentedQuery<ApiType, (arg: u64 | AnyNumber | Uint8Array) => Observable<bool>>;
       eosNodeAddress: AugmentedQuery<ApiType, () => Observable<Bytes>>;
       /**
        * Initialize a producer schedule while starting a node.
@@ -225,11 +222,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * According trx id to find processing trx
        **/
-      processingBridgeTrx: AugmentedQuery<ApiType, (arg: Checksum256 | string | Uint8Array) => Observable<TxOut>>;
-      /**
-       * According trx id to find processing trx
-       **/
-      processingBridgeTrxV2: AugmentedQuery<ApiType, (arg: Checksum256 | string | Uint8Array) => Observable<ITuple<[TxOutV1, u64]>>>;
+      processingBridgeTrx: AugmentedQuery<ApiType, (arg: Checksum256 | string | Uint8Array) => Observable<ITuple<[TxOut, u64]>>>;
       /**
        * Eos producer list and hash which in specific version id
        **/
@@ -272,8 +265,6 @@ declare module '@polkadot/api/types/storage' {
        * Current pending schedule version
        **/
       pendingScheduleVersion: AugmentedQuery<ApiType, () => Observable<VersionId>>;
-    };
-    chainlink: {
     };
     convert: {
       /**
@@ -418,7 +409,7 @@ declare module '@polkadot/api/types/storage' {
        **/
       members: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AccountId, BalanceOf]>>>>;
       /**
-       * The current runners_up. Sorted based on low to high merit (worse to best runner).
+       * The current runners_up. Sorted based on low to high merit (worse to best).
        **/
       runnersUp: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AccountId, BalanceOf]>>>>;
       /**
@@ -548,9 +539,6 @@ declare module '@polkadot/api/types/storage' {
        **/
       reportsByKindIndex: AugmentedQuery<ApiType, (arg: Kind | string | Uint8Array) => Observable<Bytes>>;
     };
-    oracle: {
-      result: AugmentedQuery<ApiType, () => Observable<u128>>;
-    };
     proxy: {
       /**
        * The announcements made by the proxy (key).
@@ -561,24 +549,6 @@ declare module '@polkadot/api/types/storage' {
        * which are being delegated to, together with the amount held on deposit.
        **/
       proxies: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ProxyDefinition>, BalanceOf]>>>;
-    };
-    proxyValidator: {
-      /**
-       * Asset config data.
-       **/
-      assetConfigs: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<AssetConfig>>;
-      /**
-       * The total amount of asset has been locked for staking.
-       **/
-      assetLockedBalances: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<Balance>>;
-      /**
-       * The locked amount of asset of account for staking.
-       **/
-      lockedBalances: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Balance>>;
-      /**
-       * The proxy validators registered from cross chain.
-       **/
-      proxyValidators: AugmentedQueryDoubleMap<ApiType, (key1: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<ProxyValidatorRegister>>;
     };
     randomnessCollectiveFlip: {
       /**
@@ -928,43 +898,40 @@ declare module '@polkadot/api/types/storage' {
     };
     swap: {
       /**
-       * Balancer pool token
+       * Record the calculated deducted BNC bonus amount for each pool,
+       * including deducted but unclaimed amount as well as claimed amount
        **/
-      balancerPoolToken: AugmentedQuery<ApiType, () => Observable<Balance>>;
-      exitFee: AugmentedQuery<ApiType, () => Observable<Fee>>;
+      deductedBonusAmountInPool: AugmentedQuery<ApiType, (arg: PoolId | AnyNumber | Uint8Array) => Observable<Balance>>;
       /**
-       * Global pool, pool's details, like asset type, balance, weight, and value of function
+       * Pool info
        **/
-      globalPool: AugmentedQuery<ApiType, () => Observable<ITuple<[Vec<ITuple<[TokenSymbol, Balance, PoolWeight]>>, InvariantValue]>>>;
+      pools: AugmentedQuery<ApiType, (arg: PoolId | AnyNumber | Uint8Array) => Observable<PoolDetails>>;
       /**
-       * Fee stuff
+       * total pool tokens in pool.
        **/
-      liquidityFee: AugmentedQuery<ApiType, () => Observable<Fee>>;
+      poolTokensInPool: AugmentedQuery<ApiType, (arg: PoolId | AnyNumber | Uint8Array) => Observable<Balance>>;
       /**
-       * Now only support 7 tokens
+       * Token balance info for pools
        **/
-      numberOfSupportedTokens: AugmentedQuery<ApiType, () => Observable<u8>>;
+      tokenBalancesInPool: AugmentedQueryDoubleMap<ApiType, (key1: PoolId | AnyNumber | Uint8Array, key2: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<Balance>>;
       /**
-       * shared fee pool
+       * Token weights info for pools. Weights must be normalized at the beginning.
+       * Sum of all the token weights for a pool must be 1 * WeightPrecision. Should be ensured when set up the pool.
        **/
-      sharedRewardPool: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[TokenSymbol, Balance]>>>>;
-      swapFee: AugmentedQuery<ApiType, () => Observable<Fee>>;
+      tokenWeightsInPool: AugmentedQueryDoubleMap<ApiType, (key1: PoolId | AnyNumber | Uint8Array, key2: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<PoolWeight>>;
       /**
-       * Each token's weight
+       * Users' pool tokens in different pools
        **/
-      tokenWeight: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<PoolWeight>>;
+      userPoolTokensInPool: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: PoolId | AnyNumber | Uint8Array) => Observable<Balance>>;
       /**
-       * Total weights
+       * Record user unclaimed liquidity bonus. There are two occasions that will trigger the calculation of unclaimed bonus:
+       * 1. The user adds or removes his liquidity to the pool.
+       * 2. The user claims his bonus.
+       * The value part of the map is a tuple contains (un_claimed_Bonus, last_calculation_block).
+       * "un_claimed_Bonus" shows the remaining unclaimed but calculated bonus balance.
+       * "last_calculation_block" records the block number of last time when liquidity bonus calculation is triggered.
        **/
-      totalWeight: AugmentedQuery<ApiType, () => Observable<PoolWeight>>;
-      /**
-       * Each user details for pool
-       **/
-      userPool: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ITuple<[TokenSymbol, Balance]>>, Balance]>>>;
-      /**
-       * User may add a single asst to liquidity
-       **/
-      userSinglePool: AugmentedQuery<ApiType, (arg: ITuple<[AccountId, TokenSymbol]> | [AccountId | string | Uint8Array, TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array]) => Observable<ITuple<[Balance, Balance]>>>;
+      userUnclaimedBonusInPool: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: PoolId | AnyNumber | Uint8Array) => Observable<ITuple<[Balance, BlockNumber]>>>;
     };
     system: {
       /**

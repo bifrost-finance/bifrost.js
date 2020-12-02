@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Option, Struct, U8aFixed, Vec, u128, u16, u32, u64, u8 } from '@polkadot/types';
+import type { Bytes, Enum, Option, Struct, U8aFixed, Vec, bool, u128, u16, u32, u64, u8 } from '@polkadot/types';
 import type { ITuple } from '@polkadot/types/types';
 import type { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
 
@@ -15,7 +15,7 @@ export interface AccountAsset extends Struct {
 }
 
 /** @name AccountName */
-export interface AccountName extends u64 { }
+export interface AccountName extends u64 {}
 
 /** @name Action */
 export interface Action extends Struct {
@@ -26,7 +26,7 @@ export interface Action extends Struct {
 }
 
 /** @name ActionName */
-export interface ActionName extends u64 { }
+export interface ActionName extends u64 {}
 
 /** @name ActionReceipt */
 export interface ActionReceipt extends Struct {
@@ -66,10 +66,10 @@ export interface BlockHeader extends Struct {
 }
 
 /** @name BlockNumber */
-export interface BlockNumber extends u32 { }
+export interface BlockNumber extends u32 {}
 
 /** @name BlockSigningAuthority */
-export interface BlockSigningAuthority extends ITuple<[UnsignedInt, BlockSigningAuthorityV0]> { }
+export interface BlockSigningAuthority extends ITuple<[UnsignedInt, BlockSigningAuthorityV0]> {}
 
 /** @name BlockSigningAuthorityV0 */
 // @ts-ignore
@@ -79,7 +79,7 @@ export interface BlockSigningAuthorityV0 extends Struct {
 }
 
 /** @name BlockTimestamp */
-export interface BlockTimestamp extends u32 { }
+export interface BlockTimestamp extends u32 {}
 
 /** @name BridgeAssetSymbol */
 export interface BridgeAssetSymbol extends Struct {
@@ -89,10 +89,10 @@ export interface BridgeAssetSymbol extends Struct {
 }
 
 /** @name Checksum256 */
-export interface Checksum256 extends U8aFixed { }
+export interface Checksum256 extends U8aFixed {}
 
 /** @name Checksum256Array */
-export interface Checksum256Array extends Vec<Checksum256> { }
+export interface Checksum256Array extends Vec<Checksum256> {}
 
 /** @name ConvertPool */
 export interface ConvertPool extends Struct {
@@ -103,32 +103,25 @@ export interface ConvertPool extends Struct {
 }
 
 /** @name ConvertPrice */
-export interface ConvertPrice extends u128 { }
+export interface ConvertPrice extends u128 {}
 
 /** @name Cost */
-export interface Cost extends u128 { }
+export interface Cost extends u128 {}
 
 /** @name DataVersion */
-export interface DataVersion extends u64 { }
+export interface DataVersion extends u64 {}
 
 /** @name Extension */
-export interface Extension extends ITuple<[u16, Bytes]> { }
+export interface Extension extends ITuple<[u16, Bytes]> {}
 
-/** @name Fail */
-export interface Fail extends Struct {
-  readonly tx_id: Bytes;
-  readonly reason: Bytes;
-  readonly tx: MultiSigTx;
-}
-
-/** @name Failure */
-export interface Failure extends Struct {
+/** @name Failed */
+export interface Failed extends Struct {
   readonly tx_id: Bytes;
   readonly reason: Bytes;
 }
 
 /** @name Fee */
-export interface Fee extends u64 { }
+export interface Fee extends u64 {}
 
 /** @name FlatMap */
 export interface FlatMap extends Struct {
@@ -136,7 +129,7 @@ export interface FlatMap extends Struct {
 }
 
 /** @name Income */
-export interface Income extends u128 { }
+export interface Income extends u128 {}
 
 /** @name IncrementalMerkle */
 export interface IncrementalMerkle extends Struct {
@@ -145,10 +138,10 @@ export interface IncrementalMerkle extends Struct {
 }
 
 /** @name InVariantPool */
-export interface InVariantPool extends Balance { }
+export interface InVariantPool extends Balance {}
 
 /** @name InvariantValue */
-export interface InvariantValue extends Balance { }
+export interface InvariantValue extends Balance {}
 
 /** @name IostAction */
 export interface IostAction extends Struct {
@@ -179,6 +172,9 @@ export interface MultiSigTx extends Struct {
   readonly token_symbol: TokenSymbol;
 }
 
+/** @name Nonce */
+export interface Nonce extends u32 {}
+
 /** @name PermissionLevel */
 export interface PermissionLevel extends Struct {
   readonly actor: AccountName;
@@ -186,22 +182,33 @@ export interface PermissionLevel extends Struct {
 }
 
 /** @name PermissionName */
-export interface PermissionName extends u64 { }
+export interface PermissionName extends u64 {}
+
+/** @name PoolCreateTokenDetails */
+export interface PoolCreateTokenDetails extends Struct {
+  readonly token_id: TokenSymbol;
+  readonly token_balance: Balance;
+  readonly token_weight: PoolWeight;
+}
+
+/** @name PoolDetails */
+export interface PoolDetails extends Struct {
+  readonly owner: AccountId;
+  readonly swap_fee_rate: Fee;
+  readonly active: bool;
+}
+
+/** @name PoolId */
+export interface PoolId extends u32 {}
 
 /** @name PoolWeight */
-export interface PoolWeight extends Balance { }
+export interface PoolWeight extends Balance {}
 
 /** @name Precision */
-export interface Precision extends u32 { }
+export interface Precision extends u32 {}
 
 /** @name Price */
-export interface Price extends u64 { }
-
-/** @name Processing */
-export interface Processing extends Struct {
-  readonly tx_id: Bytes;
-  readonly multi_sig_tx: MultiSigTx;
-}
+export interface Price extends u64 {}
 
 /** @name ProducerAuthority */
 export interface ProducerAuthority extends Struct {
@@ -244,10 +251,16 @@ export interface PublicKey extends Struct {
 }
 
 /** @name RatePerBlock */
-export interface RatePerBlock extends u64 { }
+export interface RatePerBlock extends u64 {}
 
 /** @name RequestIdentifier */
-export interface RequestIdentifier extends u64 { }
+export interface RequestIdentifier extends u64 {}
+
+/** @name RewardRecord */
+export interface RewardRecord extends Struct {
+  readonly account_id: AccountId;
+  readonly record_amount: Balance;
+}
 
 /** @name Sent */
 export interface Sent extends Struct {
@@ -269,7 +282,12 @@ export interface SignedBlockHeader extends Struct {
 }
 
 /** @name SpecIndex */
-export interface SpecIndex extends u32 { }
+export interface SpecIndex extends u32 {}
+
+/** @name Succeeded */
+export interface Succeeded extends Struct {
+  readonly tx_id: Bytes;
+}
 
 /** @name Token */
 export interface Token extends Struct {
@@ -279,7 +297,7 @@ export interface Token extends Struct {
 }
 
 /** @name TokenPool */
-export interface TokenPool extends Balance { }
+export interface TokenPool extends Balance {}
 
 /** @name TokenSymbol */
 export interface TokenSymbol extends Enum {
@@ -294,46 +312,30 @@ export interface TokenSymbol extends Enum {
   readonly isVIost: boolean;
 }
 
-/** @name TrxStatus */
-export interface TrxStatus extends Enum {
-  readonly isInitial: boolean;
-  readonly isGenerated: boolean;
-  readonly isSigned: boolean;
-  readonly isProcessing: boolean;
-  readonly isSuccess: boolean;
-  readonly isFail: boolean;
+/** @name TransactionStatus */
+export interface TransactionStatus extends Enum {
+  readonly isInitialized: boolean;
+  readonly isCreated: boolean;
+  readonly isSignComplete: boolean;
+  readonly isSent: boolean;
+  readonly isSucceeded: boolean;
+  readonly isFailed: boolean;
 }
 
 /** @name TxOut */
 export interface TxOut extends Enum {
-  readonly isInitial: boolean;
-  readonly asInitial: MultiSigTx;
-  readonly isGenerated: boolean;
-  readonly asGenerated: MultiSigTx;
-  readonly isSigned: boolean;
-  readonly asSigned: MultiSigTx;
-  readonly isProcessing: boolean;
-  readonly asProcessing: Processing;
-  readonly isSuccess: boolean;
-  readonly asSuccess: Bytes;
-  readonly isFail: boolean;
-  readonly asFail: Fail;
-}
-
-/** @name TxOutV1 */
-export interface TxOutV1 extends Enum {
   readonly isInitialized: boolean;
   readonly asInitialized: MultiSigTx;
   readonly isCreated: boolean;
   readonly asCreated: MultiSigTx;
-  readonly isCompleteSigned: boolean;
-  readonly asCompleteSigned: MultiSigTx;
+  readonly isSignComplete: boolean;
+  readonly asSignComplete: MultiSigTx;
   readonly isSent: boolean;
   readonly asSent: Sent;
   readonly isSucceeded: boolean;
-  readonly asSucceeded: Bytes;
-  readonly isFailure: boolean;
-  readonly asFailure: Failure;
+  readonly asSucceeded: Succeeded;
+  readonly isFailed: boolean;
+  readonly asFailed: Failed;
 }
 
 /** @name TxSig */
@@ -343,12 +345,12 @@ export interface TxSig extends Struct {
 }
 
 /** @name UnsignedInt */
-export interface UnsignedInt extends u32 { }
+export interface UnsignedInt extends u32 {}
 
 /** @name VersionId */
-export interface VersionId extends u32 { }
+export interface VersionId extends u32 {}
 
 /** @name VTokenPool */
-export interface VTokenPool extends Balance { }
+export interface VTokenPool extends Balance {}
 
 export type PHANTOM_PRIMITIVES = 'primitives';

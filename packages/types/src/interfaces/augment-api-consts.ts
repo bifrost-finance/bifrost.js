@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Vec, u16, u32, u64 } from '@polkadot/types';
-import type { Fee } from '@bifrost-finance/types/interfaces/primitives';
+import type { Vec, u16, u32, u64, u8 } from '@polkadot/types';
+import type { Fee, PoolWeight, TokenSymbol } from '@bifrost-finance/types/interfaces/primitives';
 import type { Balance, BalanceOf, BlockNumber, LockIdentifier, ModuleId, Moment, Perbill, Percent, Permill, RuntimeDbWeight, Weight } from '@polkadot/types/interfaces/runtime';
 import type { SessionIndex } from '@polkadot/types/interfaces/session';
 import type { EraIndex } from '@polkadot/types/interfaces/staking';
@@ -80,16 +80,6 @@ declare module '@polkadot/api/types/consts' {
       moduleId: LockIdentifier & AugmentedConst<ApiType>;
       termDuration: BlockNumber & AugmentedConst<ApiType>;
       votingBond: BalanceOf & AugmentedConst<ApiType>;
-    };
-    finalityTracker: {
-      /**
-       * The delay after which point things become suspicious. Default is 1000.
-       **/
-      reportLatency: BlockNumber & AugmentedConst<ApiType>;
-      /**
-       * The number of recent samples to keep from this chain. Default is 101.
-       **/
-      windowSize: BlockNumber & AugmentedConst<ApiType>;
     };
     identity: {
       /**
@@ -264,12 +254,17 @@ declare module '@polkadot/api/types/consts' {
       slashDeferDuration: EraIndex & AugmentedConst<ApiType>;
     };
     swap: {
-      feePrecision: Balance & AugmentedConst<ApiType>;
-      initPoolSupply: Balance & AugmentedConst<ApiType>;
+      bncAssetId: TokenSymbol & AugmentedConst<ApiType>;
+      bonusClaimAgeDenominator: BlockNumber & AugmentedConst<ApiType>;
+      feePrecision: Fee & AugmentedConst<ApiType>;
+      initialPoolSupply: Balance & AugmentedConst<ApiType>;
+      maximumPassedInPoolTokenShares: Balance & AugmentedConst<ApiType>;
       maximumSwapFee: Fee & AugmentedConst<ApiType>;
       maximumSwapInRatio: Balance & AugmentedConst<ApiType>;
-      minimumBalance: Balance & AugmentedConst<ApiType>;
+      minimumPassedInPoolTokenShares: Balance & AugmentedConst<ApiType>;
       minimumSwapFee: Fee & AugmentedConst<ApiType>;
+      numberOfSupportedTokens: u8 & AugmentedConst<ApiType>;
+      weightPrecision: PoolWeight & AugmentedConst<ApiType>;
     };
     system: {
       /**
