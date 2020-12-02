@@ -1,10 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import { Enum, Option, Struct, U8aFixed, Vec } from '@polkadot/types/codec';
-import { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
-import { Bytes, u128, u16, u32, u64, u8 } from '@polkadot/types/primitive';
-import { ITuple } from '@polkadot/types/types';
+import type { Bytes, Enum, Option, Struct, U8aFixed, Vec, u128, u16, u32, u64, u8 } from '@polkadot/types';
+import type { ITuple } from '@polkadot/types/types';
+import type { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
 
 /** @name AccountAsset */
 export interface AccountAsset extends Struct {
@@ -16,7 +15,7 @@ export interface AccountAsset extends Struct {
 }
 
 /** @name AccountName */
-export interface AccountName extends u64 {}
+export interface AccountName extends u64 { }
 
 /** @name Action */
 export interface Action extends Struct {
@@ -27,7 +26,7 @@ export interface Action extends Struct {
 }
 
 /** @name ActionName */
-export interface ActionName extends u64 {}
+export interface ActionName extends u64 { }
 
 /** @name ActionReceipt */
 export interface ActionReceipt extends Struct {
@@ -67,10 +66,10 @@ export interface BlockHeader extends Struct {
 }
 
 /** @name BlockNumber */
-export interface BlockNumber extends u32 {}
+export interface BlockNumber extends u32 { }
 
 /** @name BlockSigningAuthority */
-export interface BlockSigningAuthority extends ITuple<[UnsignedInt, BlockSigningAuthorityV0]> {}
+export interface BlockSigningAuthority extends ITuple<[UnsignedInt, BlockSigningAuthorityV0]> { }
 
 /** @name BlockSigningAuthorityV0 */
 // @ts-ignore
@@ -80,7 +79,7 @@ export interface BlockSigningAuthorityV0 extends Struct {
 }
 
 /** @name BlockTimestamp */
-export interface BlockTimestamp extends u32 {}
+export interface BlockTimestamp extends u32 { }
 
 /** @name BridgeAssetSymbol */
 export interface BridgeAssetSymbol extends Struct {
@@ -90,10 +89,10 @@ export interface BridgeAssetSymbol extends Struct {
 }
 
 /** @name Checksum256 */
-export interface Checksum256 extends U8aFixed {}
+export interface Checksum256 extends U8aFixed { }
 
 /** @name Checksum256Array */
-export interface Checksum256Array extends Vec<Checksum256> {}
+export interface Checksum256Array extends Vec<Checksum256> { }
 
 /** @name ConvertPool */
 export interface ConvertPool extends Struct {
@@ -104,16 +103,16 @@ export interface ConvertPool extends Struct {
 }
 
 /** @name ConvertPrice */
-export interface ConvertPrice extends u128 {}
+export interface ConvertPrice extends u128 { }
 
 /** @name Cost */
-export interface Cost extends u128 {}
+export interface Cost extends u128 { }
 
 /** @name DataVersion */
-export interface DataVersion extends u64 {}
+export interface DataVersion extends u64 { }
 
 /** @name Extension */
-export interface Extension extends ITuple<[u16, Bytes]> {}
+export interface Extension extends ITuple<[u16, Bytes]> { }
 
 /** @name Fail */
 export interface Fail extends Struct {
@@ -129,7 +128,7 @@ export interface Failure extends Struct {
 }
 
 /** @name Fee */
-export interface Fee extends u64 {}
+export interface Fee extends u64 { }
 
 /** @name FlatMap */
 export interface FlatMap extends Struct {
@@ -137,7 +136,7 @@ export interface FlatMap extends Struct {
 }
 
 /** @name Income */
-export interface Income extends u128 {}
+export interface Income extends u128 { }
 
 /** @name IncrementalMerkle */
 export interface IncrementalMerkle extends Struct {
@@ -146,10 +145,10 @@ export interface IncrementalMerkle extends Struct {
 }
 
 /** @name InVariantPool */
-export interface InVariantPool extends Balance {}
+export interface InVariantPool extends Balance { }
 
 /** @name InvariantValue */
-export interface InvariantValue extends Balance {}
+export interface InvariantValue extends Balance { }
 
 /** @name IostAction */
 export interface IostAction extends Struct {
@@ -187,16 +186,16 @@ export interface PermissionLevel extends Struct {
 }
 
 /** @name PermissionName */
-export interface PermissionName extends u64 {}
+export interface PermissionName extends u64 { }
 
 /** @name PoolWeight */
-export interface PoolWeight extends Balance {}
+export interface PoolWeight extends Balance { }
 
 /** @name Precision */
-export interface Precision extends u32 {}
+export interface Precision extends u32 { }
 
 /** @name Price */
-export interface Price extends u64 {}
+export interface Price extends u64 { }
 
 /** @name Processing */
 export interface Processing extends Struct {
@@ -245,10 +244,10 @@ export interface PublicKey extends Struct {
 }
 
 /** @name RatePerBlock */
-export interface RatePerBlock extends u64 {}
+export interface RatePerBlock extends u64 { }
 
 /** @name RequestIdentifier */
-export interface RequestIdentifier extends u64 {}
+export interface RequestIdentifier extends u64 { }
 
 /** @name Sent */
 export interface Sent extends Struct {
@@ -270,7 +269,7 @@ export interface SignedBlockHeader extends Struct {
 }
 
 /** @name SpecIndex */
-export interface SpecIndex extends u32 {}
+export interface SpecIndex extends u32 { }
 
 /** @name Token */
 export interface Token extends Struct {
@@ -280,7 +279,7 @@ export interface Token extends Struct {
 }
 
 /** @name TokenPool */
-export interface TokenPool extends Balance {}
+export interface TokenPool extends Balance { }
 
 /** @name TokenSymbol */
 export interface TokenSymbol extends Enum {
@@ -344,12 +343,12 @@ export interface TxSig extends Struct {
 }
 
 /** @name UnsignedInt */
-export interface UnsignedInt extends u32 {}
+export interface UnsignedInt extends u32 { }
 
 /** @name VersionId */
-export interface VersionId extends u32 {}
+export interface VersionId extends u32 { }
 
 /** @name VTokenPool */
-export interface VTokenPool extends Balance {}
+export interface VTokenPool extends Balance { }
 
 export type PHANTOM_PRIMITIVES = 'primitives';

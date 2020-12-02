@@ -1,34 +1,33 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
-import { BTreeMap, Option, U8aFixed, Vec } from '@polkadot/types/codec';
-import { Bytes, Data, bool, u128, u32, u64, u8 } from '@polkadot/types/primitive';
-import { AccountAsset, Action, ActionReceipt, AssetConfig, Checksum256, ConvertPool, ConvertPrice, Fee, InvariantValue, PoolWeight, Price, ProducerAuthority, ProducerAuthoritySchedule, ProxyValidatorRegister, RatePerBlock, Token, TokenSymbol, TrxStatus, TxOut, TxOutV1, VersionId } from '@bifrost-finance/types/interfaces/primitives';
-import { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
-import { BabeAuthorityWeight, MaybeRandomness, NextConfigDescriptor, Randomness } from '@polkadot/types/interfaces/babe';
-import { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
-import { ProposalIndex, Votes } from '@polkadot/types/interfaces/collective';
-import { AuthorityId } from '@polkadot/types/interfaces/consensus';
-import { PreimageStatus, PropIndex, Proposal, ReferendumIndex, ReferendumInfo, Voting } from '@polkadot/types/interfaces/democracy';
-import { VoteThreshold } from '@polkadot/types/interfaces/elections';
-import { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa';
-import { RegistrarInfo, Registration } from '@polkadot/types/interfaces/identity';
-import { AuthIndex } from '@polkadot/types/interfaces/imOnline';
-import { DeferredOffenceOf, Kind, OffenceDetails, OpaqueTimeSlot, ReportIdOf } from '@polkadot/types/interfaces/offences';
-import { ProxyAnnouncement, ProxyDefinition } from '@polkadot/types/interfaces/proxy';
-import { ActiveRecovery, RecoveryConfig } from '@polkadot/types/interfaces/recovery';
-import { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, ExtrinsicsWeight, Hash, KeyTypeId, Moment, OpaqueCall, Perbill, Releases, ValidatorId } from '@polkadot/types/interfaces/runtime';
-import { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
-import { Keys, SessionIndex } from '@polkadot/types/interfaces/session';
-import { Bid, BidKind, SocietyVote, StrikeCount, VouchingStatus } from '@polkadot/types/interfaces/society';
-import { ActiveEraInfo, ElectionResult, ElectionScore, ElectionStatus, EraIndex, EraRewardPoints, Exposure, Forcing, Nominations, RewardDestination, SlashingSpans, SpanIndex, SpanRecord, StakingLedger, UnappliedSlash, ValidatorPrefs } from '@polkadot/types/interfaces/staking';
-import { AccountInfo, DigestOf, EventIndex, EventRecord, LastRuntimeUpgradeInfo, Phase } from '@polkadot/types/interfaces/system';
-import { Bounty, BountyIndex, OpenTip, TreasuryProposal } from '@polkadot/types/interfaces/treasury';
-import { Multiplier } from '@polkadot/types/interfaces/txpayment';
-import { Multisig } from '@polkadot/types/interfaces/utility';
-import { VestingInfo } from '@polkadot/types/interfaces/vesting';
-import { ApiTypes } from '@polkadot/api/types';
+import type { BTreeMap, Bytes, Data, Option, U8aFixed, Vec, bool, u128, u32, u64, u8 } from '@polkadot/types';
+import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
+import type { AccountAsset, Action, ActionReceipt, AssetConfig, Checksum256, ConvertPool, ConvertPrice, Fee, InvariantValue, PoolWeight, Price, ProducerAuthority, ProducerAuthoritySchedule, ProxyValidatorRegister, RatePerBlock, Token, TokenSymbol, TrxStatus, TxOut, TxOutV1, VersionId } from '@bifrost-finance/types/interfaces/primitives';
+import type { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
+import type { BabeAuthorityWeight, MaybeRandomness, NextConfigDescriptor, Randomness } from '@polkadot/types/interfaces/babe';
+import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
+import type { ProposalIndex, Votes } from '@polkadot/types/interfaces/collective';
+import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
+import type { PreimageStatus, PropIndex, Proposal, ReferendumIndex, ReferendumInfo, Voting } from '@polkadot/types/interfaces/democracy';
+import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
+import type { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa';
+import type { RegistrarInfo, Registration } from '@polkadot/types/interfaces/identity';
+import type { AuthIndex } from '@polkadot/types/interfaces/imOnline';
+import type { DeferredOffenceOf, Kind, OffenceDetails, OpaqueTimeSlot, ReportIdOf } from '@polkadot/types/interfaces/offences';
+import type { ProxyAnnouncement, ProxyDefinition } from '@polkadot/types/interfaces/proxy';
+import type { ActiveRecovery, RecoveryConfig } from '@polkadot/types/interfaces/recovery';
+import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, ExtrinsicsWeight, Hash, KeyTypeId, Moment, OpaqueCall, Perbill, Releases, ValidatorId } from '@polkadot/types/interfaces/runtime';
+import type { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
+import type { Keys, SessionIndex } from '@polkadot/types/interfaces/session';
+import type { Bid, BidKind, SocietyVote, StrikeCount, VouchingStatus } from '@polkadot/types/interfaces/society';
+import type { ActiveEraInfo, ElectionResult, ElectionScore, ElectionStatus, EraIndex, EraRewardPoints, Exposure, Forcing, Nominations, RewardDestination, SlashingSpans, SpanIndex, SpanRecord, StakingLedger, UnappliedSlash, ValidatorPrefs } from '@polkadot/types/interfaces/staking';
+import type { AccountInfo, DigestOf, EventIndex, EventRecord, LastRuntimeUpgradeInfo, Phase } from '@polkadot/types/interfaces/system';
+import type { Bounty, BountyIndex, OpenTip, TreasuryProposal } from '@polkadot/types/interfaces/treasury';
+import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
+import type { Multisig } from '@polkadot/types/interfaces/utility';
+import type { VestingInfo } from '@polkadot/types/interfaces/vesting';
+import type { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/storage' {
   export interface AugmentedQueries<ApiType> {
@@ -48,11 +47,11 @@ declare module '@polkadot/api/types/storage' {
       /**
        * The number of units of prices held by any given asset.
        **/
-      prices: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<Price>>;
+      prices: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<Price>>;
       /**
        * Details of the token corresponding to an asset id.
        **/
-      tokens: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<Token>>;
+      tokens: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<Token>>;
     };
     authorship: {
       /**
@@ -284,15 +283,15 @@ declare module '@polkadot/api/types/storage' {
       /**
        * convert price between two tokens, vtoken => (token, convert_price)
        **/
-      convertPrice: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<ConvertPrice>>;
+      convertPrice: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<ConvertPrice>>;
       /**
        * Convert pool
        **/
-      pool: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<ConvertPool>>;
+      pool: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<ConvertPool>>;
       /**
        * change rate per block, vtoken => (token, rate_per_block)
        **/
-      ratePerBlock: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<RatePerBlock>>;
+      ratePerBlock: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<RatePerBlock>>;
       /**
        * collect referrer, converter => ([(referrer1, 1000), (referrer2, 2000), ...], total_point)
        * total_point = 1000 + 2000 + ...
@@ -567,11 +566,11 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Asset config data.
        **/
-      assetConfigs: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<AssetConfig>>;
+      assetConfigs: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<AssetConfig>>;
       /**
        * The total amount of asset has been locked for staking.
        **/
-      assetLockedBalances: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<Balance>>;
+      assetLockedBalances: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<Balance>>;
       /**
        * The locked amount of asset of account for staking.
        **/
@@ -579,7 +578,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * The proxy validators registered from cross chain.
        **/
-      proxyValidators: AugmentedQueryDoubleMap<ApiType, (key1: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<ProxyValidatorRegister>>;
+      proxyValidators: AugmentedQueryDoubleMap<ApiType, (key1: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<ProxyValidatorRegister>>;
     };
     randomnessCollectiveFlip: {
       /**
@@ -953,7 +952,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Each token's weight
        **/
-      tokenWeight: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD'|'DOT'|'vDOT'|'KSM'|'vKSM'|'EOS'|'vEOS'|'IOST'|'vIOST' | number | Uint8Array) => Observable<PoolWeight>>;
+      tokenWeight: AugmentedQuery<ApiType, (arg: TokenSymbol | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<PoolWeight>>;
       /**
        * Total weights
        **/
