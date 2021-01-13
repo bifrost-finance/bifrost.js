@@ -8,7 +8,7 @@ import BN from 'bn.js';
 
 // interface that aggregates DeriveVtokenPoolInfo from asset types and DeriveVtokenConvertInfo from convert types
 export interface DeriveVtokenPoolInfo extends DeriveVtokenAssetsInfo, DeriveVtokenConvertInfo {
-// symbol: string,
+// tokenId: string,
 // totalSupply: BN;
 // tokenPool: BN;
 // convertPrice: number;
@@ -21,34 +21,15 @@ export interface timestampAndConvertPrice {
   convertPriceList: number[]
 }
 
-export type vToken = 'vDOT' | 'vKSM' | 'vEOS';
-export type allTokens = 'vDOT' | 'vKSM' | 'vEOS'| 'DOT' | 'KSM' | 'EOS' | 'aUSD';
-export type nonVtoken = 'DOT' | 'KSM' | 'EOS' | 'aUSD';
-
-// All the tokens that are supported by Bifrost. Need to be maintained regularly.
-export const bifrostAllTokenList = ['vDOT', 'vKSM', 'vEOS', 'DOT', 'KSM', 'EOS', 'aUSD'];
-
-// All the non vTokens excluding 'aUSD' that are supported by Bifrost. Need to be maintained regularly.
-export const bifrostTokenList = ['DOT', 'KSM', 'EOS'];
-
-// All the vTokens that are supported by Bifrost. Need to be maintained regularly.
-export const bifrostVtokenList = ['vDOT', 'vKSM', 'vEOS'];
-
-// All the non vTokens that are supported by Bifrost. Need to be maintained regularly.
-export const bifrostNonVtokenList = ['DOT', 'KSM', 'EOS', 'aUSD'];
-
 // Balances value in the form of USDT
 export interface symbolUSDValue {
-  symbol: allTokens,
+  tokenId: number,
   balance: number,
   locked: number,
   available: number,
   cost: number,
   income: number
 }
-
-// The fields from a user's asset account that need to calculate USDT value.
-export const symbolUSDValueFields = ['balance', 'locked', 'available', 'cost', 'income'];
 
 // Balance precision. need to cut down by 10^^12 zeros.
 export const PRECISION = new BN(1000000000000);

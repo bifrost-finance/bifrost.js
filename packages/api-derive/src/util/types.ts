@@ -3,7 +3,6 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import BN from 'bn.js';
-import { allTokens } from '../type';
 
 export interface timestampListAndBlockHeight{
   timestamp: number,
@@ -13,9 +12,4 @@ export interface timestampListAndBlockHeight{
 export interface timestampListAndBlockHeightList{
   timestampList: number[],
   blockHeightList: BN[]
-}
-
-export interface cexTokenPrice{
-  symbol: allTokens;
-  price: BN;
 }

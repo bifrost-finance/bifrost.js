@@ -6,7 +6,6 @@ import { ApiInterfaceRx } from "@polkadot/api/types";
 import { map } from "rxjs/operators";
 import { Observable, combineLatest } from "rxjs";
 import { memo } from "@polkadot/api-derive/util";
-import { allTokens } from "../type";
 
 /**
  * @name getBalancerPoolTokenPairQuotePrice
@@ -18,15 +17,15 @@ import { allTokens } from "../type";
 export function getBalancerPoolTokenPairQuotePrice(
   instanceId: string,
   api: ApiInterfaceRx
-): (tokenSymbol: allTokens, quoteTokenSymbol: allTokens) => Observable<number> {
-  return memo(instanceId, (tokenSymbol: allTokens, quoteTokenSymbol: allTokens) => {
+): (tokenId: number, quoteTokenId: number) => Observable<number> {
+  return memo(instanceId, (tokenId: number, quoteTokenId: number) => {
     const globalPoolId = 0;
 
-    const tokenSymbolWeight = api.query.swap.tokenWeightsInPool(globalPoolId, tokenSymbol);
-    const quoteTokenSymbolWeight = api.query.swap.tokenWeightsInPool(globalPoolId, quoteTokenSymbol);
+    const tokenSymbolWeight = api.query.swap.tokenWeightsInPool(globalPoolId, tokenId);
+    const quoteTokenSymbolWeight = api.query.swap.tokenWeightsInPool(globalPoolId, quoteTokenId);
 
-    const tokenSymbolBalance = api.query.swap.tokenBalancesInPool(globalPoolId, tokenSymbol);
-    const quoteTokenSymbolBalance = api.query.swap.tokenBalancesInPool(globalPoolId, quoteTokenSymbol);
+    const tokenSymbolBalance = api.query.swap.tokenBalancesInPool(globalPoolId, tokenId);
+    const quoteTokenSymbolBalance = api.query.swap.tokenBalancesInPool(globalPoolId, quoteTokenId);
 
     return combineLatest([tokenSymbolWeight, quoteTokenSymbolWeight, tokenSymbolBalance, quoteTokenSymbolBalance]).pipe(
       map(([baseTokenWeight, quoteTokenWeight, baseTokenBalance, quoteTokenBalance]) => {

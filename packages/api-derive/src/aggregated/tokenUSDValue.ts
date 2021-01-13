@@ -2,15 +2,23 @@
 // This software may be modified and distributed under the terms
 // of the Apache-2.0 license. See the LICENSE file for details.
 
-import { ApiInterfaceRx } from '@polkadot/api/types';
-import { Observable, of, from, combineLatest } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
-import { memo } from '@polkadot/api-derive/util';
-import BN from 'bn.js';
-import { getSingleAccountAsset, getAccountAssets, accountAsset } from '../assets';
-import { getConvertPriceInfo, getAllConvertPriceInfo } from '../convert';
-import { allTokens, vToken, symbolUSDValue, bifrostTokenList, bifrostVtokenList, bifrostAllTokenList, nonVtoken, symbolUSDValueFields, bifrostNonVtokenList, PRECISION } from '../type';
-import ccxt from 'ccxt';
+import { ApiInterfaceRx } from "@polkadot/api/types";
+import { Observable, of, combineLatest } from "rxjs";
+import { map, mergeMap } from "rxjs/operators";
+import { memo } from "@polkadot/api-derive/util";
+import {
+  getSingleAccountAsset,
+  getAccountAssets,
+  accountAsset,
+  getTokenInfo,
+  getTokenSymbolList,
+  getAllTokenIdList,
+  getAllTokenInfo,
+  getAccountAssetIds,
+} from "../assets";
+import { getConvertPriceInfo, getAllConvertPriceInfo } from "../convert";
+import { symbolUSDValue, PRECISION } from "../type";
+import ccxt from "ccxt";
 
 /**
  * @name getAccountSingleTokenUSDValue
@@ -18,49 +26,54 @@ import ccxt from 'ccxt';
  * @param instanceId
  * @param api
  */
-export function getAccountSingleTokenUSDValue (instanceId: string, api: ApiInterfaceRx): (accountName: string, tokenSymbol: allTokens) => Observable<symbolUSDValue> {
-  return memo(instanceId, (accountName: string, tokenSymbol: allTokens) => {
+export function getAccountSingleTokenUSDValue(
+  instanceId: string,
+  api: ApiInterfaceRx
+): (accountName: string, tokenId: number) => Observable<symbolUSDValue> {
+  return memo(instanceId, (accountName: string, tokenId: number) => {
+    const getTokenInfoQuery = getTokenInfo(instanceId, api);
+    const tokenDetail = getTokenInfoQuery(tokenId);
+
     const getSingleAccountAssetQuery = getSingleAccountAsset(instanceId, api);
-    const assetBalanceInfo = getSingleAccountAssetQuery(accountName, tokenSymbol);
+    const assetBalanceInfo = getSingleAccountAssetQuery(accountName, tokenId);
 
     const getConvertPriceInfoQuery = getConvertPriceInfo(instanceId, api);
-    let tkName: string;
-    let convertPrice;
-    let tokenUSDPrice;
+    let convertPrice: Observable<number>;
+    let tokenUSDPrice: Observable<{ [index: string]: number }>;
 
-    return assetBalanceInfo.pipe(mergeMap((balanceInfo) => {
-      const tokenName = balanceInfo.tokenName;
-      const tokenBalanceObj: {[index: string]: any} = {};
+    return combineLatest([tokenDetail, assetBalanceInfo]).pipe(
+      mergeMap(([tkDetail, balanceInfo]) => {
+        const tokenBalanceObj: { [index: string]: any } = {};
+        tokenBalanceObj.tokenId = tokenId;
 
-      if (bifrostTokenList.includes(tokenName)) {
-        tkName = tokenName;
-        convertPrice = of(1);
-        tokenUSDPrice = from(getCEXDesignatedTokenPrices([tkName as nonVtoken]));
-      } else if (bifrostVtokenList.includes(tokenName)) {
-        tkName = tokenName.slice(1); // get the corresponding token
-        convertPrice = getConvertPriceInfoQuery(tokenName as vToken);
-        tokenUSDPrice = from(getCEXDesignatedTokenPrices([tkName as nonVtoken]));
-      } else { // this can only be aUSD
-        tkName = 'aUSD';
-        convertPrice = of(1);
-        tokenUSDPrice = of({ tkName: 1 });
-      }
+        const getCEXDesignatedTokenPricesQuery = getCEXDesignatedTokenPrices(instanceId, api);
+        tokenUSDPrice = getCEXDesignatedTokenPricesQuery([tokenId]);
 
-      tokenBalanceObj.symbol = tokenName;
+        const tokenType = tkDetail.tokenType; // 0是Native(BNC), 1是Stable， 2是Token, 3是 VToken
+        if (tokenType === 3) {
+          // 如果是vtoken，查询下转换价格
+          convertPrice = getConvertPriceInfoQuery(tokenId);
+        } else {
+          // 如果是token, stable coin， 或者是BNC。现在BNC未上交易所，价格获取过来为0。
+          convertPrice = of(1);
+        }
 
-      type balanceItemType = keyof accountAsset; // Get all the subkeys of the interface accountAsset
-      const balanceItemArray = Object.keys(balanceInfo.assetInfo);
+        type balanceItemType = keyof accountAsset; // Get all the subkeys of the interface accountAsset
+        const balanceItemArray = Object.keys(balanceInfo.assetInfo);
 
-      return combineLatest([tokenUSDPrice, convertPrice]).pipe(map(([usdPrice, cvtPrice]) => {
-        balanceItemArray.map((filed) => {
-          const itemBalance = balanceInfo.assetInfo[filed as balanceItemType];
+        return combineLatest([tokenUSDPrice, convertPrice]).pipe(
+          map(([usdPrice, cvtPrice]) => {
+            balanceItemArray.map((filed) => {
+              const itemBalance = balanceInfo.assetInfo[filed as balanceItemType];
 
-          tokenBalanceObj[filed] = usdPrice[tkName] * itemBalance.div(PRECISION).toNumber() * cvtPrice;
-        });
+              tokenBalanceObj[filed] = usdPrice[tokenId.toString()] * itemBalance.div(PRECISION).toNumber() * cvtPrice;
+            });
 
-        return tokenBalanceObj as symbolUSDValue;
-      }));
-    }));
+            return tokenBalanceObj as symbolUSDValue;
+          })
+        );
+      })
+    );
   });
 }
 
@@ -70,58 +83,66 @@ export function getAccountSingleTokenUSDValue (instanceId: string, api: ApiInter
  * @param instanceId
  * @param api
  */
-export function getAccountManyTokenUSDValues (instanceId: string, api: ApiInterfaceRx): (accountName: string, tokenArray?: allTokens[]) => Observable<symbolUSDValue[]> {
-  return memo(instanceId, (accountName: string, tokenArray?: allTokens[]) => {
-    const getAllConvertPriceInfoQuery = getAllConvertPriceInfo(instanceId, api);
-    const vTokenList = bifrostVtokenList as vToken[];
-    const vTokenConvertPrices = getAllConvertPriceInfoQuery(vTokenList); // all vToken convert prices
+export function getAccountManyTokenUSDValues(
+  instanceId: string,
+  api: ApiInterfaceRx
+): (accountName: string, tokenArray?: number[]) => Observable<symbolUSDValue[]> {
+  return memo(instanceId, (accountName: string, tokenArray?: number[]) => {
+    let tokenList: Observable<number[]>;
 
-    const getAccountAssetsQuery = getAccountAssets(instanceId, api);
-    let tokenList: allTokens[];
-
-    if (tokenArray === undefined) {
-      tokenList = bifrostAllTokenList as allTokens[];
+    if (!tokenArray || tokenArray.length === 0) {
+      // if not provided with token array, then get the user's asset ids.
+      const getAccountAssetIdsQuery = getAccountAssetIds(instanceId, api);
+      tokenList = getAccountAssetIdsQuery(accountName);
+      // 如果账户没有资产咋办，则默认只查BNC一个资产
+      tokenList = tokenList.pipe(
+        map((tkList) => {
+          if (tkList.length === 0) {
+            return [0];
+          } else {
+            return tkList;
+          }
+        })
+      );
     } else {
-      tokenList = tokenArray;
+      tokenList = of(tokenArray);
     }
 
-    const assetsBalanceInfo = getAccountAssetsQuery(accountName, tokenList); // all assets of an account
-    const tokensUSDPrices = from(getCEXDesignatedTokenPrices()); // all token USD prices
+    return tokenList.pipe(
+      mergeMap((tokenList) => {
+        const getAllConvertPriceInfoQuery = getAllConvertPriceInfo(instanceId, api);
+        const tokenConvertPrices = getAllConvertPriceInfoQuery(tokenList); // all vToken convert prices
 
-    return combineLatest([assetsBalanceInfo, tokensUSDPrices, vTokenConvertPrices]).pipe(map(([balanceInfo, usdPriceObj, cvtPriceArray]) => {
-      let tokenBalance = new BN(0);
-      let convertPrice;
-      let tokenUSDPrice;
-      const tokenBalancesArray = balanceInfo.assetsInfo;
+        const getAccountAssetsQuery = getAccountAssets(instanceId, api);
+        const assetsBalanceInfo = getAccountAssetsQuery(accountName, tokenList); // all assets of an account
 
-      return tokenList.map((tokenName) => {
-        const tkAssentInfoObj: {[index: string]:any} = tokenBalancesArray.find((assetInfoObj) => assetInfoObj.tokenName === tokenName) || {};
-        const fieldNames: string[] = symbolUSDValueFields; // get the object keys of type accountAsset.
-        const obj: {[index: string]:any} = { symbol: tokenName }; // initialize the object with the property name of 'symbol'.
+        const getCEXDesignatedTokenPricesQuery = getCEXDesignatedTokenPrices(instanceId, api);
+        const tokensUSDPrices = getCEXDesignatedTokenPricesQuery(tokenList); // all token USD prices
 
-        fieldNames.forEach((field) => {
-          tokenBalance = tkAssentInfoObj?.assetInfo?.[field] || new BN(0);
-          const idx = vTokenList.findIndex((vtk) => vtk === tokenName);
+        type balanceItemType = keyof accountAsset; // Get all the subkeys of the interface accountAsset
 
-          if (bifrostTokenList.includes(tokenName)) {
-            convertPrice = 1; // convertPrice is an instance of Observable<number>
-            tokenUSDPrice = usdPriceObj[tokenName];
-          } else if (bifrostVtokenList.includes(tokenName)) {
-            const tkName = tokenName.slice(1); // get the corresponding token
+        return combineLatest([assetsBalanceInfo, tokensUSDPrices, tokenConvertPrices]).pipe(
+          map(([balanceInfo, usdPriceObj, cvtPriceArray]) => {
+            const tokenBalancesArray = balanceInfo.assetsInfo;
+            const balanceItemArray = Object.keys(tokenBalancesArray[0].assetInfo); // get the keys of accountAsset type.
 
-            convertPrice = cvtPriceArray[idx];
-            tokenUSDPrice = usdPriceObj[tkName];
-          } else { // this can only be aUSD
-            convertPrice = 1;
-            tokenUSDPrice = 1;
-          }
+            return tokenList.map((tk, idx) => {
+              let tokenBalanceObj: { [index: string]: any } = {};
+              tokenBalanceObj["tokenId"] = tk;
 
-          obj[field] = tokenUSDPrice * tokenBalance.div(PRECISION).toNumber() * convertPrice;
-        });
+              balanceItemArray.forEach((filed) => {
+                const itemBalance = tokenBalancesArray[tk].assetInfo[filed as balanceItemType];
 
-        return obj as symbolUSDValue;
-      });
-    }));
+                tokenBalanceObj[filed] =
+                  usdPriceObj[tk.toString()] * itemBalance.div(PRECISION).toNumber() * cvtPriceArray[idx];
+              });
+
+              return tokenBalanceObj as symbolUSDValue;
+            });
+          })
+        );
+      })
+    );
   });
 }
 
@@ -131,20 +152,25 @@ export function getAccountManyTokenUSDValues (instanceId: string, api: ApiInterf
  * @param instanceId
  * @param api
  */
-export function getAccountTotalValue (instanceId: string, api: ApiInterfaceRx): (accountName: string) => Observable<number> {
+export function getAccountTotalValue(
+  instanceId: string,
+  api: ApiInterfaceRx
+): (accountName: string) => Observable<number> {
   return memo(instanceId, (accountName: string) => {
     const getAccountManyTokenUSDValuesQuery = getAccountManyTokenUSDValues(instanceId, api);
     const accountTokenUSDValuesArray = getAccountManyTokenUSDValuesQuery(accountName);
 
-    return accountTokenUSDValuesArray.pipe(map((accountTokenUSDValuesList) => {
-      let sumValue = 0;
+    return accountTokenUSDValuesArray.pipe(
+      map((accountTokenUSDValuesList) => {
+        let sumValue = 0;
 
-      accountTokenUSDValuesList.forEach((accountTokenUSDValue) => {
-        sumValue = sumValue + accountTokenUSDValue.balance;
-      });
+        accountTokenUSDValuesList.forEach((accountTokenUSDValue) => {
+          sumValue = sumValue + accountTokenUSDValue.balance;
+        });
 
-      return sumValue;
-    }));
+        return sumValue;
+      })
+    );
   });
 }
 
@@ -154,20 +180,25 @@ export function getAccountTotalValue (instanceId: string, api: ApiInterfaceRx): 
  * @param instanceId
  * @param api
  */
-export function getAccountIncomeValue (instanceId: string, api: ApiInterfaceRx): (accountName: string) => Observable<number> {
+export function getAccountIncomeValue(
+  instanceId: string,
+  api: ApiInterfaceRx
+): (accountName: string) => Observable<number> {
   return memo(instanceId, (accountName: string) => {
     const getAccountManyTokenUSDValuesQuery = getAccountManyTokenUSDValues(instanceId, api);
     const accountTokenUSDValuesArray = getAccountManyTokenUSDValuesQuery(accountName);
 
-    return accountTokenUSDValuesArray.pipe(map((accountTokenUSDValuesList) => {
-      let sumValue = 0;
+    return accountTokenUSDValuesArray.pipe(
+      map((accountTokenUSDValuesList) => {
+        let sumValue = 0;
 
-      accountTokenUSDValuesList.forEach((accountTokenUSDValue) => {
-        sumValue = sumValue + accountTokenUSDValue.income;
-      });
+        accountTokenUSDValuesList.forEach((accountTokenUSDValue) => {
+          sumValue = sumValue + accountTokenUSDValue.income;
+        });
 
-      return sumValue;
-    }));
+        return sumValue;
+      })
+    );
   });
 }
 
@@ -177,45 +208,105 @@ export function getAccountIncomeValue (instanceId: string, api: ApiInterfaceRx):
  * @param instanceId
  * @param api
  */
-async function getBinancePrices () {
-  const pricesObj : {[index: string]:any} = {};
+async function getBinancePrices(tokenNameList: string[]) {
+  const pricesObj: { [index: string]: any } = {};
 
-  const tokenPairList = bifrostTokenList.map((token) => { // not include aUSD price
-    return token + '/USDT';
+  const tokenPairList = tokenNameList.map((token) => {
+    // not include aUSD price
+    return token + "/USDT";
   });
   const exchange = new ccxt.binance();
   const allTickers = await exchange.fetchTickers();
 
   tokenPairList.forEach((tokenPair, idx) => {
-    const price = allTickers[tokenPair].open || 0;
+    const price = allTickers[tokenPair]?.open || 0;
 
-    pricesObj[bifrostTokenList[idx]] = price;
+    pricesObj[tokenNameList[idx]] = price;
   });
 
-  pricesObj.aUSD = 1; // add aUSD price
+  pricesObj.aUSD = 1; // add aUSD price, ????
 
   return pricesObj;
 }
 
 /**
  * @name getCEXDesignatedTokenPrices
- * @description get current prices of specific tokens from Binance exchange
+ * @description get current prices of specific tokens from Binance exchange. Can accept any kind of tokens.
  */
-async function getCEXDesignatedTokenPrices (tokenNames?: nonVtoken[]) {
-  let tkNames;
+export function getCEXDesignatedTokenPrices(
+  instanceId: string,
+  api: ApiInterfaceRx
+): (tokenIdArray?: number[]) => Observable<{ [index: string]: number }> {
+  return memo(instanceId, (tokenIdArray?: number[]) => {
+    let tokenIdList: Observable<number[]>;
+    let tokenQuerySet: Set<number> = new Set();
+    let pricesObj: { [index: string]: number } = {};
+    let pricesObjTemp: { [index: string]: number } = {};
 
-  if (tokenNames === undefined) {
-    tkNames = bifrostNonVtokenList;
-  } else {
-    tkNames = tokenNames;
-  }
+    if (!tokenIdArray || tokenIdArray.length === 0) {
+      const getAllTokenIdListQuery = getAllTokenIdList(instanceId, api);
+      tokenIdList = getAllTokenIdListQuery();
+    } else {
+      tokenIdList = of(tokenIdArray);
+    }
 
-  const allPrices = await getBinancePrices();
-  const pricesObj : {[index: string]:number} = {};
+    tokenIdList.pipe(
+      map((tokenIdList) => {
+        const getAllTokenInfoQuery = getAllTokenInfo(instanceId, api);
+        const tokensInfo = getAllTokenInfoQuery(tokenIdList);
 
-  tkNames.forEach((tk) => {
-    pricesObj[tk] = allPrices[tk] || 0;
+        tokensInfo.pipe(
+          map((tokensInfo) => {
+            tokensInfo.forEach((tokenInfo, idx) => {
+              if (tokenInfo.tokenType === 2 || tokenInfo.tokenType === 0) {
+                // token或BNC
+                tokenQuerySet.add(tokenIdList[idx]);
+              } else if (tokenInfo.tokenType === 3) {
+                // vtoken
+                tokenQuerySet.add(tokenInfo.pair);
+              }
+            });
+          })
+        );
+
+        const tokenQueryList = Array.from(tokenQuerySet);
+        const getTokenSymbolListQuery = getTokenSymbolList(instanceId, api);
+        const nameIdObject = getTokenSymbolListQuery(tokenQueryList);
+
+        nameIdObject.pipe(
+          map(async (nameIdObj) => {
+            const nameArray = Object.keys(nameIdObj);
+            const idArray = Object.values(nameIdObj);
+
+            const allPrices = await getBinancePrices(nameArray);
+            nameArray.forEach((tkName, idx) => {
+              pricesObjTemp[idArray[idx].toString()] = allPrices[tkName] || 0;
+            });
+          })
+        );
+
+        // 查完回来，我需要做一一对应的工作
+        tokensInfo.pipe(
+          map((tokensInfo) => {
+            tokensInfo.forEach((tokenInfo, idx) => {
+              let tokenIdString = tokenIdList[idx].toString();
+
+              if (tokenInfo.tokenType === 2 || tokenInfo.tokenType === 0) {
+                // token或BNC
+                pricesObj[tokenIdString] = pricesObjTemp[tokenIdString];
+              } else if (tokenInfo.tokenType === 3) {
+                // vtoken, 则返回它pair的美元价值
+                pricesObj[tokenIdString] = pricesObjTemp[tokenInfo.pair.toString()];
+              } else {
+                // stable coin，返回1
+                pricesObj[tokenIdList[idx].toString()] = 1;
+              }
+            });
+          })
+        );
+      })
+    );
+
+    return of(pricesObj);
   });
-
-  return pricesObj;
 }

@@ -3,11 +3,10 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import { ApiInterfaceRx } from '@polkadot/api/types';
-import { map } from 'rxjs/operators';
-import { Observable, combineLatest } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
+import { Observable, combineLatest, of, forkJoin } from 'rxjs';
 import { memo } from '@polkadot/api-derive/util';
-import { allTokens, bifrostAllTokenList } from '../type';
-import { accountsAssetInfo, assetInfo, tokenInformation } from './types';
+import { accountsAssetInfo, assetInfo, tokenInformation, accountAsset } from './types';
 import BN from 'bn.js';
 import { u8aToString } from '@polkadot/util';
 
@@ -17,14 +16,16 @@ import { u8aToString } from '@polkadot/util';
  * @param instanceId
  * @param api
  */
-export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSymbol: allTokens) => Observable<tokenInformation> {
-  return memo(instanceId, (tokenSymbol: allTokens) => {
-    return api.query.assets.tokens(tokenSymbol).pipe(
+export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenId: number) => Observable<tokenInformation> {
+  return memo(instanceId, (tokenId: number) => {
+    return api.query.assets.tokens(tokenId).pipe(
       map((result) => {
         return {
           precision: new BN(result.precision),
           symbol: u8aToString(result.symbol),
-          totalSupply: new BN(result.totalSupply)
+          tokenType: result.token_type;
+          totalSupply: new BN(result.total_supply),
+          pair: result.pair
         };
       })
     );
@@ -37,19 +38,83 @@ export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenSy
  * @param instanceId
  * @param api
  */
-export function getAllTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenArray?: allTokens[]) => Observable<tokenInformation[]> {
-  return memo(instanceId, (tokenArray?: allTokens[]) => {
-    let tokenList: allTokens[];
+export function getAllTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenArray?: number[]) => Observable<tokenInformation[]> {
+  return memo(instanceId, (tokenArray?: number[]) => {
 
-    if (tokenArray === undefined) {
-      tokenList = bifrostAllTokenList as allTokens[];
+    if (!tokenArray || tokenArray.length === 0) {
+      return api.query.assets.tokens.entries().pipe(
+        map((resultSet) => {
+          return resultSet.map((rawResult) => {
+            let result = rawResult[1];
+            
+            return {
+              precision: new BN(result.precision),
+              symbol: u8aToString(result.symbol),
+              tokenType: result.token_type;
+              totalSupply: new BN(result.total_supply),
+              pair: result.pair
+            };
+          });
+        })
+      );
     } else {
-      tokenList = tokenArray;
+      const getTokenInfoQuery = getTokenInfo(instanceId, api);
+      return combineLatest(tokenArray.map((tk) => getTokenInfoQuery(tk)));
+    }
+  });
+}
+
+/**
+ * @name getAllTokenIdList
+ * @description get all token Id list
+ * @param instanceId
+ * @param api
+ */
+export function getAllTokenIdList (instanceId: string, api: ApiInterfaceRx): () => Observable<number[]> {
+  return memo(instanceId, () => {
+    return api.query.assets.tokens.entries().pipe(
+      map((resultSet) => {
+        return resultSet.map((rawResult) => (rawResult[0] as unknown) as number);
+      })
+    );
+  });
+}
+
+/**
+ * @name getAllTokenSymbolList
+ * @description get token symbol/name list.
+ * @param instanceId
+ * @param api
+ */
+export function getTokenSymbolList (instanceId: string, api: ApiInterfaceRx): (tokenArray?: number[]) => Observable<{[index: string]:number}> {
+  return memo(instanceId, (tokenArray?: number[]) => {
+
+    let symbolIdObj : {[index: string]:any} = {};
+
+    if (!tokenArray || tokenArray.length === 0) {
+      api.query.assets.tokens.entries().pipe(
+        map((resultSet) => {
+          resultSet.forEach((rawResult) => {
+            let tokenSymbol = u8aToString(rawResult[1].symbol);
+            let tkId = (rawResult[0] as unknown) as number;
+            symbolIdObj[tokenSymbol] = tkId;
+          });
+        })
+      );
+    } else {
+      const getTokenInfoQuery = getTokenInfo(instanceId, api);
+
+      for(let idx = 0; idx < tokenArray.length; idx ++) {
+        let tkId = tokenArray[idx];
+        let result = getTokenInfoQuery(tkId);
+        result.pipe(map((rs) => {
+          let tokenSymbol = rs.symbol;
+          symbolIdObj[tokenSymbol] = tkId;
+        }));
+      }
     }
 
-    const getTokenInfoQuery = getTokenInfo(instanceId, api);
-
-    return combineLatest(tokenList.map((tk) => getTokenInfoQuery(tk)));
+    return of(symbolIdObj);
   });
 }
 
@@ -59,22 +124,33 @@ export function getAllTokenInfo (instanceId: string, api: ApiInterfaceRx): (toke
  * @param instanceId
  * @param api
  */
-export function getSingleAccountAsset (instanceId: string, api: ApiInterfaceRx): (accountName: string, tokenSymbol: allTokens) => Observable<assetInfo> {
-  return memo(instanceId, (accountName: string, tokenSymbol: allTokens) => {
-    const result = api.query.assets.accountAssets([tokenSymbol, accountName]);
+export function getSingleAccountAsset (instanceId: string, api: ApiInterfaceRx): (accountName: string, tokenId: number) => Observable<assetInfo> {
+  return memo(instanceId, (accountName: string, tokenId: number) => {
+    const result = api.query.assets.accountAssets([tokenId, accountName]);
 
     return result.pipe(map((result) => {
-      const asstInfo = {
-        available: new BN(result.available),
-        balance: new BN(result.balance),
-        cost: new BN(result.cost),
-        income: new BN(result.income),
-        locked: new BN(result.locked)
-      };
+      let astInfo: accountAsset;
+      if (result) {
+        astInfo = {
+          available: new BN(result.available),
+          balance: new BN(result.balance),
+          cost: new BN(result.cost),
+          income: new BN(result.income),
+          locked: new BN(result.locked)
+        };
+      } else {
+        astInfo = {
+          available: new BN(0),
+          balance: new BN(0),
+          cost: new BN(0),
+          income: new BN(0),
+          locked: new BN(0)
+        };
+      }
 
       return {
-        assetInfo: asstInfo,
-        tokenName: tokenSymbol
+        assetInfo: astInfo,
+        tokenId: tokenId
       };
     }));
   });
@@ -86,27 +162,31 @@ export function getSingleAccountAsset (instanceId: string, api: ApiInterfaceRx):
  * @param instanceId
  * @param api
  */
-export function getAccountAssets (instanceId: string, api: ApiInterfaceRx): (accountName: string, tokenArray?: allTokens[]) => Observable<accountsAssetInfo> {
-  return memo(instanceId, (accountName: string, tokenArray?: allTokens[]) => {
-    let tokenList: allTokens[];
+export function getAccountAssets (instanceId: string, api: ApiInterfaceRx): (accountName: string, tokenArray?: number[]) => Observable<accountsAssetInfo> {
+  return memo(instanceId, (accountName: string, tokenArray?: number[]) => {
+    let tokenList: Observable<number[]>;
 
-    if (tokenArray === undefined) {
-      tokenList = bifrostAllTokenList as allTokens[];
+    if (!tokenArray || tokenArray.length === 0) {
+      const getAllTokenIdLisQuery =  getAllTokenIdList(instanceId, api);
+      tokenList = getAllTokenIdLisQuery();
     } else {
-      tokenList = tokenArray;
+      tokenList = of(tokenArray);
     }
 
     const getSingleAccountAssetQuery = getSingleAccountAsset(instanceId, api);
-    const result = combineLatest(tokenList.map((tk) => getSingleAccountAssetQuery(accountName, tk)));
+    const result =  tokenList.pipe(mergeMap((tkList) => {
+      return combineLatest(tkList.map((tk) => getSingleAccountAssetQuery(accountName, tk)));
+    }));
 
-    return result.pipe(map((result) => {
+    return result.pipe(map(rs => {
       return {
         accountName: accountName,
-        assetsInfo: result
+        assetsInfo: rs
       };
     }));
   });
 }
+
 
 /**
  * @name getManyAccountsAssets
@@ -114,18 +194,35 @@ export function getAccountAssets (instanceId: string, api: ApiInterfaceRx): (acc
  * @param instanceId
  * @param api
  */
-export function getManyAccountsAssets (instanceId: string, api: ApiInterfaceRx): (accountNameArray: string[], tokenArray?: allTokens[]) => Observable<accountsAssetInfo[]> {
-  return memo(instanceId, (accountNameArray: string[], tokenArray?: allTokens[]) => {
-    let tokenList: allTokens[];
+export function getManyAccountsAssets (instanceId: string, api: ApiInterfaceRx): (accountNameArray: string[], tokenArray?: number[]) => Observable<accountsAssetInfo[]> {
+  return memo(instanceId, (accountNameArray: string[], tokenArray?: number[]) => {
+    let tokenList: Observable<number[]>;
 
-    if (tokenArray === undefined) {
-      tokenList = bifrostAllTokenList as allTokens[];
+    if (!tokenArray || tokenArray.length === 0) {
+      const getAllTokenIdLisQuery =  getAllTokenIdList(instanceId, api);
+      tokenList = getAllTokenIdLisQuery();
     } else {
-      tokenList = tokenArray;
+      tokenList = of(tokenArray);
     }
 
     const getAccountAssetsQuery = getAccountAssets(instanceId, api);
-
-    return combineLatest(accountNameArray.map((accountName) => getAccountAssetsQuery(accountName, tokenList)));
+    return tokenList.pipe(mergeMap(tkList => {
+      return combineLatest(accountNameArray.map((accountName) => getAccountAssetsQuery(accountName, tkList)));
+    }));
   });
 }
+
+/**
+ * @name getAccountAssetIds
+ * @description get all the asset Ids that account owns.
+ * @param instanceId
+ * @param api
+ */
+export function getAccountAssetIds (instanceId: string, api: ApiInterfaceRx): (accountName: string) => Observable<number[]> {
+  return memo(instanceId, (accountName: string) => {
+    return api.query.assets.accountAssetIds(accountName);
+  });
+}
+
+
+

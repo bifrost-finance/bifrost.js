@@ -2,11 +2,10 @@
 // This software may be modified and distributed under the terms
 // of the Apache-2.0 license. See the LICENSE file for details.
 
-import { allTokens } from '../type';
 import BN from 'bn.js';
 
 export interface DeriveVtokenAssetsInfo{
-  symbol: string,
+  tokenId: number,
   totalSupply: BN
 }
 
@@ -19,7 +18,7 @@ export interface accountAsset{
 }
 
 export interface assetInfo{
-  tokenName: allTokens,
+  tokenId: number,
   assetInfo: accountAsset
 }
 
@@ -31,5 +30,7 @@ export interface accountsAssetInfo{
 export interface tokenInformation{
   symbol: string,
   precision: BN,
-  totalSupply: BN
+  tokenType: number,
+  totalSupply: BN,
+  pair: number
 }
