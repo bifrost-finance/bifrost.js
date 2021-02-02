@@ -1,10 +1,10 @@
-// Copyright 2020 @bifrost-finance/api-derive authors & contributors
+// Copyright 2021 @bifrost-finance/api-derive authors & contributors
 // This software may be modified and distributed under the terms
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import { ApiInterfaceRx } from '@polkadot/api/types';
 import { map, mergeMap } from 'rxjs/operators';
-import { Observable, combineLatest, of, forkJoin } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
 import { memo } from '@polkadot/api-derive/util';
 import { accountsAssetInfo, assetInfo, tokenInformation, accountAsset } from './types';
 import BN from 'bn.js';
@@ -23,9 +23,9 @@ export function getTokenInfo (instanceId: string, api: ApiInterfaceRx): (tokenId
         return {
           precision: new BN(result.precision),
           symbol: u8aToString(result.symbol),
-          tokenType: result.token_type;
+          tokenType: result.token_type.toNumber(),
           totalSupply: new BN(result.total_supply),
-          pair: result.pair
+          pair: result.pair.unwrap().toNumber()
         };
       })
     );
@@ -50,9 +50,9 @@ export function getAllTokenInfo (instanceId: string, api: ApiInterfaceRx): (toke
             return {
               precision: new BN(result.precision),
               symbol: u8aToString(result.symbol),
-              tokenType: result.token_type;
+              tokenType: result.token_type.toNumber(),
               totalSupply: new BN(result.total_supply),
-              pair: result.pair
+              pair: result.pair.unwrap().toNumber()
             };
           });
         })
@@ -220,7 +220,11 @@ export function getManyAccountsAssets (instanceId: string, api: ApiInterfaceRx):
  */
 export function getAccountAssetIds (instanceId: string, api: ApiInterfaceRx): (accountName: string) => Observable<number[]> {
   return memo(instanceId, (accountName: string) => {
-    return api.query.assets.accountAssetIds(accountName);
+    const resultVec = api.query.assets.accountAssetIds(accountName);
+
+    return resultVec.pipe(map((resultVec) => {
+      return resultVec.map(result => result.toNumber())
+    }));
   });
 }
 
