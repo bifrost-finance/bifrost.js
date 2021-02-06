@@ -11,42 +11,23 @@
     "typescript": "^4.1.3"
   },
   "scripts": {
-    "build": "tsc",
-    "generate": "yarn build:interfaces && polkadot-dev-build-ts",
-    "build:interfaces": "yarn generate:defs && yarn generate:meta",
-    "build:release": "polkadot-ci-ghact-build",
-    "docs": "polkadot-types-internal-metadata && polkadot-dev-build-docs",
-    "docs:release": "polkadot-ci-ghact-docs",
-    "chain:info": "polkadot-types-chain-info",
+    "build": "polkadot-dev-build-ts",
     "lint": "polkadot-dev-run-lint",
     "clean": "polkadot-dev-clean-build",
-    "postinstall": "polkadot-dev-yarn-only",
-    "test": "polkadot-dev-run-test --coverage --runInBand --testPathIgnorePatterns e2e",
-    "test:one": "polkadot-dev-run-test",
-    "test:watch": "polkadot-dev-run-test --watch",
+    "generate": "yarn generate:defs && yarn generate:meta",
     "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package @bifrost-finance/types/interfaces --input ./packages/types/src/interfaces",
-    "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package @bifrost-finance/types/interfaces --endpoint ./packages/types/bifrost.json --output ./packages/types/src/interfaces --strict"
+    "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package @bifrost-finance/types/interfaces --endpoint ./packages/types/bifrost.json --output ./packages/types/src/interfaces --strict",
+    "update-metadata": "ts-node --project ./tsconfig.json ./packages/types/scripts/updateMetadata.ts",
+    "generate-full-definitions": "ts-node --project ./tsconfig.json ./packages/types/scripts/printFullJson.ts"
   },
   "devDependencies": {
+    "@polkadot/typegen": "^3.6.4",
+    "@polkadot/dev": "^0.61.24",
     "@babel/core": "^7.12.10",
     "@babel/register": "^7.12.10",
     "@babel/runtime": "^7.12.5",
-    "@polkadot/dev": "^0.61.24",
-    "@polkadot/ts": "^0.3.59",
-    "@polkadot/typegen": "3.5.1",
     "@types/jest": "^26.0.20",
-    "copyfiles": "^2.4.1",
-    "ts-node": "^9.0.0",
-    "typedoc": "^0.19.1",
-    "typedoc-plugin-markdown": "^2.4.2",
-    "typedoc-plugin-no-inherit": "^1.2.0",
-    "ccxt": "^1.36.2"
+    "ts-node": "^9.0.0"
   },
-  "version": "1.0.16",
-  "dependencies": {
-    "ccxt": "^1.36.2",
-    "@polkadot/typegen": "3.5.1",
-    "@polkadot/types": "3.5.1",
-    "@polkadot/api": "3.5.1"
-  }
+  "version": "1.0.16"
 }
