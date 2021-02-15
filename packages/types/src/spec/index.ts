@@ -16,6 +16,4 @@ const typesBundle: OverrideBundleType = {
   },
 };
 
-export default {
-  typesBundle,
-};
+export default typesBundle;

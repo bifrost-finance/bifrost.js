@@ -1,8 +1,7 @@
 {
   "name": "@bifrost-finance/types",
-  "version": "1.0.81",
+  "version": "1.0.91",
   "description": "Bifrost JS types",
-  "main": "index.js",
   "keywords": [
     "Polkadot",
     "Bifrost",

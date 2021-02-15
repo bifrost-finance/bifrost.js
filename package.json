@@ -18,7 +18,7 @@
     "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package @bifrost-finance/types/interfaces --input ./packages/types/src/interfaces",
     "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package @bifrost-finance/types/interfaces --endpoint ./packages/types/bifrost.json --output ./packages/types/src/interfaces --strict",
     "update-metadata": "ts-node --project ./tsconfig.json ./packages/types/scripts/updateMetadata.ts",
-    "generate-full-definitions": "ts-node --project ./tsconfig.json ./packages/types/scripts/printFullJson.ts"
+    "generate-full-definitions": "ts-node --project ./tsconfig.json ./packages/types/scripts/printFullJson"
   },
   "devDependencies": {
     "@polkadot/typegen": "^3.6.4",

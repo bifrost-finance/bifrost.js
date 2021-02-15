@@ -1,8 +1,8 @@
 import { RegistryTypes } from "@polkadot/types/types";
-import * as bifrostDefinitions from "../interfaces/definitions";
+// import * as bifrostDefinitions from "../interfaces/definitions";
 
 // These are user defined types.
-const bifrostTypes = Object.values(bifrostDefinitions).reduce((res, { types }) => ({ ...res, ...types }), {});
+// const bifrostTypes = Object.values(bifrostDefinitions).reduce((res, { types }) => ({ ...res, ...types }), {});
 
 // These are polkadot.js api override types. If not provided, the frontend will not display properly.
 const overrideTypes = {
@@ -12,7 +12,7 @@ const overrideTypes = {
 };
 
 const types: RegistryTypes = {
-  ...bifrostTypes,
+  // ...bifrostTypes,
   ...overrideTypes,
 };
 
