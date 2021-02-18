@@ -159,7 +159,6 @@ declare module '@polkadot/types/types/registry' {
     'Compact<VersionId>': Compact<VersionId>;
     'Compact<VoteIndex>': Compact<VoteIndex>;
     'Compact<VtokenMintPrice>': Compact<VtokenMintPrice>;
-    'Compact<VtokenPool>': Compact<VtokenPool>;
     'Compact<Weight>': Compact<Weight>;
     'Option<AbridgedCandidateReceipt>': Option<AbridgedCandidateReceipt>;
     'Option<AbridgedHostConfiguration>': Option<AbridgedHostConfiguration>;

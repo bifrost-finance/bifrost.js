@@ -1,18 +1,9 @@
 {
-  "name": "@bifrost-finance/api",
+  "name": "@bifrost-finance/api-derive",
   "version": "1.0.92",
-  "description": "Promise and RxJS wrappers around the Bifrost JS RPC",
+  "description": "Additional polkadot.js derives for Bifrost",
   "main": "index.js",
-  "keywords": [
-    "Polkadot",
-    "Bifrost",
-    "RxJs"
-  ],
   "author": "Edwin Wang <lark930@gmail.com>",
-  "maintainers": [
-    "Edwin Wang <lark930@gmail.com>"
-  ],
-  "contributors": [],
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
@@ -29,6 +20,10 @@
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "@bifrost-finance/types": "^1.0.92",
-    "@polkadot/api": "^3.6.4"
+    "@polkadot/api": "^3.6.4",
+    "@polkadot/api-derive": "^3.6.4",
+    "@polkadot/types": "^3.6.4",
+    "ccxt": "^1.36.45",
+    "rxjs": "^6.5.5"
   }
 }
