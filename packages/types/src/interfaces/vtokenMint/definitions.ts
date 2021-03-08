@@ -8,5 +8,6 @@ export default {
     },
     VtokenMintPrice: "u128",
     MintPrice: "VtokenMintPrice",
+    CurrencyIdOf: "CurrencyId",
   },
 };

@@ -2,7 +2,11 @@
 /* eslint-disable */
 
 import type { Struct, u128 } from '@polkadot/types';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { Balance } from '@polkadot/types/interfaces/runtime';
+
+/** @name CurrencyIdOf */
+export interface CurrencyIdOf extends CurrencyId {}
 
 /** @name MintPrice */
 export interface MintPrice extends VtokenMintPrice {}

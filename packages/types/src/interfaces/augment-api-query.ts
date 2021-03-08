@@ -1,61 +1,25 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { BTreeMap, Bytes, Data, Option, U8aFixed, Vec, bool, u32, u64 } from '@polkadot/types';
+import type { Bytes, Option, Vec, bool, u32, u64 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
-import type { AccountAsset, Price, Token } from '@bifrost-finance/types/interfaces/assets';
-import type { BiddingOrderId, BiddingOrderUnitOf, EraId, RewardRecord } from '@bifrost-finance/types/interfaces/bid';
-import type { PoolDetails, PoolId, PoolToken, PoolWeight } from '@bifrost-finance/types/interfaces/swap';
-import type { MintPrice, VtokenPool } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
 import type { BabeAuthorityWeight, MaybeRandomness, NextConfigDescriptor, Randomness } from '@polkadot/types/interfaces/babe';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
-import type { ProposalIndex, Votes } from '@polkadot/types/interfaces/collective';
 import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
-import type { PreimageStatus, PropIndex, Proposal, ReferendumIndex, ReferendumInfo, Voting } from '@polkadot/types/interfaces/democracy';
-import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
 import type { SetId, StoredPendingChange, StoredState } from '@polkadot/types/interfaces/grandpa';
-import type { RegistrarInfo, Registration } from '@polkadot/types/interfaces/identity';
 import type { AuthIndex } from '@polkadot/types/interfaces/imOnline';
 import type { DeferredOffenceOf, Kind, OffenceDetails, OpaqueTimeSlot, ReportIdOf } from '@polkadot/types/interfaces/offences';
-import type { ProxyAnnouncement, ProxyDefinition } from '@polkadot/types/interfaces/proxy';
-import type { ActiveRecovery, RecoveryConfig } from '@polkadot/types/interfaces/recovery';
-import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, KeyTypeId, Moment, OpaqueCall, Perbill, Permill, Releases, ValidatorId } from '@polkadot/types/interfaces/runtime';
-import type { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
+import type { AssignmentId, AvailabilityBitfieldRecord, BufferedSessionChange, CandidateCommitments, CandidatePendingAvailability, CoreAssignment, CoreOccupied, HeadData, HostConfiguration, HrmpChannel, HrmpChannelId, HrmpOpenChannelRequest, InboundDownwardMessage, InboundHrmpMessage, ParaGenesisArgs, ParaId, ParaLifecycle, ParaPastCodeMeta, ParaValidatorIndex, ParachainProposal, ParathreadClaimQueue, RegisteredParachainInfo, SessionInfo, UpwardMessage, ValidationCode } from '@polkadot/types/interfaces/parachains';
+import type { AccountId, AccountIndex, Balance, BalanceOf, BlockNumber, Hash, KeyTypeId, Moment, Releases, Slot, ValidatorId } from '@polkadot/types/interfaces/runtime';
 import type { Keys, SessionIndex } from '@polkadot/types/interfaces/session';
-import type { Bid, BidKind, SocietyVote, StrikeCount, VouchingStatus } from '@polkadot/types/interfaces/society';
-import type { ActiveEraInfo, ElectionResult, ElectionScore, ElectionStatus, EraIndex, EraRewardPoints, Exposure, Forcing, Nominations, RewardDestination, SeatHolder, SlashingSpans, SpanIndex, SpanRecord, StakingLedger, UnappliedSlash, ValidatorPrefs, Voter } from '@polkadot/types/interfaces/staking';
+import type { ValidatorIndex } from '@polkadot/types/interfaces/staking';
 import type { AccountInfo, ConsumedWeight, DigestOf, EventIndex, EventRecord, LastRuntimeUpgradeInfo, Phase } from '@polkadot/types/interfaces/system';
-import type { Bounty, BountyIndex, OpenTip, TreasuryProposal } from '@polkadot/types/interfaces/treasury';
 import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
-import type { Multisig } from '@polkadot/types/interfaces/utility';
-import type { VestingInfo } from '@polkadot/types/interfaces/vesting';
 import type { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/storage' {
   export interface AugmentedQueries<ApiType> {
-    assets: {
-      /**
-       * A collection of asset which an account owned
-       **/
-      accountAssetIds: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Vec<AssetId>>, [AccountId]>;
-      /**
-       * The number of units of assets held by any given asset ans given account.
-       **/
-      accountAssets: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AccountId]> | [AssetId | AnyNumber | Uint8Array, AccountId | string | Uint8Array]) => Observable<AccountAsset>, [ITuple<[AssetId, AccountId]>]>;
-      /**
-       * The next asset identifier up for grabs.
-       **/
-      nextAssetId: AugmentedQuery<ApiType, () => Observable<AssetId>, []>;
-      /**
-       * The number of units of prices held by any given asset.
-       **/
-      prices: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Price>, [AssetId]>;
-      /**
-       * Details of the token corresponding to an asset id.
-       **/
-      tokens: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Token>, [AssetId]>;
-    };
     authorship: {
       /**
        * Author of current block.
@@ -84,7 +48,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Current slot number.
        **/
-      currentSlot: AugmentedQuery<ApiType, () => Observable<u64>, []>;
+      currentSlot: AugmentedQuery<ApiType, () => Observable<Slot>, []>;
       /**
        * Current epoch index.
        **/
@@ -93,7 +57,7 @@ declare module '@polkadot/api/types/storage' {
        * The slot at which the first epoch actually started. This is 0
        * until the first block of the chain.
        **/
-      genesisSlot: AugmentedQuery<ApiType, () => Observable<u64>, []>;
+      genesisSlot: AugmentedQuery<ApiType, () => Observable<Slot>, []>;
       /**
        * Temporary value (cleared at block finalization) which is `Some`
        * if per-block initialization has already been called for current block.
@@ -153,7 +117,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * The balance of an account.
        * 
-       * NOTE: This is only used in the case that this module is used to store balances.
+       * NOTE: This is only used in the case that this pallet is used to store balances.
        **/
       account: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<AccountData>, [AccountId]>;
       /**
@@ -172,243 +136,21 @@ declare module '@polkadot/api/types/storage' {
        **/
       totalIssuance: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
     };
-    bid: {
+    dmp: {
       /**
-       * Bidder proposals in queue which haven't been matched.
-       **/
-      bidderProposalInQueue: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: AssetId | AnyNumber | Uint8Array) => Observable<Vec<BiddingOrderId>>, [AccountId, AssetId]>;
-      /**
-       * Record bidder token orders in service in the form of id in a map.
-       **/
-      bidderTokenOrdersInService: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: AssetId | AnyNumber | Uint8Array) => Observable<Vec<BiddingOrderId>>, [AccountId, AssetId]>;
-      /**
-       * queue for unmatched bidding proposals
-       **/
-      biddingQueues: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Vec<ITuple<[Permill, BiddingOrderId]>>>, [AssetId]>;
-      /**
-       * Block number per era for each vtoken
-       **/
-      blockNumberPerEra: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<BlockNumber>, [AssetId]>;
-      /**
-       * Orders have been unbonded because of user withdrawing within current era. If vtoken supply increase later
-       * within current era, the deleted orders recorded in this storage can restore.
-       * vtoken => (deleted_order_id, original_end_block_number)
-       **/
-      forciblyUnbondOrdersInCurrentEra: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Vec<ITuple<[BiddingOrderId, BiddingOrderUnitOf]>>>, [AssetId]>;
-      /**
-       * the min and max number of blocks that an matched order can last. 【token => (min, max)】
-       **/
-      minMaxOrderLastingBlockNum: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<ITuple<[BlockNumber, BlockNumber]>>, [AssetId]>;
-      /**
-       * Recording the orders in service ids for every end block number.
-       **/
-      orderEndBlockNumMap: AugmentedQuery<ApiType, (arg: BlockNumber | AnyNumber | Uint8Array) => Observable<Vec<BiddingOrderId>>, [BlockNumber]>;
-      /**
-       * Order next id
-       **/
-      orderNextId: AugmentedQuery<ApiType, () => Observable<BiddingOrderId>, []>;
-      /**
-       * map for recording orders in service. key is id, value is BiddingOrderUnit struct.
-       **/
-      ordersInService: AugmentedQuery<ApiType, (arg: BiddingOrderId | AnyNumber | Uint8Array) => Observable<BiddingOrderUnitOf>, [BiddingOrderId]>;
-      /**
-       * proposal Id
-       **/
-      proposalNextId: AugmentedQuery<ApiType, () => Observable<BiddingOrderId>, []>;
-      /**
-       * Proposals map, recording all the proposals. key is id, value is proposal detail.
-       **/
-      proposalsInQueue: AugmentedQuery<ApiType, (arg: BiddingOrderId | AnyNumber | Uint8Array) => Observable<BiddingOrderUnitOf>, [BiddingOrderId]>;
-      /**
-       * the block number lag before we can vote for another validator when we stop a staking
-       **/
-      serviceStopBlockNumLag: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<BlockNumber>, [AssetId]>;
-      /**
-       * Slash amounts for orders in service. This storage should be updated by the Staking pallet whenever there is
-       * slash occurred for a certain order. When the order ends, remaining slash deposit should be return to the
-       * bidder and the record in this storage should be deleted.
-       **/
-      slashForOrdersInService: AugmentedQuery<ApiType, (arg: BiddingOrderId | AnyNumber | Uint8Array) => Observable<Balance>, [BiddingOrderId]>;
-      /**
-       * slash margin rates for each type of token
-       **/
-      slashMarginRates: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Permill>, [AssetId]>;
-      /**
-       * maintain a list of order id for each token in the order of ROI increasing. Every Vec constrain
-       * to a constant length. token => (annual roi, order id), order by annual roi ascending.
-       **/
-      tokenOrderRoiList: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Vec<ITuple<[Permill, BiddingOrderId]>>>, [AssetId]>;
-      /**
-       * Record the releasing votes from now to the end of current era.
-       **/
-      toReleaseVotesTilEndOfEra: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, EraId]> | [AssetId | AnyNumber | Uint8Array, EraId | AnyNumber | Uint8Array]) => Observable<Balance>, [ITuple<[AssetId, EraId]>]>;
-      /**
-       * the bidding balance of each registered vtoken.
-       **/
-      totalProposalsInQueue: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Balance>, [AssetId]>;
-      /**
-       * total votes which are already in service
-       **/
-      totalVotesInService: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Balance>, [AssetId]>;
-      /**
-       * vtokens that have been registered for bidding marketplace
-       **/
-      vtokensRegisteredForBidding: AugmentedQuery<ApiType, () => Observable<Vec<AssetId>>, []>;
-    };
-    bounties: {
-      /**
-       * Bounties that have been made.
-       **/
-      bounties: AugmentedQuery<ApiType, (arg: BountyIndex | AnyNumber | Uint8Array) => Observable<Option<Bounty>>, [BountyIndex]>;
-      /**
-       * Bounty indices that have been approved but not yet funded.
-       **/
-      bountyApprovals: AugmentedQuery<ApiType, () => Observable<Vec<BountyIndex>>, []>;
-      /**
-       * Number of bounty proposals that have been made.
-       **/
-      bountyCount: AugmentedQuery<ApiType, () => Observable<BountyIndex>, []>;
-      /**
-       * The description of each bounty.
-       **/
-      bountyDescriptions: AugmentedQuery<ApiType, (arg: BountyIndex | AnyNumber | Uint8Array) => Observable<Option<Bytes>>, [BountyIndex]>;
-    };
-    council: {
-      /**
-       * The current members of the collective. This is stored sorted (just by value).
-       **/
-      members: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>, []>;
-      /**
-       * The prime member that helps determine the default vote behavior in case of absentations.
-       **/
-      prime: AugmentedQuery<ApiType, () => Observable<Option<AccountId>>, []>;
-      /**
-       * Proposals so far.
-       **/
-      proposalCount: AugmentedQuery<ApiType, () => Observable<u32>, []>;
-      /**
-       * Actual proposal for a given hash, if it's current.
-       **/
-      proposalOf: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<Option<Proposal>>, [Hash]>;
-      /**
-       * The hashes of the active proposals.
-       **/
-      proposals: AugmentedQuery<ApiType, () => Observable<Vec<Hash>>, []>;
-      /**
-       * Votes on a given proposal, if it is ongoing.
-       **/
-      voting: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<Option<Votes>>, [Hash]>;
-    };
-    democracy: {
-      /**
-       * A record of who vetoed what. Maps proposal hash to a possible existent block number
-       * (until when it may not be resubmitted) and who vetoed it.
-       **/
-      blacklist: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<Option<ITuple<[BlockNumber, Vec<AccountId>]>>>, [Hash]>;
-      /**
-       * Record of all proposals that have been subject to emergency cancellation.
-       **/
-      cancellations: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<bool>, [Hash]>;
-      /**
-       * Those who have locked a deposit.
+       * A mapping that stores the downward message queue MQC head for each para.
        * 
-       * TWOX-NOTE: Safe, as increasing integer keys are safe.
+       * Each link in this chain has a form:
+       * `(prev_head, B, H(M))`, where
+       * - `prev_head`: is the previous head hash or zero if none.
+       * - `B`: is the relay-chain block number in which a message was appended.
+       * - `H(M)`: is the hash of the message being appended.
        **/
-      depositOf: AugmentedQuery<ApiType, (arg: PropIndex | AnyNumber | Uint8Array) => Observable<Option<ITuple<[Vec<AccountId>, BalanceOf]>>>, [PropIndex]>;
+      downwardMessageQueueHeads: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Hash>, [ParaId]>;
       /**
-       * True if the last referendum tabled was submitted externally. False if it was a public
-       * proposal.
+       * The downward messages addressed for a certain para.
        **/
-      lastTabledWasExternal: AugmentedQuery<ApiType, () => Observable<bool>, []>;
-      /**
-       * Accounts for which there are locks in action which may be removed at some point in the
-       * future. The value is the block number at which the lock expires and may be removed.
-       * 
-       * TWOX-NOTE: OK ― `AccountId` is a secure hash.
-       **/
-      locks: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<BlockNumber>>, [AccountId]>;
-      /**
-       * The lowest referendum index representing an unbaked referendum. Equal to
-       * `ReferendumCount` if there isn't a unbaked referendum.
-       **/
-      lowestUnbaked: AugmentedQuery<ApiType, () => Observable<ReferendumIndex>, []>;
-      /**
-       * The referendum to be tabled whenever it would be valid to table an external proposal.
-       * This happens when a referendum needs to be tabled and one of two conditions are met:
-       * - `LastTabledWasExternal` is `false`; or
-       * - `PublicProps` is empty.
-       **/
-      nextExternal: AugmentedQuery<ApiType, () => Observable<Option<ITuple<[Hash, VoteThreshold]>>>, []>;
-      /**
-       * Map of hashes to the proposal preimage, along with who registered it and their deposit.
-       * The block number is the block at which it was deposited.
-       **/
-      preimages: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<Option<PreimageStatus>>, [Hash]>;
-      /**
-       * The number of (public) proposals that have been made so far.
-       **/
-      publicPropCount: AugmentedQuery<ApiType, () => Observable<PropIndex>, []>;
-      /**
-       * The public proposals. Unsorted. The second item is the proposal's hash.
-       **/
-      publicProps: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[PropIndex, Hash, AccountId]>>>, []>;
-      /**
-       * The next free referendum index, aka the number of referenda started so far.
-       **/
-      referendumCount: AugmentedQuery<ApiType, () => Observable<ReferendumIndex>, []>;
-      /**
-       * Information concerning any given referendum.
-       * 
-       * TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
-       **/
-      referendumInfoOf: AugmentedQuery<ApiType, (arg: ReferendumIndex | AnyNumber | Uint8Array) => Observable<Option<ReferendumInfo>>, [ReferendumIndex]>;
-      /**
-       * Storage version of the pallet.
-       * 
-       * New networks start with last version.
-       **/
-      storageVersion: AugmentedQuery<ApiType, () => Observable<Option<Releases>>, []>;
-      /**
-       * All votes for a particular voter. We store the balance for the number of votes that we
-       * have recorded. The second item is the total amount of delegations, that will be added.
-       * 
-       * TWOX-NOTE: SAFE as `AccountId`s are crypto hashes anyway.
-       **/
-      votingOf: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Voting>, [AccountId]>;
-    };
-    elections: {
-      /**
-       * The present candidate list. A current member or runner-up can never enter this vector
-       * and is always implicitly assumed to be a candidate.
-       * 
-       * Second element is the deposit.
-       * 
-       * Invariant: Always sorted based on account id.
-       **/
-      candidates: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AccountId, BalanceOf]>>>, []>;
-      /**
-       * The total number of vote rounds that have happened, excluding the upcoming one.
-       **/
-      electionRounds: AugmentedQuery<ApiType, () => Observable<u32>, []>;
-      /**
-       * The current elected members.
-       * 
-       * Invariant: Always sorted based on account id.
-       **/
-      members: AugmentedQuery<ApiType, () => Observable<Vec<SeatHolder>>, []>;
-      /**
-       * The current reserved runners-up.
-       * 
-       * Invariant: Always sorted based on rank (worse to best). Upon removal of a member, the
-       * last (i.e. _best_) runner-up will be replaced.
-       **/
-      runnersUp: AugmentedQuery<ApiType, () => Observable<Vec<SeatHolder>>, []>;
-      /**
-       * Votes and locked stake of a particular voter.
-       * 
-       * TWOX-NOTE: SAFE as `AccountId` is a crypto hash.
-       **/
-      voting: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Voter>, [AccountId]>;
+      downwardMessageQueues: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Vec<InboundDownwardMessage>>, [ParaId]>;
     };
     grandpa: {
       /**
@@ -440,37 +182,88 @@ declare module '@polkadot/api/types/storage' {
        **/
       state: AugmentedQuery<ApiType, () => Observable<StoredState>, []>;
     };
-    identity: {
+    hrmp: {
       /**
-       * Information that is pertinent to identify the entity behind an account.
-       * 
-       * TWOX-NOTE: OK ― `AccountId` is a secure hash.
+       * This mapping tracks how many open channel requests were accepted by a given recipient para.
+       * Invariant: `HrmpOpenChannelRequests` should contain the same number of items `(_, X)` with
+       * `confirmed` set to true, as the number of `HrmpAcceptedChannelRequestCount` for `X`.
        **/
-      identityOf: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<Registration>>, [AccountId]>;
+      hrmpAcceptedChannelRequestCount: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<u32>, [ParaId]>;
       /**
-       * The set of registrars. Not expected to get very big as can only be added through a
-       * special origin (likely a council motion).
-       * 
-       * The index into this can be cast to `RegistrarIndex` to get a valid value.
+       * Storage for the messages for each channel.
+       * Invariant: cannot be non-empty if the corresponding channel in `HrmpChannels` is `None`.
        **/
-      registrars: AugmentedQuery<ApiType, () => Observable<Vec<Option<RegistrarInfo>>>, []>;
+      hrmpChannelContents: AugmentedQuery<ApiType, (arg: HrmpChannelId | { sender?: any; receiver?: any } | string | Uint8Array) => Observable<Vec<InboundHrmpMessage>>, [HrmpChannelId]>;
       /**
-       * Alternative "sub" identities of this account.
-       * 
-       * The first item is the deposit, the second is a vector of the accounts.
-       * 
-       * TWOX-NOTE: OK ― `AccountId` is a secure hash.
+       * Maintains a mapping that can be used to answer the question:
+       * What paras sent a message at the given block number for a given reciever.
+       * Invariants:
+       * - The inner `Vec<ParaId>` is never empty.
+       * - The inner `Vec<ParaId>` cannot store two same `ParaId`.
+       * - The outer vector is sorted ascending by block number and cannot store two items with the same
+       * block number.
        **/
-      subsOf: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[BalanceOf, Vec<AccountId>]>>, [AccountId]>;
+      hrmpChannelDigests: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Vec<ITuple<[BlockNumber, Vec<ParaId>]>>>, [ParaId]>;
       /**
-       * The super-identity of an alternative "sub" identity together with its name, within that
-       * context. If the account is not some other account's sub-identity, then just `None`.
+       * HRMP channel data associated with each para.
+       * Invariant:
+       * - each participant in the channel should satisfy `Paras::is_valid_para(P)` within a session.
        **/
-      superOf: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<ITuple<[AccountId, Data]>>>, [AccountId]>;
+      hrmpChannels: AugmentedQuery<ApiType, (arg: HrmpChannelId | { sender?: any; receiver?: any } | string | Uint8Array) => Observable<Option<HrmpChannel>>, [HrmpChannelId]>;
+      /**
+       * A set of pending HRMP close channel requests that are going to be closed during the session change.
+       * Used for checking if a given channel is registered for closure.
+       * 
+       * The set is accompanied by a list for iteration.
+       * 
+       * Invariant:
+       * - There are no channels that exists in list but not in the set and vice versa.
+       **/
+      hrmpCloseChannelRequests: AugmentedQuery<ApiType, (arg: HrmpChannelId | { sender?: any; receiver?: any } | string | Uint8Array) => Observable<Option<ITuple<[]>>>, [HrmpChannelId]>;
+      hrmpCloseChannelRequestsList: AugmentedQuery<ApiType, () => Observable<Vec<HrmpChannelId>>, []>;
+      hrmpEgressChannelsIndex: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Vec<ParaId>>, [ParaId]>;
+      /**
+       * Ingress/egress indexes allow to find all the senders and receivers given the opposite
+       * side. I.e.
+       * 
+       * (a) ingress index allows to find all the senders for a given recipient.
+       * (b) egress index allows to find all the recipients for a given sender.
+       * 
+       * Invariants:
+       * - for each ingress index entry for `P` each item `I` in the index should present in `HrmpChannels`
+       * as `(I, P)`.
+       * - for each egress index entry for `P` each item `E` in the index should present in `HrmpChannels`
+       * as `(P, E)`.
+       * - there should be no other dangling channels in `HrmpChannels`.
+       * - the vectors are sorted.
+       **/
+      hrmpIngressChannelsIndex: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Vec<ParaId>>, [ParaId]>;
+      /**
+       * This mapping tracks how many open channel requests are inititated by a given sender para.
+       * Invariant: `HrmpOpenChannelRequests` should contain the same number of items that has `(X, _)`
+       * as the number of `HrmpOpenChannelRequestCount` for `X`.
+       **/
+      hrmpOpenChannelRequestCount: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<u32>, [ParaId]>;
+      /**
+       * The set of pending HRMP open channel requests.
+       * 
+       * The set is accompanied by a list for iteration.
+       * 
+       * Invariant:
+       * - There are no channels that exists in list but not in the set and vice versa.
+       **/
+      hrmpOpenChannelRequests: AugmentedQuery<ApiType, (arg: HrmpChannelId | { sender?: any; receiver?: any } | string | Uint8Array) => Observable<Option<HrmpOpenChannelRequest>>, [HrmpChannelId]>;
+      hrmpOpenChannelRequestsList: AugmentedQuery<ApiType, () => Observable<Vec<HrmpChannelId>>, []>;
+      /**
+       * The HRMP watermark associated with each para.
+       * Invariant:
+       * - each para `P` used here as a key should satisfy `Paras::is_valid_para(P)` within a session.
+       **/
+      hrmpWatermarks: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<BlockNumber>>, [ParaId]>;
     };
     imOnline: {
       /**
-       * For each session index, we keep a mapping of `T::ValidatorId` to the
+       * For each session index, we keep a mapping of `ValidatorId<T>` to the
        * number of blocks authored by the given authority.
        **/
       authoredBlocks: AugmentedQueryDoubleMap<ApiType, (key1: SessionIndex | AnyNumber | Uint8Array, key2: ValidatorId | string | Uint8Array) => Observable<u32>, [SessionIndex, ValidatorId]>;
@@ -493,18 +286,63 @@ declare module '@polkadot/api/types/storage' {
        **/
       receivedHeartbeats: AugmentedQueryDoubleMap<ApiType, (key1: SessionIndex | AnyNumber | Uint8Array, key2: AuthIndex | AnyNumber | Uint8Array) => Observable<Option<Bytes>>, [SessionIndex, AuthIndex]>;
     };
+    inclusion: {
+      /**
+       * The latest bitfield for each validator, referred to by their index in the validator set.
+       **/
+      availabilityBitfields: AugmentedQuery<ApiType, (arg: ValidatorIndex | AnyNumber | Uint8Array) => Observable<Option<AvailabilityBitfieldRecord>>, [ValidatorIndex]>;
+      /**
+       * Candidates pending availability by `ParaId`.
+       **/
+      pendingAvailability: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<CandidatePendingAvailability>>, [ParaId]>;
+      /**
+       * The commitments of candidates pending availability, by ParaId.
+       **/
+      pendingAvailabilityCommitments: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<CandidateCommitments>>, [ParaId]>;
+      /**
+       * The current validators, by their parachain session keys.
+       **/
+      validators: AugmentedQuery<ApiType, () => Observable<Vec<ValidatorId>>, []>;
+    };
+    inclusionInherent: {
+      /**
+       * Whether the inclusion inherent was included within this block.
+       * 
+       * The `Option<()>` is effectively a bool, but it never hits storage in the `None` variant
+       * due to the guarantees of FRAME's storage APIs.
+       * 
+       * If this is `None` at the end of the block, we panic and render the block invalid.
+       **/
+      included: AugmentedQuery<ApiType, () => Observable<Option<ITuple<[]>>>, []>;
+    };
     indices: {
       /**
        * The lookup from index to account.
        **/
       accounts: AugmentedQuery<ApiType, (arg: AccountIndex | AnyNumber | Uint8Array) => Observable<Option<ITuple<[AccountId, BalanceOf, bool]>>>, [AccountIndex]>;
     };
-    multisig: {
-      calls: AugmentedQuery<ApiType, (arg: U8aFixed | string | Uint8Array) => Observable<Option<ITuple<[OpaqueCall, AccountId, BalanceOf]>>>, [U8aFixed]>;
+    initializer: {
       /**
-       * The set of open multisig operations.
+       * Buffered session changes along with the block number at which they should be applied.
+       * 
+       * Typically this will be empty or one element long. Apart from that this item never hits
+       * the storage.
+       * 
+       * However this is a `Vec` regardless to handle various edge cases that may occur at runtime
+       * upgrade boundaries or if governance intervenes.
        **/
-      multisigs: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: U8aFixed | string | Uint8Array) => Observable<Option<Multisig>>, [AccountId, U8aFixed]>;
+      bufferedSessionChanges: AugmentedQuery<ApiType, () => Observable<Vec<BufferedSessionChange>>, []>;
+      /**
+       * Whether the parachains modules have been initialized within this block.
+       * 
+       * Semantically a bool, but this guarantees it should never hit the trie,
+       * as this is cleared in `on_finalize` and Frame optimizes `None` values to be empty values.
+       * 
+       * As a bool, `set(false)` and `remove()` both lead to the next `get()` being false, but one of
+       * them writes to the trie and one does not. This confusion makes `Option<()>` more suitable for
+       * the semantics of this variable.
+       **/
+      hasInitialized: AugmentedQuery<ApiType, () => Observable<Option<ITuple<[]>>>, []>;
     };
     offences: {
       /**
@@ -530,59 +368,170 @@ declare module '@polkadot/api/types/storage' {
        **/
       reportsByKindIndex: AugmentedQuery<ApiType, (arg: Kind | string | Uint8Array) => Observable<Bytes>, [Kind]>;
     };
-    proxy: {
+    parachainsConfiguration: {
       /**
-       * The announcements made by the proxy (key).
+       * The active configuration for the current session.
        **/
-      announcements: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ProxyAnnouncement>, BalanceOf]>>, [AccountId]>;
+      activeConfig: AugmentedQuery<ApiType, () => Observable<HostConfiguration>, []>;
       /**
-       * The set of account proxies. Maps the account which has delegated to the accounts
-       * which are being delegated to, together with the amount held on deposit.
+       * Pending configuration (if any) for the next session.
        **/
-      proxies: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ProxyDefinition>, BalanceOf]>>, [AccountId]>;
+      pendingConfig: AugmentedQuery<ApiType, (arg: SessionIndex | AnyNumber | Uint8Array) => Observable<Option<HostConfiguration>>, [SessionIndex]>;
     };
-    randomnessCollectiveFlip: {
+    paras: {
       /**
-       * Series of block headers from the last 81 blocks that acts as random seed material. This
-       * is arranged as a ring buffer with `block_number % 81` being the index into the `Vec` of
-       * the oldest hash.
+       * The actions to perform during the start of a specific session index.
        **/
-      randomMaterial: AugmentedQuery<ApiType, () => Observable<Vec<Hash>>, []>;
+      actionsQueue: AugmentedQuery<ApiType, (arg: SessionIndex | AnyNumber | Uint8Array) => Observable<Vec<ParaId>>, [SessionIndex]>;
+      /**
+       * The validation code of every live para.
+       **/
+      currentCode: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<ValidationCode>>, [ParaId]>;
+      /**
+       * The actual future code of a para.
+       **/
+      futureCode: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<ValidationCode>>, [ParaId]>;
+      /**
+       * The block number at which the planned code change is expected for a para.
+       * The change will be applied after the first parablock for this ID included which executes
+       * in the context of a relay chain block with a number >= `expected_at`.
+       **/
+      futureCodeUpgrades: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<BlockNumber>>, [ParaId]>;
+      /**
+       * The head-data of every registered para.
+       **/
+      heads: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<HeadData>>, [ParaId]>;
+      /**
+       * All parachains. Ordered ascending by ParaId. Parathreads are not included.
+       **/
+      parachains: AugmentedQuery<ApiType, () => Observable<Vec<ParaId>>, []>;
+      /**
+       * The current lifecycle of a all known Para IDs.
+       **/
+      paraLifecycles: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<ParaLifecycle>>, [ParaId]>;
+      /**
+       * Actual past code, indicated by the para id as well as the block number at which it became outdated.
+       **/
+      pastCode: AugmentedQuery<ApiType, (arg: ITuple<[ParaId, BlockNumber]> | [ParaId | AnyNumber | Uint8Array, BlockNumber | AnyNumber | Uint8Array]) => Observable<Option<ValidationCode>>, [ITuple<[ParaId, BlockNumber]>]>;
+      /**
+       * Past code of parachains. The parachains themselves may not be registered anymore,
+       * but we also keep their code on-chain for the same amount of time as outdated code
+       * to keep it available for secondary checkers.
+       **/
+      pastCodeMeta: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<ParaPastCodeMeta>, [ParaId]>;
+      /**
+       * Which paras have past code that needs pruning and the relay-chain block at which the code was replaced.
+       * Note that this is the actual height of the included block, not the expected height at which the
+       * code upgrade would be applied, although they may be equal.
+       * This is to ensure the entire acceptance period is covered, not an offset acceptance period starting
+       * from the time at which the parachain perceives a code upgrade as having occurred.
+       * Multiple entries for a single para are permitted. Ordered ascending by block number.
+       **/
+      pastCodePruning: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[ParaId, BlockNumber]>>>, []>;
+      /**
+       * Upcoming paras instantiation arguments.
+       **/
+      upcomingParasGenesis: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<ParaGenesisArgs>>, [ParaId]>;
     };
-    recovery: {
+    proposeParachain: {
       /**
-       * Active recovery attempts.
-       * 
-       * First account is the account to be recovered, and the second account
-       * is the user trying to recover the account.
+       * Proposals that are approved.
        **/
-      activeRecoveries: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<Option<ActiveRecovery>>, [AccountId, AccountId]>;
+      approvedProposals: AugmentedQuery<ApiType, () => Observable<Vec<ParaId>>, []>;
       /**
-       * The list of allowed proxy accounts.
-       * 
-       * Map from the user who can access it to the recovered account.
+       * Information about the registered parachains.
        **/
-      proxy: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<AccountId>>, [AccountId]>;
+      parachainInfo: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<RegisteredParachainInfo>>, [ParaId]>;
       /**
-       * The set of recoverable accounts and their recovery configuration.
+       * The validation WASM code of the parachain.
        **/
-      recoverable: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<RecoveryConfig>>, [AccountId]>;
+      parachainValidationCode: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<ValidationCode>>, [ParaId]>;
+      /**
+       * All the proposals.
+       **/
+      proposals: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<ParachainProposal>>, [ParaId]>;
+      /**
+       * Proposals that are scheduled at for a fixed session to be applied.
+       **/
+      scheduledProposals: AugmentedQuery<ApiType, (arg: SessionIndex | AnyNumber | Uint8Array) => Observable<Vec<ParaId>>, [SessionIndex]>;
+      /**
+       * Validators that should be added.
+       **/
+      validatorsToAdd: AugmentedQuery<ApiType, () => Observable<Vec<ValidatorId>>, []>;
+      /**
+       * Validators that should be retired, because their Parachain was deregistered.
+       **/
+      validatorsToRetire: AugmentedQuery<ApiType, () => Observable<Vec<ValidatorId>>, []>;
+    };
+    registrar: {
+      /**
+       * Users who have paid a parathread's deposit.
+       **/
+      debtors: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<AccountId>, [ParaId]>;
+      /**
+       * Map of all registered parathreads/chains.
+       **/
+      paras: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<bool>>, [ParaId]>;
+      /**
+       * Whether parathreads are enabled or not.
+       **/
+      parathreadsRegistrationEnabled: AugmentedQuery<ApiType, () => Observable<bool>, []>;
+      /**
+       * Pending swap operations.
+       **/
+      pendingSwap: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<ParaId>>, [ParaId]>;
     };
     scheduler: {
       /**
-       * Items to be executed, indexed by the block number that they should be executed on.
-       **/
-      agenda: AugmentedQuery<ApiType, (arg: BlockNumber | AnyNumber | Uint8Array) => Observable<Vec<Option<Scheduled>>>, [BlockNumber]>;
-      /**
-       * Lookup from identity to the block number and index of the task.
-       **/
-      lookup: AugmentedQuery<ApiType, (arg: Bytes | string | Uint8Array) => Observable<Option<TaskAddress>>, [Bytes]>;
-      /**
-       * Storage version of the pallet.
+       * One entry for each availability core. Entries are `None` if the core is not currently occupied. Can be
+       * temporarily `Some` if scheduled but not occupied.
+       * The i'th parachain belongs to the i'th core, with the remaining cores all being
+       * parathread-multiplexers.
        * 
-       * New networks start with last version.
+       * Bounded by the maximum of either of these two values:
+       * * The number of parachains and parathread multiplexers
+       * * The number of validators divided by `configuration.max_validators_per_core`.
        **/
-      storageVersion: AugmentedQuery<ApiType, () => Observable<Releases>, []>;
+      availabilityCores: AugmentedQuery<ApiType, () => Observable<Vec<Option<CoreOccupied>>>, []>;
+      /**
+       * An index used to ensure that only one claim on a parathread exists in the queue or is
+       * currently being handled by an occupied core.
+       * 
+       * Bounded by the number of parathread cores and scheduling lookahead. Reasonably, 10 * 50 = 500.
+       **/
+      parathreadClaimIndex: AugmentedQuery<ApiType, () => Observable<Vec<ParaId>>, []>;
+      /**
+       * A queue of upcoming claims and which core they should be mapped onto.
+       * 
+       * The number of queued claims is bounded at the `scheduling_lookahead`
+       * multiplied by the number of parathread multiplexer cores. Reasonably, 10 * 50 = 500.
+       **/
+      parathreadQueue: AugmentedQuery<ApiType, () => Observable<ParathreadClaimQueue>, []>;
+      /**
+       * Currently scheduled cores - free but up to be occupied.
+       * 
+       * Bounded by the number of cores: one for each parachain and parathread multiplexer.
+       * 
+       * The value contained here will not be valid after the end of a block. Runtime APIs should be used to determine scheduled cores/
+       * for the upcoming block.
+       **/
+      scheduled: AugmentedQuery<ApiType, () => Observable<Vec<CoreAssignment>>, []>;
+      /**
+       * The block number where the session start occurred. Used to track how many group rotations have occurred.
+       * 
+       * Note that in the context of parachains modules the session change is signalled during
+       * the block and enacted at the end of the block (at the finalization stage, to be exact).
+       * Thus for all intents and purposes the effect of the session change is observed at the
+       * block following the session change, block number of which we save in this storage value.
+       **/
+      sessionStartBlock: AugmentedQuery<ApiType, () => Observable<BlockNumber>, []>;
+      /**
+       * All the validator groups. One for each core.
+       * 
+       * Bound: The number of cores is the sum of the numbers of parachains and parathread multiplexers.
+       * Reasonably, 100-1000. The dominant factor is the number of validators: safe upper bound at 10k.
+       **/
+      validatorGroups: AugmentedQuery<ApiType, () => Observable<Vec<Vec<ParaValidatorIndex>>>, []>;
     };
     session: {
       /**
@@ -618,318 +567,35 @@ declare module '@polkadot/api/types/storage' {
        **/
       validators: AugmentedQuery<ApiType, () => Observable<Vec<ValidatorId>>, []>;
     };
-    society: {
+    sessionInfo: {
       /**
-       * The current bids, stored ordered by the value of the bid.
+       * Assignment keys for the current session.
+       * Note that this API is private due to it being prone to 'off-by-one' at session boundaries.
+       * When in doubt, use `Sessions` API instead.
        **/
-      bids: AugmentedQuery<ApiType, () => Observable<Vec<Bid>>, []>;
+      assignmentKeysUnsafe: AugmentedQuery<ApiType, () => Observable<Vec<AssignmentId>>, []>;
       /**
-       * The current set of candidates; bidders that are attempting to become members.
+       * The earliest session for which previous session info is stored.
        **/
-      candidates: AugmentedQuery<ApiType, () => Observable<Vec<Bid>>, []>;
+      earliestStoredSession: AugmentedQuery<ApiType, () => Observable<SessionIndex>, []>;
       /**
-       * The defending member currently being challenged.
+       * Session information in a rolling window.
+       * Should have an entry in range `EarliestStoredSession..=CurrentSessionIndex`.
+       * Does not have any entries before the session index in the first session change notification.
        **/
-      defender: AugmentedQuery<ApiType, () => Observable<Option<AccountId>>, []>;
-      /**
-       * Votes for the defender.
-       **/
-      defenderVotes: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<SocietyVote>>, [AccountId]>;
-      /**
-       * The first member.
-       **/
-      founder: AugmentedQuery<ApiType, () => Observable<Option<AccountId>>, []>;
-      /**
-       * The most primary from the most recently approved members.
-       **/
-      head: AugmentedQuery<ApiType, () => Observable<Option<AccountId>>, []>;
-      /**
-       * The max number of members for the society at one time.
-       **/
-      maxMembers: AugmentedQuery<ApiType, () => Observable<u32>, []>;
-      /**
-       * The current set of members, ordered.
-       **/
-      members: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>, []>;
-      /**
-       * Pending payouts; ordered by block number, with the amount that should be paid out.
-       **/
-      payouts: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Vec<ITuple<[BlockNumber, BalanceOf]>>>, [AccountId]>;
-      /**
-       * Amount of our account balance that is specifically for the next round's bid(s).
-       **/
-      pot: AugmentedQuery<ApiType, () => Observable<BalanceOf>, []>;
-      /**
-       * A hash of the rules of this society concerning membership. Can only be set once and
-       * only by the founder.
-       **/
-      rules: AugmentedQuery<ApiType, () => Observable<Option<Hash>>, []>;
-      /**
-       * The ongoing number of losing votes cast by the member.
-       **/
-      strikes: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<StrikeCount>, [AccountId]>;
-      /**
-       * The set of suspended candidates.
-       **/
-      suspendedCandidates: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<ITuple<[BalanceOf, BidKind]>>>, [AccountId]>;
-      /**
-       * The set of suspended members.
-       **/
-      suspendedMembers: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<bool>, [AccountId]>;
-      /**
-       * Double map from Candidate -> Voter -> (Maybe) Vote.
-       **/
-      votes: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<Option<SocietyVote>>, [AccountId, AccountId]>;
-      /**
-       * Members currently vouching or banned from vouching again
-       **/
-      vouching: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<VouchingStatus>>, [AccountId]>;
+      sessions: AugmentedQuery<ApiType, (arg: SessionIndex | AnyNumber | Uint8Array) => Observable<Option<SessionInfo>>, [SessionIndex]>;
     };
-    staking: {
+    shared: {
       /**
-       * The active era information, it holds index and start.
-       * 
-       * The active era is the era being currently rewarded. Validator set of this era must be
-       * equal to [`SessionInterface::validators`].
+       * The current session index.
        **/
-      activeEra: AugmentedQuery<ApiType, () => Observable<Option<ActiveEraInfo>>, []>;
-      /**
-       * Map from all locked "stash" accounts to the controller account.
-       **/
-      bonded: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<AccountId>>, [AccountId]>;
-      /**
-       * A mapping from still-bonded eras to the first session index of that era.
-       * 
-       * Must contains information for eras for the range:
-       * `[active_era - bounding_duration; active_era]`
-       **/
-      bondedEras: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[EraIndex, SessionIndex]>>>, []>;
-      /**
-       * The amount of currency given to reporters of a slash event which was
-       * canceled by extraordinary circumstances (e.g. governance).
-       **/
-      canceledSlashPayout: AugmentedQuery<ApiType, () => Observable<BalanceOf>, []>;
-      /**
-       * The current era index.
-       * 
-       * This is the latest planned era, depending on how the Session pallet queues the validator
-       * set, it might be active or not.
-       **/
-      currentEra: AugmentedQuery<ApiType, () => Observable<Option<EraIndex>>, []>;
-      /**
-       * The earliest era for which we have a pending, unapplied slash.
-       **/
-      earliestUnappliedSlash: AugmentedQuery<ApiType, () => Observable<Option<EraIndex>>, []>;
-      /**
-       * Flag to control the execution of the offchain election. When `Open(_)`, we accept
-       * solutions to be submitted.
-       **/
-      eraElectionStatus: AugmentedQuery<ApiType, () => Observable<ElectionStatus>, []>;
-      /**
-       * Rewards for the last `HISTORY_DEPTH` eras.
-       * If reward hasn't been set or has been removed then 0 reward is returned.
-       **/
-      erasRewardPoints: AugmentedQuery<ApiType, (arg: EraIndex | AnyNumber | Uint8Array) => Observable<EraRewardPoints>, [EraIndex]>;
-      /**
-       * Exposure of validator at era.
-       * 
-       * This is keyed first by the era index to allow bulk deletion and then the stash account.
-       * 
-       * Is it removed after `HISTORY_DEPTH` eras.
-       * If stakers hasn't been set or has been removed then empty exposure is returned.
-       **/
-      erasStakers: AugmentedQueryDoubleMap<ApiType, (key1: EraIndex | AnyNumber | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<Exposure>, [EraIndex, AccountId]>;
-      /**
-       * Clipped Exposure of validator at era.
-       * 
-       * This is similar to [`ErasStakers`] but number of nominators exposed is reduced to the
-       * `T::MaxNominatorRewardedPerValidator` biggest stakers.
-       * (Note: the field `total` and `own` of the exposure remains unchanged).
-       * This is used to limit the i/o cost for the nominator payout.
-       * 
-       * This is keyed fist by the era index to allow bulk deletion and then the stash account.
-       * 
-       * Is it removed after `HISTORY_DEPTH` eras.
-       * If stakers hasn't been set or has been removed then empty exposure is returned.
-       **/
-      erasStakersClipped: AugmentedQueryDoubleMap<ApiType, (key1: EraIndex | AnyNumber | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<Exposure>, [EraIndex, AccountId]>;
-      /**
-       * The session index at which the era start for the last `HISTORY_DEPTH` eras.
-       * 
-       * Note: This tracks the starting session (i.e. session index when era start being active)
-       * for the eras in `[CurrentEra - HISTORY_DEPTH, CurrentEra]`.
-       **/
-      erasStartSessionIndex: AugmentedQuery<ApiType, (arg: EraIndex | AnyNumber | Uint8Array) => Observable<Option<SessionIndex>>, [EraIndex]>;
-      /**
-       * The total amount staked for the last `HISTORY_DEPTH` eras.
-       * If total hasn't been set or has been removed then 0 stake is returned.
-       **/
-      erasTotalStake: AugmentedQuery<ApiType, (arg: EraIndex | AnyNumber | Uint8Array) => Observable<BalanceOf>, [EraIndex]>;
-      /**
-       * Similar to `ErasStakers`, this holds the preferences of validators.
-       * 
-       * This is keyed first by the era index to allow bulk deletion and then the stash account.
-       * 
-       * Is it removed after `HISTORY_DEPTH` eras.
-       **/
-      erasValidatorPrefs: AugmentedQueryDoubleMap<ApiType, (key1: EraIndex | AnyNumber | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<ValidatorPrefs>, [EraIndex, AccountId]>;
-      /**
-       * The total validator era payout for the last `HISTORY_DEPTH` eras.
-       * 
-       * Eras that haven't finished yet or has been removed doesn't have reward.
-       **/
-      erasValidatorReward: AugmentedQuery<ApiType, (arg: EraIndex | AnyNumber | Uint8Array) => Observable<Option<BalanceOf>>, [EraIndex]>;
-      /**
-       * Mode of era forcing.
-       **/
-      forceEra: AugmentedQuery<ApiType, () => Observable<Forcing>, []>;
-      /**
-       * Number of eras to keep in history.
-       * 
-       * Information is kept for eras in `[current_era - history_depth; current_era]`.
-       * 
-       * Must be more than the number of eras delayed by session otherwise. I.e. active era must
-       * always be in history. I.e. `active_era > current_era - history_depth` must be
-       * guaranteed.
-       **/
-      historyDepth: AugmentedQuery<ApiType, () => Observable<u32>, []>;
-      /**
-       * Any validators that may never be slashed or forcibly kicked. It's a Vec since they're
-       * easy to initialize and the performance hit is minimal (we expect no more than four
-       * invulnerables) and restricted to testnets.
-       **/
-      invulnerables: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>, []>;
-      /**
-       * True if the current **planned** session is final. Note that this does not take era
-       * forcing into account.
-       **/
-      isCurrentSessionFinal: AugmentedQuery<ApiType, () => Observable<bool>, []>;
-      /**
-       * Map from all (unlocked) "controller" accounts to the info regarding the staking.
-       **/
-      ledger: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<StakingLedger>>, [AccountId]>;
-      /**
-       * Minimum number of staking participants before emergency conditions are imposed.
-       **/
-      minimumValidatorCount: AugmentedQuery<ApiType, () => Observable<u32>, []>;
-      /**
-       * The map from nominator stash key to the set of stash keys of all validators to nominate.
-       **/
-      nominators: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<Nominations>>, [AccountId]>;
-      /**
-       * All slashing events on nominators, mapped by era to the highest slash value of the era.
-       **/
-      nominatorSlashInEra: AugmentedQueryDoubleMap<ApiType, (key1: EraIndex | AnyNumber | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<Option<BalanceOf>>, [EraIndex, AccountId]>;
-      /**
-       * Where the reward payment should be made. Keyed by stash.
-       **/
-      payee: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<RewardDestination>, [AccountId]>;
-      /**
-       * The next validator set. At the end of an era, if this is available (potentially from the
-       * result of an offchain worker), it is immediately used. Otherwise, the on-chain election
-       * is executed.
-       **/
-      queuedElected: AugmentedQuery<ApiType, () => Observable<Option<ElectionResult>>, []>;
-      /**
-       * The score of the current [`QueuedElected`].
-       **/
-      queuedScore: AugmentedQuery<ApiType, () => Observable<Option<ElectionScore>>, []>;
-      /**
-       * Slashing spans for stash accounts.
-       **/
-      slashingSpans: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<SlashingSpans>>, [AccountId]>;
-      /**
-       * The percentage of the slash that is distributed to reporters.
-       * 
-       * The rest of the slashed value is handled by the `Slash`.
-       **/
-      slashRewardFraction: AugmentedQuery<ApiType, () => Observable<Perbill>, []>;
-      /**
-       * Snapshot of nominators at the beginning of the current election window. This should only
-       * have a value when [`EraElectionStatus`] == `ElectionStatus::Open(_)`.
-       **/
-      snapshotNominators: AugmentedQuery<ApiType, () => Observable<Option<Vec<AccountId>>>, []>;
-      /**
-       * Snapshot of validators at the beginning of the current election window. This should only
-       * have a value when [`EraElectionStatus`] == `ElectionStatus::Open(_)`.
-       **/
-      snapshotValidators: AugmentedQuery<ApiType, () => Observable<Option<Vec<AccountId>>>, []>;
-      /**
-       * Records information about the maximum slash of a stash within a slashing span,
-       * as well as how much reward has been paid out.
-       **/
-      spanSlash: AugmentedQuery<ApiType, (arg: ITuple<[AccountId, SpanIndex]> | [AccountId | string | Uint8Array, SpanIndex | AnyNumber | Uint8Array]) => Observable<SpanRecord>, [ITuple<[AccountId, SpanIndex]>]>;
-      /**
-       * True if network has been upgraded to this version.
-       * Storage version of the pallet.
-       * 
-       * This is set to v5.0.0 for new networks.
-       **/
-      storageVersion: AugmentedQuery<ApiType, () => Observable<Releases>, []>;
-      /**
-       * All unapplied slashes that are queued for later.
-       **/
-      unappliedSlashes: AugmentedQuery<ApiType, (arg: EraIndex | AnyNumber | Uint8Array) => Observable<Vec<UnappliedSlash>>, [EraIndex]>;
-      /**
-       * The ideal number of staking participants.
-       **/
-      validatorCount: AugmentedQuery<ApiType, () => Observable<u32>, []>;
-      /**
-       * The map from (wannabe) validator stash key to the preferences of that validator.
-       **/
-      validators: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ValidatorPrefs>, [AccountId]>;
-      /**
-       * All slashing events on validators, mapped by era to the highest slash proportion
-       * and slash value of the era.
-       **/
-      validatorSlashInEra: AugmentedQueryDoubleMap<ApiType, (key1: EraIndex | AnyNumber | Uint8Array, key2: AccountId | string | Uint8Array) => Observable<Option<ITuple<[Perbill, BalanceOf]>>>, [EraIndex, AccountId]>;
-    };
-    stakingReward: {
-      point: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AccountId]> | [AssetId | AnyNumber | Uint8Array, AccountId | string | Uint8Array]) => Observable<Balance>, [ITuple<[AssetId, AccountId]>]>;
-      reward: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<Vec<RewardRecord>>, [AssetId]>;
+      currentSessionIndex: AugmentedQuery<ApiType, () => Observable<SessionIndex>, []>;
     };
     sudo: {
       /**
        * The `AccountId` of the sudo key.
        **/
       key: AugmentedQuery<ApiType, () => Observable<AccountId>, []>;
-    };
-    swap: {
-      /**
-       * Record the calculated deducted BNC bonus amount for each pool,
-       * including deducted but unclaimed amount as well as claimed amount
-       **/
-      deductedBonusAmountInPool: AugmentedQuery<ApiType, (arg: PoolId | AnyNumber | Uint8Array) => Observable<Balance>, [PoolId]>;
-      /**
-       * Pool info
-       **/
-      pools: AugmentedQuery<ApiType, (arg: PoolId | AnyNumber | Uint8Array) => Observable<PoolDetails>, [PoolId]>;
-      /**
-       * total pool tokens in pool.
-       **/
-      poolTokensInPool: AugmentedQuery<ApiType, (arg: PoolId | AnyNumber | Uint8Array) => Observable<PoolToken>, [PoolId]>;
-      /**
-       * Token balance info for pools
-       **/
-      tokenBalancesInPool: AugmentedQueryDoubleMap<ApiType, (key1: PoolId | AnyNumber | Uint8Array, key2: AssetId | AnyNumber | Uint8Array) => Observable<Balance>, [PoolId, AssetId]>;
-      /**
-       * Token weights info for pools. Weights must be normalized at the beginning.
-       * Sum of all the token weights for a pool must be 1 * WeightPrecision. Should be ensured when set up the pool.
-       **/
-      tokenWeightsInPool: AugmentedQueryDoubleMap<ApiType, (key1: PoolId | AnyNumber | Uint8Array, key2: AssetId | AnyNumber | Uint8Array) => Observable<PoolWeight>, [PoolId, AssetId]>;
-      /**
-       * Users' pool tokens in different pools
-       **/
-      userPoolTokensInPool: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: PoolId | AnyNumber | Uint8Array) => Observable<PoolToken>, [AccountId, PoolId]>;
-      /**
-       * Record user unclaimed liquidity bonus. There are two occasions that will trigger the calculation of unclaimed bonus:
-       * 1. The user adds or removes his liquidity to the pool.
-       * 2. The user claims his bonus.
-       * The value part of the map is a tuple contains (un_claimed_Bonus, last_calculation_block).
-       * "un_claimed_Bonus" shows the remaining unclaimed but calculated bonus balance.
-       * "last_calculation_block" records the block number of last time when liquidity bonus calculation is triggered.
-       **/
-      userUnclaimedBonusInPool: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: PoolId | AnyNumber | Uint8Array) => Observable<ITuple<[Balance, BlockNumber]>>, [AccountId, PoolId]>;
     };
     system: {
       /**
@@ -1007,42 +673,6 @@ declare module '@polkadot/api/types/storage' {
        **/
       upgradedToU32RefCount: AugmentedQuery<ApiType, () => Observable<bool>, []>;
     };
-    technicalCommittee: {
-      /**
-       * The current members of the collective. This is stored sorted (just by value).
-       **/
-      members: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>, []>;
-      /**
-       * The prime member that helps determine the default vote behavior in case of absentations.
-       **/
-      prime: AugmentedQuery<ApiType, () => Observable<Option<AccountId>>, []>;
-      /**
-       * Proposals so far.
-       **/
-      proposalCount: AugmentedQuery<ApiType, () => Observable<u32>, []>;
-      /**
-       * Actual proposal for a given hash, if it's current.
-       **/
-      proposalOf: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<Option<Proposal>>, [Hash]>;
-      /**
-       * The hashes of the active proposals.
-       **/
-      proposals: AugmentedQuery<ApiType, () => Observable<Vec<Hash>>, []>;
-      /**
-       * Votes on a given proposal, if it is ongoing.
-       **/
-      voting: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<Option<Votes>>, [Hash]>;
-    };
-    technicalMembership: {
-      /**
-       * The current membership, stored as an ordered Vec.
-       **/
-      members: AugmentedQuery<ApiType, () => Observable<Vec<AccountId>>, []>;
-      /**
-       * The current prime member, if one exists.
-       **/
-      prime: AugmentedQuery<ApiType, () => Observable<Option<AccountId>>, []>;
-    };
     timestamp: {
       /**
        * Did the timestamp get updated in this block?
@@ -1053,77 +683,50 @@ declare module '@polkadot/api/types/storage' {
        **/
       now: AugmentedQuery<ApiType, () => Observable<Moment>, []>;
     };
-    tips: {
-      /**
-       * Simple preimage lookup from the reason's hash to the original data. Again, has an
-       * insecure enumerable hash since the key is guaranteed to be the result of a secure hash.
-       **/
-      reasons: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<Option<Bytes>>, [Hash]>;
-      /**
-       * TipsMap that are not yet completed. Keyed by the hash of `(reason, who)` from the value.
-       * This has the insecure enumerable hash function since the key itself is already
-       * guaranteed to be a secure hash.
-       **/
-      tips: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<Option<OpenTip>>, [Hash]>;
-    };
     transactionPayment: {
       nextFeeMultiplier: AugmentedQuery<ApiType, () => Observable<Multiplier>, []>;
       storageVersion: AugmentedQuery<ApiType, () => Observable<Releases>, []>;
     };
-    treasury: {
+    ump: {
       /**
-       * Proposal indices that have been approved but not yet awarded.
+       * The ordered list of `ParaId`s that have a `RelayDispatchQueue` entry.
+       * 
+       * Invariant:
+       * - The set of items from this vector should be exactly the set of the keys in
+       * `RelayDispatchQueues` and `RelayDispatchQueueSize`.
        **/
-      approvals: AugmentedQuery<ApiType, () => Observable<Vec<ProposalIndex>>, []>;
+      needsDispatch: AugmentedQuery<ApiType, () => Observable<Vec<ParaId>>, []>;
       /**
-       * Number of proposals that have been made.
+       * This is the para that gets will get dispatched first during the next upward dispatchable queue
+       * execution round.
+       * 
+       * Invariant:
+       * - If `Some(para)`, then `para` must be present in `NeedsDispatch`.
        **/
-      proposalCount: AugmentedQuery<ApiType, () => Observable<ProposalIndex>, []>;
+      nextDispatchRoundStartWith: AugmentedQuery<ApiType, () => Observable<Option<ParaId>>, []>;
       /**
-       * Proposals that have been made.
+       * The messages waiting to be handled by the relay-chain originating from a certain parachain.
+       * 
+       * Note that some upward messages might have been already processed by the inclusion logic. E.g.
+       * channel management messages.
+       * 
+       * The messages are processed in FIFO order.
        **/
-      proposals: AugmentedQuery<ApiType, (arg: ProposalIndex | AnyNumber | Uint8Array) => Observable<Option<TreasuryProposal>>, [ProposalIndex]>;
-    };
-    vesting: {
+      relayDispatchQueues: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Vec<UpwardMessage>>, [ParaId]>;
       /**
-       * Information regarding the vesting of a given account.
+       * Size of the dispatch queues. Caches sizes of the queues in `RelayDispatchQueue`.
+       * 
+       * First item in the tuple is the count of messages and second
+       * is the total length (in bytes) of the message payloads.
+       * 
+       * Note that this is an auxilary mapping: it's possible to tell the byte size and the number of
+       * messages only looking at `RelayDispatchQueues`. This mapping is separate to avoid the cost of
+       * loading the whole message queue if only the total size and count are required.
+       * 
+       * Invariant:
+       * - The set of keys should exactly match the set of keys of `RelayDispatchQueues`.
        **/
-      vesting: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<VestingInfo>>, [AccountId]>;
-    };
-    voucher: {
-      /**
-       * How much voucher you have
-       **/
-      balancesVoucher: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Balance>, [AccountId]>;
-      /**
-       * Current remaining BNC adds all others vouchers, equaling to TotalSuppliedBNC
-       **/
-      remainingBnc: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
-      /**
-       * Total BNC in mainnet
-       **/
-      totalSuppliedBnc: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
-    };
-    vtokenMint: {
-      /**
-       * referer channels for all users
-       **/
-      allReferrerChannels: AugmentedQuery<ApiType, () => Observable<ITuple<[BTreeMap<AccountId, Balance>, Balance]>>, []>;
-      /**
-       * mint price between two tokens, vtoken => (token, mint_price)
-       **/
-      mintPrice: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<MintPrice>, [AssetId]>;
-      /**
-       * Vtoken mint pool
-       **/
-      pool: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<VtokenPool>, [AssetId]>;
-      /**
-       * collect referrer, minter => ([(referrer1, 1000), (referrer2, 2000), ...], total_point)
-       * total_point = 1000 + 2000 + ...
-       * referrer must be unique, so check it unique while a new referrer incoming.
-       * and insert the new channel to the
-       **/
-      referrerChannels: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ITuple<[AccountId, Balance]>>, Balance]>>, [AccountId]>;
+      relayDispatchQueueSize: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<ITuple<[u32, u32]>>, [ParaId]>;
     };
   }
 

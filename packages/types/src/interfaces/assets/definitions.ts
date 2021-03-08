@@ -15,6 +15,14 @@ export default {
       cost: "Balance",
       income: "Balance",
     },
+    TokenSymbol: {
+      _enum: ["BNC", "aUSD", "DOT", "vDOT", "KSM", "vKSM", "ETH", "vETH", "EOS", "vEOS", "IOST", "vIOST"],
+    },
     TokenType: { _enum: ["Native", "Stable", "Token", "VToken"] },
+    CurrencyId: {
+      _enum: {
+        Token: "TokenSymbol",
+      },
+    },
   },
 };

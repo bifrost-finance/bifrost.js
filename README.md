@@ -17,8 +17,17 @@
 
 ### 更新后端的 metadata 文件。
 
+##### 方法一：无正在运行的节点时：
+
 1. 在本地跑起来一条链。
 2. 在 bifrost.js 工程根目录下，输入命令行：yarn update-metadata 。 则 packages/bypes/bifrost.json 文件会根据本地跑的链，进行相应的更新。
+
+##### 方法二：有正在运行的节点时：
+
+用下面的代码直接获取新的 metadata 文件：
+curl -H "Content-Type: application/json" -d '{"id":"1", "jsonrpc":"2.0", "method": "state_getMetadata", "params":[]}' http://bifrost-rpc.testnet.liebi.com:9933 > bifrost.json
+
+### 必要时，需升级 polkadot.js 版本，与后端版本同步。
 
 ## 包的上传操作
 

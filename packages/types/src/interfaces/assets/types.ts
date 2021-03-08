@@ -13,6 +13,12 @@ export interface AccountAsset extends Struct {
   readonly income: Balance;
 }
 
+/** @name CurrencyId */
+export interface CurrencyId extends Enum {
+  readonly isToken: boolean;
+  readonly asToken: TokenSymbol;
+}
+
 /** @name Price */
 export interface Price extends u64 {}
 
@@ -23,6 +29,22 @@ export interface Token extends Struct {
   readonly total_supply: Balance;
   readonly token_type: TokenType;
   readonly pair: Option<AssetId>;
+}
+
+/** @name TokenSymbol */
+export interface TokenSymbol extends Enum {
+  readonly isBnc: boolean;
+  readonly isAUsd: boolean;
+  readonly isDot: boolean;
+  readonly isVDot: boolean;
+  readonly isKsm: boolean;
+  readonly isVKsm: boolean;
+  readonly isEth: boolean;
+  readonly isVEth: boolean;
+  readonly isEos: boolean;
+  readonly isVEos: boolean;
+  readonly isIost: boolean;
+  readonly isVIost: boolean;
 }
 
 /** @name TokenType */

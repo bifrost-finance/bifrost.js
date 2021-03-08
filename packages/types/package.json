@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/types",
-  "version": "1.0.92",
+  "version": "1.0.93",
   "description": "Bifrost JS types",
   "keywords": [
     "Polkadot",
@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/types#readme",
   "devDependencies": {
-    "@polkadot/api": "^3.6.4",
-    "@polkadot/typegen": "^3.6.4",
-    "@polkadot/types": "^3.6.4",
+    "@polkadot/api": "^4.0.1",
+    "@polkadot/typegen": "^4.0.1",
+    "@polkadot/types": "^4.0.1",
     "@types/websocket": "^1.0.0",
     "ts-node": "^8.6.2",
     "typescript": "^4.0.5",
