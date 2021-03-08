@@ -25,7 +25,8 @@
 ##### 方法二：有正在运行的节点时：
 
 用下面的代码直接获取新的 metadata 文件：
-curl -H "Content-Type: application/json" -d '{"id":"1", "jsonrpc":"2.0", "method": "state_getMetadata", "params":[]}' http://bifrost-rpc.testnet.liebi.com:9933 > bifrost.json
+curl -H "Content-Type: application/json" -d '{"id":"1", "jsonrpc":"2.0", "method": "state_getMetadata", "params":[]}' http://ssss.sss.com:9922 > bifrost.json
+其中，http://ssss.sss.com:9922 修改成节点地址及端口
 
 ### 必要时，需升级 polkadot.js 版本，与后端版本同步。
 
