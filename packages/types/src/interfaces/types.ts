@@ -9,3 +9,5 @@ export * from './chainlink/types';
 export * from './proxyValidator/types';
 export * from './swap/types';
 export * from './vtokenMint/types';
+export * from './chargeTransactionFee/types';
+export * from './ZenlinkDEXModule/types';

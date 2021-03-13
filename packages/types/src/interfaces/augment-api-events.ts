@@ -1,13 +1,13 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Vec, bool } from '@polkadot/types';
+import type { Bytes, Vec, bool, u32 } from '@polkadot/types';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
 import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
 import type { AuthorityList } from '@polkadot/types/interfaces/grandpa';
 import type { Kind, OpaqueTimeSlot } from '@polkadot/types/interfaces/offences';
-import type { CandidateReceipt, CoreIndex, GroupIndex, HeadData, ParaId } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIndex, Balance, ValidatorId } from '@polkadot/types/interfaces/runtime';
+import type { CandidateReceipt, CoreIndex, GroupIndex, HeadData, HrmpChannelId, ParaId } from '@polkadot/types/interfaces/parachains';
+import type { AccountId, AccountIndex, Balance, Hash, ValidatorId } from '@polkadot/types/interfaces/runtime';
 import type { IdentificationTuple, SessionIndex } from '@polkadot/types/interfaces/session';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
 import type { ApiTypes } from '@polkadot/api/types';
@@ -64,6 +64,21 @@ declare module '@polkadot/api/types/events' {
        * Current authority set has been resumed.
        **/
       Resumed: AugmentedEvent<ApiType, []>;
+    };
+    hrmp: {
+      /**
+       * HRMP channel closed. \[by_parachain, channel_id\]
+       **/
+      ChannelClosed: AugmentedEvent<ApiType, [ParaId, HrmpChannelId]>;
+      /**
+       * Open HRMP channel accepted. \[sender, recipient\]
+       **/
+      OpenChannelAccepted: AugmentedEvent<ApiType, [ParaId, ParaId]>;
+      /**
+       * Open HRMP channel requested.
+       * \[sender, recipient, proposed_max_capacity, proposed_max_message_size\]
+       **/
+      OpenChannelRequested: AugmentedEvent<ApiType, [ParaId, ParaId, u32, u32]>;
     };
     imOnline: {
       /**
@@ -176,6 +191,10 @@ declare module '@polkadot/api/types/events' {
        * A new \[account\] was created.
        **/
       NewAccount: AugmentedEvent<ApiType, [AccountId]>;
+      /**
+       * On on-chain remark happened. \[origin, remark_hash\]
+       **/
+      Remarked: AugmentedEvent<ApiType, [AccountId, Hash]>;
     };
   }
 

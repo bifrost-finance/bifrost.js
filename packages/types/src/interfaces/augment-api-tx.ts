@@ -3,7 +3,7 @@
 
 import type { Bytes, Compact, Option, Vec, bool, u32, u64 } from '@polkadot/types';
 import type { AnyNumber } from '@polkadot/types/types';
-import type { BabeEquivocationProof } from '@polkadot/types/interfaces/babe';
+import type { BabeEquivocationProof, NextConfigDescriptor } from '@polkadot/types/interfaces/babe';
 import type { Extrinsic, Signature } from '@polkadot/types/interfaces/extrinsics';
 import type { GrandpaEquivocationProof, KeyOwnerProof } from '@polkadot/types/interfaces/grandpa';
 import type { Heartbeat } from '@polkadot/types/interfaces/imOnline';
@@ -22,6 +22,13 @@ declare module '@polkadot/api/types/submittable' {
       setUncles: AugmentedSubmittable<(newUncles: Vec<Header> | (Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<Header>]>;
     };
     babe: {
+      /**
+       * Plan an epoch config change. The epoch config change is recorded and will be enacted on
+       * the next call to `enact_epoch_change`. The config will be activated one epoch after.
+       * Multiple calls to this method will replace any existing planned config change that had
+       * not been enacted yet.
+       **/
+      planConfigChange: AugmentedSubmittable<(config: NextConfigDescriptor | { V0: any } | { V1: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [NextConfigDescriptor]>;
       /**
        * Report authority equivocation/misbehavior. This method will verify
        * the equivocation proof and validate the given key ownership proof
@@ -402,6 +409,10 @@ declare module '@polkadot/api/types/submittable' {
        **/
       setMaxUpwardQueueSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
       /**
+       * Set the maximum number of validators to use in parachain consensus.
+       **/
+      setMaxValidators: AugmentedSubmittable<(updated: Option<u32> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<u32>]>;
+      /**
        * Set the maximum number of validators to assign to any core.
        **/
       setMaxValidatorsPerCore: AugmentedSubmittable<(updated: Option<u32> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<u32>]>;
@@ -668,11 +679,18 @@ declare module '@polkadot/api/types/submittable' {
        * 
        * # <weight>
        * - `O(1)`
-       * - Base Weight: 0.665 µs, independent of remark length.
-       * - No DB operations.
        * # </weight>
        **/
       remark: AugmentedSubmittable<(remark: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes]>;
+      /**
+       * Make some on-chain remark and emit event.
+       * 
+       * # <weight>
+       * - `O(b)` where b is the length of the remark.
+       * - 1 event.
+       * # </weight>
+       **/
+      remarkWithEvent: AugmentedSubmittable<(remark: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes]>;
       /**
        * Set the new changes trie configuration.
        * 

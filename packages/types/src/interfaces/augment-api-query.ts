@@ -299,10 +299,6 @@ declare module '@polkadot/api/types/storage' {
        * The commitments of candidates pending availability, by ParaId.
        **/
       pendingAvailabilityCommitments: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<CandidateCommitments>>, [ParaId]>;
-      /**
-       * The current validators, by their parachain session keys.
-       **/
-      validators: AugmentedQuery<ApiType, () => Observable<Vec<ValidatorId>>, []>;
     };
     inclusionInherent: {
       /**
@@ -526,7 +522,9 @@ declare module '@polkadot/api/types/storage' {
        **/
       sessionStartBlock: AugmentedQuery<ApiType, () => Observable<BlockNumber>, []>;
       /**
-       * All the validator groups. One for each core.
+       * All the validator groups. One for each core. Indices are into `ActiveValidators` - not the
+       * broader set of Polkadot validators, but instead just the subset used for parachains during
+       * this session.
        * 
        * Bound: The number of cores is the sum of the numbers of parachains and parathread multiplexers.
        * Reasonably, 100-1000. The dominant factor is the number of validators: safe upper bound at 10k.
@@ -586,6 +584,16 @@ declare module '@polkadot/api/types/storage' {
       sessions: AugmentedQuery<ApiType, (arg: SessionIndex | AnyNumber | Uint8Array) => Observable<Option<SessionInfo>>, [SessionIndex]>;
     };
     shared: {
+      /**
+       * All the validators actively participating in parachain consensus.
+       * Indices are into the broader validator set.
+       **/
+      activeValidatorIndices: AugmentedQuery<ApiType, () => Observable<Vec<ValidatorIndex>>, []>;
+      /**
+       * The parachain attestation keys of the validators actively participating in parachain consensus.
+       * This should be the same length as `ActiveValidatorIndices`.
+       **/
+      activeValidatorKeys: AugmentedQuery<ApiType, () => Observable<Vec<ValidatorId>>, []>;
       /**
        * The current session index.
        **/
@@ -664,10 +672,10 @@ declare module '@polkadot/api/types/storage' {
        **/
       parentHash: AugmentedQuery<ApiType, () => Observable<Hash>, []>;
       /**
-       * True if we have upgraded so that AccountInfo contains two types of `RefCount`. False
+       * True if we have upgraded so that AccountInfo contains three types of `RefCount`. False
        * (default) if not.
        **/
-      upgradedToDualRefCount: AugmentedQuery<ApiType, () => Observable<bool>, []>;
+      upgradedToTripleRefCount: AugmentedQuery<ApiType, () => Observable<bool>, []>;
       /**
        * True if we have upgraded so that `type RefCount` is `u32`. False (default) if not.
        **/
