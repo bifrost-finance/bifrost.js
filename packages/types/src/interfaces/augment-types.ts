@@ -2,13 +2,11 @@
 /* eslint-disable */
 
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
-import type { Pair, PairId, PairInfo, TokenBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
 import type { AccountAsset, CurrencyId, Price, Token, TokenSymbol, TokenType } from '@bifrost-finance/types/interfaces/assets';
 import type { BiddingOrderId, BiddingOrderUnit, BiddingOrderUnitOf, EraId, RewardRecord } from '@bifrost-finance/types/interfaces/bid';
 import type { AccountName, Action, ActionName, ActionReceipt, BlockHeader, BlockSigningAuthority, BlockSigningAuthorityV0, BlockTimestamp, BlockchainType, BridgeAssetSymbol, Checksum256, Checksum256Array, Extension, Failed, FlatMap, IncrementalMerkle, KeyWeight, MultiSig, MultiSigTx, PermissionLevel, PermissionName, Precision, ProducerAuthority, ProducerAuthoritySchedule, ProducerKey, ProducerSchedule, PublicKey, Sent, SignedBlockHeader, Succeeded, TransactionStatus, TxOut, TxSig, UnsignedInt, VersionId, bridgeEosSignature } from '@bifrost-finance/types/interfaces/bridgeEos';
 import type { IostAction, IostMultiSigTx, IostTxOut, Processing } from '@bifrost-finance/types/interfaces/bridgeIost';
 import type { DataVersion, RequestIdentifier, SpecIndex } from '@bifrost-finance/types/interfaces/chainlink';
-import type { PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { AssetConfig, ProxyValidatorRegister } from '@bifrost-finance/types/interfaces/proxyValidator';
 import type { PoolCreateTokenDetails, PoolDetails, PoolId, PoolToken, PoolWeight, SwapFee } from '@bifrost-finance/types/interfaces/swap';
 import type { CurrencyIdOf, MintPrice, VtokenMintPrice, VtokenPool } from '@bifrost-finance/types/interfaces/vtokenMint';
@@ -106,8 +104,6 @@ declare module '@polkadot/types/types/registry' {
     'Compact<MomentOf>': Compact<MomentOf>;
     'Compact<NominatorIndex>': Compact<NominatorIndex>;
     'Compact<OffchainAccuracy>': Compact<OffchainAccuracy>;
-    'Compact<PairId>': Compact<PairId>;
-    'Compact<PalletBalanceOf>': Compact<PalletBalanceOf>;
     'Compact<ParaId>': Compact<ParaId>;
     'Compact<ParaValidatorIndex>': Compact<ParaValidatorIndex>;
     'Compact<Perbill>': Compact<Perbill>;
@@ -144,7 +140,6 @@ declare module '@polkadot/types/types/registry' {
     'Compact<StrikeCount>': Compact<StrikeCount>;
     'Compact<SubId>': Compact<SubId>;
     'Compact<SwapFee>': Compact<SwapFee>;
-    'Compact<TokenBalance>': Compact<TokenBalance>;
     'Compact<TransactionPriority>': Compact<TransactionPriority>;
     'Compact<u128>': Compact<u128>;
     'Compact<U128>': Compact<U128>;
@@ -646,10 +641,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<OriginKind>': Option<OriginKind>;
     'Option<OutboundHrmpMessage>': Option<OutboundHrmpMessage>;
     'Option<Owner>': Option<Owner>;
-    'Option<Pair>': Option<Pair>;
-    'Option<PairId>': Option<PairId>;
-    'Option<PairInfo>': Option<PairInfo>;
-    'Option<PalletBalanceOf>': Option<PalletBalanceOf>;
     'Option<PalletsOrigin>': Option<PalletsOrigin>;
     'Option<PalletVersion>': Option<PalletVersion>;
     'Option<ParachainDispatchOrigin>': Option<ParachainDispatchOrigin>;
@@ -891,7 +882,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<Text>': Option<Text>;
     'Option<Timepoint>': Option<Timepoint>;
     'Option<Token>': Option<Token>;
-    'Option<TokenBalance>': Option<TokenBalance>;
     'Option<TokenSymbol>': Option<TokenSymbol>;
     'Option<TokenType>': Option<TokenType>;
     'Option<TombstoneContractInfo>': Option<TombstoneContractInfo>;
@@ -981,7 +971,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<Xcm>': Option<Xcm>;
     'Option<XcmError>': Option<XcmError>;
     'Option<XcmResult>': Option<XcmResult>;
-    'Option<ZenlinkAssetId>': Option<ZenlinkAssetId>;
     'Vec<AbridgedCandidateReceipt>': Vec<AbridgedCandidateReceipt>;
     'Vec<AbridgedHostConfiguration>': Vec<AbridgedHostConfiguration>;
     'Vec<AbridgedHrmpChannel>': Vec<AbridgedHrmpChannel>;
@@ -1459,10 +1448,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<OriginKind>': Vec<OriginKind>;
     'Vec<OutboundHrmpMessage>': Vec<OutboundHrmpMessage>;
     'Vec<Owner>': Vec<Owner>;
-    'Vec<Pair>': Vec<Pair>;
-    'Vec<PairId>': Vec<PairId>;
-    'Vec<PairInfo>': Vec<PairInfo>;
-    'Vec<PalletBalanceOf>': Vec<PalletBalanceOf>;
     'Vec<PalletsOrigin>': Vec<PalletsOrigin>;
     'Vec<PalletVersion>': Vec<PalletVersion>;
     'Vec<ParachainDispatchOrigin>': Vec<ParachainDispatchOrigin>;
@@ -1704,7 +1689,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Text>': Vec<Text>;
     'Vec<Timepoint>': Vec<Timepoint>;
     'Vec<Token>': Vec<Token>;
-    'Vec<TokenBalance>': Vec<TokenBalance>;
     'Vec<TokenSymbol>': Vec<TokenSymbol>;
     'Vec<TokenType>': Vec<TokenType>;
     'Vec<TombstoneContractInfo>': Vec<TombstoneContractInfo>;
@@ -1794,7 +1778,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Xcm>': Vec<Xcm>;
     'Vec<XcmError>': Vec<XcmError>;
     'Vec<XcmResult>': Vec<XcmResult>;
-    'Vec<ZenlinkAssetId>': Vec<ZenlinkAssetId>;
     AbridgedCandidateReceipt: AbridgedCandidateReceipt;
     AbridgedHostConfiguration: AbridgedHostConfiguration;
     AbridgedHrmpChannel: AbridgedHrmpChannel;
@@ -2272,10 +2255,6 @@ declare module '@polkadot/types/types/registry' {
     OriginKind: OriginKind;
     OutboundHrmpMessage: OutboundHrmpMessage;
     Owner: Owner;
-    Pair: Pair;
-    PairId: PairId;
-    PairInfo: PairInfo;
-    PalletBalanceOf: PalletBalanceOf;
     PalletsOrigin: PalletsOrigin;
     PalletVersion: PalletVersion;
     ParachainDispatchOrigin: ParachainDispatchOrigin;
@@ -2517,7 +2496,6 @@ declare module '@polkadot/types/types/registry' {
     Text: Text;
     Timepoint: Timepoint;
     Token: Token;
-    TokenBalance: TokenBalance;
     TokenSymbol: TokenSymbol;
     TokenType: TokenType;
     TombstoneContractInfo: TombstoneContractInfo;
@@ -2607,6 +2585,5 @@ declare module '@polkadot/types/types/registry' {
     Xcm: Xcm;
     XcmError: XcmError;
     XcmResult: XcmResult;
-    ZenlinkAssetId: ZenlinkAssetId;
   }
 }
