@@ -1,19 +1,32 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Vec, bool, u32 } from '@polkadot/types';
+import type { Bytes, Option, Vec, u32 } from '@polkadot/types';
+import type { TokenBalance } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
+import type { AmountOf, CurrencyId, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { TAssetBalance } from '@polkadot/types/interfaces/assets';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
-import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
-import type { AuthorityList } from '@polkadot/types/interfaces/grandpa';
-import type { Kind, OpaqueTimeSlot } from '@polkadot/types/interfaces/offences';
-import type { CandidateReceipt, CoreIndex, GroupIndex, HeadData, HrmpChannelId, ParaId } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIndex, Balance, Hash, ValidatorId } from '@polkadot/types/interfaces/runtime';
-import type { IdentificationTuple, SessionIndex } from '@polkadot/types/interfaces/session';
+import type { NetworkId, ParaId, RelayChainBlockNumber, XcmError } from '@polkadot/types/interfaces/parachains';
+import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash } from '@polkadot/types/interfaces/runtime';
+import type { TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
 import type { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/events' {
   export interface AugmentedEvents<ApiType> {
+    assets: {
+      /**
+       * An account was removed whose balance was non-zero but below
+       * ExistentialDeposit, resulting in an outright loss. \[account,
+       * currency_id, amount\]
+       **/
+      DustLost: AugmentedEvent<ApiType, [AccountId, CurrencyId, TAssetBalance]>;
+      /**
+       * Token transfer success. \[currency_id, from, to, amount\]
+       **/
+      Transferred: AugmentedEvent<ApiType, [CurrencyId, AccountId, AccountId, TAssetBalance]>;
+    };
     balances: {
       /**
        * A balance was set by root. \[who, free, reserved\]
@@ -51,62 +64,33 @@ declare module '@polkadot/api/types/events' {
        **/
       Unreserved: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
-    grandpa: {
+    brmlAssets: {
       /**
-       * New authority set has been applied. \[authority_set\]
+       * Token burn success, \[currency_id, dest, amount\]
        **/
-      NewAuthorities: AugmentedEvent<ApiType, [AuthorityList]>;
+      Burned: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
       /**
-       * Current authority set has been paused.
+       * Token issue success, \[currency_id, dest, amount\]
        **/
-      Paused: AugmentedEvent<ApiType, []>;
-      /**
-       * Current authority set has been resumed.
-       **/
-      Resumed: AugmentedEvent<ApiType, []>;
+      Issued: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
     };
-    hrmp: {
+    currencies: {
       /**
-       * HRMP channel closed. \[by_parachain, channel_id\]
+       * Update balance success. [currency_id, who, amount]
        **/
-      ChannelClosed: AugmentedEvent<ApiType, [ParaId, HrmpChannelId]>;
+      BalanceUpdated: AugmentedEvent<ApiType, [CurrencyIdOf, AccountId, AmountOf]>;
       /**
-       * Open HRMP channel accepted. \[sender, recipient\]
+       * Deposit success. [currency_id, who, amount]
        **/
-      OpenChannelAccepted: AugmentedEvent<ApiType, [ParaId, ParaId]>;
+      Deposited: AugmentedEvent<ApiType, [CurrencyIdOf, AccountId, BalanceOf]>;
       /**
-       * Open HRMP channel requested.
-       * \[sender, recipient, proposed_max_capacity, proposed_max_message_size\]
+       * Currency transfer success. [currency_id, from, to, amount]
        **/
-      OpenChannelRequested: AugmentedEvent<ApiType, [ParaId, ParaId, u32, u32]>;
-    };
-    imOnline: {
+      Transferred: AugmentedEvent<ApiType, [CurrencyIdOf, AccountId, AccountId, BalanceOf]>;
       /**
-       * At the end of the session, no offence was committed.
+       * Withdraw success. [currency_id, who, amount]
        **/
-      AllGood: AugmentedEvent<ApiType, []>;
-      /**
-       * A new heartbeat was received from `AuthorityId` \[authority_id\]
-       **/
-      HeartbeatReceived: AugmentedEvent<ApiType, [AuthorityId]>;
-      /**
-       * At the end of the session, at least one validator was found to be \[offline\].
-       **/
-      SomeOffline: AugmentedEvent<ApiType, [Vec<IdentificationTuple>]>;
-    };
-    inclusion: {
-      /**
-       * A candidate was backed. [candidate, head_data]
-       **/
-      CandidateBacked: AugmentedEvent<ApiType, [CandidateReceipt, HeadData, CoreIndex, GroupIndex]>;
-      /**
-       * A candidate was included. [candidate, head_data]
-       **/
-      CandidateIncluded: AugmentedEvent<ApiType, [CandidateReceipt, HeadData, CoreIndex, GroupIndex]>;
-      /**
-       * A candidate timed out. [candidate, head_data]
-       **/
-      CandidateTimedOut: AugmentedEvent<ApiType, [CandidateReceipt, HeadData, CoreIndex]>;
+      Withdrawn: AugmentedEvent<ApiType, [CurrencyIdOf, AccountId, BalanceOf]>;
     };
     indices: {
       /**
@@ -122,39 +106,25 @@ declare module '@polkadot/api/types/events' {
        **/
       IndexFrozen: AugmentedEvent<ApiType, [AccountIndex, AccountId]>;
     };
-    offences: {
-      /**
-       * There is an offence reported of the given `kind` happened at the `session_index` and
-       * (kind-specific) time slot. This event is not deposited for duplicate slashes. last
-       * element indicates of the offence was applied (true) or queued (false)
-       * \[kind, timeslot, applied\].
-       **/
-      Offence: AugmentedEvent<ApiType, [Kind, OpaqueTimeSlot, bool]>;
+    minterReward: {
     };
-    proposeParachain: {
-      /**
-       * A parachain was approved and is scheduled for being activated.
-       **/
-      ParachainApproved: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * A parachain was proposed for registration.
-       **/
-      ParachainProposed: AugmentedEvent<ApiType, [Bytes, ParaId]>;
-      /**
-       * A parachain was registered and is now running.
-       **/
-      ParachainRegistered: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * New validators were added to the set.
-       **/
-      ValidatorsRegistered: AugmentedEvent<ApiType, [Vec<ValidatorId>]>;
+    parachainSystem: {
+      ValidationFunctionApplied: AugmentedEvent<ApiType, [RelayChainBlockNumber]>;
+      ValidationFunctionStored: AugmentedEvent<ApiType, [RelayChainBlockNumber]>;
     };
-    session: {
+    scheduler: {
       /**
-       * New session has happened. Note that the argument is the \[session_index\], not the block
-       * number as the type might suggest.
+       * Canceled some task. \[when, index\]
        **/
-      NewSession: AugmentedEvent<ApiType, [SessionIndex]>;
+      Canceled: AugmentedEvent<ApiType, [BlockNumber, u32]>;
+      /**
+       * Dispatched some task. \[task, id, result\]
+       **/
+      Dispatched: AugmentedEvent<ApiType, [TaskAddress, Option<Bytes>, DispatchResult]>;
+      /**
+       * Scheduled some task. \[when, index\]
+       **/
+      Scheduled: AugmentedEvent<ApiType, [BlockNumber, u32]>;
     };
     sudo: {
       /**
@@ -195,6 +165,138 @@ declare module '@polkadot/api/types/events' {
        * On on-chain remark happened. \[origin, remark_hash\]
        **/
       Remarked: AugmentedEvent<ApiType, [AccountId, Hash]>;
+    };
+    utility: {
+      /**
+       * Batch of dispatches completed fully with no error.
+       **/
+      BatchCompleted: AugmentedEvent<ApiType, []>;
+      /**
+       * Batch of dispatches did not complete fully. Index of first failing dispatch given, as
+       * well as the error. \[index, error\]
+       **/
+      BatchInterrupted: AugmentedEvent<ApiType, [u32, DispatchError]>;
+    };
+    voucher: {
+      DestroyedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
+      /**
+       * A event indicate user receives transaction.
+       **/
+      IssuedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
+    };
+    vtokenMint: {
+      MintedToken: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      MintedVToken: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      RedeemedPointsSuccess: AugmentedEvent<ApiType, []>;
+      UpdateRatePerBlockSuccess: AugmentedEvent<ApiType, []>;
+      UpdateVtokenPoolSuccess: AugmentedEvent<ApiType, []>;
+    };
+    xcmHandler: {
+      /**
+       * Bad XCM format used.
+       **/
+      BadFormat: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * Bad XCM version used.
+       **/
+      BadVersion: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * Some XCM failed.
+       **/
+      Fail: AugmentedEvent<ApiType, [Hash, XcmError]>;
+      /**
+       * An HRMP message was sent to a sibling parachain.
+       **/
+      HrmpMessageSent: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * Some XCM was executed ok.
+       **/
+      Success: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * An upward message was sent to the relay chain.
+       **/
+      UpwardMessageSent: AugmentedEvent<ApiType, [Hash]>;
+    };
+    xTokens: {
+      /**
+       * Transferred to parachain. \[x_currency_id, src, para_id, dest,
+       * dest_network, amount\]
+       **/
+      TransferredToParachain: AugmentedEvent<ApiType, [XCurrencyId, AccountId, ParaId, AccountId, NetworkId, Balance]>;
+      /**
+       * Transferred to relay chain. \[src, dest, amount\]
+       **/
+      TransferredToRelayChain: AugmentedEvent<ApiType, [AccountId, AccountId, Balance]>;
+      /**
+       * Transfer to parachain failed. \[x_currency_id, src, para_id, dest,
+       * dest_network, amount, error\]
+       **/
+      TransferToParachainFailed: AugmentedEvent<ApiType, [XCurrencyId, AccountId, ParaId, AccountId, NetworkId, Balance, XcmError]>;
+      /**
+       * Transfer to relay chain failed. \[src, dest, amount, error\]
+       **/
+      TransferToRelayChainFailed: AugmentedEvent<ApiType, [AccountId, AccountId, Balance, XcmError]>;
+    };
+    zenlinkProtocol: {
+      /**
+       * Some assets were burned. \[asset_id, owner, amount\]
+       **/
+      Burned: AugmentedEvent<ApiType, [AssetId, AccountId, TokenBalance]>;
+      /**
+       * An HRMP message was sent to a sibling parachainchain. \[xcm_hash\]
+       **/
+      HrmpMessageSent: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * Add liquidity. \[owner, asset_id, asset_id\]
+       **/
+      LiquidityAdded: AugmentedEvent<ApiType, [AccountId, AssetId, AssetId]>;
+      /**
+       * Remove liquidity. \[owner, receiver, asset_id, asset_id, amount\]
+       **/
+      LiquidityRemoved: AugmentedEvent<ApiType, [AccountId, AccountId, AssetId, AssetId, TokenBalance]>;
+      /**
+       * Some assets were minted. \[asset_id, owner, amount\]
+       **/
+      Minted: AugmentedEvent<ApiType, [AssetId, AccountId, TokenBalance]>;
+      /**
+       * Swap
+       * Create a trading pair. \[creator, asset_id, asset_id\]
+       **/
+      PairCreated: AugmentedEvent<ApiType, [AccountId, AssetId, AssetId]>;
+      /**
+       * Transact in trading \[owner, receiver, swap_path\]
+       **/
+      TokenSwap: AugmentedEvent<ApiType, [AccountId, AccountId, Vec<AssetId>]>;
+      /**
+       * Assets
+       * Some assets were transferred. \[asset_id, owner, target, amount\]
+       **/
+      Transferred: AugmentedEvent<ApiType, [AssetId, AccountId, AccountId, TokenBalance]>;
+      /**
+       * Xtransfer
+       * Transferred to parachain. \[asset_id, src, para_id, dest, amount\]
+       **/
+      TransferredToParachain: AugmentedEvent<ApiType, [AssetId, AccountId, ParaId, AccountId, TokenBalance]>;
+      /**
+       * An upward message was sent to the relay chain. \[xcm_hash\]
+       **/
+      UpwardMessageSent: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * Bad XCM format used. \[xcm_hash\]
+       **/
+      XcmBadFormat: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * Bad XCM version used. \[xcm_hash\]
+       **/
+      XcmBadVersion: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * Some XCM failed. \[xcm_hash, xcm_error\]
+       **/
+      XcmExecuteFail: AugmentedEvent<ApiType, [Hash, XcmError]>;
+      /**
+       * Some XCM was executed ok. \[xcm_hash\]
+       **/
+      XcmExecuteSuccess: AugmentedEvent<ApiType, [Hash]>;
     };
   }
 

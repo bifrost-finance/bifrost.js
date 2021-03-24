@@ -5,35 +5,31 @@ import type { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/errors' {
   export interface AugmentedErrors<ApiType> {
-    authorship: {
+    assets: {
       /**
-       * The uncle is genesis.
+       * Cannot convert Amount into Balance type
        **/
-      GenesisUncle: AugmentedError<ApiType>;
+      AmountIntoBalanceFailed: AugmentedError<ApiType>;
       /**
-       * The uncle parent not in the chain.
+       * This operation will cause balance to overflow
        **/
-      InvalidUncleParent: AugmentedError<ApiType>;
+      BalanceOverflow: AugmentedError<ApiType>;
       /**
-       * The uncle isn't recent enough to be included.
+       * The balance is too low
        **/
-      OldUncle: AugmentedError<ApiType>;
+      BalanceTooLow: AugmentedError<ApiType>;
       /**
-       * The uncle is too high in chain.
+       * Failed because liquidity restrictions due to locking
        **/
-      TooHighUncle: AugmentedError<ApiType>;
+      LiquidityRestrictions: AugmentedError<ApiType>;
       /**
-       * Too many uncles.
+       * Account still has active reserved
        **/
-      TooManyUncles: AugmentedError<ApiType>;
+      StillHasActiveReserved: AugmentedError<ApiType>;
       /**
-       * The uncle is already included.
+       * This operation will cause total issuance to overflow
        **/
-      UncleAlreadyIncluded: AugmentedError<ApiType>;
-      /**
-       * Uncles already set in the block.
-       **/
-      UnclesAlreadySet: AugmentedError<ApiType>;
+      TotalIssuanceOverflow: AugmentedError<ApiType>;
     };
     balances: {
       /**
@@ -69,371 +65,47 @@ declare module '@polkadot/api/types/errors' {
        **/
       VestingBalance: AugmentedError<ApiType>;
     };
-    grandpa: {
+    brmlAssets: {
       /**
-       * Attempt to signal GRANDPA change with one already pending.
+       * This operation will cause balance to overflow
        **/
-      ChangePending: AugmentedError<ApiType>;
+      BalanceOverflow: AugmentedError<ApiType>;
       /**
-       * A given equivocation report is valid but already previously reported.
+       * The balance is too low
        **/
-      DuplicateOffenceReport: AugmentedError<ApiType>;
+      BalanceTooLow: AugmentedError<ApiType>;
       /**
-       * An equivocation proof provided as part of an equivocation report is invalid.
+       * Destroy balance too much
        **/
-      InvalidEquivocationProof: AugmentedError<ApiType>;
-      /**
-       * A key ownership proof provided as part of an equivocation report is invalid.
-       **/
-      InvalidKeyOwnershipProof: AugmentedError<ApiType>;
-      /**
-       * Attempt to signal GRANDPA pause when the authority set isn't live
-       * (either paused or already pending pause).
-       **/
-      PauseFailed: AugmentedError<ApiType>;
-      /**
-       * Attempt to signal GRANDPA resume when the authority set isn't paused
-       * (either live or already pending resume).
-       **/
-      ResumeFailed: AugmentedError<ApiType>;
-      /**
-       * Cannot signal forced change so soon after last.
-       **/
-      TooSoon: AugmentedError<ApiType>;
+      BurnTooMuch: AugmentedError<ApiType>;
     };
-    hrmp: {
+    currencies: {
       /**
-       * The channel is already confirmed.
+       * Unable to convert the Amount type into Balance.
        **/
-      AcceptHrmpChannelAlreadyConfirmed: AugmentedError<ApiType>;
+      AmountIntoBalanceFailed: AugmentedError<ApiType>;
       /**
-       * The channel from the sender to the origin doesn't exist.
+       * Balance is too low.
        **/
-      AcceptHrmpChannelDoesntExist: AugmentedError<ApiType>;
-      /**
-       * The recipient already has the maximum number of allowed inbound channels.
-       **/
-      AcceptHrmpChannelLimitExceeded: AugmentedError<ApiType>;
-      /**
-       * The channel close request is already requested.
-       **/
-      CloseHrmpChannelAlreadyUnderway: AugmentedError<ApiType>;
-      /**
-       * The channel to be closed doesn't exist.
-       **/
-      CloseHrmpChannelDoesntExist: AugmentedError<ApiType>;
-      /**
-       * The origin tries to close a channel where it is neither the sender nor the recipient.
-       **/
-      CloseHrmpChannelUnauthorized: AugmentedError<ApiType>;
-      /**
-       * The channel already exists
-       **/
-      OpenHrmpChannelAlreadyExists: AugmentedError<ApiType>;
-      /**
-       * There is already a request to open the same channel.
-       **/
-      OpenHrmpChannelAlreadyRequested: AugmentedError<ApiType>;
-      /**
-       * The requested capacity exceeds the global limit.
-       **/
-      OpenHrmpChannelCapacityExceedsLimit: AugmentedError<ApiType>;
-      /**
-       * The recipient is not a valid para.
-       **/
-      OpenHrmpChannelInvalidRecipient: AugmentedError<ApiType>;
-      /**
-       * The sender already has the maximum number of allowed outbound channels.
-       **/
-      OpenHrmpChannelLimitExceeded: AugmentedError<ApiType>;
-      /**
-       * The open request requested the message size that exceeds the global limit.
-       **/
-      OpenHrmpChannelMessageSizeExceedsLimit: AugmentedError<ApiType>;
-      /**
-       * The sender tried to open a channel to themselves.
-       **/
-      OpenHrmpChannelToSelf: AugmentedError<ApiType>;
-      /**
-       * The requested capacity is zero.
-       **/
-      OpenHrmpChannelZeroCapacity: AugmentedError<ApiType>;
-      /**
-       * The requested maximum message size is 0.
-       **/
-      OpenHrmpChannelZeroMessageSize: AugmentedError<ApiType>;
+      BalanceTooLow: AugmentedError<ApiType>;
     };
-    imOnline: {
+    scheduler: {
       /**
-       * Duplicated heartbeat.
+       * Failed to schedule a call
        **/
-      DuplicatedHeartbeat: AugmentedError<ApiType>;
+      FailedToSchedule: AugmentedError<ApiType>;
       /**
-       * Non existent public key.
+       * Cannot find the scheduled call.
        **/
-      InvalidKey: AugmentedError<ApiType>;
-    };
-    inclusion: {
+      NotFound: AugmentedError<ApiType>;
       /**
-       * Multiple bitfields submitted by same validator or validators out of order by index.
+       * Reschedule failed because it does not change scheduled time.
        **/
-      BitfieldDuplicateOrUnordered: AugmentedError<ApiType>;
+      RescheduleNoChange: AugmentedError<ApiType>;
       /**
-       * Candidate not in parent context.
+       * Given target block number is in the past.
        **/
-      CandidateNotInParentContext: AugmentedError<ApiType>;
-      /**
-       * Candidate scheduled despite pending candidate already existing for the para.
-       **/
-      CandidateScheduledBeforeParaFree: AugmentedError<ApiType>;
-      /**
-       * Head data exceeds the configured maximum.
-       **/
-      HeadDataTooLarge: AugmentedError<ApiType>;
-      /**
-       * The candidate didn't follow the rules of HRMP watermark advancement.
-       **/
-      HrmpWatermarkMishandling: AugmentedError<ApiType>;
-      /**
-       * The downward message queue is not processed correctly.
-       **/
-      IncorrectDownwardMessageHandling: AugmentedError<ApiType>;
-      /**
-       * Insufficient (non-majority) backing.
-       **/
-      InsufficientBacking: AugmentedError<ApiType>;
-      /**
-       * Internal error only returned when compiled with debug assertions.
-       **/
-      InternalError: AugmentedError<ApiType>;
-      /**
-       * Invalid (bad signature, unknown validator, etc.) backing.
-       **/
-      InvalidBacking: AugmentedError<ApiType>;
-      /**
-       * Invalid signature
-       **/
-      InvalidBitfieldSignature: AugmentedError<ApiType>;
-      /**
-       * Invalid group index in core assignment.
-       **/
-      InvalidGroupIndex: AugmentedError<ApiType>;
-      /**
-       * The HRMP messages sent by the candidate is not valid.
-       **/
-      InvalidOutboundHrmp: AugmentedError<ApiType>;
-      /**
-       * At least one upward message sent does not pass the acceptance criteria.
-       **/
-      InvalidUpwardMessages: AugmentedError<ApiType>;
-      /**
-       * Output code is too large
-       **/
-      NewCodeTooLarge: AugmentedError<ApiType>;
-      /**
-       * Collator did not sign PoV.
-       **/
-      NotCollatorSigned: AugmentedError<ApiType>;
-      /**
-       * Code upgrade prematurely.
-       **/
-      PrematureCodeUpgrade: AugmentedError<ApiType>;
-      /**
-       * Scheduled cores out of order.
-       **/
-      ScheduledOutOfOrder: AugmentedError<ApiType>;
-      /**
-       * The bitfield contains a bit relating to an unassigned availability core.
-       **/
-      UnoccupiedBitInBitfield: AugmentedError<ApiType>;
-      /**
-       * Candidate submitted but para not scheduled.
-       **/
-      UnscheduledCandidate: AugmentedError<ApiType>;
-      /**
-       * The validation data hash does not match expected.
-       **/
-      ValidationDataHashMismatch: AugmentedError<ApiType>;
-      /**
-       * Validator index out of bounds.
-       **/
-      ValidatorIndexOutOfBounds: AugmentedError<ApiType>;
-      /**
-       * Availability bitfield has unexpected size.
-       **/
-      WrongBitfieldSize: AugmentedError<ApiType>;
-      /**
-       * Candidate included with the wrong collator.
-       **/
-      WrongCollator: AugmentedError<ApiType>;
-    };
-    inclusionInherent: {
-      /**
-       * The hash of the submitted parent header doesn't correspond to the saved block hash of
-       * the parent.
-       **/
-      InvalidParentHeader: AugmentedError<ApiType>;
-      /**
-       * Inclusion inherent called more than once per block.
-       **/
-      TooManyInclusionInherents: AugmentedError<ApiType>;
-    };
-    parachainsConfiguration: {
-      /**
-       * The new value for a configuration parameter is invalid.
-       **/
-      InvalidNewValue: AugmentedError<ApiType>;
-    };
-    paras: {
-      /**
-       * Para cannot be downgraded to a parathread.
-       **/
-      CannotDowngrade: AugmentedError<ApiType>;
-      /**
-       * Para cannot be offboarded at this time.
-       **/
-      CannotOffboard: AugmentedError<ApiType>;
-      /**
-       * Para cannot be onboarded because it is already tracked by our system.
-       **/
-      CannotOnboard: AugmentedError<ApiType>;
-      /**
-       * Para cannot be upgraded to a parachain.
-       **/
-      CannotUpgrade: AugmentedError<ApiType>;
-      /**
-       * Para is not registered in our system.
-       **/
-      NotRegistered: AugmentedError<ApiType>;
-    };
-    parasSudoWrapper: {
-      /**
-       * Could not schedule para cleanup.
-       **/
-      CouldntCleanup: AugmentedError<ApiType>;
-      /**
-       * The validation code provided doesn't start with the Wasm file magic string.
-       **/
-      DefinitelyNotWasm: AugmentedError<ApiType>;
-      /**
-       * A DMP message couldn't be sent because it exceeds the maximum size allowed for a downward
-       * message.
-       **/
-      ExceedsMaxMessageSize: AugmentedError<ApiType>;
-      /**
-       * The specified parachain or parathread is already registered.
-       **/
-      ParaAlreadyExists: AugmentedError<ApiType>;
-      /**
-       * The specified parachain or parathread is not registered.
-       **/
-      ParaDoesntExist: AugmentedError<ApiType>;
-    };
-    proposeParachain: {
-      /**
-       * Registration requires at least one validator.
-       **/
-      AtLeastOneValidatorRequired: AugmentedError<ApiType>;
-      /**
-       * Couldn't schedule parachain cleanup.
-       **/
-      CouldntCleanup: AugmentedError<ApiType>;
-      /**
-       * The given WASM blob is definitley not valid.
-       **/
-      DefinitelyNotWasm: AugmentedError<ApiType>;
-      /**
-       * The name of the parachain is too long.
-       **/
-      NameTooLong: AugmentedError<ApiType>;
-      /**
-       * Not authorized to do a certain operation.
-       **/
-      NotAuthorized: AugmentedError<ApiType>;
-      /**
-       * Parachain is already approved for registration.
-       **/
-      ParachainAlreadyApproved: AugmentedError<ApiType>;
-      /**
-       * Parachain is already scheduled for registration.
-       **/
-      ParachainAlreadyScheduled: AugmentedError<ApiType>;
-      /**
-       * The requested parachain id is already proposed for another parachain.
-       **/
-      ParachainIdAlreadyProposed: AugmentedError<ApiType>;
-      /**
-       * The requested parachain id is already registered.
-       **/
-      ParachainIdAlreadyTaken: AugmentedError<ApiType>;
-      /**
-       * No information about the registered parachain found.
-       **/
-      ParachainInfoNotFound: AugmentedError<ApiType>;
-      /**
-       * Could not find the parachain proposal.
-       **/
-      ProposalNotFound: AugmentedError<ApiType>;
-      /**
-       * A validator is already registered in the active validator set.
-       **/
-      ValidatorAlreadyRegistered: AugmentedError<ApiType>;
-    };
-    registrar: {
-      /**
-       * Cannot deregister para
-       **/
-      CannotDeregister: AugmentedError<ApiType>;
-      /**
-       * Invalid para code size.
-       **/
-      CodeTooLarge: AugmentedError<ApiType>;
-      /**
-       * The validation code provided doesn't start with the Wasm file magic string.
-       **/
-      DefinitelyNotWasm: AugmentedError<ApiType>;
-      /**
-       * Invalid para head data size.
-       **/
-      HeadDataTooLarge: AugmentedError<ApiType>;
-      /**
-       * Invalid parachain ID.
-       **/
-      InvalidChainId: AugmentedError<ApiType>;
-      /**
-       * Invalid parathread ID.
-       **/
-      InvalidThreadId: AugmentedError<ApiType>;
-      /**
-       * Parachain already exists.
-       **/
-      ParaAlreadyExists: AugmentedError<ApiType>;
-      /**
-       * Parathreads registration is disabled.
-       **/
-      ParathreadsRegistrationDisabled: AugmentedError<ApiType>;
-    };
-    session: {
-      /**
-       * Registered duplicate key.
-       **/
-      DuplicatedKey: AugmentedError<ApiType>;
-      /**
-       * Invalid ownership proof.
-       **/
-      InvalidProof: AugmentedError<ApiType>;
-      /**
-       * Key setting account is not live, so it's impossible to associate keys.
-       **/
-      NoAccount: AugmentedError<ApiType>;
-      /**
-       * No associated validator ID for account.
-       **/
-      NoAssociatedValidatorId: AugmentedError<ApiType>;
-      /**
-       * No keys are associated with this account.
-       **/
-      NoKeys: AugmentedError<ApiType>;
+      TargetBlockNumberInPast: AugmentedError<ApiType>;
     };
     sudo: {
       /**
@@ -466,6 +138,134 @@ declare module '@polkadot/api/types/errors' {
        * and the new runtime.
        **/
       SpecVersionNeedsToIncrease: AugmentedError<ApiType>;
+    };
+    voucher: {
+      /**
+       * Transferring too big balance
+       **/
+      TransferringTooBigBalance: AugmentedError<ApiType>;
+    };
+    vtokenMint: {
+      /**
+       * Account balance must be greater than or equal to the transfer amount.
+       **/
+      BalanceLow: AugmentedError<ApiType>;
+      /**
+       * Balance should be non-zero.
+       **/
+      BalanceZero: AugmentedError<ApiType>;
+      /**
+       * Empty vtoken pool, cause there's no price at all.
+       **/
+      EmptyVtokenPool: AugmentedError<ApiType>;
+      /**
+       * The amount of token you want to mint is bigger than the vtoken pool.
+       **/
+      NotEnoughVtokenPool: AugmentedError<ApiType>;
+      /**
+       * Token type not support.
+       **/
+      NotSupportTokenType: AugmentedError<ApiType>;
+      /**
+       * User's token still under staking while he want to redeem.
+       **/
+      UnderStaking: AugmentedError<ApiType>;
+    };
+    xTokens: {
+      /**
+       * Bad location.
+       **/
+      BadLocation: AugmentedError<ApiType>;
+    };
+    zenlinkProtocol: {
+      /**
+       * Location given was invalid or unsupported.
+       **/
+      AccountIdBadLocation: AugmentedError<ApiType>;
+      /**
+       * Asset has not been created.
+       **/
+      AssetNotExists: AugmentedError<ApiType>;
+      /**
+       * Transaction block number is larger than the end block number.
+       **/
+      Deadline: AugmentedError<ApiType>;
+      /**
+       * Ensure correct parameter in cross chain add liquidity.
+       **/
+      DeniedAddLiquidityToParachain: AugmentedError<ApiType>;
+      /**
+       * Trading pair can't be created.
+       **/
+      DeniedCreatePair: AugmentedError<ApiType>;
+      /**
+       * The target chain is not in whitelist.
+       **/
+      DeniedReachTargetChain: AugmentedError<ApiType>;
+      /**
+       * Swap in local parachain by XCM message
+       **/
+      DeniedSwapInLocal: AugmentedError<ApiType>;
+      /**
+       * Transfer to self by XCM message
+       **/
+      DeniedTransferToSelf: AugmentedError<ApiType>;
+      /**
+       * Sold amount is more than exception.
+       **/
+      ExcessiveSoldAmount: AugmentedError<ApiType>;
+      /**
+       * XCM execution failed
+       **/
+      ExecutionFailed: AugmentedError<ApiType>;
+      /**
+       * Incorrect asset amount range.
+       **/
+      IncorrectAssetAmountRange: AugmentedError<ApiType>;
+      /**
+       * Account balance must be greater than or equal to the transfer amount.
+       **/
+      InsufficientAssetBalance: AugmentedError<ApiType>;
+      /**
+       * Liquidity is not enough.
+       **/
+      InsufficientLiquidity: AugmentedError<ApiType>;
+      /**
+       * Trading pair does have enough asset.
+       **/
+      InsufficientPairReserve: AugmentedError<ApiType>;
+      /**
+       * Get target amount is less than exception.
+       **/
+      InsufficientTargetAmount: AugmentedError<ApiType>;
+      /**
+       * Can't find pair though trading path.
+       **/
+      InvalidPath: AugmentedError<ApiType>;
+      /**
+       * XCM can not reach target chain, probably because of the hrmp channel is closed.
+       **/
+      MaybeHrmpChannelIsClosed: AugmentedError<ApiType>;
+      /**
+       * AssetId is native currency
+       **/
+      NotParaCurrency: AugmentedError<ApiType>;
+      /**
+       * Overflow.
+       **/
+      Overflow: AugmentedError<ApiType>;
+      /**
+       * Trading pair already exists.
+       **/
+      PairAlreadyExists: AugmentedError<ApiType>;
+      /**
+       * Trading pair does not exist.
+       **/
+      PairNotExists: AugmentedError<ApiType>;
+      /**
+       * Transfer Error
+       **/
+      TransferError: AugmentedError<ApiType>;
     };
   }
 

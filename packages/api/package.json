@@ -29,6 +29,6 @@
   "dependencies": {
     "@babel/runtime": "^7.12.5",
     "@bifrost-finance/types": "^1.0.97",
-    "@polkadot/api": "^4.0.3"
+    "@polkadot/api": "^4.2.1"
   }
 }
