@@ -1,53 +1,20 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Compact, Option, Vec, bool, u32, u64 } from '@polkadot/types';
+import type { Bytes, Compact, Option, Vec, bool, u16, u32, u64 } from '@polkadot/types';
 import type { AnyNumber } from '@polkadot/types/types';
-import type { BabeEquivocationProof, NextConfigDescriptor } from '@polkadot/types/interfaces/babe';
-import type { Extrinsic, Signature } from '@polkadot/types/interfaces/extrinsics';
-import type { GrandpaEquivocationProof, KeyOwnerProof } from '@polkadot/types/interfaces/grandpa';
-import type { Heartbeat } from '@polkadot/types/interfaces/imOnline';
-import type { BackedCandidate, HeadData, HrmpChannelId, ParaGenesisArgs, ParaId, SignedAvailabilityBitfields, ValidationCode, VersionedXcm } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIndex, Balance, BalanceOf, BlockNumber, Call, ChangesTrieConfiguration, Header, KeyValue, LookupSource, Moment, Perbill, ValidatorId, Weight } from '@polkadot/types/interfaces/runtime';
-import type { Keys, SessionIndex } from '@polkadot/types/interfaces/session';
+import type { TokenBalance } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
+import type { AmountOf, CurrencyId, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
+import type { MultiLocation, NetworkId, OutboundHrmpMessage, ParaId, ParachainInherentData, UpwardMessage, VersionedXcm, Xcm } from '@polkadot/types/interfaces/parachains';
+import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Call, ChangesTrieConfiguration, KeyValue, LookupSource, Moment, Perbill, Weight } from '@polkadot/types/interfaces/runtime';
+import type { Period, Priority } from '@polkadot/types/interfaces/scheduler';
 import type { Key } from '@polkadot/types/interfaces/system';
 import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/submittable' {
   export interface AugmentedSubmittables<ApiType> {
-    authorship: {
-      /**
-       * Provide a set of uncles.
-       **/
-      setUncles: AugmentedSubmittable<(newUncles: Vec<Header> | (Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<Header>]>;
-    };
-    babe: {
-      /**
-       * Plan an epoch config change. The epoch config change is recorded and will be enacted on
-       * the next call to `enact_epoch_change`. The config will be activated one epoch after.
-       * Multiple calls to this method will replace any existing planned config change that had
-       * not been enacted yet.
-       **/
-      planConfigChange: AugmentedSubmittable<(config: NextConfigDescriptor | { V0: any } | { V1: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [NextConfigDescriptor]>;
-      /**
-       * Report authority equivocation/misbehavior. This method will verify
-       * the equivocation proof and validate the given key ownership proof
-       * against the extracted offender. If both are valid, the offence will
-       * be reported.
-       **/
-      reportEquivocation: AugmentedSubmittable<(equivocationProof: BabeEquivocationProof | { offender?: any; slotNumber?: any; firstHeader?: any; secondHeader?: any } | string | Uint8Array, keyOwnerProof: KeyOwnerProof | { session?: any; trieNodes?: any; validatorCount?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [BabeEquivocationProof, KeyOwnerProof]>;
-      /**
-       * Report authority equivocation/misbehavior. This method will verify
-       * the equivocation proof and validate the given key ownership proof
-       * against the extracted offender. If both are valid, the offence will
-       * be reported.
-       * This extrinsic must be called unsigned and it is expected that only
-       * block authors will call it (validated in `ValidateUnsigned`), as such
-       * if the block author is defined it will be defined as the equivocation
-       * reporter.
-       **/
-      reportEquivocationUnsigned: AugmentedSubmittable<(equivocationProof: BabeEquivocationProof | { offender?: any; slotNumber?: any; firstHeader?: any; secondHeader?: any } | string | Uint8Array, keyOwnerProof: KeyOwnerProof | { session?: any; trieNodes?: any; validatorCount?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [BabeEquivocationProof, KeyOwnerProof]>;
-    };
     balances: {
       /**
        * Exactly as `transfer`, except the origin must be root and the source account may be
@@ -124,84 +91,49 @@ declare module '@polkadot/api/types/submittable' {
        **/
       transferKeepAlive: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, value: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, Compact<Balance>]>;
     };
-    grandpa: {
+    brmlAssets: {
       /**
-       * Note that the current authority set of the GRANDPA finality gadget has
-       * stalled. This will trigger a forced authority set change at the beginning
-       * of the next session, to be enacted `delay` blocks after that. The delay
-       * should be high enough to safely assume that the block signalling the
-       * forced change will not be re-orged (e.g. 1000 blocks). The GRANDPA voters
-       * will start the new authority set using the given finalized block as base.
-       * Only callable by root.
-       **/
-      noteStalled: AugmentedSubmittable<(delay: BlockNumber | AnyNumber | Uint8Array, bestFinalizedBlockNumber: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber, BlockNumber]>;
-      /**
-       * Report voter equivocation/misbehavior. This method will verify the
-       * equivocation proof and validate the given key ownership proof
-       * against the extracted offender. If both are valid, the offence
-       * will be reported.
-       **/
-      reportEquivocation: AugmentedSubmittable<(equivocationProof: GrandpaEquivocationProof | { setId?: any; equivocation?: any } | string | Uint8Array, keyOwnerProof: KeyOwnerProof | { session?: any; trieNodes?: any; validatorCount?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [GrandpaEquivocationProof, KeyOwnerProof]>;
-      /**
-       * Report voter equivocation/misbehavior. This method will verify the
-       * equivocation proof and validate the given key ownership proof
-       * against the extracted offender. If both are valid, the offence
-       * will be reported.
+       * Destroy some balance from an account.
        * 
-       * This extrinsic must be called unsigned and it is expected that only
-       * block authors will call it (validated in `ValidateUnsigned`), as such
-       * if the block author is defined it will be defined as the equivocation
-       * reporter.
+       * The dispatch origin for this call must be `Root` by the
+       * transactor.
        **/
-      reportEquivocationUnsigned: AugmentedSubmittable<(equivocationProof: GrandpaEquivocationProof | { setId?: any; equivocation?: any } | string | Uint8Array, keyOwnerProof: KeyOwnerProof | { session?: any; trieNodes?: any; validatorCount?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [GrandpaEquivocationProof, KeyOwnerProof]>;
+      burn: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
+      /**
+       * Issue some balance to an account.
+       * 
+       * The dispatch origin for this call must be `Root` by the
+       * transactor.
+       **/
+      issue: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
     };
-    hrmp: {
+    chargeTransactionFee: {
       /**
-       * Accept a pending open channel request from the given sender.
-       * 
-       * The channel will be opened only on the next session boundary.
+       * Set user fee charge assets order
        **/
-      hrmpAcceptOpenChannel: AugmentedSubmittable<(sender: ParaId | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId]>;
-      /**
-       * Initiate unilateral closing of a channel. The origin must be either the sender or the
-       * recipient in the channel being closed.
-       * 
-       * The closure can only happen on a session change.
-       **/
-      hrmpCloseChannel: AugmentedSubmittable<(channelId: HrmpChannelId | { sender?: any; receiver?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [HrmpChannelId]>;
-      /**
-       * Initiate opening a channel from a parachain to a given recipient with given channel
-       * parameters.
-       * 
-       * - `proposed_max_capacity` - specifies how many messages can be in the channel at once.
-       * - `proposed_max_message_size` - specifies the maximum size of any of the messages.
-       * 
-       * These numbers are a subject to the relay-chain configuration limits.
-       * 
-       * The channel can be opened only after the recipient confirms it and only on a session
-       * change.
-       **/
-      hrmpInitOpenChannel: AugmentedSubmittable<(recipient: ParaId | AnyNumber | Uint8Array, proposedMaxCapacity: u32 | AnyNumber | Uint8Array, proposedMaxMessageSize: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, u32, u32]>;
+      setUserFeeChargeOrder: AugmentedSubmittable<(assetOrderListVec: Option<Vec<CurrencyId>> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<Vec<CurrencyId>>]>;
     };
-    imOnline: {
+    currencies: {
       /**
-       * # <weight>
-       * - Complexity: `O(K + E)` where K is length of `Keys` (heartbeat.validators_len)
-       * and E is length of `heartbeat.network_state.external_address`
-       * - `O(K)`: decoding of length `K`
-       * - `O(E)`: decoding/encoding of length `E`
-       * - DbReads: pallet_session `Validators`, pallet_session `CurrentIndex`, `Keys`,
-       * `ReceivedHeartbeats`
-       * - DbWrites: `ReceivedHeartbeats`
-       * # </weight>
+       * Transfer some balance to another account under `currency_id`.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
        **/
-      heartbeat: AugmentedSubmittable<(heartbeat: Heartbeat | { blockNumber?: any; networkState?: any; sessionIndex?: any; authorityIndex?: any; validatorsLen?: any } | string | Uint8Array, signature: Signature | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Heartbeat, Signature]>;
-    };
-    inclusionInherent: {
+      transfer: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
       /**
-       * Include backed candidates and bitfields.
+       * Transfer some native currency to another account.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
        **/
-      inclusion: AugmentedSubmittable<(signedBitfields: SignedAvailabilityBitfields, backedCandidates: Vec<BackedCandidate> | (BackedCandidate | { candidate?: any; validityVotes?: any; validatorIndices?: any } | string | Uint8Array)[], parentHeader: Header | { parentHash?: any; number?: any; stateRoot?: any; extrinsicsRoot?: any; digest?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [SignedAvailabilityBitfields, Vec<BackedCandidate>, Header]>;
+      transferNativeCurrency: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, Compact<BalanceOf>]>;
+      /**
+       * update amount of account `who` under `currency_id`.
+       * 
+       * The dispatch origin of this call must be _Root_.
+       **/
+      updateBalance: AugmentedSubmittable<(who: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, amount: AmountOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, AmountOf]>;
     };
     indices: {
       /**
@@ -314,281 +246,99 @@ declare module '@polkadot/api/types/submittable' {
        **/
       transfer: AugmentedSubmittable<(updated: AccountId | string | Uint8Array, index: AccountIndex | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId, AccountIndex]>;
     };
-    parachainsConfiguration: {
+    parachainSystem: {
+      scheduleUpgrade: AugmentedSubmittable<(validationFunction: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes]>;
       /**
-       * Set the acceptance period for an included candidate.
+       * Schedule a validation function upgrade without further checks.
+       * 
+       * Same as [`Module::schedule_upgrade`], but without checking that the new `validation_function`
+       * is correct. This makes it more flexible, but also opens the door to easily brick the chain.
        **/
-      setAcceptancePeriod: AugmentedSubmittable<(updated: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber]>;
+      scheduleUpgradeWithoutChecks: AugmentedSubmittable<(validationFunction: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes]>;
       /**
-       * Set the availability period for parachains.
+       * Set the current validation data.
+       * 
+       * This should be invoked exactly once per block. It will panic at the finalization
+       * phase if the call was not invoked.
+       * 
+       * The dispatch origin for this call must be `Inherent`
+       * 
+       * As a side effect, this function upgrades the current validation function
+       * if the appropriate time has come.
        **/
-      setChainAvailabilityPeriod: AugmentedSubmittable<(updated: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber]>;
-      /**
-       * Set the dispute period, in number of sessions to keep for disputes.
-       **/
-      setDisputePeriod: AugmentedSubmittable<(updated: SessionIndex | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [SessionIndex]>;
-      /**
-       * Set the parachain validator-group rotation frequency
-       **/
-      setGroupRotationFrequency: AugmentedSubmittable<(updated: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber]>;
-      /**
-       * Sets the maximum number of messages allowed in an HRMP channel at once.
-       **/
-      setHrmpChannelMaxCapacity: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum size of a message that could ever be put into an HRMP channel.
-       **/
-      setHrmpChannelMaxMessageSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum total size of messages in bytes allowed in an HRMP channel at once.
-       **/
-      setHrmpChannelMaxTotalSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum number of outbound HRMP messages can be sent by a candidate.
-       **/
-      setHrmpMaxMessageNumPerCandidate: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum number of inbound HRMP channels a parachain is allowed to accept.
-       **/
-      setHrmpMaxParachainInboundChannels: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum number of outbound HRMP channels a parachain is allowed to open.
-       **/
-      setHrmpMaxParachainOutboundChannels: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum number of inbound HRMP channels a parathread is allowed to accept.
-       **/
-      setHrmpMaxParathreadInboundChannels: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum number of outbound HRMP channels a parathread is allowed to open.
-       **/
-      setHrmpMaxParathreadOutboundChannels: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the number of sessions after which an HRMP open channel request expires.
-       **/
-      setHrmpOpenRequestTtl: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the amount of funds that the recipient should provide for accepting opening an HRMP
-       * channel.
-       **/
-      setHrmpRecipientDeposit: AugmentedSubmittable<(updated: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Balance]>;
-      /**
-       * Sets the amount of funds that the sender should provide for opening an HRMP channel.
-       **/
-      setHrmpSenderDeposit: AugmentedSubmittable<(updated: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Balance]>;
-      /**
-       * Set the max validation code size for incoming upgrades.
-       **/
-      setMaxCodeSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the critical downward message size.
-       **/
-      setMaxDownwardMessageSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the max head data size for paras.
-       **/
-      setMaxHeadDataSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the max POV block size for incoming upgrades.
-       **/
-      setMaxPovSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum number of messages that a candidate can contain.
-       **/
-      setMaxUpwardMessageNumPerCandidate: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum size of an upward message that can be sent by a candidate.
-       **/
-      setMaxUpwardMessageSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum items that can present in a upward dispatch queue at once.
-       **/
-      setMaxUpwardQueueCount: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the maximum total size of items that can present in a upward dispatch queue at once.
-       **/
-      setMaxUpwardQueueSize: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the maximum number of validators to use in parachain consensus.
-       **/
-      setMaxValidators: AugmentedSubmittable<(updated: Option<u32> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<u32>]>;
-      /**
-       * Set the maximum number of validators to assign to any core.
-       **/
-      setMaxValidatorsPerCore: AugmentedSubmittable<(updated: Option<u32> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<u32>]>;
-      /**
-       * Set the total number of delay tranches.
-       **/
-      setNDelayTranches: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the number of validators needed to approve a block.
-       **/
-      setNeededApprovals: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the no show slots, in number of number of consensus slots.
-       * Must be at least 1.
-       **/
-      setNoShowSlots: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the number of parathread execution cores.
-       **/
-      setParathreadCores: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the number of retries for a particular parathread.
-       **/
-      setParathreadRetries: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Sets the soft limit for the phase of dispatching dispatchable upward messages.
-       **/
-      setPreferredDispatchableUpwardMessagesStepWeight: AugmentedSubmittable<(updated: Weight | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Weight]>;
-      /**
-       * Set the number of samples to do of the RelayVRFModulo approval assignment criterion.
-       **/
-      setRelayVrfModuloSamples: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the scheduling lookahead, in expected number of blocks at peak throughput.
-       **/
-      setSchedulingLookahead: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
-      /**
-       * Set the availability period for parathreads.
-       **/
-      setThreadAvailabilityPeriod: AugmentedSubmittable<(updated: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber]>;
-      /**
-       * Set the validation upgrade delay.
-       **/
-      setValidationUpgradeDelay: AugmentedSubmittable<(updated: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber]>;
-      /**
-       * Set the validation upgrade frequency.
-       **/
-      setValidationUpgradeFrequency: AugmentedSubmittable<(updated: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber]>;
-      /**
-       * Set the zeroth delay tranche width.
-       **/
-      setZerothDelayTrancheWidth: AugmentedSubmittable<(updated: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [u32]>;
+      setValidationData: AugmentedSubmittable<(data: ParachainInherentData | { validationData?: any; relayChainState?: any; downwardMessages?: any; horizontalMessages?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParachainInherentData]>;
+      sudoSendHrmpMessage: AugmentedSubmittable<(message: OutboundHrmpMessage | { recipient?: any; data?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [OutboundHrmpMessage]>;
+      sudoSendUpwardMessage: AugmentedSubmittable<(message: UpwardMessage | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [UpwardMessage]>;
     };
-    parasSudoWrapper: {
+    scheduler: {
       /**
-       * Forcefully establish a channel from the sender to the recipient.
-       * 
-       * This is equivalent to sending an `Hrmp::hrmp_init_open_channel` extrinsic followed by
-       * `Hrmp::hrmp_accept_open_channel`.
-       **/
-      sudoEstablishHrmpChannel: AugmentedSubmittable<(sender: ParaId | AnyNumber | Uint8Array, recipient: ParaId | AnyNumber | Uint8Array, maxCapacity: u32 | AnyNumber | Uint8Array, maxMessageSize: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, ParaId, u32, u32]>;
-      /**
-       * Send a downward XCM to the given para.
-       * 
-       * The given parachain should exist and the payload should not exceed the preconfigured size
-       * `config.max_downward_message_size`.
-       **/
-      sudoQueueDownwardXcm: AugmentedSubmittable<(id: ParaId | AnyNumber | Uint8Array, xcm: VersionedXcm | { V0: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, VersionedXcm]>;
-      /**
-       * Schedule a para to be cleaned up at the start of the next session.
-       **/
-      sudoScheduleParaCleanup: AugmentedSubmittable<(id: ParaId | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId]>;
-      /**
-       * Schedule a para to be initialized at the start of the next session.
-       **/
-      sudoScheduleParaInitialize: AugmentedSubmittable<(id: ParaId | AnyNumber | Uint8Array, genesis: ParaGenesisArgs | { genesisHead?: any; validationCode?: any; parachain?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, ParaGenesisArgs]>;
-    };
-    proposeParachain: {
-      /**
-       * Approve a parachain proposal.
-       **/
-      approveProposal: AugmentedSubmittable<(paraId: ParaId | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId]>;
-      /**
-       * Cancel a parachain proposal.
-       * 
-       * This also unreserves the deposit.
-       **/
-      cancelProposal: AugmentedSubmittable<(paraId: ParaId | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId]>;
-      /**
-       * Deregister a parachain that was already successfully registered in the relay chain.
-       **/
-      deregisterParachain: AugmentedSubmittable<(paraId: ParaId | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId]>;
-      /**
-       * Propose a new parachain
-       * 
-       * This requires:
-       * - `para_id`: The id of the parachain.
-       * - `name`: The name of the parachain.
-       * - `validation_function`: The wasm runtime of the parachain.
-       * - `initial_head_state`: The genesis state of the parachain.
-       * - `validators`: Validators that will validate for the relay chain, needs to be at least one.
-       * - `balance`: The initial balance of the parachain on the relay chain.
-       * 
-       * It will reserve a deposit from the sender account over the lifetime of the chain.
-       **/
-      proposeParachain: AugmentedSubmittable<(paraId: ParaId | AnyNumber | Uint8Array, name: Bytes | string | Uint8Array, validationCode: ValidationCode | string | Uint8Array, genesisHead: HeadData | string | Uint8Array, validators: Vec<ValidatorId> | (ValidatorId | string | Uint8Array)[], balance: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, Bytes, ValidationCode, HeadData, Vec<ValidatorId>, BalanceOf]>;
-      /**
-       * Add new validators to the set.
-       **/
-      registerValidators: AugmentedSubmittable<(validators: Vec<ValidatorId> | (ValidatorId | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<ValidatorId>]>;
-    };
-    registrar: {
-      /**
-       * Deregister a parathread and retreive the deposit.
-       * 
-       * Must be sent from a `Parachain` origin which is currently a parathread.
-       * 
-       * Ensure that before calling this that any funds you want emptied from the parathread's
-       * account is moved out; after this it will be impossible to retreive them (without
-       * governance intervention).
-       **/
-      deregisterParathread: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
-      disableParathreadRegistration: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
-      enableParathreadRegistration: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
-      /**
-       * Register a parathread with given code for immediate use.
-       * 
-       * Must be sent from a Signed origin that is able to have `ParathreadDeposit` reserved.
-       * `genesis_head` and `validation_code` are used to initalize the parathread's state.
-       **/
-      registerParathread: AugmentedSubmittable<(id: ParaId | AnyNumber | Uint8Array, genesisHead: HeadData | string | Uint8Array, validationCode: ValidationCode | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, HeadData, ValidationCode]>;
-      /**
-       * Swap a parachain with another parachain or parathread. The origin must be a `Parachain`.
-       * The swap will happen only if there is already an opposite swap pending. If there is not,
-       * the swap will be stored in the pending swaps map, ready for a later confirmatory swap.
-       * 
-       * The `ParaId`s remain mapped to the same head data and code so external code can rely on
-       * `ParaId` to be a long-term identifier of a notional "parachain". However, their
-       * scheduling info (i.e. whether they're a parathread or parachain), auction information
-       * and the auction deposit are switched.
-       **/
-      swap: AugmentedSubmittable<(other: ParaId | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId]>;
-    };
-    session: {
-      /**
-       * Removes any session key(s) of the function caller.
-       * This doesn't take effect until the next session.
-       * 
-       * The dispatch origin of this function must be signed.
+       * Cancel an anonymously scheduled task.
        * 
        * # <weight>
-       * - Complexity: `O(1)` in number of key types.
-       * Actual cost depends on the number of length of `T::Keys::key_ids()` which is fixed.
-       * - DbReads: `T::ValidatorIdOf`, `NextKeys`, `origin account`
-       * - DbWrites: `NextKeys`, `origin account`
-       * - DbWrites per key id: `KeyOwnder`
+       * - S = Number of already scheduled calls
+       * - Base Weight: 22.15 + 2.869 * S µs
+       * - DB Weight:
+       * - Read: Agenda
+       * - Write: Agenda, Lookup
+       * - Will use base weight of 100 which should be good for up to 30 scheduled calls
        * # </weight>
        **/
-      purgeKeys: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      cancel: AugmentedSubmittable<(when: BlockNumber | AnyNumber | Uint8Array, index: u32 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber, u32]>;
       /**
-       * Sets the session key(s) of the function caller to `keys`.
-       * Allows an account to set its session key prior to becoming a validator.
-       * This doesn't take effect until the next session.
-       * 
-       * The dispatch origin of this function must be signed.
+       * Cancel a named scheduled task.
        * 
        * # <weight>
-       * - Complexity: `O(1)`
-       * Actual cost depends on the number of length of `T::Keys::key_ids()` which is fixed.
-       * - DbReads: `origin account`, `T::ValidatorIdOf`, `NextKeys`
-       * - DbWrites: `origin account`, `NextKeys`
-       * - DbReads per key id: `KeyOwner`
-       * - DbWrites per key id: `KeyOwner`
+       * - S = Number of already scheduled calls
+       * - Base Weight: 24.91 + 2.907 * S µs
+       * - DB Weight:
+       * - Read: Agenda, Lookup
+       * - Write: Agenda, Lookup
+       * - Will use base weight of 100 which should be good for up to 30 scheduled calls
        * # </weight>
        **/
-      setKeys: AugmentedSubmittable<(keys: Keys, proof: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Keys, Bytes]>;
+      cancelNamed: AugmentedSubmittable<(id: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes]>;
+      /**
+       * Anonymously schedule a task.
+       * 
+       * # <weight>
+       * - S = Number of already scheduled calls
+       * - Base Weight: 22.29 + .126 * S µs
+       * - DB Weight:
+       * - Read: Agenda
+       * - Write: Agenda
+       * - Will use base weight of 25 which should be good for up to 30 scheduled calls
+       * # </weight>
+       **/
+      schedule: AugmentedSubmittable<(when: BlockNumber | AnyNumber | Uint8Array, maybePeriodic: Option<Period> | null | object | string | Uint8Array, priority: Priority | AnyNumber | Uint8Array, call: Call | { callIndex?: any; args?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber, Option<Period>, Priority, Call]>;
+      /**
+       * Anonymously schedule a task after a delay.
+       * 
+       * # <weight>
+       * Same as [`schedule`].
+       * # </weight>
+       **/
+      scheduleAfter: AugmentedSubmittable<(after: BlockNumber | AnyNumber | Uint8Array, maybePeriodic: Option<Period> | null | object | string | Uint8Array, priority: Priority | AnyNumber | Uint8Array, call: Call | { callIndex?: any; args?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [BlockNumber, Option<Period>, Priority, Call]>;
+      /**
+       * Schedule a named task.
+       * 
+       * # <weight>
+       * - S = Number of already scheduled calls
+       * - Base Weight: 29.6 + .159 * S µs
+       * - DB Weight:
+       * - Read: Agenda, Lookup
+       * - Write: Agenda, Lookup
+       * - Will use base weight of 35 which should be good for more than 30 scheduled calls
+       * # </weight>
+       **/
+      scheduleNamed: AugmentedSubmittable<(id: Bytes | string | Uint8Array, when: BlockNumber | AnyNumber | Uint8Array, maybePeriodic: Option<Period> | null | object | string | Uint8Array, priority: Priority | AnyNumber | Uint8Array, call: Call | { callIndex?: any; args?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes, BlockNumber, Option<Period>, Priority, Call]>;
+      /**
+       * Schedule a named task after a delay.
+       * 
+       * # <weight>
+       * Same as [`schedule_named`].
+       * # </weight>
+       **/
+      scheduleNamedAfter: AugmentedSubmittable<(id: Bytes | string | Uint8Array, after: BlockNumber | AnyNumber | Uint8Array, maybePeriodic: Option<Period> | null | object | string | Uint8Array, priority: Priority | AnyNumber | Uint8Array, call: Call | { callIndex?: any; args?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes, BlockNumber, Option<Period>, Priority, Call]>;
     };
     sudo: {
       /**
@@ -770,6 +520,186 @@ declare module '@polkadot/api/types/submittable' {
        * # </weight>
        **/
       set: AugmentedSubmittable<(now: Compact<Moment> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<Moment>]>;
+    };
+    utility: {
+      /**
+       * Send a call through an indexed pseudonym of the sender.
+       * 
+       * Filter from origin are passed along. The call will be dispatched with an origin which
+       * use the same filter as the origin of this call.
+       * 
+       * NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
+       * because you expect `proxy` to have been used prior in the call stack and you do not want
+       * the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
+       * in the Multisig pallet instead.
+       * 
+       * NOTE: Prior to version *12, this was called `as_limited_sub`.
+       * 
+       * The dispatch origin for this call must be _Signed_.
+       **/
+      asDerivative: AugmentedSubmittable<(index: u16 | AnyNumber | Uint8Array, call: Call | { callIndex?: any; args?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [u16, Call]>;
+      /**
+       * Send a batch of dispatch calls.
+       * 
+       * May be called from any origin.
+       * 
+       * - `calls`: The calls to be dispatched from the same origin.
+       * 
+       * If origin is root then call are dispatch without checking origin filter. (This includes
+       * bypassing `frame_system::Config::BaseCallFilter`).
+       * 
+       * # <weight>
+       * - Complexity: O(C) where C is the number of calls to be batched.
+       * # </weight>
+       * 
+       * This will return `Ok` in all circumstances. To determine the success of the batch, an
+       * event is deposited. If a call failed and the batch was interrupted, then the
+       * `BatchInterrupted` event is deposited, along with the number of successful calls made
+       * and the error of the failed call. If all were successful, then the `BatchCompleted`
+       * event is deposited.
+       **/
+      batch: AugmentedSubmittable<(calls: Vec<Call> | (Call | { callIndex?: any; args?: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<Call>]>;
+      /**
+       * Send a batch of dispatch calls and atomically execute them.
+       * The whole transaction will rollback and fail if any of the calls failed.
+       * 
+       * May be called from any origin.
+       * 
+       * - `calls`: The calls to be dispatched from the same origin.
+       * 
+       * If origin is root then call are dispatch without checking origin filter. (This includes
+       * bypassing `frame_system::Config::BaseCallFilter`).
+       * 
+       * # <weight>
+       * - Complexity: O(C) where C is the number of calls to be batched.
+       * # </weight>
+       **/
+      batchAll: AugmentedSubmittable<(calls: Vec<Call> | (Call | { callIndex?: any; args?: any } | string | Uint8Array)[]) => SubmittableExtrinsic<ApiType>, [Vec<Call>]>;
+    };
+    voucher: {
+      destroyVoucher: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, Compact<Balance>]>;
+      exportAllVouchers: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      intializeAllVoucher: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
+      issueVoucher: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, Compact<Balance>]>;
+    };
+    vtokenMint: {
+      /**
+       * Set price for minting vtoken.
+       * 
+       * The dispatch origin for this call must be `Root` by the
+       * transactor.
+       **/
+      setVtokenPool: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, newTokenPool: Compact<BalanceOf> | AnyNumber | Uint8Array, newVtokenPool: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>, Compact<BalanceOf>]>;
+      /**
+       * Mint token by vtoken.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
+       **/
+      toToken: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, vtokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
+      /**
+       * Mint vtoken by token.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
+       **/
+      toVtoken: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, tokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
+    };
+    xcmHandler: {
+      sendHrmpXcm: AugmentedSubmittable<(recipient: ParaId | AnyNumber | Uint8Array, message: VersionedXcm | { V0: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, VersionedXcm]>;
+      sendUpwardXcm: AugmentedSubmittable<(message: VersionedXcm | { V0: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [VersionedXcm]>;
+      sendXcm: AugmentedSubmittable<(dest: MultiLocation | { Null: any } | { X1: any } | { X2: any } | { X3: any } | { X4: any } | string | Uint8Array, message: Xcm | { WithdrawAsset: any } | { ReserveAssetDeposit: any } | { TeleportAsset: any } | { Balances: any } | { Transact: any } | { RelayTo: any } | { RelayedFrom: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiLocation, Xcm]>;
+    };
+    xTokens: {
+      /**
+       * Transfer tokens to parachain.
+       **/
+      transferToParachain: AugmentedSubmittable<(xCurrencyId: XCurrencyId | { chainId?: any; currencyId?: any } | string | Uint8Array, paraId: ParaId | AnyNumber | Uint8Array, dest: AccountId | string | Uint8Array, destNetwork: NetworkId | { Any: any } | { Named: any } | { Polkadot: any } | { Kusama: any } | string | Uint8Array, amount: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [XCurrencyId, ParaId, AccountId, NetworkId, Balance]>;
+      /**
+       * Transfer relay chain tokens to relay chain.
+       **/
+      transferToRelayChain: AugmentedSubmittable<(dest: AccountId | string | Uint8Array, amount: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId, Balance]>;
+    };
+    zenlinkProtocol: {
+      /**
+       * Provide liquidity to a pair.
+       * 
+       * The order of asset dot effect result.
+       * 
+       * # Arguments
+       * 
+       * * `token_0`: Token that make up pair
+       * * `token_1`: Token that make up pair
+       * * `amount_0_desired`: Maximum amount of token_0 added to the pair
+       * * `amount_1_desired`: Maximum amount of token_1 added to the pair
+       * * `amount_0_min`: Minimum amount of token_0 added to the pair
+       * * `amount_1_min`: Minimum amount of token_1 added to the pair
+       * * `deadline`: Height of the cutoff block of this transaction
+       **/
+      addLiquidity: AugmentedSubmittable<(token0: AssetId | AnyNumber | Uint8Array, token1: AssetId | AnyNumber | Uint8Array, amount0Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<BlockNumber>]>;
+      /**
+       * Create pair by tow asset.
+       * 
+       * The order of asset dot effect result.
+       * 
+       * # Arguments
+       * 
+       * * `token_0`: Token that make up Pair
+       * * `token_1`: Token that make up Pair
+       **/
+      createPair: AugmentedSubmittable<(token0: AssetId | AnyNumber | Uint8Array, token1: AssetId | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId]>;
+      /**
+       * Extract liquidity.
+       * 
+       * The order of asset dot effect result.
+       * 
+       * # Arguments
+       * 
+       * * `token_0`: Token that make up pair
+       * * `token_1`: Token that make up pair
+       * * `amount_token_0_min`: Minimum amount of token_0 to exact
+       * * `amount_token_1_min`: Minimum amount of token_1 to exact
+       * * `to`: Account that accepts withdrawal of assets
+       * * `deadline`: Height of the cutoff block of this transaction
+       **/
+      removeLiquidity: AugmentedSubmittable<(token0: AssetId | AnyNumber | Uint8Array, token1: AssetId | AnyNumber | Uint8Array, liquidity: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, LookupSource, Compact<BlockNumber>]>;
+      /**
+       * Sell amount of asset by path.
+       * 
+       * # Arguments
+       * 
+       * * `amount_in`: Amount asset will be sold
+       * * `amount_out_min`: Minimum amount of target asset
+       * * `path`: path can convert to pairs.
+       * * `to`: Account that receive the target asset
+       * * `deadline`: Height of the cutoff block of this transaction
+       **/
+      swapExactTokensForTokens: AugmentedSubmittable<(amountIn: Compact<TokenBalance> | AnyNumber | Uint8Array, amountOutMin: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | AnyNumber | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
+      /**
+       * Buy amount of asset by path.
+       * 
+       * # Arguments
+       * 
+       * * `amount_out`: Amount asset will be bought
+       * * `amount_in_max`: Maximum amount of sold asset
+       * * `path`: path can convert to pairs.
+       * * `to`: Account that receive the target asset
+       * * `deadline`: Height of the cutoff block of this transaction
+       **/
+      swapTokensForExactTokens: AugmentedSubmittable<(amountOut: Compact<TokenBalance> | AnyNumber | Uint8Array, amountInMax: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | AnyNumber | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
+      /**
+       * Transfer zenlink assets to a sibling parachain.
+       * 
+       * Zenlink assets can be either native or foreign to the sending parachain.
+       * 
+       * # Arguments
+       * 
+       * * `asset_id`: Global identifier for a zenlink asset
+       * * `para_id`: Destination parachain
+       * * `account`: Destination account
+       * * `amount`: Amount to transfer
+       **/
+      transferToParachain: AugmentedSubmittable<(assetId: AssetId | AnyNumber | Uint8Array, paraId: ParaId | AnyNumber | Uint8Array, account: AccountId | string | Uint8Array, amount: Compact<TokenBalance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, ParaId, AccountId, Compact<TokenBalance>]>;
     };
   }
 

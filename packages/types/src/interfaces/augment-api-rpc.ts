@@ -3,7 +3,10 @@
 
 import type { Metadata } from '@polkadot/metadata';
 import type { Bytes, HashMap, Json, Null, Option, StorageKey, Text, U256, U64, Vec, bool, u32, u64 } from '@polkadot/types';
-import type { AnyNumber, Codec, IExtrinsic, Observable } from '@polkadot/types/types';
+import type { AnyNumber, Codec, IExtrinsic, ITuple, Observable } from '@polkadot/types/types';
+import type { PairInfo, TokenBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { NumberOrHex } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
 import type { EpochAuthorship } from '@polkadot/types/interfaces/babe';
 import type { BlockHash } from '@polkadot/types/interfaces/chain';
@@ -14,10 +17,11 @@ import type { CreatedBlock } from '@polkadot/types/interfaces/engine';
 import type { EthAccount, EthCallRequest, EthFilter, EthFilterChanges, EthLog, EthReceipt, EthRichBlock, EthSubKind, EthSubParams, EthSyncStatus, EthTransaction, EthTransactionRequest, EthWork } from '@polkadot/types/interfaces/eth';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
 import type { EncodedFinalityProofs, JustificationNotification, ReportedRoundStates } from '@polkadot/types/interfaces/grandpa';
+import type { MmrLeafProof } from '@polkadot/types/interfaces/mmr';
 import type { StorageKind } from '@polkadot/types/interfaces/offchain';
 import type { FeeDetails, RuntimeDispatchInfo } from '@polkadot/types/interfaces/payment';
 import type { RpcMethods } from '@polkadot/types/interfaces/rpc';
-import type { AccountId, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, SignedBlock, StorageData } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, AssetId, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, SignedBlock, StorageData } from '@polkadot/types/interfaces/runtime';
 import type { ReadProof, RuntimeVersion } from '@polkadot/types/interfaces/state';
 import type { ApplyExtrinsicResult, ChainProperties, ChainType, Health, NetworkState, NodeRole, PeerInfo, SyncState } from '@polkadot/types/interfaces/system';
 
@@ -93,6 +97,12 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        **/
       subscribeNewHeads: AugmentedRpc<() => Observable<Header>>;
     };
+    chargeTransactionFee: {
+      /**
+       * Get charging token type and amount in terms of flexible transaction fee.
+       **/
+      getFeeTokenAndAmount: AugmentedRpc<(who: AccountId | string | Uint8Array, extrinsic: Bytes | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[CurrencyId, NumberOrHex]>>>;
+    };
     childstate: {
       /**
        * Returns the keys with prefix from a child storage, leave empty to get all the keys
@@ -133,7 +143,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Instructs the manual-seal authorship task to finalize a block
        **/
-      finalizeBlock: AugmentedRpc<(hash: BlockHash | string | Uint8Array, justification?: Justification | string | Uint8Array) => Observable<bool>>;
+      finalizeBlock: AugmentedRpc<(hash: BlockHash | string | Uint8Array, justification?: Justification) => Observable<bool>>;
     };
     eth: {
       /**
@@ -314,6 +324,12 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Subscribes to grandpa justifications
        **/
       subscribeJustifications: AugmentedRpc<() => Observable<JustificationNotification>>;
+    };
+    mmr: {
+      /**
+       * Generate MMR proof for given leaf index.
+       **/
+      generateProof: AugmentedRpc<(leafIndex: u64 | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<MmrLeafProof>>;
     };
     net: {
       /**
@@ -518,6 +534,36 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Returns sha3 of the given data
        **/
       sha3: AugmentedRpc<(data: Bytes | string | Uint8Array) => Observable<H256>>;
+    };
+    ZenlinkDEXModule: {
+      /**
+       * Get the information of all the exchange pairs.
+       **/
+      getAllPairs: AugmentedRpc<(at?: BlockHash | string | Uint8Array) => Observable<Vec<PairInfo>>>;
+      /**
+       * Get the output token amount for an exact input token amount.
+       **/
+      getAmountInPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | AnyNumber | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<NumberOrHex>>;
+      /**
+       * Get the input token amount for an exact output token amount.
+       **/
+      getAmountOutPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | AnyNumber | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<NumberOrHex>>;
+      /**
+       * Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.
+       **/
+      getEstimateLptoken: AugmentedRpc<(token0: ZenlinkAssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: ZenlinkAssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, amount0Desired: TokenBalance | AnyNumber | Uint8Array, amount1Desired: TokenBalance | AnyNumber | Uint8Array, amount0Min: TokenBalance | AnyNumber | Uint8Array, amount1Min: TokenBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<NumberOrHex>>;
+      /**
+       * Get ownership of all exchange pairs for a particular account.
+       **/
+      getOwnerPairs: AugmentedRpc<(owner: AccountId | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Vec<PairInfo>>>;
+      /**
+       * Get the detailed information of a particular exchange pair.
+       **/
+      getPairByAssetId: AugmentedRpc<(token0: ZenlinkAssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: ZenlinkAssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Option<PairInfo>>>;
+      /**
+       * Get the ownership of a certain currency for each parachain.
+       **/
+      getSovereignsInfo: AugmentedRpc<(assetId: ZenlinkAssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[u32, AccountId, NumberOrHex]>>>;
     };
   }
 }

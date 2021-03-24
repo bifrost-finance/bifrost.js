@@ -1,34 +1,23 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Option, Struct, u16, u64 } from '@polkadot/types';
-import type { AssetId, Balance } from '@polkadot/types/interfaces/runtime';
+import type { Bytes, Enum, Struct, i128 } from '@polkadot/types';
+import type { ParaId } from '@polkadot/types/interfaces/parachains';
 
-/** @name AccountAsset */
-export interface AccountAsset extends Struct {
-  readonly balance: Balance;
-  readonly locked: Balance;
-  readonly available: Balance;
-  readonly cost: Balance;
-  readonly income: Balance;
+/** @name AmountOf */
+export interface AmountOf extends i128 {}
+
+/** @name ChainId */
+export interface ChainId extends Enum {
+  readonly isRelayChain: boolean;
+  readonly isParaChain: boolean;
+  readonly asParaChain: ParaId;
 }
 
 /** @name CurrencyId */
 export interface CurrencyId extends Enum {
   readonly isToken: boolean;
   readonly asToken: TokenSymbol;
-}
-
-/** @name Price */
-export interface Price extends u64 {}
-
-/** @name Token */
-export interface Token extends Struct {
-  readonly symbol: Bytes;
-  readonly precision: u16;
-  readonly total_supply: Balance;
-  readonly token_type: TokenType;
-  readonly pair: Option<AssetId>;
 }
 
 /** @name TokenSymbol */
@@ -47,12 +36,10 @@ export interface TokenSymbol extends Enum {
   readonly isVIost: boolean;
 }
 
-/** @name TokenType */
-export interface TokenType extends Enum {
-  readonly isNative: boolean;
-  readonly isStable: boolean;
-  readonly isToken: boolean;
-  readonly isVToken: boolean;
+/** @name XCurrencyId */
+export interface XCurrencyId extends Struct {
+  readonly chainId: ChainId;
+  readonly currencyId: Bytes;
 }
 
 export type PHANTOM_ASSETS = 'assets';

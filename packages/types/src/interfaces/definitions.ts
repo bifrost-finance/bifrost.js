@@ -10,5 +10,5 @@ export { default as chainlink } from "./chainlink/definitions";
 export { default as proxyValidator } from "./proxyValidator/definitions";
 export { default as swap } from "./swap/definitions";
 export { default as vtokenMint } from "./vtokenMint/definitions";
-// export { default as chargeTransactionFee } from "./chargeTransactionFee/definitions";
-// export { default as ZenlinkDEXModule } from "./ZenlinkDEXModule/definitions";
+export { default as chargeTransactionFee } from "./chargeTransactionFee/definitions";
+export { default as ZenlinkDEXModule } from "./ZenlinkDEXModule/definitions";

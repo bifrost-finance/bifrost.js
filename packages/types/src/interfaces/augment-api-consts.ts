@@ -1,8 +1,11 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Vec, u32, u64, u8 } from '@polkadot/types';
-import type { Balance, BalanceOf, BlockNumber, Moment, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';
+import type { Vec, u8 } from '@polkadot/types';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
+import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { Balance, BalanceOf, BlockNumber, ModuleId, Moment, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';
 import type { RuntimeVersion } from '@polkadot/types/interfaces/state';
 import type { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support';
 import type { BlockLength, BlockWeights } from '@polkadot/types/interfaces/system';
@@ -10,29 +13,17 @@ import type { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/consts' {
   export interface AugmentedConsts<ApiType> {
-    babe: {
-      /**
-       * The number of **slots** that an epoch takes. We couple sessions to
-       * epochs, i.e. we start a new session once the new epoch begins.
-       * NOTE: Currently it is not possible to change the epoch duration
-       * after the chain has started. Attempting to do so will brick block
-       * production.
-       **/
-      epochDuration: u64 & AugmentedConst<ApiType>;
-      /**
-       * The expected average block time at which BABE should be creating
-       * blocks. Since BABE is probabilistic it is not trivial to figure out
-       * what the expected average block time should be based on the slot
-       * duration and the security parameter `c` (where `1 - c` represents
-       * the probability of a slot being empty).
-       **/
-      expectedBlockTime: Moment & AugmentedConst<ApiType>;
-    };
     balances: {
       /**
        * The minimum amount required to keep an account open.
        **/
       existentialDeposit: Balance & AugmentedConst<ApiType>;
+    };
+    chargeTransactionFee: {
+      nativeCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+    };
+    currencies: {
+      getNativeCurrencyId: CurrencyIdOf & AugmentedConst<ApiType>;
     };
     indices: {
       /**
@@ -40,15 +31,19 @@ declare module '@polkadot/api/types/consts' {
        **/
       deposit: BalanceOf & AugmentedConst<ApiType>;
     };
-    proposeParachain: {
+    minterReward: {
       /**
-       * The maximum name length of a parachain.
+       * Allow maximum blocks can be extended.
        **/
-      maxNameLength: u32 & AugmentedConst<ApiType>;
+      maximumExtendedPeriod: BlockNumberFor & AugmentedConst<ApiType>;
       /**
-       * The deposit that will be reserved when proposing a parachain.
+       * Reward period, normally it's 50 blocks after.
        **/
-      proposeDeposit: BalanceOf & AugmentedConst<ApiType>;
+      rewardPeriod: BlockNumberFor & AugmentedConst<ApiType>;
+      /**
+       * Two year as a round, 600 * 24 * 365 * 2
+       **/
+      twoYear: BlockNumberFor & AugmentedConst<ApiType>;
     };
     system: {
       /**
@@ -98,6 +93,12 @@ declare module '@polkadot/api/types/consts' {
        * The polynomial that is applied in order to derive fee from weight.
        **/
       weightToFee: Vec<WeightToFeeCoefficient> & AugmentedConst<ApiType>;
+    };
+    vtokenMint: {
+      /**
+       * Identifier for the staking lock.
+       **/
+      moduleId: ModuleId & AugmentedConst<ApiType>;
     };
   }
 
