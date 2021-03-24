@@ -1,4 +1,5 @@
 export default {
+  rpc: {},
   types: {
     CurrencyIdOf: "CurrencyId",
     IsExtended: "bool",

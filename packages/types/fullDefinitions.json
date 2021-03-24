@@ -1,48 +1,23 @@
 {
   "types": {
-    "Token": {
-      "symbol": "Vec<u8>",
-      "precision": "u16",
-      "total_supply": "Balance",
-      "token_type": "TokenType",
-      "pair": "Option<AssetId>"
-    },
-    "Price": "u64",
-    "AccountAsset": {
-      "balance": "Balance",
-      "locked": "Balance",
-      "available": "Balance",
-      "cost": "Balance",
-      "income": "Balance"
-    },
     "TokenSymbol": {
-      "_enum": [
-        "BNC",
-        "aUSD",
-        "DOT",
-        "vDOT",
-        "KSM",
-        "vKSM",
-        "ETH",
-        "vETH",
-        "EOS",
-        "vEOS",
-        "IOST",
-        "vIOST"
-      ]
-    },
-    "TokenType": {
-      "_enum": [
-        "Native",
-        "Stable",
-        "Token",
-        "VToken"
-      ]
+      "_enum": ["BNC", "aUSD", "DOT", "vDOT", "KSM", "vKSM", "ETH", "vETH", "EOS", "vEOS", "IOST", "vIOST"]
     },
     "CurrencyId": {
       "_enum": {
         "Token": "TokenSymbol"
       }
+    },
+    "AmountOf": "i128",
+    "ChainId": {
+      "_enum": {
+        "RelayChain": "Null",
+        "ParaChain": "ParaId"
+      }
+    },
+    "XCurrencyId": {
+      "chainId": "ChainId",
+      "currencyId": "Vec<u8>"
     },
     "BiddingOrderId": "u64",
     "RewardRecord": {
@@ -88,11 +63,7 @@
       "abi_sequence": "UnsignedInt"
     },
     "BlockchainType": {
-      "_enum": [
-        "BIFROST",
-        "EOS",
-        "IOST"
-      ]
+      "_enum": ["BIFROST", "EOS", "IOST"]
     },
     "Precision": "u32",
     "BridgeAssetSymbol": {
@@ -177,14 +148,7 @@
       }
     },
     "TransactionStatus": {
-      "_enum": [
-        "Initialized",
-        "Created",
-        "SignComplete",
-        "Sent",
-        "Succeeded",
-        "Failed"
-      ]
+      "_enum": ["Initialized", "Created", "SignComplete", "Sent", "Succeeded", "Failed"]
     },
     "ProducerAuthoritySchedule": {
       "version": "u32",
@@ -259,25 +223,47 @@
       "token_balance": "Balance",
       "token_weight": "PoolWeight"
     },
-    "VtokenPool": {
-      "token_pool": "Balance",
-      "vtoken_pool": "Balance",
-      "current_reward": "Balance",
-      "pending_reward": "Balance"
+    "CurrencyIdOf": "CurrencyId",
+    "IsExtended": "bool",
+    "StorageVersion": "Releases",
+    "PalletBalanceOf": "Balance",
+    "BlockNumberFor": "BlockNumber",
+    "NumberOrHex": {
+      "_enum": {
+        "Number": "u64",
+        "Hex": "U256"
+      }
     },
-    "VtokenMintPrice": "u128",
-    "MintPrice": "VtokenMintPrice",
-    "CurrencyIdOf": "CurrencyId"
+    "TokenBalance": "Balance",
+    "PairId": "u32",
+    "ZenlinkAssetId": {
+      "_enum": {
+        "NativeCurrency": null,
+        "ParaCurrency": "u32"
+      }
+    },
+    "Pair": {
+      "token_0": "ZenlinkAssetId",
+      "token_1": "ZenlinkAssetId",
+      "account": "AccountId",
+      "total_liquidity": "TokenBalance"
+    },
+    "PairInfo": {
+      "token_0": "ZenlinkAssetId",
+      "token_1": "ZenlinkAssetId",
+      "account": "AccountId",
+      "total_liquidity": "TokenBalance",
+      "holding_liquidity": "TokenBalance",
+      "reserve_0": "TokenBalance",
+      "reserve_1": "TokenBalance"
+    }
   },
   "typesBundle": {
     "spec": {
       "bifrost": {
         "types": [
           {
-            "minmax": [
-              0,
-              null
-            ],
+            "minmax": [0, null],
             "types": {
               "AccountInfo": "AccountInfoWithRefCount",
               "Address": "MultiAddress",
@@ -285,6 +271,204 @@
             }
           }
         ]
+      }
+    }
+  },
+  "rpc": {
+    "chargeTransactionFee": {
+      "getFeeTokenAndAmount": {
+        "description": "Get charging token type and amount in terms of flexible transaction fee.",
+        "params": [
+          {
+            "name": "who",
+            "type": "AccountId"
+          },
+          {
+            "name": "extrinsic",
+            "type": "Bytes"
+          },
+          {
+            "name": "at",
+            "type": "BlockHash",
+            "isHistoric": true,
+            "isOptional": true
+          }
+        ],
+        "type": "(CurrencyId, NumberOrHex)",
+        "isSubscription": false,
+        "jsonrpc": "chargeTransactionFee_getFeeTokenAndAmount",
+        "method": "getFeeTokenAndAmount",
+        "section": "chargeTransactionFee"
+      }
+    },
+    "ZenlinkDEXModule": {
+      "getSovereignsInfo": {
+        "description": "Get the ownership of a certain currency for each parachain.",
+        "params": [
+          {
+            "name": "assetId",
+            "type": "ZenlinkAssetId"
+          },
+          {
+            "name": "at",
+            "type": "BlockHash",
+            "isHistoric": true,
+            "isOptional": true
+          }
+        ],
+        "type": "(u32, AccountId, NumberOrHex)",
+        "isSubscription": false,
+        "jsonrpc": "ZenlinkDEXModule_getSovereignsInfo",
+        "method": "getSovereignsInfo",
+        "section": "ZenlinkDEXModule"
+      },
+      "getAllPairs": {
+        "description": "Get the information of all the exchange pairs.",
+        "params": [
+          {
+            "name": "at",
+            "type": "BlockHash",
+            "isHistoric": true,
+            "isOptional": true
+          }
+        ],
+        "type": "Vec<PairInfo<AccountId, NumberOrHex>>",
+        "isSubscription": false,
+        "jsonrpc": "ZenlinkDEXModule_getAllPairs",
+        "method": "getAllPairs",
+        "section": "ZenlinkDEXModule"
+      },
+      "getOwnerPairs": {
+        "description": "Get ownership of all exchange pairs for a particular account.",
+        "params": [
+          {
+            "name": "owner",
+            "type": "AccountId"
+          },
+          {
+            "name": "at",
+            "type": "BlockHash",
+            "isHistoric": true,
+            "isOptional": true
+          }
+        ],
+        "type": "Vec<PairInfo<AccountId, NumberOrHex>>",
+        "isSubscription": false,
+        "jsonrpc": "ZenlinkDEXModule_getOwnerPairs",
+        "method": "getOwnerPairs",
+        "section": "ZenlinkDEXModule"
+      },
+      "getPairByAssetId": {
+        "description": "Get the detailed information of a particular exchange pair.",
+        "params": [
+          {
+            "name": "token0",
+            "type": "ZenlinkAssetId"
+          },
+          {
+            "name": "token1",
+            "type": "ZenlinkAssetId"
+          },
+          {
+            "name": "at",
+            "type": "BlockHash",
+            "isHistoric": true,
+            "isOptional": true
+          }
+        ],
+        "type": "Option<PairInfo<AccountId, NumberOrHex>>",
+        "isSubscription": false,
+        "jsonrpc": "ZenlinkDEXModule_getPairByAssetId",
+        "method": "getPairByAssetId",
+        "section": "ZenlinkDEXModule"
+      },
+      "getAmountInPrice": {
+        "description": "Get the output token amount for an exact input token amount.",
+        "params": [
+          {
+            "name": "supply",
+            "type": "TokenBalance"
+          },
+          {
+            "name": "path",
+            "type": "Vec<AssetId>"
+          },
+          {
+            "name": "at",
+            "type": "BlockHash",
+            "isHistoric": true,
+            "isOptional": true
+          }
+        ],
+        "type": "NumberOrHex",
+        "isSubscription": false,
+        "jsonrpc": "ZenlinkDEXModule_getAmountInPrice",
+        "method": "getAmountInPrice",
+        "section": "ZenlinkDEXModule"
+      },
+      "getAmountOutPrice": {
+        "description": "Get the input token amount for an exact output token amount.",
+        "params": [
+          {
+            "name": "supply",
+            "type": "TokenBalance"
+          },
+          {
+            "name": "path",
+            "type": "Vec<AssetId>"
+          },
+          {
+            "name": "at",
+            "type": "BlockHash",
+            "isHistoric": true,
+            "isOptional": true
+          }
+        ],
+        "type": "NumberOrHex",
+        "isSubscription": false,
+        "jsonrpc": "ZenlinkDEXModule_getAmountOutPrice",
+        "method": "getAmountOutPrice",
+        "section": "ZenlinkDEXModule"
+      },
+      "getEstimateLptoken": {
+        "description": "Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.",
+        "params": [
+          {
+            "name": "token0",
+            "type": "ZenlinkAssetId"
+          },
+          {
+            "name": "token1",
+            "type": "ZenlinkAssetId"
+          },
+          {
+            "name": "amount0Desired",
+            "type": "TokenBalance"
+          },
+          {
+            "name": "amount1Desired",
+            "type": "TokenBalance"
+          },
+          {
+            "name": "amount0Min",
+            "type": "TokenBalance"
+          },
+          {
+            "name": "amount1Min",
+            "type": "TokenBalance"
+          },
+          {
+            "name": "at",
+            "type": "BlockHash",
+            "isHistoric": true,
+            "isOptional": true
+          }
+        ],
+        "type": "NumberOrHex",
+        "isSubscription": false,
+        "jsonrpc": "ZenlinkDEXModule_getEstimateLptoken",
+        "method": "getEstimateLptoken",
+        "section": "ZenlinkDEXModule"
       }
     }
   }

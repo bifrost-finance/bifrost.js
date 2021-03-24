@@ -1,4 +1,5 @@
 export default {
+  rpc: {},
   types: {
     VersionId: "u32",
     PermissionName: "u64",

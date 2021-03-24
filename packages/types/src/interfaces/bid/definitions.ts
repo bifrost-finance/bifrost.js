@@ -1,4 +1,5 @@
 export default {
+  rpc: {},
   types: {
     BiddingOrderId: "u64",
     RewardRecord: { account_id: "AccountId", record_amount: "Balance" },

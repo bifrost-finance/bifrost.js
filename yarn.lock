@@ -1517,6 +1517,11 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
+"@open-web3/orml-type-definitions@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@open-web3/orml-type-definitions/-/orml-type-definitions-0.9.1.tgz#6c0572ec8a879f23a4f45df29abff8af328d1c83"
+  integrity sha512-nC/csEqQsHtYQBUSOy+P5UOuH8oV71+LxUAwYbiiK1iDYF2L/xv6xFrGE+tnabs3eAkeF9zbin0aWq6beVQebg==
+
 "@polkadot/api-derive@4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@polkadot/api-derive/-/api-derive-4.2.1.tgz#848a2a9ef947f08660af2571f72ca2b06969f2e3"

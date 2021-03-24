@@ -1,4 +1,5 @@
 export default {
+  rpc: {},
   types: {
     PoolId: "u32",
     SwapFee: "u128",

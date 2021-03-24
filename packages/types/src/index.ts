@@ -1,4 +1,8 @@
 import * as definitions from "./interfaces/definitions";
+import { jsonrpcFromDefs, typesFromDefs, typesAliasFromDefs } from "@open-web3/orml-type-definitions/utils";
 
-export const bifrostTypes = Object.values(definitions).reduce((res, { types }) => ({ ...res, ...types }), {});
+export const bifrostRpc = jsonrpcFromDefs(definitions);
+export const bifrostTypes = typesFromDefs(definitions);
+export const bifrostTypeAlias = typesAliasFromDefs(definitions);
+// export const bifrostTypes = Object.values(definitions).reduce((res, { types }) => ({ ...res, ...types }), {});
 export { default as spec } from "./spec/index";

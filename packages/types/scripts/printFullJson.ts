@@ -1,5 +1,5 @@
 import fs from "fs";
-import { spec, bifrostTypes } from "../../types/src/index";
+import { spec, bifrostTypes, bifrostRpc } from "../../types/src/index";
 
 function writeDataFile(filePath: string, data: any) {
   fs.writeFileSync(filePath, data);
@@ -12,6 +12,9 @@ function main() {
     },
     typesBundle: {
       ...spec,
+    },
+    rpc: {
+      ...bifrostRpc,
     },
   };
 
