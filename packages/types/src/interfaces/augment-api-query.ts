@@ -6,11 +6,11 @@ import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
 import type { Pair, PairId, TokenBalance } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
-import type { CurrencyIdOf, IsExtended, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { CurrencyIdOf, IsExtended, ShareWeight, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { TAssetBalance } from '@polkadot/types/interfaces/assets';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { AbridgedHostConfiguration, MessageQueueChain, MessagingStateSnapshot, ParaId, PersistedValidationData, RelayChainBlockNumber, UpwardMessage } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Moment, Releases, Weight } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Moment, Releases } from '@polkadot/types/interfaces/runtime';
 import type { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { AccountInfo, ConsumedWeight, DigestOf, EventIndex, EventRecord, LastRuntimeUpgradeInfo, Phase } from '@polkadot/types/interfaces/system';
 import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
@@ -61,10 +61,6 @@ declare module '@polkadot/api/types/storage' {
        **/
       totalIssuance: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
     };
-    chargeTransactionFee: {
-      defaultFeeChargeOrderList: AugmentedQuery<ApiType, () => Observable<Vec<CurrencyId>>, []>;
-      userFeeChargeOrderList: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Vec<CurrencyId>>, [AccountId]>;
-    };
     indices: {
       /**
        * The lookup from index to account.
@@ -97,7 +93,11 @@ declare module '@polkadot/api/types/storage' {
        **/
       storageVersion: AugmentedQuery<ApiType, () => Observable<StorageVersion>, []>;
       totalVtokenMinted: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
-      weights: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<Weight>, [CurrencyIdOf]>;
+      /**
+       * Record a user how much bnc s/he reveives.
+       **/
+      userNbncReward: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<BalanceOf>, [AccountId]>;
+      weights: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<ShareWeight>, [CurrencyIdOf]>;
     };
     parachainInfo: {
       parachainId: AugmentedQuery<ApiType, () => Observable<ParaId>, []>;
@@ -309,16 +309,16 @@ declare module '@polkadot/api/types/storage' {
        **/
       mintPool: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
       /**
+       * Record when and how much balance user want to redeem.
+       **/
+      redeemRecord: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<Vec<ITuple<[BlockNumber, BalanceOf]>>>, [AccountId, CurrencyIdOf]>;
+      /**
        * Collect referrer, minter => ([(referrer1, 1000), (referrer2, 2000), ...], total_point)
        * total_point = 1000 + 2000 + ...
        * referrer must be unique, so check it unique while a new referrer incoming.
        * and insert the new channel to the
        **/
       referrerChannels: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ITuple<[AccountId, BalanceOf]>>, BalanceOf]>>, [AccountId]>;
-      /**
-       * When the use start to stake.
-       **/
-      whenStaked: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<BlockNumber>, [AccountId]>;
     };
     xTokens: {
     };

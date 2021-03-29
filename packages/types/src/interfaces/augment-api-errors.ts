@@ -89,6 +89,12 @@ declare module '@polkadot/api/types/errors' {
        **/
       BalanceTooLow: AugmentedError<ApiType>;
     };
+    minterReward: {
+      /**
+       * There's no price at all.
+       **/
+      FailToGetSwapPrice: AugmentedError<ApiType>;
+    };
     scheduler: {
       /**
        * Failed to schedule a call

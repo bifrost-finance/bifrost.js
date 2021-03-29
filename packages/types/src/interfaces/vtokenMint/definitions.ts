@@ -4,5 +4,6 @@ export default {
     CurrencyIdOf: "CurrencyId",
     IsExtended: "bool",
     StorageVersion: "Releases",
+    ShareWeight: "Balance",
   },
 };

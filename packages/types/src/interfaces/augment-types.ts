@@ -11,7 +11,7 @@ import type { DataVersion, RequestIdentifier, SpecIndex } from '@bifrost-finance
 import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { AssetConfig, ProxyValidatorRegister } from '@bifrost-finance/types/interfaces/proxyValidator';
 import type { PoolCreateTokenDetails, PoolDetails, PoolId, PoolToken, PoolWeight, SwapFee } from '@bifrost-finance/types/interfaces/swap';
-import type { CurrencyIdOf, IsExtended, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { CurrencyIdOf, IsExtended, ShareWeight, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
 import type { RawAuraPreDigest } from '@polkadot/types/interfaces/aura';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -136,6 +136,7 @@ declare module '@polkadot/types/types/registry' {
     'Compact<SessionIndex>': Compact<SessionIndex>;
     'Compact<SetId>': Compact<SetId>;
     'Compact<SetIndex>': Compact<SetIndex>;
+    'Compact<ShareWeight>': Compact<ShareWeight>;
     'Compact<SiLookupTypeId>': Compact<SiLookupTypeId>;
     'Compact<Slot>': Compact<Slot>;
     'Compact<SlotNumber>': Compact<SlotNumber>;
@@ -811,6 +812,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<SessionKeys9>': Option<SessionKeys9>;
     'Option<SetId>': Option<SetId>;
     'Option<SetIndex>': Option<SetIndex>;
+    'Option<ShareWeight>': Option<ShareWeight>;
     'Option<SiField>': Option<SiField>;
     'Option<Signature>': Option<Signature>;
     'Option<SignedAvailabilityBitfield>': Option<SignedAvailabilityBitfield>;
@@ -1629,6 +1631,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<SessionKeys9>': Vec<SessionKeys9>;
     'Vec<SetId>': Vec<SetId>;
     'Vec<SetIndex>': Vec<SetIndex>;
+    'Vec<ShareWeight>': Vec<ShareWeight>;
     'Vec<SiField>': Vec<SiField>;
     'Vec<Signature>': Vec<Signature>;
     'Vec<SignedAvailabilityBitfield>': Vec<SignedAvailabilityBitfield>;
@@ -2447,6 +2450,7 @@ declare module '@polkadot/types/types/registry' {
     SessionKeys9: SessionKeys9;
     SetId: SetId;
     SetIndex: SetIndex;
+    ShareWeight: ShareWeight;
     SiField: SiField;
     Signature: Signature;
     SignedAvailabilityBitfield: SignedAvailabilityBitfield;

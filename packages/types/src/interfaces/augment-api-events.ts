@@ -185,9 +185,9 @@ declare module '@polkadot/api/types/events' {
       IssuedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
     vtokenMint: {
-      MintedToken: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
-      MintedVToken: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      Minted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
       RedeemedPointsSuccess: AugmentedEvent<ApiType, []>;
+      RedeemStarted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
       UpdateRatePerBlockSuccess: AugmentedEvent<ApiType, []>;
       UpdateVtokenPoolSuccess: AugmentedEvent<ApiType, []>;
     };

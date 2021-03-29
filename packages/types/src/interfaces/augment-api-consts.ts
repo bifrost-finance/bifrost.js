@@ -2,7 +2,6 @@
 /* eslint-disable */
 
 import type { Vec, u8 } from '@polkadot/types';
-import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { Balance, BalanceOf, BlockNumber, ModuleId, Moment, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';
@@ -19,9 +18,6 @@ declare module '@polkadot/api/types/consts' {
        **/
       existentialDeposit: Balance & AugmentedConst<ApiType>;
     };
-    chargeTransactionFee: {
-      nativeCurrencyId: CurrencyId & AugmentedConst<ApiType>;
-    };
     currencies: {
       getNativeCurrencyId: CurrencyIdOf & AugmentedConst<ApiType>;
     };
@@ -36,6 +32,10 @@ declare module '@polkadot/api/types/consts' {
        * Allow maximum blocks can be extended.
        **/
       maximumExtendedPeriod: BlockNumberFor & AugmentedConst<ApiType>;
+      /**
+       * Identifier for adjusting weight
+       **/
+      moduleId: ModuleId & AugmentedConst<ApiType>;
       /**
        * Reward period, normally it's 50 blocks after.
        **/

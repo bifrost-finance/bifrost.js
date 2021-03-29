@@ -3,13 +3,16 @@
 
 import type { bool } from '@polkadot/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
-import type { Releases } from '@polkadot/types/interfaces/runtime';
+import type { Balance, Releases } from '@polkadot/types/interfaces/runtime';
 
 /** @name CurrencyIdOf */
 export interface CurrencyIdOf extends CurrencyId {}
 
 /** @name IsExtended */
 export interface IsExtended extends bool {}
+
+/** @name ShareWeight */
+export interface ShareWeight extends Balance {}
 
 /** @name StorageVersion */
 export interface StorageVersion extends Releases {}
