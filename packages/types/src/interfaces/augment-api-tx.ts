@@ -3,9 +3,9 @@
 
 import type { Bytes, Compact, Option, Vec, bool, u16, u32, u64 } from '@polkadot/types';
 import type { AnyNumber } from '@polkadot/types/types';
-import type { TokenBalance } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
-import type { AmountOf, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { AmountOf, CurrencyId, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
 import type { MultiLocation, NetworkId, OutboundHrmpMessage, ParaId, ParachainInherentData, UpwardMessage, VersionedXcm, Xcm } from '@polkadot/types/interfaces/parachains';
 import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Call, ChangesTrieConfiguration, KeyValue, LookupSource, Moment, Perbill, Weight } from '@polkadot/types/interfaces/runtime';
@@ -106,6 +106,12 @@ declare module '@polkadot/api/types/submittable' {
        * transactor.
        **/
       issue: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
+    };
+    chargeTransactionFee: {
+      /**
+       * Set user fee charge assets order.
+       **/
+      setUserFeeChargeOrder: AugmentedSubmittable<(assetOrderListVec: Option<Vec<CurrencyId>> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<Vec<CurrencyId>>]>;
     };
     currencies: {
       /**
@@ -630,7 +636,7 @@ declare module '@polkadot/api/types/submittable' {
        * * `amount_1_min`: Minimum amount of token_1 added to the pair
        * * `deadline`: Height of the cutoff block of this transaction
        **/
-      addLiquidity: AugmentedSubmittable<(token0: AssetId | AnyNumber | Uint8Array, token1: AssetId | AnyNumber | Uint8Array, amount0Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<BlockNumber>]>;
+      addLiquidity: AugmentedSubmittable<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, amount0Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<BlockNumber>]>;
       /**
        * Create pair by tow asset.
        * 
@@ -641,7 +647,7 @@ declare module '@polkadot/api/types/submittable' {
        * * `token_0`: Token that make up Pair
        * * `token_1`: Token that make up Pair
        **/
-      createPair: AugmentedSubmittable<(token0: AssetId | AnyNumber | Uint8Array, token1: AssetId | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId]>;
+      createPair: AugmentedSubmittable<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId]>;
       /**
        * Extract liquidity.
        * 
@@ -656,7 +662,7 @@ declare module '@polkadot/api/types/submittable' {
        * * `to`: Account that accepts withdrawal of assets
        * * `deadline`: Height of the cutoff block of this transaction
        **/
-      removeLiquidity: AugmentedSubmittable<(token0: AssetId | AnyNumber | Uint8Array, token1: AssetId | AnyNumber | Uint8Array, liquidity: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, LookupSource, Compact<BlockNumber>]>;
+      removeLiquidity: AugmentedSubmittable<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, liquidity: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, LookupSource, Compact<BlockNumber>]>;
       /**
        * Sell amount of asset by path.
        * 
@@ -668,7 +674,7 @@ declare module '@polkadot/api/types/submittable' {
        * * `to`: Account that receive the target asset
        * * `deadline`: Height of the cutoff block of this transaction
        **/
-      swapExactTokensForTokens: AugmentedSubmittable<(amountIn: Compact<TokenBalance> | AnyNumber | Uint8Array, amountOutMin: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | AnyNumber | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
+      swapExactTokensForTokens: AugmentedSubmittable<(amountIn: Compact<TokenBalance> | AnyNumber | Uint8Array, amountOutMin: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
       /**
        * Buy amount of asset by path.
        * 
@@ -680,7 +686,7 @@ declare module '@polkadot/api/types/submittable' {
        * * `to`: Account that receive the target asset
        * * `deadline`: Height of the cutoff block of this transaction
        **/
-      swapTokensForExactTokens: AugmentedSubmittable<(amountOut: Compact<TokenBalance> | AnyNumber | Uint8Array, amountInMax: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | AnyNumber | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
+      swapTokensForExactTokens: AugmentedSubmittable<(amountOut: Compact<TokenBalance> | AnyNumber | Uint8Array, amountInMax: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
       /**
        * Transfer zenlink assets to a sibling parachain.
        * 
@@ -693,7 +699,7 @@ declare module '@polkadot/api/types/submittable' {
        * * `account`: Destination account
        * * `amount`: Amount to transfer
        **/
-      transferToParachain: AugmentedSubmittable<(assetId: AssetId | AnyNumber | Uint8Array, paraId: ParaId | AnyNumber | Uint8Array, account: AccountId | string | Uint8Array, amount: Compact<TokenBalance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, ParaId, AccountId, Compact<TokenBalance>]>;
+      transferToParachain: AugmentedSubmittable<(assetId: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, paraId: ParaId | AnyNumber | Uint8Array, account: AccountId | string | Uint8Array, amount: Compact<TokenBalance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, ParaId, AccountId, Compact<TokenBalance>]>;
     };
   }
 

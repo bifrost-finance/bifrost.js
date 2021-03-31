@@ -4,10 +4,17 @@
 import type { Enum, Struct, u32 } from '@polkadot/types';
 import type { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
 
+/** @name AssetId */
+export interface AssetId extends Enum {
+  readonly isNativeCurrency: boolean;
+  readonly isParaCurrency: boolean;
+  readonly asParaCurrency: u32;
+}
+
 /** @name Pair */
 export interface Pair extends Struct {
-  readonly token_0: ZenlinkAssetId;
-  readonly token_1: ZenlinkAssetId;
+  readonly token_0: AssetId;
+  readonly token_1: AssetId;
   readonly account: AccountId;
   readonly total_liquidity: TokenBalance;
 }
@@ -17,8 +24,8 @@ export interface PairId extends u32 {}
 
 /** @name PairInfo */
 export interface PairInfo extends Struct {
-  readonly token_0: ZenlinkAssetId;
-  readonly token_1: ZenlinkAssetId;
+  readonly token_0: AssetId;
+  readonly token_1: AssetId;
   readonly account: AccountId;
   readonly total_liquidity: TokenBalance;
   readonly holding_liquidity: TokenBalance;
@@ -29,11 +36,4 @@ export interface PairInfo extends Struct {
 /** @name TokenBalance */
 export interface TokenBalance extends Balance {}
 
-/** @name ZenlinkAssetId */
-export interface ZenlinkAssetId extends Enum {
-  readonly isNativeCurrency: boolean;
-  readonly isParaCurrency: boolean;
-  readonly asParaCurrency: u32;
-}
-
-export type PHANTOM_ZENLINKDEXMODULE = 'ZenlinkDEXModule';
+export type PHANTOM_ZENLINKPROTOCOL = 'zenlinkProtocol';

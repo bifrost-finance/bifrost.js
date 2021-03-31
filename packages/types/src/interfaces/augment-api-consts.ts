@@ -2,6 +2,7 @@
 /* eslint-disable */
 
 import type { Vec, u8 } from '@polkadot/types';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { Balance, BalanceOf, BlockNumber, ModuleId, Moment, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';
@@ -17,6 +18,9 @@ declare module '@polkadot/api/types/consts' {
        * The minimum amount required to keep an account open.
        **/
       existentialDeposit: Balance & AugmentedConst<ApiType>;
+    };
+    chargeTransactionFee: {
+      nativeCurrencyId: CurrencyId & AugmentedConst<ApiType>;
     };
     currencies: {
       getNativeCurrencyId: CurrencyIdOf & AugmentedConst<ApiType>;

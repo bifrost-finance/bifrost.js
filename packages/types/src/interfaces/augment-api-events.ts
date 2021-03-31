@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 import type { Bytes, Option, Vec, u32 } from '@polkadot/types';
-import type { TokenBalance } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
 import type { AmountOf, CurrencyId, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { TAssetBalance } from '@polkadot/types/interfaces/assets';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
 import type { NetworkId, ParaId, RelayChainBlockNumber, XcmError } from '@polkadot/types/interfaces/parachains';
@@ -187,7 +187,7 @@ declare module '@polkadot/api/types/events' {
     vtokenMint: {
       Minted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
       RedeemedPointsSuccess: AugmentedEvent<ApiType, []>;
-      RedeemStarted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      RedeemStarted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance, BlockNumber]>;
       UpdateRatePerBlockSuccess: AugmentedEvent<ApiType, []>;
       UpdateVtokenPoolSuccess: AugmentedEvent<ApiType, []>;
     };

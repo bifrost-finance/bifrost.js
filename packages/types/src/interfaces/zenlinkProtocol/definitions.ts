@@ -5,7 +5,7 @@ export default {
       params: [
         {
           name: "assetId",
-          type: "ZenlinkAssetId",
+          type: "AssetId",
         },
         {
           name: "at",
@@ -49,11 +49,11 @@ export default {
       params: [
         {
           name: "token0",
-          type: "ZenlinkAssetId",
+          type: "AssetId",
         },
         {
           name: "token1",
-          type: "ZenlinkAssetId",
+          type: "AssetId",
         },
         {
           name: "at",
@@ -110,11 +110,11 @@ export default {
       params: [
         {
           name: "token0",
-          type: "ZenlinkAssetId",
+          type: "AssetId",
         },
         {
           name: "token1",
-          type: "ZenlinkAssetId",
+          type: "AssetId",
         },
         {
           name: "amount0Desired",
@@ -145,21 +145,21 @@ export default {
   types: {
     TokenBalance: "Balance",
     PairId: "u32",
-    ZenlinkAssetId: {
+    AssetId: {
       _enum: {
         NativeCurrency: null,
         ParaCurrency: "u32",
       },
     },
     Pair: {
-      token_0: "ZenlinkAssetId",
-      token_1: "ZenlinkAssetId",
+      token_0: "AssetId",
+      token_1: "AssetId",
       account: "AccountId",
       total_liquidity: "TokenBalance",
     },
     PairInfo: {
-      token_0: "ZenlinkAssetId",
-      token_1: "ZenlinkAssetId",
+      token_0: "AssetId",
+      token_1: "AssetId",
 
       account: "AccountId",
       total_liquidity: "TokenBalance",

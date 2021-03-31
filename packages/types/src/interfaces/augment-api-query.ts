@@ -3,14 +3,14 @@
 
 import type { BTreeMap, Bytes, Option, Vec, bool, u32, u8 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
-import type { Pair, PairId, TokenBalance } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { CurrencyIdOf, IsExtended, ShareWeight, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { Pair, PairId, TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { TAssetBalance } from '@polkadot/types/interfaces/assets';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { AbridgedHostConfiguration, MessageQueueChain, MessagingStateSnapshot, ParaId, PersistedValidationData, RelayChainBlockNumber, UpwardMessage } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Moment, Releases } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Moment, Permill, Releases } from '@polkadot/types/interfaces/runtime';
 import type { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { AccountInfo, ConsumedWeight, DigestOf, EventIndex, EventRecord, LastRuntimeUpgradeInfo, Phase } from '@polkadot/types/interfaces/system';
 import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
@@ -61,6 +61,10 @@ declare module '@polkadot/api/types/storage' {
        **/
       totalIssuance: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
     };
+    chargeTransactionFee: {
+      defaultFeeChargeOrderList: AugmentedQuery<ApiType, () => Observable<Vec<CurrencyId>>, []>;
+      userFeeChargeOrderList: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Vec<CurrencyId>>, [AccountId]>;
+    };
     indices: {
       /**
        * The lookup from index to account.
@@ -96,7 +100,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Record a user how much bnc s/he reveives.
        **/
-      userNbncReward: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<BalanceOf>, [AccountId]>;
+      userBncReward: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<BalanceOf>, [AccountId]>;
       weights: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<ShareWeight>, [CurrencyIdOf]>;
     };
     parachainInfo: {
@@ -309,6 +313,10 @@ declare module '@polkadot/api/types/storage' {
        **/
       mintPool: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
       /**
+       * The ROI of each token by every block.
+       **/
+      rateOfInterestEachBlock: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
+      /**
        * Record when and how much balance user want to redeem.
        **/
       redeemRecord: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<Vec<ITuple<[BlockNumber, BalanceOf]>>>, [AccountId, CurrencyIdOf]>;
@@ -319,11 +327,19 @@ declare module '@polkadot/api/types/storage' {
        * and insert the new channel to the
        **/
       referrerChannels: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ITuple<[AccountId, BalanceOf]>>, BalanceOf]>>, [AccountId]>;
+      /**
+       * List lock period while staking.
+       **/
+      stakingLockPeriod: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BlockNumber>, [CurrencyIdOf]>;
+      /**
+       * Yeild rate for each token
+       **/
+      yieldRate: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<Permill>, [CurrencyIdOf]>;
     };
     xTokens: {
     };
     zenlinkProtocol: {
-      assetsToPair: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AssetId]> | [AssetId | AnyNumber | Uint8Array, AssetId | AnyNumber | Uint8Array]) => Observable<Option<Pair>>, [ITuple<[AssetId, AssetId]>]>;
+      assetsToPair: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AssetId]> | [AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array]) => Observable<Option<Pair>>, [ITuple<[AssetId, AssetId]>]>;
       liquidityPool: AugmentedQuery<ApiType, (arg: ITuple<[AccountId, AccountId]> | [AccountId | string | Uint8Array, AccountId | string | Uint8Array]) => Observable<TokenBalance>, [ITuple<[AccountId, AccountId]>]>;
       nextPairId: AugmentedQuery<ApiType, () => Observable<PairId>, []>;
       pairs: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AssetId, AssetId]>>>, []>;

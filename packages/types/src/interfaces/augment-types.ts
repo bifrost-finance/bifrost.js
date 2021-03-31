@@ -2,16 +2,10 @@
 /* eslint-disable */
 
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
-import type { Pair, PairId, PairInfo, TokenBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/ZenlinkDEXModule';
 import type { AmountOf, ChainId, CurrencyId, TokenSymbol, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
-import type { BiddingOrderId, BiddingOrderUnit, BiddingOrderUnitOf, EraId, RewardRecord } from '@bifrost-finance/types/interfaces/bid';
-import type { AccountName, Action, ActionName, ActionReceipt, BlockHeader, BlockSigningAuthority, BlockSigningAuthorityV0, BlockTimestamp, BlockchainType, BridgeAssetSymbol, Checksum256, Checksum256Array, Extension, Failed, FlatMap, IncrementalMerkle, KeyWeight, MultiSig, MultiSigTx, PermissionLevel, PermissionName, Precision, ProducerAuthority, ProducerAuthoritySchedule, ProducerKey, ProducerSchedule, PublicKey, Sent, SignedBlockHeader, Succeeded, TransactionStatus, TxOut, TxSig, UnsignedInt, VersionId, bridgeEosSignature } from '@bifrost-finance/types/interfaces/bridgeEos';
-import type { IostAction, IostMultiSigTx, IostTxOut, Processing } from '@bifrost-finance/types/interfaces/bridgeIost';
-import type { DataVersion, RequestIdentifier, SpecIndex } from '@bifrost-finance/types/interfaces/chainlink';
 import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
-import type { AssetConfig, ProxyValidatorRegister } from '@bifrost-finance/types/interfaces/proxyValidator';
-import type { PoolCreateTokenDetails, PoolDetails, PoolId, PoolToken, PoolWeight, SwapFee } from '@bifrost-finance/types/interfaces/swap';
 import type { CurrencyIdOf, IsExtended, ShareWeight, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { Pair, PairId, PairInfo, TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
 import type { RawAuraPreDigest } from '@polkadot/types/interfaces/aura';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -66,8 +60,6 @@ import type { VestingInfo } from '@polkadot/types/interfaces/vesting';
 declare module '@polkadot/types/types/registry' {
   export interface InterfaceTypes {
     'Compact<AccountIndex>': Compact<AccountIndex>;
-    'Compact<AccountName>': Compact<AccountName>;
-    'Compact<ActionName>': Compact<ActionName>;
     'Compact<ActiveIndex>': Compact<ActiveIndex>;
     'Compact<ApprovalFlag>': Compact<ApprovalFlag>;
     'Compact<AssetId>': Compact<AssetId>;
@@ -80,16 +72,12 @@ declare module '@polkadot/types/types/registry' {
     'Compact<BabeWeight>': Compact<BabeWeight>;
     'Compact<Balance>': Compact<Balance>;
     'Compact<BalanceOf>': Compact<BalanceOf>;
-    'Compact<BiddingOrderId>': Compact<BiddingOrderId>;
     'Compact<BlockNumber>': Compact<BlockNumber>;
     'Compact<BlockNumberFor>': Compact<BlockNumberFor>;
-    'Compact<BlockTimestamp>': Compact<BlockTimestamp>;
     'Compact<BountyIndex>': Compact<BountyIndex>;
     'Compact<ConsensusEngineId>': Compact<ConsensusEngineId>;
     'Compact<ContractDiscriminant>': Compact<ContractDiscriminant>;
     'Compact<CoreIndex>': Compact<CoreIndex>;
-    'Compact<DataVersion>': Compact<DataVersion>;
-    'Compact<EraId>': Compact<EraId>;
     'Compact<EraIndex>': Compact<EraIndex>;
     'Compact<EventIndex>': Compact<EventIndex>;
     'Compact<ExtendedBalance>': Compact<ExtendedBalance>;
@@ -114,14 +102,9 @@ declare module '@polkadot/types/types/registry' {
     'Compact<Perbill>': Compact<Perbill>;
     'Compact<Percent>': Compact<Percent>;
     'Compact<Permill>': Compact<Permill>;
-    'Compact<PermissionName>': Compact<PermissionName>;
     'Compact<Perquintill>': Compact<Perquintill>;
     'Compact<PerU16>': Compact<PerU16>;
     'Compact<Points>': Compact<Points>;
-    'Compact<PoolId>': Compact<PoolId>;
-    'Compact<PoolToken>': Compact<PoolToken>;
-    'Compact<PoolWeight>': Compact<PoolWeight>;
-    'Compact<Precision>': Compact<Precision>;
     'Compact<Priority>': Compact<Priority>;
     'Compact<PropIndex>': Compact<PropIndex>;
     'Compact<ProposalIndex>': Compact<ProposalIndex>;
@@ -130,7 +113,6 @@ declare module '@polkadot/types/types/registry' {
     'Compact<ReferendumIndex>': Compact<ReferendumIndex>;
     'Compact<RegistrarIndex>': Compact<RegistrarIndex>;
     'Compact<RelayChainBlockNumber>': Compact<RelayChainBlockNumber>;
-    'Compact<RequestIdentifier>': Compact<RequestIdentifier>;
     'Compact<RewardPoint>': Compact<RewardPoint>;
     'Compact<SchedulePriority>': Compact<SchedulePriority>;
     'Compact<SessionIndex>': Compact<SessionIndex>;
@@ -141,10 +123,8 @@ declare module '@polkadot/types/types/registry' {
     'Compact<Slot>': Compact<Slot>;
     'Compact<SlotNumber>': Compact<SlotNumber>;
     'Compact<SpanIndex>': Compact<SpanIndex>;
-    'Compact<SpecIndex>': Compact<SpecIndex>;
     'Compact<StrikeCount>': Compact<StrikeCount>;
     'Compact<SubId>': Compact<SubId>;
-    'Compact<SwapFee>': Compact<SwapFee>;
     'Compact<TokenBalance>': Compact<TokenBalance>;
     'Compact<TransactionPriority>': Compact<TransactionPriority>;
     'Compact<TrieIndex>': Compact<TrieIndex>;
@@ -161,12 +141,10 @@ declare module '@polkadot/types/types/registry' {
     'Compact<U64>': Compact<U64>;
     'Compact<u8>': Compact<u8>;
     'Compact<U8>': Compact<U8>;
-    'Compact<UnsignedInt>': Compact<UnsignedInt>;
     'Compact<usize>': Compact<usize>;
     'Compact<USize>': Compact<USize>;
     'Compact<ValidatorCount>': Compact<ValidatorCount>;
     'Compact<ValidatorIndex>': Compact<ValidatorIndex>;
-    'Compact<VersionId>': Compact<VersionId>;
     'Compact<VoteIndex>': Compact<VoteIndex>;
     'Compact<VoteWeight>': Compact<VoteWeight>;
     'Compact<Weight>': Compact<Weight>;
@@ -187,15 +165,11 @@ declare module '@polkadot/types/types/registry' {
     'Option<AccountInfoWithRefCount>': Option<AccountInfoWithRefCount>;
     'Option<AccountInfoWithTripleRefCount>': Option<AccountInfoWithTripleRefCount>;
     'Option<AccountKey20Junction>': Option<AccountKey20Junction>;
-    'Option<AccountName>': Option<AccountName>;
     'Option<AccountStatus>': Option<AccountStatus>;
     'Option<AccountValidity>': Option<AccountValidity>;
     'Option<AccountVote>': Option<AccountVote>;
     'Option<AccountVoteSplit>': Option<AccountVoteSplit>;
     'Option<AccountVoteStandard>': Option<AccountVoteStandard>;
-    'Option<Action>': Option<Action>;
-    'Option<ActionName>': Option<ActionName>;
-    'Option<ActionReceipt>': Option<ActionReceipt>;
     'Option<ActiveEraInfo>': Option<ActiveEraInfo>;
     'Option<ActiveGilt>': Option<ActiveGilt>;
     'Option<ActiveGiltsTotal>': Option<ActiveGiltsTotal>;
@@ -210,7 +184,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<ApplyExtrinsicResult>': Option<ApplyExtrinsicResult>;
     'Option<ApprovalFlag>': Option<ApprovalFlag>;
     'Option<Approvals>': Option<Approvals>;
-    'Option<AssetConfig>': Option<AssetConfig>;
     'Option<AssetId>': Option<AssetId>;
     'Option<AssetInstance>': Option<AssetInstance>;
     'Option<AssetOptions>': Option<AssetOptions>;
@@ -241,22 +214,14 @@ declare module '@polkadot/types/types/registry' {
     'Option<BalanceStatus>': Option<BalanceStatus>;
     'Option<Bid>': Option<Bid>;
     'Option<Bidder>': Option<Bidder>;
-    'Option<BiddingOrderId>': Option<BiddingOrderId>;
-    'Option<BiddingOrderUnit>': Option<BiddingOrderUnit>;
-    'Option<BiddingOrderUnitOf>': Option<BiddingOrderUnitOf>;
     'Option<BidKind>': Option<BidKind>;
     'Option<BitVec>': Option<BitVec>;
     'Option<Block>': Option<Block>;
     'Option<BlockAttestations>': Option<BlockAttestations>;
-    'Option<BlockchainType>': Option<BlockchainType>;
     'Option<BlockHash>': Option<BlockHash>;
-    'Option<BlockHeader>': Option<BlockHeader>;
     'Option<BlockLength>': Option<BlockLength>;
     'Option<BlockNumber>': Option<BlockNumber>;
     'Option<BlockNumberFor>': Option<BlockNumberFor>;
-    'Option<BlockSigningAuthority>': Option<BlockSigningAuthority>;
-    'Option<BlockSigningAuthorityV0>': Option<BlockSigningAuthorityV0>;
-    'Option<BlockTimestamp>': Option<BlockTimestamp>;
     'Option<BlockWeights>': Option<BlockWeights>;
     'Option<bool>': Option<bool>;
     'Option<Bool>': Option<Bool>;
@@ -266,8 +231,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<BountyStatusActive>': Option<BountyStatusActive>;
     'Option<BountyStatusCuratorProposed>': Option<BountyStatusCuratorProposed>;
     'Option<BountyStatusPendingPayout>': Option<BountyStatusPendingPayout>;
-    'Option<BridgeAssetSymbol>': Option<BridgeAssetSymbol>;
-    'Option<bridgeEosSignature>': Option<bridgeEosSignature>;
     'Option<BufferedSessionChange>': Option<BufferedSessionChange>;
     'Option<Bytes>': Option<Bytes>;
     'Option<Call>': Option<Call>;
@@ -283,8 +246,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<ChainProperties>': Option<ChainProperties>;
     'Option<ChainType>': Option<ChainType>;
     'Option<ChangesTrieConfiguration>': Option<ChangesTrieConfiguration>;
-    'Option<Checksum256>': Option<Checksum256>;
-    'Option<Checksum256Array>': Option<Checksum256Array>;
     'Option<CodecHash>': Option<CodecHash>;
     'Option<CodeHash>': Option<CodeHash>;
     'Option<CollatorId>': Option<CollatorId>;
@@ -343,7 +304,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<CurrencyId>': Option<CurrencyId>;
     'Option<CurrencyIdOf>': Option<CurrencyIdOf>;
     'Option<Data>': Option<Data>;
-    'Option<DataVersion>': Option<DataVersion>;
     'Option<DeferredOffenceOf>': Option<DeferredOffenceOf>;
     'Option<DefunctVoter>': Option<DefunctVoter>;
     'Option<Delegations>': Option<Delegations>;
@@ -383,7 +343,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<EncodedFinalityProofs>': Option<EncodedFinalityProofs>;
     'Option<EncodedJustification>': Option<EncodedJustification>;
     'Option<EpochAuthorship>': Option<EpochAuthorship>;
-    'Option<EraId>': Option<EraId>;
     'Option<EraIndex>': Option<EraIndex>;
     'Option<EraPoints>': Option<EraPoints>;
     'Option<EraRewardPoints>': Option<EraRewardPoints>;
@@ -444,7 +403,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<ExitSucceed>': Option<ExitSucceed>;
     'Option<Exposure>': Option<Exposure>;
     'Option<ExtendedBalance>': Option<ExtendedBalance>;
-    'Option<Extension>': Option<Extension>;
     'Option<Extrinsic>': Option<Extrinsic>;
     'Option<ExtrinsicEra>': Option<ExtrinsicEra>;
     'Option<ExtrinsicMetadataLatest>': Option<ExtrinsicMetadataLatest>;
@@ -460,7 +418,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<ExtrinsicsWeight>': Option<ExtrinsicsWeight>;
     'Option<ExtrinsicUnknown>': Option<ExtrinsicUnknown>;
     'Option<ExtrinsicV4>': Option<ExtrinsicV4>;
-    'Option<Failed>': Option<Failed>;
     'Option<FeeDetails>': Option<FeeDetails>;
     'Option<Fixed128>': Option<Fixed128>;
     'Option<Fixed64>': Option<Fixed64>;
@@ -468,7 +425,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<FixedI64>': Option<FixedI64>;
     'Option<FixedU128>': Option<FixedU128>;
     'Option<FixedU64>': Option<FixedU64>;
-    'Option<FlatMap>': Option<FlatMap>;
     'Option<Forcing>': Option<Forcing>;
     'Option<FullIdentification>': Option<FullIdentification>;
     'Option<FunctionArgumentMetadataLatest>': Option<FunctionArgumentMetadataLatest>;
@@ -538,7 +494,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<IncomingParachain>': Option<IncomingParachain>;
     'Option<IncomingParachainDeploy>': Option<IncomingParachainDeploy>;
     'Option<IncomingParachainFixed>': Option<IncomingParachainFixed>;
-    'Option<IncrementalMerkle>': Option<IncrementalMerkle>;
     'Option<Index>': Option<Index>;
     'Option<IndicesLookupSource>': Option<IndicesLookupSource>;
     'Option<IndividualExposure>': Option<IndividualExposure>;
@@ -546,9 +501,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<InitiateTeleport>': Option<InitiateTeleport>;
     'Option<InstructionWeights>': Option<InstructionWeights>;
     'Option<InvalidTransaction>': Option<InvalidTransaction>;
-    'Option<IostAction>': Option<IostAction>;
-    'Option<IostMultiSigTx>': Option<IostMultiSigTx>;
-    'Option<IostTxOut>': Option<IostTxOut>;
     'Option<IsExtended>': Option<IsExtended>;
     'Option<Json>': Option<Json>;
     'Option<Junction>': Option<Junction>;
@@ -562,7 +514,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<KeyTypeId>': Option<KeyTypeId>;
     'Option<KeyValue>': Option<KeyValue>;
     'Option<KeyValueOption>': Option<KeyValueOption>;
-    'Option<KeyWeight>': Option<KeyWeight>;
     'Option<Kind>': Option<Kind>;
     'Option<LastContribution>': Option<LastContribution>;
     'Option<LastRuntimeUpgradeInfo>': Option<LastRuntimeUpgradeInfo>;
@@ -615,10 +566,8 @@ declare module '@polkadot/types/types/registry' {
     'Option<MultiLocation>': Option<MultiLocation>;
     'Option<Multiplier>': Option<Multiplier>;
     'Option<Multisig>': Option<Multisig>;
-    'Option<MultiSig>': Option<MultiSig>;
     'Option<MultiSignature>': Option<MultiSignature>;
     'Option<MultiSigner>': Option<MultiSigner>;
-    'Option<MultiSigTx>': Option<MultiSigTx>;
     'Option<NetworkId>': Option<NetworkId>;
     'Option<NetworkState>': Option<NetworkState>;
     'Option<NetworkStatePeerset>': Option<NetworkStatePeerset>;
@@ -688,8 +637,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<Period>': Option<Period>;
     'Option<Permill>': Option<Permill>;
     'Option<PermissionLatest>': Option<PermissionLatest>;
-    'Option<PermissionLevel>': Option<PermissionLevel>;
-    'Option<PermissionName>': Option<PermissionName>;
     'Option<PermissionsV1>': Option<PermissionsV1>;
     'Option<PermissionVersions>': Option<PermissionVersions>;
     'Option<Perquintill>': Option<Perquintill>;
@@ -700,12 +647,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<Phase>': Option<Phase>;
     'Option<PhragmenScore>': Option<PhragmenScore>;
     'Option<Points>': Option<Points>;
-    'Option<PoolCreateTokenDetails>': Option<PoolCreateTokenDetails>;
-    'Option<PoolDetails>': Option<PoolDetails>;
-    'Option<PoolId>': Option<PoolId>;
-    'Option<PoolToken>': Option<PoolToken>;
-    'Option<PoolWeight>': Option<PoolWeight>;
-    'Option<Precision>': Option<Precision>;
     'Option<Precommits>': Option<Precommits>;
     'Option<PrefabWasmModule>': Option<PrefabWasmModule>;
     'Option<PrefixedStorageKey>': Option<PrefixedStorageKey>;
@@ -715,11 +656,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<Prevotes>': Option<Prevotes>;
     'Option<Priority>': Option<Priority>;
     'Option<PriorLock>': Option<PriorLock>;
-    'Option<Processing>': Option<Processing>;
-    'Option<ProducerAuthority>': Option<ProducerAuthority>;
-    'Option<ProducerAuthoritySchedule>': Option<ProducerAuthoritySchedule>;
-    'Option<ProducerKey>': Option<ProducerKey>;
-    'Option<ProducerSchedule>': Option<ProducerSchedule>;
     'Option<PropIndex>': Option<PropIndex>;
     'Option<Proposal>': Option<Proposal>;
     'Option<ProposalIndex>': Option<ProposalIndex>;
@@ -727,8 +663,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<ProxyDefinition>': Option<ProxyDefinition>;
     'Option<ProxyState>': Option<ProxyState>;
     'Option<ProxyType>': Option<ProxyType>;
-    'Option<ProxyValidatorRegister>': Option<ProxyValidatorRegister>;
-    'Option<PublicKey>': Option<PublicKey>;
     'Option<QueryHolding>': Option<QueryHolding>;
     'Option<QueuedParathread>': Option<QueuedParathread>;
     'Option<Randomness>': Option<Randomness>;
@@ -771,12 +705,10 @@ declare module '@polkadot/types/types/registry' {
     'Option<ReportedRoundStates>': Option<ReportedRoundStates>;
     'Option<Reporter>': Option<Reporter>;
     'Option<ReportIdOf>': Option<ReportIdOf>;
-    'Option<RequestIdentifier>': Option<RequestIdentifier>;
     'Option<ReserveAssetDeposit>': Option<ReserveAssetDeposit>;
     'Option<Retriable>': Option<Retriable>;
     'Option<RewardDestination>': Option<RewardDestination>;
     'Option<RewardPoint>': Option<RewardPoint>;
-    'Option<RewardRecord>': Option<RewardRecord>;
     'Option<RoundSnapshot>': Option<RoundSnapshot>;
     'Option<RoundState>': Option<RoundState>;
     'Option<RpcMethods>': Option<RpcMethods>;
@@ -797,7 +729,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<SealV0>': Option<SealV0>;
     'Option<SeatHolder>': Option<SeatHolder>;
     'Option<SeedOf>': Option<SeedOf>;
-    'Option<Sent>': Option<Sent>;
     'Option<SessionIndex>': Option<SessionIndex>;
     'Option<SessionInfo>': Option<SessionInfo>;
     'Option<SessionInfoValidatorGroup>': Option<SessionInfoValidatorGroup>;
@@ -818,7 +749,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<SignedAvailabilityBitfield>': Option<SignedAvailabilityBitfield>;
     'Option<SignedAvailabilityBitfields>': Option<SignedAvailabilityBitfields>;
     'Option<SignedBlock>': Option<SignedBlock>;
-    'Option<SignedBlockHeader>': Option<SignedBlockHeader>;
     'Option<SignedBlockWithJustification>': Option<SignedBlockWithJustification>;
     'Option<SignedBlockWithJustifications>': Option<SignedBlockWithJustifications>;
     'Option<SignerPayload>': Option<SignerPayload>;
@@ -847,7 +777,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<SolutionSupports>': Option<SolutionSupports>;
     'Option<SpanIndex>': Option<SpanIndex>;
     'Option<SpanRecord>': Option<SpanRecord>;
-    'Option<SpecIndex>': Option<SpecIndex>;
     'Option<Sr25519Signature>': Option<Sr25519Signature>;
     'Option<StakingLedger>': Option<StakingLedger>;
     'Option<StakingLedgerTo223>': Option<StakingLedgerTo223>;
@@ -889,8 +818,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<StoredState>': Option<StoredState>;
     'Option<StrikeCount>': Option<StrikeCount>;
     'Option<SubId>': Option<SubId>;
-    'Option<Succeeded>': Option<Succeeded>;
-    'Option<SwapFee>': Option<SwapFee>;
     'Option<SyncState>': Option<SyncState>;
     'Option<SystemInherentData>': Option<SystemInherentData>;
     'Option<SystemOrigin>': Option<SystemOrigin>;
@@ -904,14 +831,11 @@ declare module '@polkadot/types/types/registry' {
     'Option<TombstoneContractInfo>': Option<TombstoneContractInfo>;
     'Option<Transact>': Option<Transact>;
     'Option<TransactionPriority>': Option<TransactionPriority>;
-    'Option<TransactionStatus>': Option<TransactionStatus>;
     'Option<TransactionValidityError>': Option<TransactionValidityError>;
     'Option<TransientValidationData>': Option<TransientValidationData>;
     'Option<TreasuryProposal>': Option<TreasuryProposal>;
     'Option<TrieId>': Option<TrieId>;
     'Option<TrieIndex>': Option<TrieIndex>;
-    'Option<TxOut>': Option<TxOut>;
-    'Option<TxSig>': Option<TxSig>;
     'Option<Type>': Option<Type>;
     'Option<u128>': Option<u128>;
     'Option<U128>': Option<U128>;
@@ -931,7 +855,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<UncleEntryItem>': Option<UncleEntryItem>;
     'Option<UnknownTransaction>': Option<UnknownTransaction>;
     'Option<UnlockChunk>': Option<UnlockChunk>;
-    'Option<UnsignedInt>': Option<UnsignedInt>;
     'Option<UpwardMessage>': Option<UpwardMessage>;
     'Option<usize>': Option<usize>;
     'Option<USize>': Option<USize>;
@@ -955,7 +878,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<VersionedMultiAsset>': Option<VersionedMultiAsset>;
     'Option<VersionedMultiLocation>': Option<VersionedMultiLocation>;
     'Option<VersionedXcm>': Option<VersionedXcm>;
-    'Option<VersionId>': Option<VersionId>;
     'Option<VestingInfo>': Option<VestingInfo>;
     'Option<VestingSchedule>': Option<VestingSchedule>;
     'Option<Vote>': Option<Vote>;
@@ -988,7 +910,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<XcmError>': Option<XcmError>;
     'Option<XcmResult>': Option<XcmResult>;
     'Option<XCurrencyId>': Option<XCurrencyId>;
-    'Option<ZenlinkAssetId>': Option<ZenlinkAssetId>;
     'Vec<AbridgedCandidateReceipt>': Vec<AbridgedCandidateReceipt>;
     'Vec<AbridgedHostConfiguration>': Vec<AbridgedHostConfiguration>;
     'Vec<AbridgedHrmpChannel>': Vec<AbridgedHrmpChannel>;
@@ -1006,15 +927,11 @@ declare module '@polkadot/types/types/registry' {
     'Vec<AccountInfoWithRefCount>': Vec<AccountInfoWithRefCount>;
     'Vec<AccountInfoWithTripleRefCount>': Vec<AccountInfoWithTripleRefCount>;
     'Vec<AccountKey20Junction>': Vec<AccountKey20Junction>;
-    'Vec<AccountName>': Vec<AccountName>;
     'Vec<AccountStatus>': Vec<AccountStatus>;
     'Vec<AccountValidity>': Vec<AccountValidity>;
     'Vec<AccountVote>': Vec<AccountVote>;
     'Vec<AccountVoteSplit>': Vec<AccountVoteSplit>;
     'Vec<AccountVoteStandard>': Vec<AccountVoteStandard>;
-    'Vec<Action>': Vec<Action>;
-    'Vec<ActionName>': Vec<ActionName>;
-    'Vec<ActionReceipt>': Vec<ActionReceipt>;
     'Vec<ActiveEraInfo>': Vec<ActiveEraInfo>;
     'Vec<ActiveGilt>': Vec<ActiveGilt>;
     'Vec<ActiveGiltsTotal>': Vec<ActiveGiltsTotal>;
@@ -1029,7 +946,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ApplyExtrinsicResult>': Vec<ApplyExtrinsicResult>;
     'Vec<ApprovalFlag>': Vec<ApprovalFlag>;
     'Vec<Approvals>': Vec<Approvals>;
-    'Vec<AssetConfig>': Vec<AssetConfig>;
     'Vec<AssetId>': Vec<AssetId>;
     'Vec<AssetInstance>': Vec<AssetInstance>;
     'Vec<AssetOptions>': Vec<AssetOptions>;
@@ -1060,22 +976,14 @@ declare module '@polkadot/types/types/registry' {
     'Vec<BalanceStatus>': Vec<BalanceStatus>;
     'Vec<Bid>': Vec<Bid>;
     'Vec<Bidder>': Vec<Bidder>;
-    'Vec<BiddingOrderId>': Vec<BiddingOrderId>;
-    'Vec<BiddingOrderUnit>': Vec<BiddingOrderUnit>;
-    'Vec<BiddingOrderUnitOf>': Vec<BiddingOrderUnitOf>;
     'Vec<BidKind>': Vec<BidKind>;
     'Vec<BitVec>': Vec<BitVec>;
     'Vec<Block>': Vec<Block>;
     'Vec<BlockAttestations>': Vec<BlockAttestations>;
-    'Vec<BlockchainType>': Vec<BlockchainType>;
     'Vec<BlockHash>': Vec<BlockHash>;
-    'Vec<BlockHeader>': Vec<BlockHeader>;
     'Vec<BlockLength>': Vec<BlockLength>;
     'Vec<BlockNumber>': Vec<BlockNumber>;
     'Vec<BlockNumberFor>': Vec<BlockNumberFor>;
-    'Vec<BlockSigningAuthority>': Vec<BlockSigningAuthority>;
-    'Vec<BlockSigningAuthorityV0>': Vec<BlockSigningAuthorityV0>;
-    'Vec<BlockTimestamp>': Vec<BlockTimestamp>;
     'Vec<BlockWeights>': Vec<BlockWeights>;
     'Vec<bool>': Vec<bool>;
     'Vec<Bool>': Vec<Bool>;
@@ -1085,8 +993,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<BountyStatusActive>': Vec<BountyStatusActive>;
     'Vec<BountyStatusCuratorProposed>': Vec<BountyStatusCuratorProposed>;
     'Vec<BountyStatusPendingPayout>': Vec<BountyStatusPendingPayout>;
-    'Vec<BridgeAssetSymbol>': Vec<BridgeAssetSymbol>;
-    'Vec<bridgeEosSignature>': Vec<bridgeEosSignature>;
     'Vec<BufferedSessionChange>': Vec<BufferedSessionChange>;
     'Vec<Bytes>': Vec<Bytes>;
     'Vec<Call>': Vec<Call>;
@@ -1102,8 +1008,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ChainProperties>': Vec<ChainProperties>;
     'Vec<ChainType>': Vec<ChainType>;
     'Vec<ChangesTrieConfiguration>': Vec<ChangesTrieConfiguration>;
-    'Vec<Checksum256>': Vec<Checksum256>;
-    'Vec<Checksum256Array>': Vec<Checksum256Array>;
     'Vec<CodecHash>': Vec<CodecHash>;
     'Vec<CodeHash>': Vec<CodeHash>;
     'Vec<CollatorId>': Vec<CollatorId>;
@@ -1162,7 +1066,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<CurrencyId>': Vec<CurrencyId>;
     'Vec<CurrencyIdOf>': Vec<CurrencyIdOf>;
     'Vec<Data>': Vec<Data>;
-    'Vec<DataVersion>': Vec<DataVersion>;
     'Vec<DeferredOffenceOf>': Vec<DeferredOffenceOf>;
     'Vec<DefunctVoter>': Vec<DefunctVoter>;
     'Vec<Delegations>': Vec<Delegations>;
@@ -1202,7 +1105,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<EncodedFinalityProofs>': Vec<EncodedFinalityProofs>;
     'Vec<EncodedJustification>': Vec<EncodedJustification>;
     'Vec<EpochAuthorship>': Vec<EpochAuthorship>;
-    'Vec<EraId>': Vec<EraId>;
     'Vec<EraIndex>': Vec<EraIndex>;
     'Vec<EraPoints>': Vec<EraPoints>;
     'Vec<EraRewardPoints>': Vec<EraRewardPoints>;
@@ -1263,7 +1165,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ExitSucceed>': Vec<ExitSucceed>;
     'Vec<Exposure>': Vec<Exposure>;
     'Vec<ExtendedBalance>': Vec<ExtendedBalance>;
-    'Vec<Extension>': Vec<Extension>;
     'Vec<Extrinsic>': Vec<Extrinsic>;
     'Vec<ExtrinsicEra>': Vec<ExtrinsicEra>;
     'Vec<ExtrinsicMetadataLatest>': Vec<ExtrinsicMetadataLatest>;
@@ -1279,7 +1180,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ExtrinsicsWeight>': Vec<ExtrinsicsWeight>;
     'Vec<ExtrinsicUnknown>': Vec<ExtrinsicUnknown>;
     'Vec<ExtrinsicV4>': Vec<ExtrinsicV4>;
-    'Vec<Failed>': Vec<Failed>;
     'Vec<FeeDetails>': Vec<FeeDetails>;
     'Vec<Fixed128>': Vec<Fixed128>;
     'Vec<Fixed64>': Vec<Fixed64>;
@@ -1287,7 +1187,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<FixedI64>': Vec<FixedI64>;
     'Vec<FixedU128>': Vec<FixedU128>;
     'Vec<FixedU64>': Vec<FixedU64>;
-    'Vec<FlatMap>': Vec<FlatMap>;
     'Vec<Forcing>': Vec<Forcing>;
     'Vec<FullIdentification>': Vec<FullIdentification>;
     'Vec<FunctionArgumentMetadataLatest>': Vec<FunctionArgumentMetadataLatest>;
@@ -1357,7 +1256,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<IncomingParachain>': Vec<IncomingParachain>;
     'Vec<IncomingParachainDeploy>': Vec<IncomingParachainDeploy>;
     'Vec<IncomingParachainFixed>': Vec<IncomingParachainFixed>;
-    'Vec<IncrementalMerkle>': Vec<IncrementalMerkle>;
     'Vec<Index>': Vec<Index>;
     'Vec<IndicesLookupSource>': Vec<IndicesLookupSource>;
     'Vec<IndividualExposure>': Vec<IndividualExposure>;
@@ -1365,9 +1263,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<InitiateTeleport>': Vec<InitiateTeleport>;
     'Vec<InstructionWeights>': Vec<InstructionWeights>;
     'Vec<InvalidTransaction>': Vec<InvalidTransaction>;
-    'Vec<IostAction>': Vec<IostAction>;
-    'Vec<IostMultiSigTx>': Vec<IostMultiSigTx>;
-    'Vec<IostTxOut>': Vec<IostTxOut>;
     'Vec<IsExtended>': Vec<IsExtended>;
     'Vec<Json>': Vec<Json>;
     'Vec<Junction>': Vec<Junction>;
@@ -1381,7 +1276,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<KeyTypeId>': Vec<KeyTypeId>;
     'Vec<KeyValue>': Vec<KeyValue>;
     'Vec<KeyValueOption>': Vec<KeyValueOption>;
-    'Vec<KeyWeight>': Vec<KeyWeight>;
     'Vec<Kind>': Vec<Kind>;
     'Vec<LastContribution>': Vec<LastContribution>;
     'Vec<LastRuntimeUpgradeInfo>': Vec<LastRuntimeUpgradeInfo>;
@@ -1434,10 +1328,8 @@ declare module '@polkadot/types/types/registry' {
     'Vec<MultiLocation>': Vec<MultiLocation>;
     'Vec<Multiplier>': Vec<Multiplier>;
     'Vec<Multisig>': Vec<Multisig>;
-    'Vec<MultiSig>': Vec<MultiSig>;
     'Vec<MultiSignature>': Vec<MultiSignature>;
     'Vec<MultiSigner>': Vec<MultiSigner>;
-    'Vec<MultiSigTx>': Vec<MultiSigTx>;
     'Vec<NetworkId>': Vec<NetworkId>;
     'Vec<NetworkState>': Vec<NetworkState>;
     'Vec<NetworkStatePeerset>': Vec<NetworkStatePeerset>;
@@ -1507,8 +1399,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Period>': Vec<Period>;
     'Vec<Permill>': Vec<Permill>;
     'Vec<PermissionLatest>': Vec<PermissionLatest>;
-    'Vec<PermissionLevel>': Vec<PermissionLevel>;
-    'Vec<PermissionName>': Vec<PermissionName>;
     'Vec<PermissionsV1>': Vec<PermissionsV1>;
     'Vec<PermissionVersions>': Vec<PermissionVersions>;
     'Vec<Perquintill>': Vec<Perquintill>;
@@ -1519,12 +1409,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Phase>': Vec<Phase>;
     'Vec<PhragmenScore>': Vec<PhragmenScore>;
     'Vec<Points>': Vec<Points>;
-    'Vec<PoolCreateTokenDetails>': Vec<PoolCreateTokenDetails>;
-    'Vec<PoolDetails>': Vec<PoolDetails>;
-    'Vec<PoolId>': Vec<PoolId>;
-    'Vec<PoolToken>': Vec<PoolToken>;
-    'Vec<PoolWeight>': Vec<PoolWeight>;
-    'Vec<Precision>': Vec<Precision>;
     'Vec<Precommits>': Vec<Precommits>;
     'Vec<PrefabWasmModule>': Vec<PrefabWasmModule>;
     'Vec<PrefixedStorageKey>': Vec<PrefixedStorageKey>;
@@ -1534,11 +1418,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Prevotes>': Vec<Prevotes>;
     'Vec<Priority>': Vec<Priority>;
     'Vec<PriorLock>': Vec<PriorLock>;
-    'Vec<Processing>': Vec<Processing>;
-    'Vec<ProducerAuthority>': Vec<ProducerAuthority>;
-    'Vec<ProducerAuthoritySchedule>': Vec<ProducerAuthoritySchedule>;
-    'Vec<ProducerKey>': Vec<ProducerKey>;
-    'Vec<ProducerSchedule>': Vec<ProducerSchedule>;
     'Vec<PropIndex>': Vec<PropIndex>;
     'Vec<Proposal>': Vec<Proposal>;
     'Vec<ProposalIndex>': Vec<ProposalIndex>;
@@ -1546,8 +1425,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ProxyDefinition>': Vec<ProxyDefinition>;
     'Vec<ProxyState>': Vec<ProxyState>;
     'Vec<ProxyType>': Vec<ProxyType>;
-    'Vec<ProxyValidatorRegister>': Vec<ProxyValidatorRegister>;
-    'Vec<PublicKey>': Vec<PublicKey>;
     'Vec<QueryHolding>': Vec<QueryHolding>;
     'Vec<QueuedParathread>': Vec<QueuedParathread>;
     'Vec<Randomness>': Vec<Randomness>;
@@ -1590,12 +1467,10 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ReportedRoundStates>': Vec<ReportedRoundStates>;
     'Vec<Reporter>': Vec<Reporter>;
     'Vec<ReportIdOf>': Vec<ReportIdOf>;
-    'Vec<RequestIdentifier>': Vec<RequestIdentifier>;
     'Vec<ReserveAssetDeposit>': Vec<ReserveAssetDeposit>;
     'Vec<Retriable>': Vec<Retriable>;
     'Vec<RewardDestination>': Vec<RewardDestination>;
     'Vec<RewardPoint>': Vec<RewardPoint>;
-    'Vec<RewardRecord>': Vec<RewardRecord>;
     'Vec<RoundSnapshot>': Vec<RoundSnapshot>;
     'Vec<RoundState>': Vec<RoundState>;
     'Vec<RpcMethods>': Vec<RpcMethods>;
@@ -1616,7 +1491,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<SealV0>': Vec<SealV0>;
     'Vec<SeatHolder>': Vec<SeatHolder>;
     'Vec<SeedOf>': Vec<SeedOf>;
-    'Vec<Sent>': Vec<Sent>;
     'Vec<SessionIndex>': Vec<SessionIndex>;
     'Vec<SessionInfo>': Vec<SessionInfo>;
     'Vec<SessionInfoValidatorGroup>': Vec<SessionInfoValidatorGroup>;
@@ -1637,7 +1511,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<SignedAvailabilityBitfield>': Vec<SignedAvailabilityBitfield>;
     'Vec<SignedAvailabilityBitfields>': Vec<SignedAvailabilityBitfields>;
     'Vec<SignedBlock>': Vec<SignedBlock>;
-    'Vec<SignedBlockHeader>': Vec<SignedBlockHeader>;
     'Vec<SignedBlockWithJustification>': Vec<SignedBlockWithJustification>;
     'Vec<SignedBlockWithJustifications>': Vec<SignedBlockWithJustifications>;
     'Vec<SignerPayload>': Vec<SignerPayload>;
@@ -1666,7 +1539,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<SolutionSupports>': Vec<SolutionSupports>;
     'Vec<SpanIndex>': Vec<SpanIndex>;
     'Vec<SpanRecord>': Vec<SpanRecord>;
-    'Vec<SpecIndex>': Vec<SpecIndex>;
     'Vec<Sr25519Signature>': Vec<Sr25519Signature>;
     'Vec<StakingLedger>': Vec<StakingLedger>;
     'Vec<StakingLedgerTo223>': Vec<StakingLedgerTo223>;
@@ -1708,8 +1580,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<StoredState>': Vec<StoredState>;
     'Vec<StrikeCount>': Vec<StrikeCount>;
     'Vec<SubId>': Vec<SubId>;
-    'Vec<Succeeded>': Vec<Succeeded>;
-    'Vec<SwapFee>': Vec<SwapFee>;
     'Vec<SyncState>': Vec<SyncState>;
     'Vec<SystemInherentData>': Vec<SystemInherentData>;
     'Vec<SystemOrigin>': Vec<SystemOrigin>;
@@ -1723,14 +1593,11 @@ declare module '@polkadot/types/types/registry' {
     'Vec<TombstoneContractInfo>': Vec<TombstoneContractInfo>;
     'Vec<Transact>': Vec<Transact>;
     'Vec<TransactionPriority>': Vec<TransactionPriority>;
-    'Vec<TransactionStatus>': Vec<TransactionStatus>;
     'Vec<TransactionValidityError>': Vec<TransactionValidityError>;
     'Vec<TransientValidationData>': Vec<TransientValidationData>;
     'Vec<TreasuryProposal>': Vec<TreasuryProposal>;
     'Vec<TrieId>': Vec<TrieId>;
     'Vec<TrieIndex>': Vec<TrieIndex>;
-    'Vec<TxOut>': Vec<TxOut>;
-    'Vec<TxSig>': Vec<TxSig>;
     'Vec<Type>': Vec<Type>;
     'Vec<u128>': Vec<u128>;
     'Vec<U128>': Vec<U128>;
@@ -1750,7 +1617,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<UncleEntryItem>': Vec<UncleEntryItem>;
     'Vec<UnknownTransaction>': Vec<UnknownTransaction>;
     'Vec<UnlockChunk>': Vec<UnlockChunk>;
-    'Vec<UnsignedInt>': Vec<UnsignedInt>;
     'Vec<UpwardMessage>': Vec<UpwardMessage>;
     'Vec<usize>': Vec<usize>;
     'Vec<USize>': Vec<USize>;
@@ -1774,7 +1640,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<VersionedMultiAsset>': Vec<VersionedMultiAsset>;
     'Vec<VersionedMultiLocation>': Vec<VersionedMultiLocation>;
     'Vec<VersionedXcm>': Vec<VersionedXcm>;
-    'Vec<VersionId>': Vec<VersionId>;
     'Vec<VestingInfo>': Vec<VestingInfo>;
     'Vec<VestingSchedule>': Vec<VestingSchedule>;
     'Vec<Vote>': Vec<Vote>;
@@ -1807,7 +1672,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<XcmError>': Vec<XcmError>;
     'Vec<XcmResult>': Vec<XcmResult>;
     'Vec<XCurrencyId>': Vec<XCurrencyId>;
-    'Vec<ZenlinkAssetId>': Vec<ZenlinkAssetId>;
     AbridgedCandidateReceipt: AbridgedCandidateReceipt;
     AbridgedHostConfiguration: AbridgedHostConfiguration;
     AbridgedHrmpChannel: AbridgedHrmpChannel;
@@ -1825,15 +1689,11 @@ declare module '@polkadot/types/types/registry' {
     AccountInfoWithRefCount: AccountInfoWithRefCount;
     AccountInfoWithTripleRefCount: AccountInfoWithTripleRefCount;
     AccountKey20Junction: AccountKey20Junction;
-    AccountName: AccountName;
     AccountStatus: AccountStatus;
     AccountValidity: AccountValidity;
     AccountVote: AccountVote;
     AccountVoteSplit: AccountVoteSplit;
     AccountVoteStandard: AccountVoteStandard;
-    Action: Action;
-    ActionName: ActionName;
-    ActionReceipt: ActionReceipt;
     ActiveEraInfo: ActiveEraInfo;
     ActiveGilt: ActiveGilt;
     ActiveGiltsTotal: ActiveGiltsTotal;
@@ -1848,7 +1708,6 @@ declare module '@polkadot/types/types/registry' {
     ApplyExtrinsicResult: ApplyExtrinsicResult;
     ApprovalFlag: ApprovalFlag;
     Approvals: Approvals;
-    AssetConfig: AssetConfig;
     AssetId: AssetId;
     AssetInstance: AssetInstance;
     AssetOptions: AssetOptions;
@@ -1879,22 +1738,14 @@ declare module '@polkadot/types/types/registry' {
     BalanceStatus: BalanceStatus;
     Bid: Bid;
     Bidder: Bidder;
-    BiddingOrderId: BiddingOrderId;
-    BiddingOrderUnit: BiddingOrderUnit;
-    BiddingOrderUnitOf: BiddingOrderUnitOf;
     BidKind: BidKind;
     BitVec: BitVec;
     Block: Block;
     BlockAttestations: BlockAttestations;
-    BlockchainType: BlockchainType;
     BlockHash: BlockHash;
-    BlockHeader: BlockHeader;
     BlockLength: BlockLength;
     BlockNumber: BlockNumber;
     BlockNumberFor: BlockNumberFor;
-    BlockSigningAuthority: BlockSigningAuthority;
-    BlockSigningAuthorityV0: BlockSigningAuthorityV0;
-    BlockTimestamp: BlockTimestamp;
     BlockWeights: BlockWeights;
     bool: bool;
     Bool: Bool;
@@ -1904,8 +1755,6 @@ declare module '@polkadot/types/types/registry' {
     BountyStatusActive: BountyStatusActive;
     BountyStatusCuratorProposed: BountyStatusCuratorProposed;
     BountyStatusPendingPayout: BountyStatusPendingPayout;
-    BridgeAssetSymbol: BridgeAssetSymbol;
-    bridgeEosSignature: bridgeEosSignature;
     BufferedSessionChange: BufferedSessionChange;
     Bytes: Bytes;
     Call: Call;
@@ -1921,8 +1770,6 @@ declare module '@polkadot/types/types/registry' {
     ChainProperties: ChainProperties;
     ChainType: ChainType;
     ChangesTrieConfiguration: ChangesTrieConfiguration;
-    Checksum256: Checksum256;
-    Checksum256Array: Checksum256Array;
     CodecHash: CodecHash;
     CodeHash: CodeHash;
     CollatorId: CollatorId;
@@ -1981,7 +1828,6 @@ declare module '@polkadot/types/types/registry' {
     CurrencyId: CurrencyId;
     CurrencyIdOf: CurrencyIdOf;
     Data: Data;
-    DataVersion: DataVersion;
     DeferredOffenceOf: DeferredOffenceOf;
     DefunctVoter: DefunctVoter;
     Delegations: Delegations;
@@ -2021,7 +1867,6 @@ declare module '@polkadot/types/types/registry' {
     EncodedFinalityProofs: EncodedFinalityProofs;
     EncodedJustification: EncodedJustification;
     EpochAuthorship: EpochAuthorship;
-    EraId: EraId;
     EraIndex: EraIndex;
     EraPoints: EraPoints;
     EraRewardPoints: EraRewardPoints;
@@ -2082,7 +1927,6 @@ declare module '@polkadot/types/types/registry' {
     ExitSucceed: ExitSucceed;
     Exposure: Exposure;
     ExtendedBalance: ExtendedBalance;
-    Extension: Extension;
     Extrinsic: Extrinsic;
     ExtrinsicEra: ExtrinsicEra;
     ExtrinsicMetadataLatest: ExtrinsicMetadataLatest;
@@ -2098,7 +1942,6 @@ declare module '@polkadot/types/types/registry' {
     ExtrinsicsWeight: ExtrinsicsWeight;
     ExtrinsicUnknown: ExtrinsicUnknown;
     ExtrinsicV4: ExtrinsicV4;
-    Failed: Failed;
     FeeDetails: FeeDetails;
     Fixed128: Fixed128;
     Fixed64: Fixed64;
@@ -2106,7 +1949,6 @@ declare module '@polkadot/types/types/registry' {
     FixedI64: FixedI64;
     FixedU128: FixedU128;
     FixedU64: FixedU64;
-    FlatMap: FlatMap;
     Forcing: Forcing;
     FullIdentification: FullIdentification;
     FunctionArgumentMetadataLatest: FunctionArgumentMetadataLatest;
@@ -2176,7 +2018,6 @@ declare module '@polkadot/types/types/registry' {
     IncomingParachain: IncomingParachain;
     IncomingParachainDeploy: IncomingParachainDeploy;
     IncomingParachainFixed: IncomingParachainFixed;
-    IncrementalMerkle: IncrementalMerkle;
     Index: Index;
     IndicesLookupSource: IndicesLookupSource;
     IndividualExposure: IndividualExposure;
@@ -2184,9 +2025,6 @@ declare module '@polkadot/types/types/registry' {
     InitiateTeleport: InitiateTeleport;
     InstructionWeights: InstructionWeights;
     InvalidTransaction: InvalidTransaction;
-    IostAction: IostAction;
-    IostMultiSigTx: IostMultiSigTx;
-    IostTxOut: IostTxOut;
     IsExtended: IsExtended;
     Json: Json;
     Junction: Junction;
@@ -2200,7 +2038,6 @@ declare module '@polkadot/types/types/registry' {
     KeyTypeId: KeyTypeId;
     KeyValue: KeyValue;
     KeyValueOption: KeyValueOption;
-    KeyWeight: KeyWeight;
     Kind: Kind;
     LastContribution: LastContribution;
     LastRuntimeUpgradeInfo: LastRuntimeUpgradeInfo;
@@ -2253,10 +2090,8 @@ declare module '@polkadot/types/types/registry' {
     MultiLocation: MultiLocation;
     Multiplier: Multiplier;
     Multisig: Multisig;
-    MultiSig: MultiSig;
     MultiSignature: MultiSignature;
     MultiSigner: MultiSigner;
-    MultiSigTx: MultiSigTx;
     NetworkId: NetworkId;
     NetworkState: NetworkState;
     NetworkStatePeerset: NetworkStatePeerset;
@@ -2326,8 +2161,6 @@ declare module '@polkadot/types/types/registry' {
     Period: Period;
     Permill: Permill;
     PermissionLatest: PermissionLatest;
-    PermissionLevel: PermissionLevel;
-    PermissionName: PermissionName;
     PermissionsV1: PermissionsV1;
     PermissionVersions: PermissionVersions;
     Perquintill: Perquintill;
@@ -2338,12 +2171,6 @@ declare module '@polkadot/types/types/registry' {
     Phase: Phase;
     PhragmenScore: PhragmenScore;
     Points: Points;
-    PoolCreateTokenDetails: PoolCreateTokenDetails;
-    PoolDetails: PoolDetails;
-    PoolId: PoolId;
-    PoolToken: PoolToken;
-    PoolWeight: PoolWeight;
-    Precision: Precision;
     Precommits: Precommits;
     PrefabWasmModule: PrefabWasmModule;
     PrefixedStorageKey: PrefixedStorageKey;
@@ -2353,11 +2180,6 @@ declare module '@polkadot/types/types/registry' {
     Prevotes: Prevotes;
     Priority: Priority;
     PriorLock: PriorLock;
-    Processing: Processing;
-    ProducerAuthority: ProducerAuthority;
-    ProducerAuthoritySchedule: ProducerAuthoritySchedule;
-    ProducerKey: ProducerKey;
-    ProducerSchedule: ProducerSchedule;
     PropIndex: PropIndex;
     Proposal: Proposal;
     ProposalIndex: ProposalIndex;
@@ -2365,8 +2187,6 @@ declare module '@polkadot/types/types/registry' {
     ProxyDefinition: ProxyDefinition;
     ProxyState: ProxyState;
     ProxyType: ProxyType;
-    ProxyValidatorRegister: ProxyValidatorRegister;
-    PublicKey: PublicKey;
     QueryHolding: QueryHolding;
     QueuedParathread: QueuedParathread;
     Randomness: Randomness;
@@ -2409,12 +2229,10 @@ declare module '@polkadot/types/types/registry' {
     ReportedRoundStates: ReportedRoundStates;
     Reporter: Reporter;
     ReportIdOf: ReportIdOf;
-    RequestIdentifier: RequestIdentifier;
     ReserveAssetDeposit: ReserveAssetDeposit;
     Retriable: Retriable;
     RewardDestination: RewardDestination;
     RewardPoint: RewardPoint;
-    RewardRecord: RewardRecord;
     RoundSnapshot: RoundSnapshot;
     RoundState: RoundState;
     RpcMethods: RpcMethods;
@@ -2435,7 +2253,6 @@ declare module '@polkadot/types/types/registry' {
     SealV0: SealV0;
     SeatHolder: SeatHolder;
     SeedOf: SeedOf;
-    Sent: Sent;
     SessionIndex: SessionIndex;
     SessionInfo: SessionInfo;
     SessionInfoValidatorGroup: SessionInfoValidatorGroup;
@@ -2456,7 +2273,6 @@ declare module '@polkadot/types/types/registry' {
     SignedAvailabilityBitfield: SignedAvailabilityBitfield;
     SignedAvailabilityBitfields: SignedAvailabilityBitfields;
     SignedBlock: SignedBlock;
-    SignedBlockHeader: SignedBlockHeader;
     SignedBlockWithJustification: SignedBlockWithJustification;
     SignedBlockWithJustifications: SignedBlockWithJustifications;
     SignerPayload: SignerPayload;
@@ -2485,7 +2301,6 @@ declare module '@polkadot/types/types/registry' {
     SolutionSupports: SolutionSupports;
     SpanIndex: SpanIndex;
     SpanRecord: SpanRecord;
-    SpecIndex: SpecIndex;
     Sr25519Signature: Sr25519Signature;
     StakingLedger: StakingLedger;
     StakingLedgerTo223: StakingLedgerTo223;
@@ -2527,8 +2342,6 @@ declare module '@polkadot/types/types/registry' {
     StoredState: StoredState;
     StrikeCount: StrikeCount;
     SubId: SubId;
-    Succeeded: Succeeded;
-    SwapFee: SwapFee;
     SyncState: SyncState;
     SystemInherentData: SystemInherentData;
     SystemOrigin: SystemOrigin;
@@ -2542,14 +2355,11 @@ declare module '@polkadot/types/types/registry' {
     TombstoneContractInfo: TombstoneContractInfo;
     Transact: Transact;
     TransactionPriority: TransactionPriority;
-    TransactionStatus: TransactionStatus;
     TransactionValidityError: TransactionValidityError;
     TransientValidationData: TransientValidationData;
     TreasuryProposal: TreasuryProposal;
     TrieId: TrieId;
     TrieIndex: TrieIndex;
-    TxOut: TxOut;
-    TxSig: TxSig;
     Type: Type;
     u128: u128;
     U128: U128;
@@ -2569,7 +2379,6 @@ declare module '@polkadot/types/types/registry' {
     UncleEntryItem: UncleEntryItem;
     UnknownTransaction: UnknownTransaction;
     UnlockChunk: UnlockChunk;
-    UnsignedInt: UnsignedInt;
     UpwardMessage: UpwardMessage;
     usize: usize;
     USize: USize;
@@ -2593,7 +2402,6 @@ declare module '@polkadot/types/types/registry' {
     VersionedMultiAsset: VersionedMultiAsset;
     VersionedMultiLocation: VersionedMultiLocation;
     VersionedXcm: VersionedXcm;
-    VersionId: VersionId;
     VestingInfo: VestingInfo;
     VestingSchedule: VestingSchedule;
     Vote: Vote;
@@ -2626,6 +2434,5 @@ declare module '@polkadot/types/types/registry' {
     XcmError: XcmError;
     XcmResult: XcmResult;
     XCurrencyId: XCurrencyId;
-    ZenlinkAssetId: ZenlinkAssetId;
   }
 }
