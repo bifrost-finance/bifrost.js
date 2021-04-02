@@ -3,7 +3,7 @@
 
 import type { BTreeMap, Bytes, Option, Vec, bool, u32, u8 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
-import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { CurrencyId, TokenSymbol } from '@bifrost-finance/types/interfaces/assets';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { CurrencyIdOf, IsExtended, ShareWeight, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { Pair, PairId, TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
@@ -331,6 +331,10 @@ declare module '@polkadot/api/types/storage' {
        * List lock period while staking.
        **/
       stakingLockPeriod: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BlockNumber>, [CurrencyIdOf]>;
+      /**
+       * List user staking revenue.
+       **/
+      userStakingRevenue: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: TokenSymbol | 'BNC' | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'ETH' | 'vETH' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<BalanceOf>, [AccountId, TokenSymbol]>;
       /**
        * Yeild rate for each token
        **/
