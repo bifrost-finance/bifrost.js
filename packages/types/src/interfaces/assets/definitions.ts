@@ -2,7 +2,20 @@ export default {
   rpc: {},
   types: {
     TokenSymbol: {
-      _enum: ["BNC", "aUSD", "DOT", "vDOT", "KSM", "vKSM", "ETH", "vETH", "EOS", "vEOS", "IOST", "vIOST"],
+      _enum: {
+        BNC: 0,
+        aUSD: 1,
+        DOT: 2,
+        vDOT: 3,
+        KSM: 4,
+        vKSM: 5,
+        ETH: 6,
+        vETH: 7,
+        EOS: 8,
+        vEOS: 9,
+        IOST: 10,
+        vIOST: 11,
+      },
     },
     CurrencyId: {
       _enum: {
