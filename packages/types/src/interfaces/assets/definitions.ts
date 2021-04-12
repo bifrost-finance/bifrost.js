@@ -3,7 +3,7 @@ export default {
   types: {
     TokenSymbol: {
       _enum: {
-        BNC: 0,
+        ASG: 0,
         aUSD: 1,
         DOT: 2,
         vDOT: 3,

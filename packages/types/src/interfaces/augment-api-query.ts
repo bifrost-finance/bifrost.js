@@ -334,7 +334,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * List user staking revenue.
        **/
-      userStakingRevenue: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: TokenSymbol | 'BNC' | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'ETH' | 'vETH' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<BalanceOf>, [AccountId, TokenSymbol]>;
+      userStakingRevenue: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: TokenSymbol | 'ASG' | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'ETH' | 'vETH' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<BalanceOf>, [AccountId, TokenSymbol]>;
       /**
        * Yeild rate for each token
        **/

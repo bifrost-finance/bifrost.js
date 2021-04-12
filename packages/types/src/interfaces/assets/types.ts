@@ -22,7 +22,7 @@ export interface CurrencyId extends Enum {
 
 /** @name TokenSymbol */
 export interface TokenSymbol extends Enum {
-  readonly isBnc: boolean;
+  readonly isAsg: boolean;
   readonly isAUsd: boolean;
   readonly isDot: boolean;
   readonly isVDot: boolean;
