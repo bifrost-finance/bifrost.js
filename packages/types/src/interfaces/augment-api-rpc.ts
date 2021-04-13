@@ -543,15 +543,15 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get the output token amount for an exact input token amount.
        **/
-      getAmountInPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<NumberOrHex>>;
+      getAmountInPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<Text>>;
       /**
        * Get the input token amount for an exact output token amount.
        **/
-      getAmountOutPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<NumberOrHex>>;
+      getAmountOutPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<Text>>;
       /**
        * Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.
        **/
-      getEstimateLptoken: AugmentedRpc<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, amount0Desired: TokenBalance | AnyNumber | Uint8Array, amount1Desired: TokenBalance | AnyNumber | Uint8Array, amount0Min: TokenBalance | AnyNumber | Uint8Array, amount1Min: TokenBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<NumberOrHex>>;
+      getEstimateLptoken: AugmentedRpc<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, amount0Desired: TokenBalance | AnyNumber | Uint8Array, amount1Desired: TokenBalance | AnyNumber | Uint8Array, amount0Min: TokenBalance | AnyNumber | Uint8Array, amount1Min: TokenBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Text>>;
       /**
        * Get ownership of all exchange pairs for a particular account.
        **/
@@ -563,7 +563,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get the ownership of a certain currency for each parachain.
        **/
-      getSovereignsInfo: AugmentedRpc<(assetId: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[u32, AccountId, NumberOrHex]>>>;
+      getSovereignsInfo: AugmentedRpc<(assetId: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[u32, AccountId, Text]>>>;
     };
   }
 }

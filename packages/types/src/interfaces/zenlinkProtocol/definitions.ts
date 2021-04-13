@@ -14,7 +14,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "(u32, AccountId, NumberOrHex)",
+      type: "(u32, AccountId, String)",
     },
     getAllPairs: {
       description: "Get the information of all the exchange pairs.",
@@ -26,7 +26,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "Vec<PairInfo<AccountId, NumberOrHex>>",
+      type: "Vec<PairInfo<AccountId, String>>",
     },
     getOwnerPairs: {
       description: "Get ownership of all exchange pairs for a particular account.",
@@ -42,7 +42,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "Vec<PairInfo<AccountId, NumberOrHex>>",
+      type: "Vec<PairInfo<AccountId, String>>",
     },
     getPairByAssetId: {
       description: "Get the detailed information of a particular exchange pair.",
@@ -62,7 +62,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "Option<PairInfo<AccountId, NumberOrHex>>",
+      type: "Option<PairInfo<AccountId, String>>",
     },
     getAmountInPrice: {
       description: "Get the output token amount for an exact input token amount.",
@@ -82,7 +82,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "NumberOrHex",
+      type: "String",
     },
     getAmountOutPrice: {
       description: "Get the input token amount for an exact output token amount.",
@@ -102,7 +102,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "NumberOrHex",
+      type: "String",
     },
     getEstimateLptoken: {
       description:
@@ -139,7 +139,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "NumberOrHex",
+      type: "String",
     },
   },
   types: {

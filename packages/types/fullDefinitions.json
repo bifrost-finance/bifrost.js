@@ -129,7 +129,7 @@
             "isOptional": true
           }
         ],
-        "type": "(u32, AccountId, NumberOrHex)",
+        "type": "(u32, AccountId, String)",
         "isSubscription": false,
         "jsonrpc": "zenlinkProtocol_getSovereignsInfo",
         "method": "getSovereignsInfo",
@@ -145,7 +145,7 @@
             "isOptional": true
           }
         ],
-        "type": "Vec<PairInfo<AccountId, NumberOrHex>>",
+        "type": "Vec<PairInfo<AccountId, String>>",
         "isSubscription": false,
         "jsonrpc": "zenlinkProtocol_getAllPairs",
         "method": "getAllPairs",
@@ -165,7 +165,7 @@
             "isOptional": true
           }
         ],
-        "type": "Vec<PairInfo<AccountId, NumberOrHex>>",
+        "type": "Vec<PairInfo<AccountId, String>>",
         "isSubscription": false,
         "jsonrpc": "zenlinkProtocol_getOwnerPairs",
         "method": "getOwnerPairs",
@@ -189,7 +189,7 @@
             "isOptional": true
           }
         ],
-        "type": "Option<PairInfo<AccountId, NumberOrHex>>",
+        "type": "Option<PairInfo<AccountId, String>>",
         "isSubscription": false,
         "jsonrpc": "zenlinkProtocol_getPairByAssetId",
         "method": "getPairByAssetId",
@@ -213,7 +213,7 @@
             "isOptional": true
           }
         ],
-        "type": "NumberOrHex",
+        "type": "String",
         "isSubscription": false,
         "jsonrpc": "zenlinkProtocol_getAmountInPrice",
         "method": "getAmountInPrice",
@@ -237,7 +237,7 @@
             "isOptional": true
           }
         ],
-        "type": "NumberOrHex",
+        "type": "String",
         "isSubscription": false,
         "jsonrpc": "zenlinkProtocol_getAmountOutPrice",
         "method": "getAmountOutPrice",
@@ -277,7 +277,7 @@
             "isOptional": true
           }
         ],
-        "type": "NumberOrHex",
+        "type": "String",
         "isSubscription": false,
         "jsonrpc": "zenlinkProtocol_getEstimateLptoken",
         "method": "getEstimateLptoken",
