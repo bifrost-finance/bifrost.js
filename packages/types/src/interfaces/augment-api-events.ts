@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Option, Vec, u32 } from '@polkadot/types';
+import type { Bytes, Option, Vec, u128, u32 } from '@polkadot/types';
 import type { AmountOf, CurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
@@ -74,6 +74,9 @@ declare module '@polkadot/api/types/events' {
        **/
       Issued: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
     };
+    chargeTransactionFee: {
+      FlexibleFeeExchanged: AugmentedEvent<ApiType, [CurrencyId, u128]>;
+    };
     currencies: {
       /**
        * Update balance success. [currency_id, who, amount]
@@ -105,6 +108,8 @@ declare module '@polkadot/api/types/events' {
        * A account index has been frozen to its current account ID. \[index, who\]
        **/
       IndexFrozen: AugmentedEvent<ApiType, [AccountIndex, AccountId]>;
+    };
+    minterReward: {
     };
     parachainSystem: {
       ValidationFunctionApplied: AugmentedEvent<ApiType, [RelayChainBlockNumber]>;
@@ -183,9 +188,9 @@ declare module '@polkadot/api/types/events' {
       IssuedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
     vtokenMint: {
-      MintedToken: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
-      MintedVToken: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      Minted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
       RedeemedPointsSuccess: AugmentedEvent<ApiType, []>;
+      RedeemStarted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance, BlockNumber]>;
       UpdateRatePerBlockSuccess: AugmentedEvent<ApiType, []>;
       UpdateVtokenPoolSuccess: AugmentedEvent<ApiType, []>;
     };

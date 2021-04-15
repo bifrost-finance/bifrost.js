@@ -111,6 +111,12 @@ declare module '@polkadot/api/types/errors' {
        **/
       Permanent: AugmentedError<ApiType>;
     };
+    minterReward: {
+      /**
+       * There's no price at all.
+       **/
+      FailToGetSwapPrice: AugmentedError<ApiType>;
+    };
     scheduler: {
       /**
        * Failed to schedule a call
@@ -177,17 +183,21 @@ declare module '@polkadot/api/types/errors' {
        **/
       BalanceZero: AugmentedError<ApiType>;
       /**
-       * Empty vtoken pool, cause there's no price at all
+       * Empty vtoken pool, cause there's no price at all.
        **/
       EmptyVtokenPool: AugmentedError<ApiType>;
       /**
-       * The amount of token you want to mint is bigger than the vtoken pool
+       * The amount of token you want to mint is bigger than the vtoken pool.
        **/
       NotEnoughVtokenPool: AugmentedError<ApiType>;
       /**
-       * Token type not support
+       * Token type not support.
        **/
       NotSupportTokenType: AugmentedError<ApiType>;
+      /**
+       * User's token still under staking while he want to redeem.
+       **/
+      UnderStaking: AugmentedError<ApiType>;
     };
     xTokens: {
       /**

@@ -107,6 +107,12 @@ declare module '@polkadot/api/types/submittable' {
        **/
       issue: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
     };
+    chargeTransactionFee: {
+      /**
+       * Set user fee charge assets order.
+       **/
+      setUserFeeChargeOrder: AugmentedSubmittable<(assetOrderListVec: Option<Vec<CurrencyId>> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<Vec<CurrencyId>>]>;
+    };
     currencies: {
       /**
        * Transfer some balance to another account under `currency_id`.
@@ -579,26 +585,26 @@ declare module '@polkadot/api/types/submittable' {
     };
     vtokenMint: {
       /**
+       * Mint vtoken.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
+       **/
+      mint: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, tokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
+      /**
+       * Redeem token.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
+       **/
+      redeem: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, vtokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
+      /**
        * Set price for minting vtoken.
        * 
        * The dispatch origin for this call must be `Root` by the
        * transactor.
        **/
       setVtokenPool: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, newTokenPool: Compact<BalanceOf> | AnyNumber | Uint8Array, newVtokenPool: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>, Compact<BalanceOf>]>;
-      /**
-       * Mint token by vtoken.
-       * 
-       * The dispatch origin for this call must be `Signed` by the
-       * transactor.
-       **/
-      toToken: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, vtokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
-      /**
-       * Mint vtoken by token.
-       * 
-       * The dispatch origin for this call must be `Signed` by the
-       * transactor.
-       **/
-      toVtoken: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, tokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
     };
     xcmHandler: {
       sendHrmpXcm: AugmentedSubmittable<(recipient: ParaId | AnyNumber | Uint8Array, message: VersionedXcm | { V0: any } | string | Uint8Array, qos: ServiceQuality | 'Ordered' | 'Fast' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, VersionedXcm, ServiceQuality]>;

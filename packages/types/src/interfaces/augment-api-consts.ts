@@ -2,9 +2,11 @@
 /* eslint-disable */
 
 import type { Vec, u8 } from '@polkadot/types';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { MultiLocation } from '@polkadot/types/interfaces/parachains';
-import type { Balance, BalanceOf, BlockNumber, Moment, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';
+import type { Balance, BalanceOf, BlockNumber, Moment, PalletId, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';
 import type { RuntimeVersion } from '@polkadot/types/interfaces/state';
 import type { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support';
 import type { BlockLength, BlockWeights } from '@polkadot/types/interfaces/system';
@@ -18,6 +20,9 @@ declare module '@polkadot/api/types/consts' {
        **/
       existentialDeposit: Balance & AugmentedConst<ApiType>;
     };
+    chargeTransactionFee: {
+      nativeCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+    };
     currencies: {
       getNativeCurrencyId: CurrencyIdOf & AugmentedConst<ApiType>;
     };
@@ -26,6 +31,24 @@ declare module '@polkadot/api/types/consts' {
        * The deposit needed for reserving an index.
        **/
       deposit: BalanceOf & AugmentedConst<ApiType>;
+    };
+    minterReward: {
+      /**
+       * Allow maximum blocks can be extended.
+       **/
+      maximumExtendedPeriod: BlockNumberFor & AugmentedConst<ApiType>;
+      /**
+       * Identifier for adjusting weight
+       **/
+      palletId: PalletId & AugmentedConst<ApiType>;
+      /**
+       * Reward period, normally it's 50 blocks after.
+       **/
+      rewardPeriod: BlockNumberFor & AugmentedConst<ApiType>;
+      /**
+       * Two year as a round, 600 * 24 * 365 * 2
+       **/
+      twoYear: BlockNumberFor & AugmentedConst<ApiType>;
     };
     system: {
       /**
@@ -77,7 +100,10 @@ declare module '@polkadot/api/types/consts' {
       weightToFee: Vec<WeightToFeeCoefficient> & AugmentedConst<ApiType>;
     };
     vtokenMint: {
-      vtokenMintDuration: BlockNumber & AugmentedConst<ApiType>;
+      /**
+       * Identifier for the staking lock.
+       **/
+      palletId: PalletId & AugmentedConst<ApiType>;
     };
     xTokens: {
       /**
