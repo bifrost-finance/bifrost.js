@@ -3,11 +3,11 @@
 
 import type { Bytes, Compact, Option, Vec, bool, u16, u32, u64 } from '@polkadot/types';
 import type { AnyNumber } from '@polkadot/types/types';
-import type { AmountOf, CurrencyId, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { AmountOf, CurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
-import type { MultiLocation, NetworkId, OutboundHrmpMessage, ParaId, ParachainInherentData, UpwardMessage, VersionedXcm, Xcm } from '@polkadot/types/interfaces/parachains';
+import type { MultiAsset, MultiLocation, ParaId, ParachainInherentData, RelayChainBlockNumber, ServiceQuality, UpwardMessage, VersionedXcm, Xcm } from '@polkadot/types/interfaces/parachains';
 import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Call, ChangesTrieConfiguration, KeyValue, LookupSource, Moment, Perbill, Weight } from '@polkadot/types/interfaces/runtime';
 import type { Period, Priority } from '@polkadot/types/interfaces/scheduler';
 import type { Key } from '@polkadot/types/interfaces/system';
@@ -106,12 +106,6 @@ declare module '@polkadot/api/types/submittable' {
        * transactor.
        **/
       issue: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
-    };
-    chargeTransactionFee: {
-      /**
-       * Set user fee charge assets order.
-       **/
-      setUserFeeChargeOrder: AugmentedSubmittable<(assetOrderListVec: Option<Vec<CurrencyId>> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<Vec<CurrencyId>>]>;
     };
     currencies: {
       /**
@@ -247,14 +241,14 @@ declare module '@polkadot/api/types/submittable' {
       transfer: AugmentedSubmittable<(updated: AccountId | string | Uint8Array, index: AccountIndex | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId, AccountIndex]>;
     };
     parachainSystem: {
-      scheduleUpgrade: AugmentedSubmittable<(validationFunction: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes]>;
       /**
-       * Schedule a validation function upgrade without further checks.
+       * Force an already scheduled validation function upgrade to happen on a particular block.
        * 
-       * Same as [`Module::schedule_upgrade`], but without checking that the new `validation_function`
-       * is correct. This makes it more flexible, but also opens the door to easily brick the chain.
+       * Note that coordinating this block for the upgrade has to happen independently on the relay
+       * chain and this parachain. Synchronizing the block for the upgrade is sensitive, and this
+       * bypasses all checks and and normal protocols. Very easy to brick your chain if done wrong.
        **/
-      scheduleUpgradeWithoutChecks: AugmentedSubmittable<(validationFunction: Bytes | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Bytes]>;
+      setUpgradeBlock: AugmentedSubmittable<(relayChainBlock: RelayChainBlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [RelayChainBlockNumber]>;
       /**
        * Set the current validation data.
        * 
@@ -267,7 +261,8 @@ declare module '@polkadot/api/types/submittable' {
        * if the appropriate time has come.
        **/
       setValidationData: AugmentedSubmittable<(data: ParachainInherentData | { validationData?: any; relayChainState?: any; downwardMessages?: any; horizontalMessages?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParachainInherentData]>;
-      sudoSendHrmpMessage: AugmentedSubmittable<(message: OutboundHrmpMessage | { recipient?: any; data?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [OutboundHrmpMessage]>;
+      sudoSendHmpBlob: AugmentedSubmittable<(recipient: ParaId | AnyNumber | Uint8Array, blob: Bytes | string | Uint8Array, qos: ServiceQuality | 'Ordered' | 'Fast' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, Bytes, ServiceQuality]>;
+      sudoSendHmpXcm: AugmentedSubmittable<(recipient: ParaId | AnyNumber | Uint8Array, xcm: VersionedXcm | { V0: any } | string | Uint8Array, qos: ServiceQuality | 'Ordered' | 'Fast' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, VersionedXcm, ServiceQuality]>;
       sudoSendUpwardMessage: AugmentedSubmittable<(message: UpwardMessage | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [UpwardMessage]>;
     };
     scheduler: {
@@ -584,41 +579,41 @@ declare module '@polkadot/api/types/submittable' {
     };
     vtokenMint: {
       /**
-       * Mint vtoken.
-       * 
-       * The dispatch origin for this call must be `Signed` by the
-       * transactor.
-       **/
-      mint: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, tokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
-      /**
-       * Redeem token.
-       * 
-       * The dispatch origin for this call must be `Signed` by the
-       * transactor.
-       **/
-      redeem: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, vtokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
-      /**
        * Set price for minting vtoken.
        * 
        * The dispatch origin for this call must be `Root` by the
        * transactor.
        **/
       setVtokenPool: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, newTokenPool: Compact<BalanceOf> | AnyNumber | Uint8Array, newVtokenPool: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>, Compact<BalanceOf>]>;
+      /**
+       * Mint token by vtoken.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
+       **/
+      toToken: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, vtokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
+      /**
+       * Mint vtoken by token.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
+       **/
+      toVtoken: AugmentedSubmittable<(currencyId: CurrencyIdOf | { Token: any } | string | Uint8Array, tokenAmount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>]>;
     };
     xcmHandler: {
-      sendHrmpXcm: AugmentedSubmittable<(recipient: ParaId | AnyNumber | Uint8Array, message: VersionedXcm | { V0: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, VersionedXcm]>;
+      sendHrmpXcm: AugmentedSubmittable<(recipient: ParaId | AnyNumber | Uint8Array, message: VersionedXcm | { V0: any } | string | Uint8Array, qos: ServiceQuality | 'Ordered' | 'Fast' | number | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, VersionedXcm, ServiceQuality]>;
       sendUpwardXcm: AugmentedSubmittable<(message: VersionedXcm | { V0: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [VersionedXcm]>;
-      sendXcm: AugmentedSubmittable<(dest: MultiLocation | { Null: any } | { X1: any } | { X2: any } | { X3: any } | { X4: any } | string | Uint8Array, message: Xcm | { WithdrawAsset: any } | { ReserveAssetDeposit: any } | { TeleportAsset: any } | { Balances: any } | { Transact: any } | { RelayTo: any } | { RelayedFrom: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiLocation, Xcm]>;
+      sendXcm: AugmentedSubmittable<(dest: MultiLocation | { Null: any } | { X1: any } | { X2: any } | { X3: any } | { X4: any } | { X5: any } | { X6: any } | { X7: any } | { X8: any } | string | Uint8Array, message: Xcm | { WithdrawAsset: any } | { ReserveAssetDeposit: any } | { TeleportAsset: any } | { Balances: any } | { Transact: any } | { RelayTo: any } | { RelayedFrom: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiLocation, Xcm]>;
     };
     xTokens: {
       /**
-       * Transfer tokens to parachain.
+       * Transfer native currencies.
        **/
-      transferToParachain: AugmentedSubmittable<(xCurrencyId: XCurrencyId | { chainId?: any; currencyId?: any } | string | Uint8Array, paraId: ParaId | AnyNumber | Uint8Array, dest: AccountId | string | Uint8Array, destNetwork: NetworkId | { Any: any } | { Named: any } | { Polkadot: any } | { Kusama: any } | string | Uint8Array, amount: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [XCurrencyId, ParaId, AccountId, NetworkId, Balance]>;
+      transfer: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | string | Uint8Array, amount: Balance | AnyNumber | Uint8Array, dest: MultiLocation | { Null: any } | { X1: any } | { X2: any } | { X3: any } | { X4: any } | { X5: any } | { X6: any } | { X7: any } | { X8: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, Balance, MultiLocation]>;
       /**
-       * Transfer relay chain tokens to relay chain.
+       * Transfer `MultiAsset`.
        **/
-      transferToRelayChain: AugmentedSubmittable<(dest: AccountId | string | Uint8Array, amount: Balance | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountId, Balance]>;
+      transferMultiasset: AugmentedSubmittable<(asset: MultiAsset | { None: any } | { All: any } | { AllFungible: any } | { AllNonFungible: any } | { AllAbstractFungible: any } | { AllAbstractNonFungible: any } | { AllConcreteFungible: any } | { AllConcreteNonFungible: any } | { AbstractFungible: any } | { AbstractNonFungible: any } | { ConcreteFungible: any } | { ConcreteNonFungible: any } | string | Uint8Array, dest: MultiLocation | { Null: any } | { X1: any } | { X2: any } | { X3: any } | { X4: any } | { X5: any } | { X6: any } | { X7: any } | { X8: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAsset, MultiLocation]>;
     };
     zenlinkProtocol: {
       /**
@@ -628,15 +623,15 @@ declare module '@polkadot/api/types/submittable' {
        * 
        * # Arguments
        * 
-       * * `token_0`: Token that make up pair
-       * * `token_1`: Token that make up pair
-       * * `amount_0_desired`: Maximum amount of token_0 added to the pair
-       * * `amount_1_desired`: Maximum amount of token_1 added to the pair
-       * * `amount_0_min`: Minimum amount of token_0 added to the pair
-       * * `amount_1_min`: Minimum amount of token_1 added to the pair
-       * * `deadline`: Height of the cutoff block of this transaction
+       * - `token_0`: Token that make up pair
+       * - `token_1`: Token that make up pair
+       * - `amount_0_desired`: Maximum amount of token_0 added to the pair
+       * - `amount_1_desired`: Maximum amount of token_1 added to the pair
+       * - `amount_0_min`: Minimum amount of token_0 added to the pair
+       * - `amount_1_min`: Minimum amount of token_1 added to the pair
+       * - `deadline`: Height of the cutoff block of this transaction
        **/
-      addLiquidity: AugmentedSubmittable<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, amount0Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<BlockNumber>]>;
+      addLiquidity: AugmentedSubmittable<(token0: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, token1: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, amount0Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Desired: Compact<TokenBalance> | AnyNumber | Uint8Array, amount0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amount1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, Compact<BlockNumber>]>;
       /**
        * Create pair by tow asset.
        * 
@@ -644,10 +639,10 @@ declare module '@polkadot/api/types/submittable' {
        * 
        * # Arguments
        * 
-       * * `token_0`: Token that make up Pair
-       * * `token_1`: Token that make up Pair
+       * - `token_0`: Token that make up Pair
+       * - `token_1`: Token that make up Pair
        **/
-      createPair: AugmentedSubmittable<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId]>;
+      createPair: AugmentedSubmittable<(token0: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, token1: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId]>;
       /**
        * Extract liquidity.
        * 
@@ -655,38 +650,48 @@ declare module '@polkadot/api/types/submittable' {
        * 
        * # Arguments
        * 
-       * * `token_0`: Token that make up pair
-       * * `token_1`: Token that make up pair
-       * * `amount_token_0_min`: Minimum amount of token_0 to exact
-       * * `amount_token_1_min`: Minimum amount of token_1 to exact
-       * * `to`: Account that accepts withdrawal of assets
-       * * `deadline`: Height of the cutoff block of this transaction
+       * - `token_0`: Token that make up pair
+       * - `token_1`: Token that make up pair
+       * - `amount_token_0_min`: Minimum amount of token_0 to exact
+       * - `amount_token_1_min`: Minimum amount of token_1 to exact
+       * - `to`: Account that accepts withdrawal of assets
+       * - `deadline`: Height of the cutoff block of this transaction
        **/
-      removeLiquidity: AugmentedSubmittable<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, liquidity: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, LookupSource, Compact<BlockNumber>]>;
+      removeLiquidity: AugmentedSubmittable<(token0: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, token1: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, liquidity: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken0Min: Compact<TokenBalance> | AnyNumber | Uint8Array, amountToken1Min: Compact<TokenBalance> | AnyNumber | Uint8Array, to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, AssetId, Compact<TokenBalance>, Compact<TokenBalance>, Compact<TokenBalance>, LookupSource, Compact<BlockNumber>]>;
       /**
        * Sell amount of asset by path.
        * 
        * # Arguments
        * 
-       * * `amount_in`: Amount asset will be sold
-       * * `amount_out_min`: Minimum amount of target asset
-       * * `path`: path can convert to pairs.
-       * * `to`: Account that receive the target asset
-       * * `deadline`: Height of the cutoff block of this transaction
+       * - `amount_in`: Amount asset will be sold
+       * - `amount_out_min`: Minimum amount of target asset
+       * - `path`: path can convert to pairs.
+       * - `to`: Account that receive the target asset
+       * - `deadline`: Height of the cutoff block of this transaction
        **/
-      swapExactTokensForTokens: AugmentedSubmittable<(amountIn: Compact<TokenBalance> | AnyNumber | Uint8Array, amountOutMin: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
+      swapExactTokensForTokens: AugmentedSubmittable<(amountIn: Compact<TokenBalance> | AnyNumber | Uint8Array, amountOutMin: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
       /**
        * Buy amount of asset by path.
        * 
        * # Arguments
        * 
-       * * `amount_out`: Amount asset will be bought
-       * * `amount_in_max`: Maximum amount of sold asset
-       * * `path`: path can convert to pairs.
-       * * `to`: Account that receive the target asset
-       * * `deadline`: Height of the cutoff block of this transaction
+       * - `amount_out`: Amount asset will be bought
+       * - `amount_in_max`: Maximum amount of sold asset
+       * - `path`: path can convert to pairs.
+       * - `to`: Account that receive the target asset
+       * - `deadline`: Height of the cutoff block of this transaction
        **/
-      swapTokensForExactTokens: AugmentedSubmittable<(amountOut: Compact<TokenBalance> | AnyNumber | Uint8Array, amountInMax: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
+      swapTokensForExactTokens: AugmentedSubmittable<(amountOut: Compact<TokenBalance> | AnyNumber | Uint8Array, amountInMax: Compact<TokenBalance> | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array)[], to: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, deadline: Compact<BlockNumber> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<TokenBalance>, Compact<TokenBalance>, Vec<AssetId>, LookupSource, Compact<BlockNumber>]>;
+      /**
+       * Move some assets from one holder to another.
+       * 
+       * # Arguments
+       * 
+       * - `asset_id`: The asset id.
+       * - `target`: The receiver of the asset.
+       * - `amount`: The amount of the asset to transfer.
+       **/
+      transfer: AugmentedSubmittable<(assetId: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, target: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, amount: Compact<TokenBalance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, LookupSource, Compact<TokenBalance>]>;
       /**
        * Transfer zenlink assets to a sibling parachain.
        * 
@@ -694,12 +699,13 @@ declare module '@polkadot/api/types/submittable' {
        * 
        * # Arguments
        * 
-       * * `asset_id`: Global identifier for a zenlink asset
-       * * `para_id`: Destination parachain
-       * * `account`: Destination account
-       * * `amount`: Amount to transfer
+       * - `asset_id`: Global identifier for a zenlink asset
+       * - `para_id`: Destination parachain
+       * - `account`: Destination account
+       * - `amount`: Amount to transfer
+       * - `force_transfer`: Ignore check destination parachain and minimum balance
        **/
-      transferToParachain: AugmentedSubmittable<(assetId: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, paraId: ParaId | AnyNumber | Uint8Array, account: AccountId | string | Uint8Array, amount: Compact<TokenBalance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, ParaId, AccountId, Compact<TokenBalance>]>;
+      transferToParachain: AugmentedSubmittable<(assetId: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, paraId: ParaId | AnyNumber | Uint8Array, account: AccountId | string | Uint8Array, amount: Compact<TokenBalance> | AnyNumber | Uint8Array, forceTransfer: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AssetId, ParaId, AccountId, Compact<TokenBalance>, bool]>;
     };
   }
 

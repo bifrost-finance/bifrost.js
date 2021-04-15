@@ -1,10 +1,40 @@
 export default {
   rpc: {
+    getAllAssets: {
+      description: "zenlinkProtocol getAllAssets",
+      params: [
+        {
+          name: "at",
+          type: "Hash",
+          isOptional: true,
+        },
+      ],
+      type: "Vec<AssetId>",
+    },
+    getBalance: {
+      description: "zenlinkProtocol getBalance",
+      params: [
+        {
+          name: "asset",
+          type: "AssetId",
+        },
+        {
+          name: "owner",
+          type: "AccountId",
+        },
+        {
+          name: "at",
+          type: "Hash",
+          isOptional: true,
+        },
+      ],
+      type: "String",
+    },
     getSovereignsInfo: {
       description: "Get the ownership of a certain currency for each parachain.",
       params: [
         {
-          name: "assetId",
+          name: "asset_id",
           type: "AssetId",
         },
         {
@@ -26,7 +56,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "Vec<PairInfo<AccountId, String>>",
+      type: "Vec<PairInfo>",
     },
     getOwnerPairs: {
       description: "Get ownership of all exchange pairs for a particular account.",
@@ -42,17 +72,17 @@ export default {
           isOptional: true,
         },
       ],
-      type: "Vec<PairInfo<AccountId, String>>",
+      type: "Vec<PairInfo>",
     },
     getPairByAssetId: {
       description: "Get the detailed information of a particular exchange pair.",
       params: [
         {
-          name: "token0",
+          name: "token_0",
           type: "AssetId",
         },
         {
-          name: "token1",
+          name: "token_1",
           type: "AssetId",
         },
         {
@@ -62,7 +92,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "Option<PairInfo<AccountId, String>>",
+      type: "PairInfo",
     },
     getAmountInPrice: {
       description: "Get the output token amount for an exact input token amount.",
@@ -109,27 +139,27 @@ export default {
         "Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.",
       params: [
         {
-          name: "token0",
+          name: "token_0",
           type: "AssetId",
         },
         {
-          name: "token1",
+          name: "token_1",
           type: "AssetId",
         },
         {
-          name: "amount0Desired",
+          name: "amount_0_desired",
           type: "TokenBalance",
         },
         {
-          name: "amount1Desired",
+          name: "amount_1_desired",
           type: "TokenBalance",
         },
         {
-          name: "amount0Min",
+          name: "amount_0_min",
           type: "TokenBalance",
         },
         {
-          name: "amount1Min",
+          name: "amount_1_min",
           type: "TokenBalance",
         },
         {
@@ -144,28 +174,39 @@ export default {
   },
   types: {
     TokenBalance: "Balance",
+    TokenId: "u32",
     PairId: "u32",
-    AssetId: {
-      _enum: {
-        NativeCurrency: null,
-        ParaCurrency: "u32",
-      },
-    },
     Pair: {
       token_0: "AssetId",
       token_1: "AssetId",
       account: "AccountId",
       total_liquidity: "TokenBalance",
+      lp_asset_id: "AssetId",
     },
     PairInfo: {
       token_0: "AssetId",
       token_1: "AssetId",
-
       account: "AccountId",
       total_liquidity: "TokenBalance",
       holding_liquidity: "TokenBalance",
       reserve_0: "TokenBalance",
       reserve_1: "TokenBalance",
+      lp_asset_id: "AssetId",
+    },
+    AssetId: {
+      chain_id: "u32",
+      module_index: "u8",
+      asset_index: "u32",
+    },
+    AssetProperty: {
+      _enum: {
+        Foreign: null,
+        Lp: "LpProperty",
+      },
+    },
+    LpProperty: {
+      token_0: "AssetId",
+      token_1: "AssetId",
     },
   },
 };

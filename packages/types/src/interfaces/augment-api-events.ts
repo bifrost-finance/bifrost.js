@@ -1,13 +1,13 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Option, Vec, u128, u32 } from '@polkadot/types';
-import type { AmountOf, CurrencyId, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { Bytes, Option, Vec, u32 } from '@polkadot/types';
+import type { AmountOf, CurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { TAssetBalance } from '@polkadot/types/interfaces/assets';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
-import type { NetworkId, ParaId, RelayChainBlockNumber, XcmError } from '@polkadot/types/interfaces/parachains';
+import type { MultiAsset, MultiLocation, ParaId, RelayChainBlockNumber, XcmError } from '@polkadot/types/interfaces/parachains';
 import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash } from '@polkadot/types/interfaces/runtime';
 import type { TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
@@ -74,9 +74,6 @@ declare module '@polkadot/api/types/events' {
        **/
       Issued: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
     };
-    chargeTransactionFee: {
-      FlexibleFeeExchanged: AugmentedEvent<ApiType, [CurrencyId, u128]>;
-    };
     currencies: {
       /**
        * Update balance success. [currency_id, who, amount]
@@ -108,8 +105,6 @@ declare module '@polkadot/api/types/events' {
        * A account index has been frozen to its current account ID. \[index, who\]
        **/
       IndexFrozen: AugmentedEvent<ApiType, [AccountIndex, AccountId]>;
-    };
-    minterReward: {
     };
     parachainSystem: {
       ValidationFunctionApplied: AugmentedEvent<ApiType, [RelayChainBlockNumber]>;
@@ -188,9 +183,9 @@ declare module '@polkadot/api/types/events' {
       IssuedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
     vtokenMint: {
-      Minted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      MintedToken: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      MintedVToken: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
       RedeemedPointsSuccess: AugmentedEvent<ApiType, []>;
-      RedeemStarted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance, BlockNumber]>;
       UpdateRatePerBlockSuccess: AugmentedEvent<ApiType, []>;
       UpdateVtokenPoolSuccess: AugmentedEvent<ApiType, []>;
     };
@@ -222,23 +217,13 @@ declare module '@polkadot/api/types/events' {
     };
     xTokens: {
       /**
-       * Transferred to parachain. \[x_currency_id, src, para_id, dest,
-       * dest_network, amount\]
+       * Transferred. \[sender, currency_id, amount, dest\]
        **/
-      TransferredToParachain: AugmentedEvent<ApiType, [XCurrencyId, AccountId, ParaId, AccountId, NetworkId, Balance]>;
+      Transferred: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance, MultiLocation]>;
       /**
-       * Transferred to relay chain. \[src, dest, amount\]
+       * Transferred `MultiAsset`. \[sender, asset, dest\]
        **/
-      TransferredToRelayChain: AugmentedEvent<ApiType, [AccountId, AccountId, Balance]>;
-      /**
-       * Transfer to parachain failed. \[x_currency_id, src, para_id, dest,
-       * dest_network, amount, error\]
-       **/
-      TransferToParachainFailed: AugmentedEvent<ApiType, [XCurrencyId, AccountId, ParaId, AccountId, NetworkId, Balance, XcmError]>;
-      /**
-       * Transfer to relay chain failed. \[src, dest, amount, error\]
-       **/
-      TransferToRelayChainFailed: AugmentedEvent<ApiType, [AccountId, AccountId, Balance, XcmError]>;
+      TransferredMultiAsset: AugmentedEvent<ApiType, [AccountId, MultiAsset, MultiLocation]>;
     };
     zenlinkProtocol: {
       /**
@@ -246,9 +231,9 @@ declare module '@polkadot/api/types/events' {
        **/
       Burned: AugmentedEvent<ApiType, [AssetId, AccountId, TokenBalance]>;
       /**
-       * An HRMP message was sent to a sibling parachainchain. \[xcm_hash\]
+       * Some assets were Issued. \[asset_id, \]
        **/
-      HrmpMessageSent: AugmentedEvent<ApiType, [Hash]>;
+      Issued: AugmentedEvent<ApiType, [AssetId]>;
       /**
        * Add liquidity. \[owner, asset_id, asset_id\]
        **/
@@ -267,6 +252,10 @@ declare module '@polkadot/api/types/events' {
        **/
       PairCreated: AugmentedEvent<ApiType, [AccountId, AssetId, AssetId]>;
       /**
+       * Add liquidity. \[asset_id, asset_id\]
+       **/
+      PairCreatedByRoot: AugmentedEvent<ApiType, [AssetId, AssetId]>;
+      /**
        * Transact in trading \[owner, receiver, swap_path\]
        **/
       TokenSwap: AugmentedEvent<ApiType, [AccountId, AccountId, Vec<AssetId>]>;
@@ -276,30 +265,9 @@ declare module '@polkadot/api/types/events' {
        **/
       Transferred: AugmentedEvent<ApiType, [AssetId, AccountId, AccountId, TokenBalance]>;
       /**
-       * Xtransfer
        * Transferred to parachain. \[asset_id, src, para_id, dest, amount\]
        **/
       TransferredToParachain: AugmentedEvent<ApiType, [AssetId, AccountId, ParaId, AccountId, TokenBalance]>;
-      /**
-       * An upward message was sent to the relay chain. \[xcm_hash\]
-       **/
-      UpwardMessageSent: AugmentedEvent<ApiType, [Hash]>;
-      /**
-       * Bad XCM format used. \[xcm_hash\]
-       **/
-      XcmBadFormat: AugmentedEvent<ApiType, [Hash]>;
-      /**
-       * Bad XCM version used. \[xcm_hash\]
-       **/
-      XcmBadVersion: AugmentedEvent<ApiType, [Hash]>;
-      /**
-       * Some XCM failed. \[xcm_hash, xcm_error\]
-       **/
-      XcmExecuteFail: AugmentedEvent<ApiType, [Hash, XcmError]>;
-      /**
-       * Some XCM was executed ok. \[xcm_hash\]
-       **/
-      XcmExecuteSuccess: AugmentedEvent<ApiType, [Hash]>;
     };
   }
 

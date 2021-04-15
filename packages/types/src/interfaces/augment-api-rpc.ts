@@ -537,21 +537,29 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
     };
     zenlinkProtocol: {
       /**
+       * zenlinkProtocol getAllAssets
+       **/
+      getAllAssets: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<Vec<AssetId>>>;
+      /**
        * Get the information of all the exchange pairs.
        **/
       getAllPairs: AugmentedRpc<(at?: BlockHash | string | Uint8Array) => Observable<Vec<PairInfo>>>;
       /**
        * Get the output token amount for an exact input token amount.
        **/
-      getAmountInPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      getAmountInPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<Text>>;
       /**
        * Get the input token amount for an exact output token amount.
        **/
-      getAmountOutPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      getAmountOutPrice: AugmentedRpc<(supply: TokenBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      /**
+       * zenlinkProtocol getBalance
+       **/
+      getBalance: AugmentedRpc<(asset: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, owner: AccountId | string | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Text>>;
       /**
        * Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.
        **/
-      getEstimateLptoken: AugmentedRpc<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, amount0Desired: TokenBalance | AnyNumber | Uint8Array, amount1Desired: TokenBalance | AnyNumber | Uint8Array, amount0Min: TokenBalance | AnyNumber | Uint8Array, amount1Min: TokenBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      getEstimateLptoken: AugmentedRpc<(token_0: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, token_1: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, amount_0_desired: TokenBalance | AnyNumber | Uint8Array, amount_1_desired: TokenBalance | AnyNumber | Uint8Array, amount_0_min: TokenBalance | AnyNumber | Uint8Array, amount_1_min: TokenBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Text>>;
       /**
        * Get ownership of all exchange pairs for a particular account.
        **/
@@ -559,11 +567,11 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get the detailed information of a particular exchange pair.
        **/
-      getPairByAssetId: AugmentedRpc<(token0: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, token1: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Option<PairInfo>>>;
+      getPairByAssetId: AugmentedRpc<(token_0: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, token_1: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<PairInfo>>;
       /**
        * Get the ownership of a certain currency for each parachain.
        **/
-      getSovereignsInfo: AugmentedRpc<(assetId: AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[u32, AccountId, Text]>>>;
+      getSovereignsInfo: AugmentedRpc<(asset_id: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[u32, AccountId, Text]>>>;
     };
   }
 }

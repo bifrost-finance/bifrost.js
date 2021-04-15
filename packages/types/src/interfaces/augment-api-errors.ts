@@ -89,11 +89,27 @@ declare module '@polkadot/api/types/errors' {
        **/
       BalanceTooLow: AugmentedError<ApiType>;
     };
-    minterReward: {
+    indices: {
       /**
-       * There's no price at all.
+       * The index was not available.
        **/
-      FailToGetSwapPrice: AugmentedError<ApiType>;
+      InUse: AugmentedError<ApiType>;
+      /**
+       * The index was not already assigned.
+       **/
+      NotAssigned: AugmentedError<ApiType>;
+      /**
+       * The index is assigned to another account.
+       **/
+      NotOwner: AugmentedError<ApiType>;
+      /**
+       * The source and destination accounts are identical.
+       **/
+      NotTransfer: AugmentedError<ApiType>;
+      /**
+       * The index is permanent and may not be freed/changed.
+       **/
+      Permanent: AugmentedError<ApiType>;
     };
     scheduler: {
       /**
@@ -161,33 +177,49 @@ declare module '@polkadot/api/types/errors' {
        **/
       BalanceZero: AugmentedError<ApiType>;
       /**
-       * Empty vtoken pool, cause there's no price at all.
+       * Empty vtoken pool, cause there's no price at all
        **/
       EmptyVtokenPool: AugmentedError<ApiType>;
       /**
-       * The amount of token you want to mint is bigger than the vtoken pool.
+       * The amount of token you want to mint is bigger than the vtoken pool
        **/
       NotEnoughVtokenPool: AugmentedError<ApiType>;
       /**
-       * Token type not support.
+       * Token type not support
        **/
       NotSupportTokenType: AugmentedError<ApiType>;
-      /**
-       * User's token still under staking while he want to redeem.
-       **/
-      UnderStaking: AugmentedError<ApiType>;
     };
     xTokens: {
       /**
-       * Bad location.
+       * Asset has no reserve location.
        **/
-      BadLocation: AugmentedError<ApiType>;
+      AssetHasNoReserve: AugmentedError<ApiType>;
+      /**
+       * Invalid transfer destination.
+       **/
+      InvalidDest: AugmentedError<ApiType>;
+      /**
+       * Not cross-chain transfer.
+       **/
+      NotCrossChainTransfer: AugmentedError<ApiType>;
+      /**
+       * Currency is not cross-chain transferable.
+       **/
+      NotCrossChainTransferableCurrency: AugmentedError<ApiType>;
     };
     zenlinkProtocol: {
       /**
        * Location given was invalid or unsupported.
        **/
       AccountIdBadLocation: AugmentedError<ApiType>;
+      /**
+       * Amount to Balance conversion failed
+       **/
+      AmountToBalanceConversionFailed: AugmentedError<ApiType>;
+      /**
+       * Asset has already exist.
+       **/
+      AssetAlreadyExist: AugmentedError<ApiType>;
       /**
        * Asset has not been created.
        **/
@@ -197,10 +229,6 @@ declare module '@polkadot/api/types/errors' {
        **/
       Deadline: AugmentedError<ApiType>;
       /**
-       * Ensure correct parameter in cross chain add liquidity.
-       **/
-      DeniedAddLiquidityToParachain: AugmentedError<ApiType>;
-      /**
        * Trading pair can't be created.
        **/
       DeniedCreatePair: AugmentedError<ApiType>;
@@ -208,10 +236,6 @@ declare module '@polkadot/api/types/errors' {
        * The target chain is not in whitelist.
        **/
       DeniedReachTargetChain: AugmentedError<ApiType>;
-      /**
-       * Swap in local parachain by XCM message
-       **/
-      DeniedSwapInLocal: AugmentedError<ApiType>;
       /**
        * Transfer to self by XCM message
        **/
@@ -224,6 +248,10 @@ declare module '@polkadot/api/types/errors' {
        * XCM execution failed
        **/
       ExecutionFailed: AugmentedError<ApiType>;
+      /**
+       * Value too low to create account due to existential deposit
+       **/
+      ExistentialDeposit: AugmentedError<ApiType>;
       /**
        * Incorrect asset amount range.
        **/
@@ -245,17 +273,17 @@ declare module '@polkadot/api/types/errors' {
        **/
       InsufficientTargetAmount: AugmentedError<ApiType>;
       /**
+       * Invalid Asset Id.
+       **/
+      InvalidAssetId: AugmentedError<ApiType>;
+      /**
        * Can't find pair though trading path.
        **/
       InvalidPath: AugmentedError<ApiType>;
       /**
-       * XCM can not reach target chain, probably because of the hrmp channel is closed.
+       * AssetId is not in zenlink module
        **/
-      MaybeHrmpChannelIsClosed: AugmentedError<ApiType>;
-      /**
-       * AssetId is native currency
-       **/
-      NotParaCurrency: AugmentedError<ApiType>;
+      NotZenlinkAsset: AugmentedError<ApiType>;
       /**
        * Overflow.
        **/
@@ -268,10 +296,6 @@ declare module '@polkadot/api/types/errors' {
        * Trading pair does not exist.
        **/
       PairNotExists: AugmentedError<ApiType>;
-      /**
-       * Transfer Error
-       **/
-      TransferError: AugmentedError<ApiType>;
     };
   }
 

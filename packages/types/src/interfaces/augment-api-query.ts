@@ -1,16 +1,15 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { BTreeMap, Bytes, Option, Vec, bool, u32, u8 } from '@polkadot/types';
+import type { BTreeMap, Bytes, Option, Vec, bool, u32 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
-import type { CurrencyId, TokenSymbol } from '@bifrost-finance/types/interfaces/assets';
-import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
-import type { CurrencyIdOf, IsExtended, ShareWeight, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
-import type { Pair, PairId, TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/vtokenMint';
+import type { AssetProperty, Pair, PairId, TokenBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { TAssetBalance } from '@polkadot/types/interfaces/assets';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { AbridgedHostConfiguration, MessageQueueChain, MessagingStateSnapshot, ParaId, PersistedValidationData, RelayChainBlockNumber, UpwardMessage } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Moment, Permill, Releases } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Moment, Releases } from '@polkadot/types/interfaces/runtime';
 import type { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { AccountInfo, ConsumedWeight, DigestOf, EventIndex, EventRecord, LastRuntimeUpgradeInfo, Phase } from '@polkadot/types/interfaces/system';
 import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
@@ -61,47 +60,11 @@ declare module '@polkadot/api/types/storage' {
        **/
       totalIssuance: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
     };
-    chargeTransactionFee: {
-      defaultFeeChargeOrderList: AugmentedQuery<ApiType, () => Observable<Vec<CurrencyId>>, []>;
-      userFeeChargeOrderList: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Vec<CurrencyId>>, [AccountId]>;
-    };
     indices: {
       /**
        * The lookup from index to account.
        **/
       accounts: AugmentedQuery<ApiType, (arg: AccountIndex | AnyNumber | Uint8Array) => Observable<Option<ITuple<[AccountId, BalanceOf, bool]>>>, [AccountIndex]>;
-    };
-    minterReward: {
-      /**
-       * How much BNC will be issued to minters each block after.
-       **/
-      bncRewardByOneBlock: AugmentedQuery<ApiType, () => Observable<BalanceOf>, []>;
-      /**
-       * Record maximum vtoken value is minted and when minted
-       **/
-      currentRound: AugmentedQuery<ApiType, () => Observable<u8>, []>;
-      /**
-       * Ieally, BNC reward will be issued after each 50 blocks.
-       **/
-      currentRoundStartAt: AugmentedQuery<ApiType, () => Observable<BlockNumberFor>, []>;
-      /**
-       * Record maximum vtoken value is minted and when minted
-       **/
-      maximumVtokenMinted: AugmentedQuery<ApiType, () => Observable<ITuple<[BlockNumberFor, BalanceOf, CurrencyIdOf, IsExtended]>>, []>;
-      /**
-       * Who mints vtoken
-       **/
-      minter: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BalanceOf>, [AccountId, CurrencyIdOf]>;
-      /**
-       * Current storage version
-       **/
-      storageVersion: AugmentedQuery<ApiType, () => Observable<StorageVersion>, []>;
-      totalVtokenMinted: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
-      /**
-       * Record a user how much bnc s/he reveives.
-       **/
-      userBncReward: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<BalanceOf>, [AccountId]>;
-      weights: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<ShareWeight>, [CurrencyIdOf]>;
     };
     parachainInfo: {
       parachainId: AugmentedQuery<ApiType, () => Observable<ParaId>, []>;
@@ -109,7 +72,7 @@ declare module '@polkadot/api/types/storage' {
     parachainSystem: {
       /**
        * The number of HRMP messages we observed in `on_initialize` and thus used that number for
-       * announcing the weight of `on_initialize` and `on_finialize`.
+       * announcing the weight of `on_initialize` and `on_finalize`.
        **/
       announcedHrmpMessagesPerCandidate: AugmentedQuery<ApiType, () => Observable<u32>, []>;
       /**
@@ -152,8 +115,20 @@ declare module '@polkadot/api/types/storage' {
        * Essentially `OutboundHrmpMessage`s grouped by the recipients.
        **/
       outboundHrmpMessages: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Vec<Bytes>>, [ParaId]>;
+      /**
+       * We need to store the new validation function for the span between
+       * setting it and applying it. If it has a
+       * value, then [`PendingValidationFunction`] must have a real value, and
+       * together will coordinate the block number where the upgrade will happen.
+       **/
+      pendingRelayChainBlockNumber: AugmentedQuery<ApiType, () => Observable<Option<RelayChainBlockNumber>>, []>;
       pendingUpwardMessages: AugmentedQuery<ApiType, () => Observable<Vec<UpwardMessage>>, []>;
-      pendingValidationFunction: AugmentedQuery<ApiType, () => Observable<Option<ITuple<[RelayChainBlockNumber, Bytes]>>>, []>;
+      /**
+       * The new validation function we will upgrade to when the relay chain
+       * reaches [`PendingRelayChainBlockNumber`]. A real validation function must
+       * exist here as long as [`PendingRelayChainBlockNumber`] is set.
+       **/
+      pendingValidationFunction: AugmentedQuery<ApiType, () => Observable<Bytes>, []>;
       /**
        * The snapshot of some state related to messaging relevant to the current parachain as per
        * the relay parent.
@@ -305,7 +280,7 @@ declare module '@polkadot/api/types/storage' {
     };
     vtokenMint: {
       /**
-       * Referer channels for all users.
+       * Referer channels for all users
        **/
       allReferrerChannels: AugmentedQuery<ApiType, () => Observable<ITuple<[BTreeMap<AccountId, BalanceOf>, BalanceOf]>>, []>;
       /**
@@ -313,40 +288,32 @@ declare module '@polkadot/api/types/storage' {
        **/
       mintPool: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
       /**
-       * The ROI of each token by every block.
-       **/
-      rateOfInterestEachBlock: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
-      /**
-       * Record when and how much balance user want to redeem.
-       **/
-      redeemRecord: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<Vec<ITuple<[BlockNumber, BalanceOf]>>>, [AccountId, CurrencyIdOf]>;
-      /**
        * Collect referrer, minter => ([(referrer1, 1000), (referrer2, 2000), ...], total_point)
        * total_point = 1000 + 2000 + ...
        * referrer must be unique, so check it unique while a new referrer incoming.
        * and insert the new channel to the
        **/
       referrerChannels: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ITuple<[AccountId, BalanceOf]>>, BalanceOf]>>, [AccountId]>;
-      /**
-       * List lock period while staking.
-       **/
-      stakingLockPeriod: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<BlockNumber>, [CurrencyIdOf]>;
-      /**
-       * List user staking revenue.
-       **/
-      userStakingRevenue: AugmentedQueryDoubleMap<ApiType, (key1: AccountId | string | Uint8Array, key2: TokenSymbol | 'ASG' | 'aUSD' | 'DOT' | 'vDOT' | 'KSM' | 'vKSM' | 'ETH' | 'vETH' | 'EOS' | 'vEOS' | 'IOST' | 'vIOST' | number | Uint8Array) => Observable<BalanceOf>, [AccountId, TokenSymbol]>;
-      /**
-       * Yeild rate for each token
-       **/
-      yieldRate: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | string | Uint8Array) => Observable<Permill>, [CurrencyIdOf]>;
     };
     xTokens: {
     };
     zenlinkProtocol: {
-      assetsToPair: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AssetId]> | [AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array, AssetId | { NativeCurrency: any } | { ParaCurrency: any } | string | Uint8Array]) => Observable<Option<Pair>>, [ITuple<[AssetId, AssetId]>]>;
-      liquidityPool: AugmentedQuery<ApiType, (arg: ITuple<[AccountId, AccountId]> | [AccountId | string | Uint8Array, AccountId | string | Uint8Array]) => Observable<TokenBalance>, [ITuple<[AccountId, AccountId]>]>;
+      /**
+       * The assets list
+       **/
+      assets: AugmentedQuery<ApiType, () => Observable<Vec<AssetId>>, []>;
+      assetsMetadata: AugmentedQuery<ApiType, (arg: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array) => Observable<AssetProperty>, [AssetId]>;
+      assetsToPair: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AssetId]> | [AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array]) => Observable<Option<Pair>>, [ITuple<[AssetId, AssetId]>]>;
+      /**
+       * The number of units of assets held by any given account.
+       **/
+      balances: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AccountId]> | [AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array, AccountId | string | Uint8Array]) => Observable<TokenBalance>, [ITuple<[AssetId, AccountId]>]>;
       nextPairId: AugmentedQuery<ApiType, () => Observable<PairId>, []>;
       pairs: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AssetId, AssetId]>>>, []>;
+      /**
+       * TWOX-NOTE: `AssetId` is trusted, so this is safe.
+       **/
+      totalSupply: AugmentedQuery<ApiType, (arg: AssetId | { chain_id?: any; module_index?: any; asset_index?: any } | string | Uint8Array) => Observable<TokenBalance>, [AssetId]>;
     };
   }
 
