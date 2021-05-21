@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
-import type { AmountOf, ChainId, CurrencyId, TokenSymbol, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { AmountOf, ChainId, CurrencyId, TAssetBalance, TokenSymbol, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { CurrencyIdOf, IsExtended, ShareWeight, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { AssetProperty, LpProperty, Pair, PairId, PairInfo, TokenBalance, TokenId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
@@ -126,6 +126,7 @@ declare module '@polkadot/types/types/registry' {
     'Compact<SpanIndex>': Compact<SpanIndex>;
     'Compact<StrikeCount>': Compact<StrikeCount>;
     'Compact<SubId>': Compact<SubId>;
+    'Compact<TAssetBalance>': Compact<TAssetBalance>;
     'Compact<TokenBalance>': Compact<TokenBalance>;
     'Compact<TokenId>': Compact<TokenId>;
     'Compact<TransactionPriority>': Compact<TransactionPriority>;
@@ -845,6 +846,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<SystemOrigin>': Option<SystemOrigin>;
     'Option<Tally>': Option<Tally>;
     'Option<TaskAddress>': Option<TaskAddress>;
+    'Option<TAssetBalance>': Option<TAssetBalance>;
     'Option<TeleportAsset>': Option<TeleportAsset>;
     'Option<Text>': Option<Text>;
     'Option<Timepoint>': Option<Timepoint>;
@@ -1629,6 +1631,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<SystemOrigin>': Vec<SystemOrigin>;
     'Vec<Tally>': Vec<Tally>;
     'Vec<TaskAddress>': Vec<TaskAddress>;
+    'Vec<TAssetBalance>': Vec<TAssetBalance>;
     'Vec<TeleportAsset>': Vec<TeleportAsset>;
     'Vec<Text>': Vec<Text>;
     'Vec<Timepoint>': Vec<Timepoint>;
@@ -2413,6 +2416,7 @@ declare module '@polkadot/types/types/registry' {
     SystemOrigin: SystemOrigin;
     Tally: Tally;
     TaskAddress: TaskAddress;
+    TAssetBalance: TAssetBalance;
     TeleportAsset: TeleportAsset;
     Text: Text;
     Timepoint: Timepoint;

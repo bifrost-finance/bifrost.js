@@ -1,8 +1,16 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Struct, i128 } from '@polkadot/types';
+import type { Bytes, Enum, Struct, i128, u128 } from '@polkadot/types';
 import type { ParaId } from '@polkadot/types/interfaces/parachains';
+import type { Balance } from '@polkadot/types/interfaces/runtime';
+
+/** @name AccountData */
+export interface AccountData extends Struct {
+  readonly free: Balance;
+  readonly reserved: Balance;
+  readonly frozen: Balance;
+}
 
 /** @name AmountOf */
 export interface AmountOf extends i128 {}
@@ -19,6 +27,9 @@ export interface CurrencyId extends Enum {
   readonly isToken: boolean;
   readonly asToken: TokenSymbol;
 }
+
+/** @name TAssetBalance */
+export interface TAssetBalance extends u128 {}
 
 /** @name TokenSymbol */
 export interface TokenSymbol extends Enum {
