@@ -1,8 +1,13 @@
 import fs from "fs";
-import { spec, bifrostTypes, bifrostRpc } from "../../types/src/index";
+import { spec, bifrostTypes, bifrostRpc, bifrostTypeAlias } from "../../types/src/index";
 
 function writeDataFile(filePath: string, data: any) {
   fs.writeFileSync(filePath, data);
+}
+
+if (bifrostTypeAlias["tokens"]) {
+  bifrostTypeAlias["assets"] = bifrostTypeAlias["tokens"];
+  delete bifrostTypeAlias.tokens;
 }
 
 function main() {
@@ -15,6 +20,9 @@ function main() {
     },
     rpc: {
       ...bifrostRpc,
+    },
+    typesAlias: {
+      ...bifrostTypeAlias,
     },
   };
 

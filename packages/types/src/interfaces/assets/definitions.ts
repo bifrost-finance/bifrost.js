@@ -33,11 +33,6 @@ export default {
       chainId: "ChainId",
       currencyId: "Vec<u8>",
     },
-    TAssetBalance: "u128",
-    AccountData: {
-      free: "Balance",
-      reserved: "Balance",
-      frozen: "Balance"
-    }
+    TAssetBalance: "Balance",
   },
 };

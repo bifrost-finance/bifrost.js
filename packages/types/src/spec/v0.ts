@@ -9,6 +9,7 @@ const overrideTypes = {
   AccountInfo: "AccountInfoWithRefCount",
   Address: "MultiAddress",
   LookupSource: "MultiAddress",
+  TAssetBalance: "Balance"
 };
 
 const types: RegistryTypes = {
