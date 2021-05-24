@@ -5,6 +5,7 @@ function writeDataFile(filePath: string, data: any) {
   fs.writeFileSync(filePath, data);
 }
 
+
 if (bifrostTypeAlias["tokens"]) {
   bifrostTypeAlias["assets"] = bifrostTypeAlias["tokens"];
   delete bifrostTypeAlias.tokens;

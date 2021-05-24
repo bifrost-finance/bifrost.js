@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
-import type { AmountOf, ChainId, CurrencyId, TAssetBalance, TokenSymbol, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
+import type { AmountOf, ChainId, CurrencyId, OrmlAccountData, TAssetBalance, TokenSymbol, XCurrencyId } from '@bifrost-finance/types/interfaces/assets';
 import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { CurrencyIdOf, IsExtended, ShareWeight, StorageVersion } from '@bifrost-finance/types/interfaces/vtokenMint';
 import type { AssetProperty, LpProperty, Pair, PairId, PairInfo, TokenBalance, TokenId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
@@ -614,6 +614,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<Origin>': Option<Origin>;
     'Option<OriginCaller>': Option<OriginCaller>;
     'Option<OriginKind>': Option<OriginKind>;
+    'Option<OrmlAccountData>': Option<OrmlAccountData>;
     'Option<OutboundHrmpMessage>': Option<OutboundHrmpMessage>;
     'Option<Owner>': Option<Owner>;
     'Option<Pair>': Option<Pair>;
@@ -1399,6 +1400,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Origin>': Vec<Origin>;
     'Vec<OriginCaller>': Vec<OriginCaller>;
     'Vec<OriginKind>': Vec<OriginKind>;
+    'Vec<OrmlAccountData>': Vec<OrmlAccountData>;
     'Vec<OutboundHrmpMessage>': Vec<OutboundHrmpMessage>;
     'Vec<Owner>': Vec<Owner>;
     'Vec<Pair>': Vec<Pair>;
@@ -2184,6 +2186,7 @@ declare module '@polkadot/types/types/registry' {
     Origin: Origin;
     OriginCaller: OriginCaller;
     OriginKind: OriginKind;
+    OrmlAccountData: OrmlAccountData;
     OutboundHrmpMessage: OutboundHrmpMessage;
     Owner: Owner;
     Pair: Pair;

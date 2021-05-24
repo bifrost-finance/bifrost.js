@@ -21,6 +21,13 @@ export interface CurrencyId extends Enum {
   readonly asToken: TokenSymbol;
 }
 
+/** @name OrmlAccountData */
+export interface OrmlAccountData extends Struct {
+  readonly free: Balance;
+  readonly reserved: Balance;
+  readonly frozen: Balance;
+}
+
 /** @name TAssetBalance */
 export interface TAssetBalance extends Balance {}
 

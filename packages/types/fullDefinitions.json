@@ -1,79 +1,5 @@
 {
   "types": {
-    "CallOf": "Call",
-    "DispatchTime": {
-      "_enum": {
-        "At": "BlockNumber",
-        "After": "BlockNumber"
-      }
-    },
-    "ScheduleTaskIndex": "u32",
-    "DelayedOrigin": {
-      "delay": "BlockNumber",
-      "origin": "PalletsOrigin"
-    },
-    "StorageValue": "Vec<u8>",
-    "GraduallyUpdate": {
-      "key": "StorageKey",
-      "targetValue": "StorageValue",
-      "perBlock": "StorageValue"
-    },
-    "StorageKeyBytes": "Vec<u8>",
-    "StorageValueBytes": "Vec<u8>",
-    "RpcDataProviderId": "Text",
-    "DataProviderId": "u8",
-    "TimestampedValue": {
-      "value": "OracleValue",
-      "timestamp": "Moment"
-    },
-    "TimestampedValueOf": "TimestampedValue",
-    "OrderedSet": "Vec<AccountId>",
-    "OrmlAccountData": {
-      "free": "Balance",
-      "frozen": "Balance",
-      "reserved": "Balance"
-    },
-    "OrmlBalanceLock": {
-      "amount": "Balance",
-      "id": "LockIdentifier"
-    },
-    "AuctionInfo": {
-      "bid": "Option<(AccountId, Balance)>",
-      "start": "BlockNumber",
-      "end": "Option<BlockNumber>"
-    },
-    "DelayedDispatchTime": {
-      "_enum": {
-        "At": "BlockNumber",
-        "After": "BlockNumber"
-      }
-    },
-    "DispatchId": "u32",
-    "Price": "FixedU128",
-    "OrmlVestingSchedule": {
-      "start": "BlockNumber",
-      "period": "BlockNumber",
-      "periodCount": "u32",
-      "perPeriod": "Compact<Balance>"
-    },
-    "VestingScheduleOf": "OrmlVestingSchedule",
-    "PoolInfo": {
-      "totalShares": "Compact<Share>",
-      "totalRewards": "Compact<Balance>",
-      "totalWithdrawnRewards": "Compact<Balance>"
-    },
-    "Share": "u128",
-    "ChainId": {
-      "_enum": {
-        "RelayChain": "Null",
-        "ParaChain": "ParaId"
-      }
-    },
-    "XCurrencyId": {
-      "chainId": "ChainId",
-      "currencyId": "Vec<u8>"
-    },
-    "OracleValue": "FixedU128",
     "TokenSymbol": {
       "_enum": {
         "ASG": 0,
@@ -96,7 +22,22 @@
       }
     },
     "AmountOf": "i128",
+    "ChainId": {
+      "_enum": {
+        "RelayChain": "Null",
+        "ParaChain": "ParaId"
+      }
+    },
+    "XCurrencyId": {
+      "chainId": "ChainId",
+      "currencyId": "Vec<u8>"
+    },
     "TAssetBalance": "Balance",
+    "OrmlAccountData": {
+      "free": "Balance",
+      "reserved": "Balance",
+      "frozen": "Balance"
+    },
     "CurrencyIdOf": "CurrencyId",
     "IsExtended": "bool",
     "StorageVersion": "Releases",
@@ -166,40 +107,6 @@
     }
   },
   "rpc": {
-    "oracle": {
-      "getValue": {
-        "description": "Retrieves the oracle value for a given key.",
-        "params": [
-          {
-            "name": "providerId",
-            "type": "RpcDataProviderId"
-          },
-          {
-            "name": "key",
-            "type": "OracleKey"
-          }
-        ],
-        "type": "Option<TimestampedValue>",
-        "isSubscription": false,
-        "jsonrpc": "oracle_getValue",
-        "method": "getValue",
-        "section": "oracle"
-      },
-      "getAllValues": {
-        "description": "Retrieves all oracle values.",
-        "params": [
-          {
-            "name": "providerId",
-            "type": "RpcDataProviderId"
-          }
-        ],
-        "type": "Vec<(OracleKey, Option<TimestampedValue>)>",
-        "isSubscription": false,
-        "jsonrpc": "oracle_getAllValues",
-        "method": "getAllValues",
-        "section": "oracle"
-      }
-    },
     "chargeTransactionFee": {
       "getFeeTokenAndAmount": {
         "description": "Get charging token type and amount in terms of flexible transaction fee.",
@@ -437,8 +344,7 @@
   },
   "typesAlias": {
     "assets": {
-      "AccountData": "OrmlAccountData",
-      "BalanceLock": "OrmlBalanceLock"
+      "AccountData": "OrmlAccountData"
     }
   }
 }
