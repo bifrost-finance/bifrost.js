@@ -15,11 +15,11 @@ export default {
       description: "zenlinkProtocol getBalance",
       params: [
         {
-          name: "asset",
+          name: "asset_id",
           type: "AssetId",
         },
         {
-          name: "owner",
+          name: "account",
           type: "AccountId",
         },
         {
@@ -78,11 +78,11 @@ export default {
       description: "Get the detailed information of a particular exchange pair.",
       params: [
         {
-          name: "token_0",
+          name: "asset_0",
           type: "AssetId",
         },
         {
-          name: "token_1",
+          name: "asset_1",
           type: "AssetId",
         },
         {
@@ -99,7 +99,7 @@ export default {
       params: [
         {
           name: "supply",
-          type: "TokenBalance",
+          type: "ZenlinkAssetBalance",
         },
         {
           name: "path",
@@ -119,7 +119,7 @@ export default {
       params: [
         {
           name: "supply",
-          type: "TokenBalance",
+          type: "ZenlinkAssetBalance",
         },
         {
           name: "path",
@@ -139,28 +139,28 @@ export default {
         "Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.",
       params: [
         {
-          name: "token_0",
+          name: "asset_0",
           type: "AssetId",
         },
         {
-          name: "token_1",
+          name: "asset_1",
           type: "AssetId",
         },
         {
           name: "amount_0_desired",
-          type: "TokenBalance",
+          type: "ZenlinkAssetBalance",
         },
         {
           name: "amount_1_desired",
-          type: "TokenBalance",
+          type: "ZenlinkAssetBalance",
         },
         {
           name: "amount_0_min",
-          type: "TokenBalance",
+          type: "ZenlinkAssetBalance",
         },
         {
           name: "amount_1_min",
-          type: "TokenBalance",
+          type: "ZenlinkAssetBalance",
         },
         {
           name: "at",
@@ -173,40 +173,26 @@ export default {
     },
   },
   types: {
-    TokenBalance: "Balance",
-    TokenId: "u32",
-    PairId: "u32",
-    Pair: {
-      token_0: "AssetId",
-      token_1: "AssetId",
-      account: "AccountId",
-      total_liquidity: "TokenBalance",
-      lp_asset_id: "AssetId",
-    },
-    PairInfo: {
-      token_0: "AssetId",
-      token_1: "AssetId",
-      account: "AccountId",
-      total_liquidity: "TokenBalance",
-      holding_liquidity: "TokenBalance",
-      reserve_0: "TokenBalance",
-      reserve_1: "TokenBalance",
-      lp_asset_id: "AssetId",
-    },
     AssetId: {
       chain_id: "u32",
-      module_index: "u8",
-      asset_index: "u32",
+      asset_type: "u8",
+      asset_index: "u32"
     },
-    AssetProperty: {
-      _enum: {
-        Foreign: null,
-        Lp: "LpProperty",
-      },
-    },
-    LpProperty: {
-      token_0: "AssetId",
-      token_1: "AssetId",
+    ZenlinkAssetBalance: "u128",
+    PairInfo: {
+      asset_0: "AssetId",
+      asset_1: "AssetId",
+      account: "AccountId",
+      total_liquidity: "ZenlinkAssetBalance",
+      holding_liquidity: "ZenlinkAssetBalance",
+      reserve_0: "ZenlinkAssetBalance",
+      reserve_1: "ZenlinkAssetBalance",
+      lp_asset_id: "AssetId"
     },
   },
+  typesAlias: {
+    ZenlinkProtocol: {
+      AssetBalance: "ZenlinkAssetBalance"
+    }
+  }
 };

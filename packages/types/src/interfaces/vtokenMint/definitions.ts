@@ -1,9 +1,22 @@
 export default {
-  rpc: {},
-  types: {
-    CurrencyIdOf: "CurrencyId",
-    IsExtended: "bool",
-    StorageVersion: "Releases",
-    ShareWeight: "Balance",
-  },
-};
+    rpc: {
+        getVtokenMintRate: {
+            description: "Get current vtoken mint rate.",
+            params: [
+            {
+                name: "asset_id",
+                type: "CurrencyId",
+            },
+            {
+                name: "at",
+                type: "BlockHash",
+                isHistoric: true,
+                isOptional: true,
+            },
+            ],
+            type: "String",
+      },
+    },
+    types: {},
+  };
+  
