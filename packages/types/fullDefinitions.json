@@ -21,6 +21,19 @@
     },
     "CurrencyIdOf": "CurrencyId",
     "TAssetBalance": "Balance",
+    "AmountOf": "i128",
+    "ChainId": {
+      "_enum": {
+        "RelayChain": "Null",
+        "ParaChain": "ParaId"
+      }
+    },
+    "XCurrencyId": {
+      "chainId": "ChainId",
+      "currencyId": "Vec<u8>"
+    },
+    "StorageVersion": "Releases",
+    "ShareWeight": "Balance",
     "OrmlAccountData": {
       "free": "Balance",
       "reserved": "Balance",
@@ -35,6 +48,7 @@
       }
     },
     "IsExtended": "bool",
+    "SystemPalletId": "PalletId",
     "RewardRecord": {
       "account_id": "AccountId",
       "record_amount": "Balance"
@@ -358,10 +372,10 @@
     }
   },
   "typesAlias": {
-    "Assets": {
+    "assets": {
       "AccountData": "OrmlAccountData"
     },
-    "ZenlinkProtocol": {
+    "zenlinkProtocol": {
       "AssetBalance": "ZenlinkAssetBalance"
     }
   }

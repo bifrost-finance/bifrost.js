@@ -2,10 +2,10 @@
 /* eslint-disable */
 
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
-import type { CurrencyId, CurrencyIdOf, TAssetBalance, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { AmountOf, ChainId, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TAssetBalance, TokenSymbol, XCurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { OrmlAccountData } from '@bifrost-finance/types/interfaces/assets';
 import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
-import type { IsExtended } from '@bifrost-finance/types/interfaces/minterReward';
+import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { MaxLocksOf, VestingInfo } from '@bifrost-finance/types/interfaces/vesting';
 import type { OrderId, OrderInfo, OrderState } from '@bifrost-finance/types/interfaces/vsbondAuction';
@@ -134,6 +134,7 @@ declare module '@polkadot/types/types/registry' {
     'Compact<SessionIndex>': Compact<SessionIndex>;
     'Compact<SetId>': Compact<SetId>;
     'Compact<SetIndex>': Compact<SetIndex>;
+    'Compact<ShareWeight>': Compact<ShareWeight>;
     'Compact<SiLookupTypeId>': Compact<SiLookupTypeId>;
     'Compact<Slot>': Compact<Slot>;
     'Compact<SlotNumber>': Compact<SlotNumber>;
@@ -193,6 +194,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<Address>': Option<Address>;
     'Option<AliveContractInfo>': Option<AliveContractInfo>;
     'Option<AllowedSlots>': Option<AllowedSlots>;
+    'Option<AmountOf>': Option<AmountOf>;
     'Option<AnySignature>': Option<AnySignature>;
     'Option<ApiId>': Option<ApiId>;
     'Option<ApplyExtrinsicResult>': Option<ApplyExtrinsicResult>;
@@ -276,6 +278,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<CandidateHash>': Option<CandidateHash>;
     'Option<CandidatePendingAvailability>': Option<CandidatePendingAvailability>;
     'Option<CandidateReceipt>': Option<CandidateReceipt>;
+    'Option<ChainId>': Option<ChainId>;
     'Option<ChainProperties>': Option<ChainProperties>;
     'Option<ChainType>': Option<ChainType>;
     'Option<ChangesTrieConfiguration>': Option<ChangesTrieConfiguration>;
@@ -847,6 +850,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<SessionKeys9B>': Option<SessionKeys9B>;
     'Option<SetId>': Option<SetId>;
     'Option<SetIndex>': Option<SetIndex>;
+    'Option<ShareWeight>': Option<ShareWeight>;
     'Option<SiField>': Option<SiField>;
     'Option<Signature>': Option<Signature>;
     'Option<SignedAvailabilityBitfield>': Option<SignedAvailabilityBitfield>;
@@ -921,6 +925,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<StorageMetadataV13>': Option<StorageMetadataV13>;
     'Option<StorageMetadataV9>': Option<StorageMetadataV9>;
     'Option<StorageProof>': Option<StorageProof>;
+    'Option<StorageVersion>': Option<StorageVersion>;
     'Option<StoredPendingChange>': Option<StoredPendingChange>;
     'Option<StoredState>': Option<StoredState>;
     'Option<StrikeCount>': Option<StrikeCount>;
@@ -928,6 +933,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<SyncState>': Option<SyncState>;
     'Option<SystemInherentData>': Option<SystemInherentData>;
     'Option<SystemOrigin>': Option<SystemOrigin>;
+    'Option<SystemPalletId>': Option<SystemPalletId>;
     'Option<Tally>': Option<Tally>;
     'Option<TaskAddress>': Option<TaskAddress>;
     'Option<TAssetBalance>': Option<TAssetBalance>;
@@ -1040,6 +1046,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<XcmTransferAsset>': Option<XcmTransferAsset>;
     'Option<XcmTransferReserveAsset>': Option<XcmTransferReserveAsset>;
     'Option<XcmWithdrawAsset>': Option<XcmWithdrawAsset>;
+    'Option<XCurrencyId>': Option<XCurrencyId>;
     'Option<ZenlinkAssetBalance>': Option<ZenlinkAssetBalance>;
     'Vec<AbridgedCandidateReceipt>': Vec<AbridgedCandidateReceipt>;
     'Vec<AbridgedHostConfiguration>': Vec<AbridgedHostConfiguration>;
@@ -1069,6 +1076,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Address>': Vec<Address>;
     'Vec<AliveContractInfo>': Vec<AliveContractInfo>;
     'Vec<AllowedSlots>': Vec<AllowedSlots>;
+    'Vec<AmountOf>': Vec<AmountOf>;
     'Vec<AnySignature>': Vec<AnySignature>;
     'Vec<ApiId>': Vec<ApiId>;
     'Vec<ApplyExtrinsicResult>': Vec<ApplyExtrinsicResult>;
@@ -1152,6 +1160,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<CandidateHash>': Vec<CandidateHash>;
     'Vec<CandidatePendingAvailability>': Vec<CandidatePendingAvailability>;
     'Vec<CandidateReceipt>': Vec<CandidateReceipt>;
+    'Vec<ChainId>': Vec<ChainId>;
     'Vec<ChainProperties>': Vec<ChainProperties>;
     'Vec<ChainType>': Vec<ChainType>;
     'Vec<ChangesTrieConfiguration>': Vec<ChangesTrieConfiguration>;
@@ -1723,6 +1732,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<SessionKeys9B>': Vec<SessionKeys9B>;
     'Vec<SetId>': Vec<SetId>;
     'Vec<SetIndex>': Vec<SetIndex>;
+    'Vec<ShareWeight>': Vec<ShareWeight>;
     'Vec<SiField>': Vec<SiField>;
     'Vec<Signature>': Vec<Signature>;
     'Vec<SignedAvailabilityBitfield>': Vec<SignedAvailabilityBitfield>;
@@ -1797,6 +1807,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<StorageMetadataV13>': Vec<StorageMetadataV13>;
     'Vec<StorageMetadataV9>': Vec<StorageMetadataV9>;
     'Vec<StorageProof>': Vec<StorageProof>;
+    'Vec<StorageVersion>': Vec<StorageVersion>;
     'Vec<StoredPendingChange>': Vec<StoredPendingChange>;
     'Vec<StoredState>': Vec<StoredState>;
     'Vec<StrikeCount>': Vec<StrikeCount>;
@@ -1804,6 +1815,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<SyncState>': Vec<SyncState>;
     'Vec<SystemInherentData>': Vec<SystemInherentData>;
     'Vec<SystemOrigin>': Vec<SystemOrigin>;
+    'Vec<SystemPalletId>': Vec<SystemPalletId>;
     'Vec<Tally>': Vec<Tally>;
     'Vec<TaskAddress>': Vec<TaskAddress>;
     'Vec<TAssetBalance>': Vec<TAssetBalance>;
@@ -1916,6 +1928,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<XcmTransferAsset>': Vec<XcmTransferAsset>;
     'Vec<XcmTransferReserveAsset>': Vec<XcmTransferReserveAsset>;
     'Vec<XcmWithdrawAsset>': Vec<XcmWithdrawAsset>;
+    'Vec<XCurrencyId>': Vec<XCurrencyId>;
     'Vec<ZenlinkAssetBalance>': Vec<ZenlinkAssetBalance>;
     AbridgedCandidateReceipt: AbridgedCandidateReceipt;
     AbridgedHostConfiguration: AbridgedHostConfiguration;
@@ -1945,6 +1958,7 @@ declare module '@polkadot/types/types/registry' {
     Address: Address;
     AliveContractInfo: AliveContractInfo;
     AllowedSlots: AllowedSlots;
+    AmountOf: AmountOf;
     AnySignature: AnySignature;
     ApiId: ApiId;
     ApplyExtrinsicResult: ApplyExtrinsicResult;
@@ -2028,6 +2042,7 @@ declare module '@polkadot/types/types/registry' {
     CandidateHash: CandidateHash;
     CandidatePendingAvailability: CandidatePendingAvailability;
     CandidateReceipt: CandidateReceipt;
+    ChainId: ChainId;
     ChainProperties: ChainProperties;
     ChainType: ChainType;
     ChangesTrieConfiguration: ChangesTrieConfiguration;
@@ -2599,6 +2614,7 @@ declare module '@polkadot/types/types/registry' {
     SessionKeys9B: SessionKeys9B;
     SetId: SetId;
     SetIndex: SetIndex;
+    ShareWeight: ShareWeight;
     SiField: SiField;
     Signature: Signature;
     SignedAvailabilityBitfield: SignedAvailabilityBitfield;
@@ -2673,6 +2689,7 @@ declare module '@polkadot/types/types/registry' {
     StorageMetadataV13: StorageMetadataV13;
     StorageMetadataV9: StorageMetadataV9;
     StorageProof: StorageProof;
+    StorageVersion: StorageVersion;
     StoredPendingChange: StoredPendingChange;
     StoredState: StoredState;
     StrikeCount: StrikeCount;
@@ -2680,6 +2697,7 @@ declare module '@polkadot/types/types/registry' {
     SyncState: SyncState;
     SystemInherentData: SystemInherentData;
     SystemOrigin: SystemOrigin;
+    SystemPalletId: SystemPalletId;
     Tally: Tally;
     TaskAddress: TaskAddress;
     TAssetBalance: TAssetBalance;
@@ -2792,6 +2810,7 @@ declare module '@polkadot/types/types/registry' {
     XcmTransferAsset: XcmTransferAsset;
     XcmTransferReserveAsset: XcmTransferReserveAsset;
     XcmWithdrawAsset: XcmWithdrawAsset;
+    XCurrencyId: XCurrencyId;
     ZenlinkAssetBalance: ZenlinkAssetBalance;
   }
 }
