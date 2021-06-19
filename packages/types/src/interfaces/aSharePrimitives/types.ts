@@ -1,20 +1,13 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Enum, Struct, i128 } from '@polkadot/types';
+import type { Enum, i128 } from '@polkadot/types';
 import type { ITuple } from '@polkadot/types/types';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 import type { Balance, Releases } from '@polkadot/types/interfaces/runtime';
 
 /** @name AmountOf */
 export interface AmountOf extends i128 {}
-
-/** @name ChainId */
-export interface ChainId extends Enum {
-  readonly isRelayChain: boolean;
-  readonly isParaChain: boolean;
-  readonly asParaChain: ParaId;
-}
 
 /** @name CurrencyId */
 export interface CurrencyId extends Enum {
@@ -51,12 +44,6 @@ export interface TokenSymbol extends Enum {
   readonly isDot: boolean;
   readonly isKsm: boolean;
   readonly isEth: boolean;
-}
-
-/** @name XCurrencyId */
-export interface XCurrencyId extends Struct {
-  readonly chainId: ChainId;
-  readonly currencyId: Bytes;
 }
 
 export type PHANTOM_ASHAREPRIMITIVES = 'aSharePrimitives';

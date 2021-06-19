@@ -1,69 +1,34 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Vec, bool, u16, u32 } from '@polkadot/types';
+import type { Bytes, Option, U8aFixed, Vec, bool, u128, u32 } from '@polkadot/types';
+import type { AmountOf, CurrencyId, CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { AssetBalance, TAssetBalance } from '@polkadot/types/interfaces/assets';
 import type { BalanceStatus } from '@polkadot/types/interfaces/balances';
 import type { MemberCount, ProposalIndex } from '@polkadot/types/interfaces/collective';
-import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
-import type { AuthorityList } from '@polkadot/types/interfaces/grandpa';
-import type { Kind, OpaqueTimeSlot } from '@polkadot/types/interfaces/offences';
-import type { AuctionIndex, CandidateReceipt, CoreIndex, GroupIndex, HeadData, HrmpChannelId, LeasePeriod, ParaId, SlotRange } from '@polkadot/types/interfaces/parachains';
-import type { ProxyType } from '@polkadot/types/interfaces/proxy';
-import type { AccountId, AccountIndex, Balance, BlockNumber, Hash, PhantomData, ValidatorId } from '@polkadot/types/interfaces/runtime';
-import type { IdentificationTuple, SessionIndex } from '@polkadot/types/interfaces/session';
+import type { MessageId, OverweightIndex } from '@polkadot/types/interfaces/cumulus';
+import type { PropIndex, ReferendumIndex } from '@polkadot/types/interfaces/democracy';
+import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
+import type { ParaId, RelayChainBlockNumber } from '@polkadot/types/interfaces/parachains';
+import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Weight } from '@polkadot/types/interfaces/runtime';
+import type { TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
-import type { MultiLocation, Outcome, Xcm } from '@polkadot/types/interfaces/xcm';
+import type { MultiLocation, Outcome, Xcm, XcmError } from '@polkadot/types/interfaces/xcm';
 import type { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/events' {
   export interface AugmentedEvents<ApiType> {
-    auctions: {
+    assets: {
       /**
-       * An auction ended. All funds become unreserved. [auction_index]
+       * An account was removed whose balance was non-zero but below
+       * ExistentialDeposit, resulting in an outright loss. \[account,
+       * currency_id, amount\]
        **/
-      AuctionClosed: AugmentedEvent<ApiType, [AuctionIndex]>;
+      DustLost: AugmentedEvent<ApiType, [AccountId, CurrencyId, TAssetBalance]>;
       /**
-       * An auction started. Provides its index and the block number where it will begin to
-       * close and the first lease period of the quadruplet that is auctioned.
-       * [auction_index, lease_period, ending]
+       * Token transfer success. \[currency_id, from, to, amount\]
        **/
-      AuctionStarted: AugmentedEvent<ApiType, [AuctionIndex, LeasePeriod, BlockNumber]>;
-      /**
-       * A new bid has been accepted as the current winner.
-       * \[who, para_id, amount, first_slot, last_slot\]
-       **/
-      BidAccepted: AugmentedEvent<ApiType, [AccountId, ParaId, Balance, LeasePeriod, LeasePeriod]>;
-      /**
-       * Someone attempted to lease the same slot twice for a parachain. The amount is held in reserve
-       * but no parachain slot has been leased.
-       * \[parachain_id, leaser, amount\]
-       **/
-      ReserveConfiscated: AugmentedEvent<ApiType, [ParaId, AccountId, Balance]>;
-      /**
-       * Funds were reserved for a winning bid. First balance is the extra amount reserved.
-       * Second is the total. [bidder, extra_reserved, total_amount]
-       **/
-      Reserved: AugmentedEvent<ApiType, [AccountId, Balance, Balance]>;
-      /**
-       * Funds were unreserved since bidder is no longer active. [bidder, amount]
-       **/
-      Unreserved: AugmentedEvent<ApiType, [AccountId, Balance]>;
-      /**
-       * The winning offset was chosen for an auction. This will map into the `Winning` storage map.
-       * \[auction_index, block_number\]
-       **/
-      WinningOffset: AugmentedEvent<ApiType, [AuctionIndex, BlockNumber]>;
-      /**
-       * Someone won the right to deploy a parachain. Balance amount is deducted for deposit.
-       * [bidder, range, parachain_id, amount]
-       **/
-      WonDeploy: AugmentedEvent<ApiType, [AccountId, SlotRange, ParaId, Balance]>;
-      /**
-       * An existing parachain won the right to continue.
-       * First balance is the extra amount reserved. Second is the total amount reserved.
-       * [parachain_id, begin, count, total_amount]
-       **/
-      WonRenewal: AugmentedEvent<ApiType, [ParaId, LeasePeriod, LeasePeriod, Balance]>;
+      Transferred: AugmentedEvent<ApiType, [CurrencyId, AccountId, AccountId, TAssetBalance]>;
     };
     balances: {
       /**
@@ -102,7 +67,20 @@ declare module '@polkadot/api/types/events' {
        **/
       Unreserved: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
-    collective: {
+    bifrostAssets: {
+      /**
+       * Token burn success, \[currency_id, dest, amount\]
+       **/
+      Burned: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      /**
+       * Token issue success, \[currency_id, dest, amount\]
+       **/
+      Issued: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+    };
+    chargeTransactionFee: {
+      FlexibleFeeExchanged: AugmentedEvent<ApiType, [CurrencyId, u128]>;
+    };
+    council: {
       /**
        * A motion was approved by the required threshold.
        * \[proposal_hash\]
@@ -141,113 +119,150 @@ declare module '@polkadot/api/types/events' {
        **/
       Voted: AugmentedEvent<ApiType, [AccountId, Hash, bool, MemberCount, MemberCount]>;
     };
-    crowdloan: {
+    cumulusXcm: {
       /**
-       * A parachain has been moved to NewRaise
+       * Downward message executed with the given outcome.
+       * \[ id, outcome \]
        **/
-      AddedToNewRaise: AugmentedEvent<ApiType, [ParaId]>;
+      ExecutedDownward: AugmentedEvent<ApiType, [U8aFixed, Outcome]>;
       /**
-       * All loans in a fund have been refunded. [fund_index]
+       * Downward message is invalid XCM.
+       * \[ id \]
        **/
-      AllRefunded: AugmentedEvent<ApiType, [ParaId]>;
+      InvalidFormat: AugmentedEvent<ApiType, [U8aFixed]>;
       /**
-       * Contributed to a crowd sale. [who, fund_index, amount]
+       * Downward message is unsupported version of XCM.
+       * \[ id \]
        **/
-      Contributed: AugmentedEvent<ApiType, [AccountId, ParaId, Balance]>;
-      /**
-       * Create a new crowdloaning campaign. [fund_index]
-       **/
-      Created: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * The deploy data of the funded parachain is set. [fund_index]
-       **/
-      DeployDataFixed: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * Fund is dissolved. [fund_index]
-       **/
-      Dissolved: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * The configuration to a crowdloan has been edited. [fund_index]
-       **/
-      Edited: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * The result of trying to submit a new bid to the Slots pallet.
-       **/
-      HandleBidResult: AugmentedEvent<ApiType, [ParaId, DispatchResult]>;
-      /**
-       * A memo has been updated. [who, fund_index, memo]
-       **/
-      MemoUpdated: AugmentedEvent<ApiType, [AccountId, ParaId, Bytes]>;
-      /**
-       * On-boarding process for a winning parachain fund is completed. [find_index, parachain_id]
-       **/
-      Onboarded: AugmentedEvent<ApiType, [ParaId, ParaId]>;
-      /**
-       * The loans in a fund have been partially dissolved, i.e. there are some left
-       * over child keys that still need to be killed. [fund_index]
-       **/
-      PartiallyRefunded: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * Withdrew full balance of a contributor. [who, fund_index, amount]
-       **/
-      Withdrew: AugmentedEvent<ApiType, [AccountId, ParaId, Balance]>;
+      UnsupportedVersion: AugmentedEvent<ApiType, [U8aFixed]>;
     };
-    grandpa: {
+    currencies: {
       /**
-       * New authority set has been applied. \[authority_set\]
+       * Update balance success. [currency_id, who, amount]
        **/
-      NewAuthorities: AugmentedEvent<ApiType, [AuthorityList]>;
+      BalanceUpdated: AugmentedEvent<ApiType, [CurrencyIdOf, AccountId, AmountOf]>;
       /**
-       * Current authority set has been paused.
+       * Deposit success. [currency_id, who, amount]
        **/
-      Paused: AugmentedEvent<ApiType, []>;
+      Deposited: AugmentedEvent<ApiType, [CurrencyIdOf, AccountId, BalanceOf]>;
       /**
-       * Current authority set has been resumed.
+       * Currency transfer success. [currency_id, from, to, amount]
        **/
-      Resumed: AugmentedEvent<ApiType, []>;
+      Transferred: AugmentedEvent<ApiType, [CurrencyIdOf, AccountId, AccountId, BalanceOf]>;
+      /**
+       * Withdraw success. [currency_id, who, amount]
+       **/
+      Withdrawn: AugmentedEvent<ApiType, [CurrencyIdOf, AccountId, BalanceOf]>;
     };
-    hrmp: {
+    democracy: {
       /**
-       * HRMP channel closed. \[by_parachain, channel_id\]
+       * A proposal \[hash\] has been blacklisted permanently.
        **/
-      ChannelClosed: AugmentedEvent<ApiType, [ParaId, HrmpChannelId]>;
+      Blacklisted: AugmentedEvent<ApiType, [Hash]>;
       /**
-       * Open HRMP channel accepted. \[sender, recipient\]
+       * A referendum has been cancelled. \[ref_index\]
        **/
-      OpenChannelAccepted: AugmentedEvent<ApiType, [ParaId, ParaId]>;
+      Cancelled: AugmentedEvent<ApiType, [ReferendumIndex]>;
       /**
-       * Open HRMP channel requested.
-       * \[sender, recipient, proposed_max_capacity, proposed_max_message_size\]
+       * An account has delegated their vote to another account. \[who, target\]
        **/
-      OpenChannelRequested: AugmentedEvent<ApiType, [ParaId, ParaId, u32, u32]>;
+      Delegated: AugmentedEvent<ApiType, [AccountId, AccountId]>;
+      /**
+       * A proposal has been enacted. \[ref_index, is_ok\]
+       **/
+      Executed: AugmentedEvent<ApiType, [ReferendumIndex, bool]>;
+      /**
+       * An external proposal has been tabled.
+       **/
+      ExternalTabled: AugmentedEvent<ApiType, []>;
+      /**
+       * A proposal has been rejected by referendum. \[ref_index\]
+       **/
+      NotPassed: AugmentedEvent<ApiType, [ReferendumIndex]>;
+      /**
+       * A proposal has been approved by referendum. \[ref_index\]
+       **/
+      Passed: AugmentedEvent<ApiType, [ReferendumIndex]>;
+      /**
+       * A proposal could not be executed because its preimage was invalid.
+       * \[proposal_hash, ref_index\]
+       **/
+      PreimageInvalid: AugmentedEvent<ApiType, [Hash, ReferendumIndex]>;
+      /**
+       * A proposal could not be executed because its preimage was missing.
+       * \[proposal_hash, ref_index\]
+       **/
+      PreimageMissing: AugmentedEvent<ApiType, [Hash, ReferendumIndex]>;
+      /**
+       * A proposal's preimage was noted, and the deposit taken. \[proposal_hash, who, deposit\]
+       **/
+      PreimageNoted: AugmentedEvent<ApiType, [Hash, AccountId, Balance]>;
+      /**
+       * A registered preimage was removed and the deposit collected by the reaper.
+       * \[proposal_hash, provider, deposit, reaper\]
+       **/
+      PreimageReaped: AugmentedEvent<ApiType, [Hash, AccountId, Balance, AccountId]>;
+      /**
+       * A proposal preimage was removed and used (the deposit was returned).
+       * \[proposal_hash, provider, deposit\]
+       **/
+      PreimageUsed: AugmentedEvent<ApiType, [Hash, AccountId, Balance]>;
+      /**
+       * A motion has been proposed by a public account. \[proposal_index, deposit\]
+       **/
+      Proposed: AugmentedEvent<ApiType, [PropIndex, Balance]>;
+      /**
+       * A referendum has begun. \[ref_index, threshold\]
+       **/
+      Started: AugmentedEvent<ApiType, [ReferendumIndex, VoteThreshold]>;
+      /**
+       * A public proposal has been tabled for referendum vote. \[proposal_index, deposit, depositors\]
+       **/
+      Tabled: AugmentedEvent<ApiType, [PropIndex, Balance, Vec<AccountId>]>;
+      /**
+       * An \[account\] has cancelled a previous delegation operation.
+       **/
+      Undelegated: AugmentedEvent<ApiType, [AccountId]>;
+      /**
+       * An \[account\] has been unlocked successfully.
+       **/
+      Unlocked: AugmentedEvent<ApiType, [AccountId]>;
+      /**
+       * An external proposal has been vetoed. \[who, proposal_hash, until\]
+       **/
+      Vetoed: AugmentedEvent<ApiType, [AccountId, Hash, BlockNumber]>;
     };
-    imOnline: {
+    dmpQueue: {
       /**
-       * At the end of the session, no offence was committed.
+       * Downward message executed with the given outcome.
+       * \[ id, outcome \]
        **/
-      AllGood: AugmentedEvent<ApiType, []>;
+      ExecutedDownward: AugmentedEvent<ApiType, [MessageId, Outcome]>;
       /**
-       * A new heartbeat was received from `AuthorityId` \[authority_id\]
+       * Downward message is invalid XCM.
+       * \[ id \]
        **/
-      HeartbeatReceived: AugmentedEvent<ApiType, [AuthorityId]>;
+      InvalidFormat: AugmentedEvent<ApiType, [MessageId]>;
       /**
-       * At the end of the session, at least one validator was found to be \[offline\].
+       * Downward message is overweight and was placed in the overweight queue.
+       * \[ id, index, required \]
        **/
-      SomeOffline: AugmentedEvent<ApiType, [Vec<IdentificationTuple>]>;
-    };
-    inclusion: {
+      OverweightEnqueued: AugmentedEvent<ApiType, [MessageId, OverweightIndex, Weight]>;
       /**
-       * A candidate was backed. [candidate, head_data]
+       * Downward message from the overweight queue was executed.
+       * \[ index, used \]
        **/
-      CandidateBacked: AugmentedEvent<ApiType, [CandidateReceipt, HeadData, CoreIndex, GroupIndex]>;
+      OverweightServiced: AugmentedEvent<ApiType, [OverweightIndex, Weight]>;
       /**
-       * A candidate was included. [candidate, head_data]
+       * Downward message is unsupported version of XCM.
+       * \[ id \]
        **/
-      CandidateIncluded: AugmentedEvent<ApiType, [CandidateReceipt, HeadData, CoreIndex, GroupIndex]>;
+      UnsupportedVersion: AugmentedEvent<ApiType, [MessageId]>;
       /**
-       * A candidate timed out. [candidate, head_data]
+       * The weight limit for handling downward messages was reached.
+       * \[ id, remaining, required \]
        **/
-      CandidateTimedOut: AugmentedEvent<ApiType, [CandidateReceipt, HeadData, CoreIndex]>;
+      WeightExhausted: AugmentedEvent<ApiType, [MessageId, Weight, Weight]>;
     };
     indices: {
       /**
@@ -263,100 +278,68 @@ declare module '@polkadot/api/types/events' {
        **/
       IndexFrozen: AugmentedEvent<ApiType, [AccountIndex, AccountId]>;
     };
-    membership: {
-      /**
-       * Phantom member, never used.
-       **/
-      Dummy: AugmentedEvent<ApiType, [PhantomData]>;
-      /**
-       * One of the members' keys changed.
-       **/
-      KeyChanged: AugmentedEvent<ApiType, []>;
-      /**
-       * The given member was added; see the transaction for who.
-       **/
-      MemberAdded: AugmentedEvent<ApiType, []>;
-      /**
-       * The given member was removed; see the transaction for who.
-       **/
-      MemberRemoved: AugmentedEvent<ApiType, []>;
-      /**
-       * The membership was reset; see the transaction for who the new set is.
-       **/
-      MembersReset: AugmentedEvent<ApiType, []>;
-      /**
-       * Two members were swapped; see the transaction for who.
-       **/
-      MembersSwapped: AugmentedEvent<ApiType, []>;
+    minterReward: {
     };
-    offences: {
+    parachainSystem: {
       /**
-       * There is an offence reported of the given `kind` happened at the `session_index` and
-       * (kind-specific) time slot. This event is not deposited for duplicate slashes.
-       * \[kind, timeslot\].
+       * Downward messages were processed using the given weight.
+       * \[ weight_used, result_mqc_head \]
        **/
-      Offence: AugmentedEvent<ApiType, [Kind, OpaqueTimeSlot]>;
+      DownwardMessagesProcessed: AugmentedEvent<ApiType, [Weight, Hash]>;
+      /**
+       * Some downward messages have been received and will be processed.
+       * \[ count \]
+       **/
+      DownwardMessagesReceived: AugmentedEvent<ApiType, [u32]>;
+      /**
+       * An upgrade has been authorized.
+       **/
+      UpgradeAuthorized: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * The validation function was applied as of the contained relay chain block number.
+       **/
+      ValidationFunctionApplied: AugmentedEvent<ApiType, [RelayChainBlockNumber]>;
+      /**
+       * The validation function has been scheduled to apply as of the contained relay chain
+       * block number.
+       **/
+      ValidationFunctionStored: AugmentedEvent<ApiType, [RelayChainBlockNumber]>;
     };
-    paras: {
-      /**
-       * A para has been queued to execute pending actions. \[para_id\]
-       **/
-      ActionQueued: AugmentedEvent<ApiType, [ParaId, SessionIndex]>;
-      /**
-       * A code upgrade has been scheduled for a Para. \[para_id\]
-       **/
-      CodeUpgradeScheduled: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * Current code has been updated for a Para. \[para_id\]
-       **/
-      CurrentCodeUpdated: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * Current head has been updated for a Para. \[para_id\]
-       **/
-      CurrentHeadUpdated: AugmentedEvent<ApiType, [ParaId]>;
-      /**
-       * A new head has been noted for a Para. \[para_id\]
-       **/
-      NewHeadNoted: AugmentedEvent<ApiType, [ParaId]>;
+    polkadotXcm: {
+      Attempted: AugmentedEvent<ApiType, [Outcome]>;
+      Sent: AugmentedEvent<ApiType, [MultiLocation, MultiLocation, Xcm]>;
     };
-    proxy: {
+    salp: {
       /**
-       * An announcement was placed to make a call in the future. \[real, proxy, call_hash\]
+       * Contributed to a crowd sale. [who, fund_index, amount]
        **/
-      Announced: AugmentedEvent<ApiType, [AccountId, AccountId, Hash]>;
+      Contributed: AugmentedEvent<ApiType, [AccountId, ParaId, BalanceOf]>;
       /**
-       * Anonymous account has been created by new proxy with given
-       * disambiguation index and proxy type. \[anonymous, who, proxy_type, disambiguation_index\]
+       * Create a new crowdloaning campaign. [fund_index]
        **/
-      AnonymousCreated: AugmentedEvent<ApiType, [AccountId, AccountId, ProxyType, u16]>;
+      Created: AugmentedEvent<ApiType, [ParaId]>;
       /**
-       * A proxy was executed correctly, with the given \[result\].
+       * Redeemed full balance of a contributor. [who, fund_index, amount]
        **/
-      ProxyExecuted: AugmentedEvent<ApiType, [DispatchResult]>;
+      Redeemed: AugmentedEvent<ApiType, [AccountId, ParaId, BalanceOf]>;
+      /**
+       * Withdrew full balance of a contributor. [who, fund_index, amount]
+       **/
+      Withdrew: AugmentedEvent<ApiType, [AccountId, ParaId, BalanceOf]>;
     };
-    registrar: {
-      Deregistered: AugmentedEvent<ApiType, [ParaId]>;
-      Registered: AugmentedEvent<ApiType, [ParaId, AccountId]>;
-      Reserved: AugmentedEvent<ApiType, [ParaId, AccountId]>;
-    };
-    session: {
+    scheduler: {
       /**
-       * New session has happened. Note that the argument is the \[session_index\], not the block
-       * number as the type might suggest.
+       * Canceled some task. \[when, index\]
        **/
-      NewSession: AugmentedEvent<ApiType, [SessionIndex]>;
-    };
-    slots: {
+      Canceled: AugmentedEvent<ApiType, [BlockNumber, u32]>;
       /**
-       * An existing parachain won the right to continue.
-       * First balance is the extra amount reseved. Second is the total amount reserved.
-       * \[parachain_id, leaser, period_begin, period_count, extra_reseved, total_amount\]
+       * Dispatched some task. \[task, id, result\]
        **/
-      Leased: AugmentedEvent<ApiType, [ParaId, AccountId, LeasePeriod, LeasePeriod, Balance, Balance]>;
+      Dispatched: AugmentedEvent<ApiType, [TaskAddress, Option<Bytes>, DispatchResult]>;
       /**
-       * A new [lease_period] is beginning.
+       * Scheduled some task. \[when, index\]
        **/
-      NewLeasePeriod: AugmentedEvent<ApiType, [LeasePeriod]>;
+      Scheduled: AugmentedEvent<ApiType, [BlockNumber, u32]>;
     };
     sudo: {
       /**
@@ -398,6 +381,45 @@ declare module '@polkadot/api/types/events' {
        **/
       Remarked: AugmentedEvent<ApiType, [AccountId, Hash]>;
     };
+    technicalCommittee: {
+      /**
+       * A motion was approved by the required threshold.
+       * \[proposal_hash\]
+       **/
+      Approved: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * A proposal was closed because its threshold was reached or after its duration was up.
+       * \[proposal_hash, yes, no\]
+       **/
+      Closed: AugmentedEvent<ApiType, [Hash, MemberCount, MemberCount]>;
+      /**
+       * A motion was not approved by the required threshold.
+       * \[proposal_hash\]
+       **/
+      Disapproved: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * A motion was executed; result will be `Ok` if it returned without error.
+       * \[proposal_hash, result\]
+       **/
+      Executed: AugmentedEvent<ApiType, [Hash, DispatchResult]>;
+      /**
+       * A single member did some action; result will be `Ok` if it returned without error.
+       * \[proposal_hash, result\]
+       **/
+      MemberExecuted: AugmentedEvent<ApiType, [Hash, DispatchResult]>;
+      /**
+       * A motion (given hash) has been proposed (by given account) with a threshold (given
+       * `MemberCount`).
+       * \[account, proposal_index, proposal_hash, threshold\]
+       **/
+      Proposed: AugmentedEvent<ApiType, [AccountId, ProposalIndex, Hash, MemberCount]>;
+      /**
+       * A motion (given hash) has been voted on by given account, leaving
+       * a tally (yes votes and no votes given respectively as `MemberCount`).
+       * \[account, proposal_hash, voted, yes, no\]
+       **/
+      Voted: AugmentedEvent<ApiType, [AccountId, Hash, bool, MemberCount, MemberCount]>;
+    };
     utility: {
       /**
        * Batch of dispatches completed fully with no error.
@@ -409,19 +431,82 @@ declare module '@polkadot/api/types/events' {
        **/
       BatchInterrupted: AugmentedEvent<ApiType, [u32, DispatchError]>;
     };
-    validatorManager: {
+    voucher: {
+      DestroyedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
       /**
-       * Validators were removed from the set.
+       * A event indicate user receives transaction.
        **/
-      ValidatorsDeregistered: AugmentedEvent<ApiType, [Vec<ValidatorId>]>;
-      /**
-       * New validators were added to the set.
-       **/
-      ValidatorsRegistered: AugmentedEvent<ApiType, [Vec<ValidatorId>]>;
+      IssuedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
-    xcmPallet: {
-      Attempted: AugmentedEvent<ApiType, [Outcome]>;
-      Sent: AugmentedEvent<ApiType, [MultiLocation, MultiLocation, Xcm]>;
+    vtokenMint: {
+      Minted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
+      RedeemedPointsSuccess: AugmentedEvent<ApiType, []>;
+      RedeemStarted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance, BlockNumber]>;
+      UpdateRatePerBlockSuccess: AugmentedEvent<ApiType, []>;
+      UpdateVtokenPoolSuccess: AugmentedEvent<ApiType, []>;
+    };
+    xcmpQueue: {
+      /**
+       * Bad XCM format used.
+       **/
+      BadFormat: AugmentedEvent<ApiType, [Option<Hash>]>;
+      /**
+       * Bad XCM version used.
+       **/
+      BadVersion: AugmentedEvent<ApiType, [Option<Hash>]>;
+      /**
+       * Some XCM failed.
+       **/
+      Fail: AugmentedEvent<ApiType, [Option<Hash>, XcmError]>;
+      /**
+       * Some XCM was executed ok.
+       **/
+      Success: AugmentedEvent<ApiType, [Option<Hash>]>;
+      /**
+       * An upward message was sent to the relay chain.
+       **/
+      UpwardMessageSent: AugmentedEvent<ApiType, [Option<Hash>]>;
+      /**
+       * An HRMP message was sent to a sibling parachain.
+       **/
+      XcmpMessageSent: AugmentedEvent<ApiType, [Option<Hash>]>;
+    };
+    zenlinkProtocol: {
+      /**
+       * Transact in trading \[owner, recipient, swap_path, balance_in, balance_out\]
+       **/
+      AssetSwap: AugmentedEvent<ApiType, [AccountId, AccountId, Vec<AssetId>, AssetBalance, AssetBalance]>;
+      /**
+       * Some assets were burned. \[asset_id, owner, amount\]
+       **/
+      Burned: AugmentedEvent<ApiType, [AssetId, AccountId, AssetBalance]>;
+      /**
+       * Add liquidity. \[owner, asset_0, asset_1, add_balance_0, add_balance_1, mint_balance_lp\]
+       **/
+      LiquidityAdded: AugmentedEvent<ApiType, [AccountId, AssetId, AssetId, AssetBalance, AssetBalance, AssetBalance]>;
+      /**
+       * Remove liquidity. \[owner, recipient, asset_0, asset_1, rm_balance_0, rm_balance_1, burn_balance_lp\]
+       **/
+      LiquidityRemoved: AugmentedEvent<ApiType, [AccountId, AccountId, AssetId, AssetId, AssetBalance, AssetBalance, AssetBalance]>;
+      /**
+       * Some assets were minted. \[asset_id, owner, amount\]
+       **/
+      Minted: AugmentedEvent<ApiType, [AssetId, AccountId, AssetBalance]>;
+      /**
+       * Swap
+       * Create a trading pair. \[creator, asset_0, asset_1\]
+       **/
+      PairCreated: AugmentedEvent<ApiType, [AccountId, AssetId, AssetId]>;
+      /**
+       * Foreign Asset
+       * Some assets were transferred. \[asset_id, owner, target, amount\]
+       **/
+      Transferred: AugmentedEvent<ApiType, [AssetId, AccountId, AccountId, AssetBalance]>;
+      /**
+       * Transfer by xcm
+       * Transferred to parachain. \[asset_id, src, para_id, dest, amount, used_weight\]
+       **/
+      TransferredToParachain: AugmentedEvent<ApiType, [AssetId, AccountId, ParaId, AccountId, AssetBalance, Weight]>;
     };
   }
 

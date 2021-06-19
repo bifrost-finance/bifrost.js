@@ -23,16 +23,16 @@ export default {
     CurrencyIdOf: "CurrencyId",
     TAssetBalance: "Balance",
     AmountOf: "i128",
-    ChainId: {
-      _enum: {
-        RelayChain: "Null",
-        ParaChain: "ParaId",
-      },
-    },
-    XCurrencyId: {
-      chainId: "ChainId",
-      currencyId: "Vec<u8>",
-    },
+    // ChainId: {
+    //   _enum: {
+    //     RelayChain: "Null",
+    //     ParaChain: "ParaId",
+    //   },
+    // },
+    // XCurrencyId: {
+    //   chainId: "ChainId",
+    //   currencyId: "Vec<u8>",
+    // },
     StorageVersion: "Releases",
     ShareWeight: "Balance",
   }
