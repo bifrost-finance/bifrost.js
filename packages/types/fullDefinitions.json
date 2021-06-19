@@ -21,6 +21,9 @@
     },
     "CurrencyIdOf": "CurrencyId",
     "TAssetBalance": "Balance",
+    "AmountOf": "i128",
+    "StorageVersion": "Releases",
+    "ShareWeight": "Balance",
     "OrmlAccountData": {
       "free": "Balance",
       "reserved": "Balance",
@@ -35,6 +38,7 @@
       }
     },
     "IsExtended": "bool",
+    "SystemPalletId": "PalletId",
     "RewardRecord": {
       "account_id": "AccountId",
       "record_amount": "Balance"

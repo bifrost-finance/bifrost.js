@@ -1,7 +1,7 @@
 export default {
-    rpc: {},
-    types: {
-        IsExtended: "bool",
-        SystemPalletId:"PalletId"
-    },
-  };
+  rpc: {},
+  types: {
+    IsExtended: "bool",
+    SystemPalletId: "PalletId"
+  },
+};

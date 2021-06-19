@@ -9,14 +9,14 @@ export default {
           isOptional: true,
         },
       ],
-      type: "Vec<AssetId>",
+      type: "Vec<ZenlinkAssetId>",
     },
     getBalance: {
       description: "zenlinkProtocol getBalance",
       params: [
         {
           name: "asset_id",
-          type: "AssetId",
+          type: "ZenlinkAssetId",
         },
         {
           name: "account",
@@ -35,7 +35,7 @@ export default {
       params: [
         {
           name: "asset_id",
-          type: "AssetId",
+          type: "ZenlinkAssetId",
         },
         {
           name: "at",
@@ -79,11 +79,11 @@ export default {
       params: [
         {
           name: "asset_0",
-          type: "AssetId",
+          type: "ZenlinkAssetId",
         },
         {
           name: "asset_1",
-          type: "AssetId",
+          type: "ZenlinkAssetId",
         },
         {
           name: "at",
@@ -103,7 +103,7 @@ export default {
         },
         {
           name: "path",
-          type: "Vec<AssetId>",
+          type: "Vec<ZenlinkAssetId>",
         },
         {
           name: "at",
@@ -123,7 +123,7 @@ export default {
         },
         {
           name: "path",
-          type: "Vec<AssetId>",
+          type: "Vec<ZenlinkAssetId>",
         },
         {
           name: "at",
@@ -140,11 +140,11 @@ export default {
       params: [
         {
           name: "asset_0",
-          type: "AssetId",
+          type: "ZenlinkAssetId",
         },
         {
           name: "asset_1",
-          type: "AssetId",
+          type: "ZenlinkAssetId",
         },
         {
           name: "amount_0_desired",
@@ -173,26 +173,27 @@ export default {
     },
   },
   types: {
-    AssetId: {
+    ZenlinkAssetId: {
       chain_id: "u32",
       asset_type: "u8",
-      asset_index: "u32"
+      asset_index: "u32",
     },
     ZenlinkAssetBalance: "u128",
     PairInfo: {
-      asset_0: "AssetId",
-      asset_1: "AssetId",
+      asset_0: "ZenlinkAssetId",
+      asset_1: "ZenlinkAssetId",
       account: "AccountId",
       total_liquidity: "ZenlinkAssetBalance",
       holding_liquidity: "ZenlinkAssetBalance",
       reserve_0: "ZenlinkAssetBalance",
       reserve_1: "ZenlinkAssetBalance",
-      lp_asset_id: "AssetId"
+      lp_asset_id: "ZenlinkAssetId",
     },
   },
   typesAlias: {
     ZenlinkProtocol: {
-      AssetBalance: "ZenlinkAssetBalance"
-    }
-  }
+      AssetBalance: "ZenlinkAssetBalance",
+      AssetId: "ZenlinkAssetId",
+    },
+  },
 };
