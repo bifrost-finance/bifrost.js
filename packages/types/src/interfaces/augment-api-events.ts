@@ -10,7 +10,7 @@ import type { MessageId, OverweightIndex } from '@polkadot/types/interfaces/cumu
 import type { PropIndex, ReferendumIndex } from '@polkadot/types/interfaces/democracy';
 import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
 import type { ParaId, RelayChainBlockNumber } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Weight } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, AccountIdOf, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Weight } from '@polkadot/types/interfaces/runtime';
 import type { TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
 import type { MultiLocation, Outcome, Xcm, XcmError } from '@polkadot/types/interfaces/xcm';
@@ -66,6 +66,14 @@ declare module '@polkadot/api/types/events' {
        * Some balance was unreserved (moved from reserved to free). \[who, value\]
        **/
       Unreserved: AugmentedEvent<ApiType, [AccountId, Balance]>;
+    };
+    bancor: {
+      /**
+       * Token has been sold.
+       * 
+       * [buyer, currencyId, token_sold, vsToken_paid]
+       **/
+      TokenSold: AugmentedEvent<ApiType, [AccountIdOf, CurrencyId, BalanceOf, BalanceOf]>;
     };
     bifrostAssets: {
       /**

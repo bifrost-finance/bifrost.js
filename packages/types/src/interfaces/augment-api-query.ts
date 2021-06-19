@@ -4,6 +4,7 @@
 import type { BTreeMap, Bytes, Option, Vec, bool, u16, u32, u8 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
 import type { CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { IsExtended } from '@bifrost-finance/types/interfaces/minterReward';
 import type { AssetBalance, TAssetBalance } from '@polkadot/types/interfaces/assets';
@@ -65,6 +66,9 @@ declare module '@polkadot/api/types/storage' {
        * The total units issued in the system.
        **/
       totalIssuance: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
+    };
+    bancor: {
+      bancorPools: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<Option<BancorPool>>, [CurrencyId]>;
     };
     chargeTransactionFee: {
       defaultFeeChargeOrderList: AugmentedQuery<ApiType, () => Observable<Vec<CurrencyId>>, []>;

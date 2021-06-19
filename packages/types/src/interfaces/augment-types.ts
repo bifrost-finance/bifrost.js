@@ -4,6 +4,7 @@
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TAssetBalance, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { OrmlAccountData } from '@bifrost-finance/types/interfaces/assets';
+import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
@@ -231,6 +232,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<BalanceLockTo212>': Option<BalanceLockTo212>;
     'Option<BalanceOf>': Option<BalanceOf>;
     'Option<BalanceStatus>': Option<BalanceStatus>;
+    'Option<BancorPool>': Option<BancorPool>;
     'Option<BeefyCommitment>': Option<BeefyCommitment>;
     'Option<BeefyKey>': Option<BeefyKey>;
     'Option<BeefyNextAuthoritySet>': Option<BeefyNextAuthoritySet>;
@@ -1117,6 +1119,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<BalanceLockTo212>': Vec<BalanceLockTo212>;
     'Vec<BalanceOf>': Vec<BalanceOf>;
     'Vec<BalanceStatus>': Vec<BalanceStatus>;
+    'Vec<BancorPool>': Vec<BancorPool>;
     'Vec<BeefyCommitment>': Vec<BeefyCommitment>;
     'Vec<BeefyKey>': Vec<BeefyKey>;
     'Vec<BeefyNextAuthoritySet>': Vec<BeefyNextAuthoritySet>;
@@ -2003,6 +2006,7 @@ declare module '@polkadot/types/types/registry' {
     BalanceLockTo212: BalanceLockTo212;
     BalanceOf: BalanceOf;
     BalanceStatus: BalanceStatus;
+    BancorPool: BancorPool;
     BeefyCommitment: BeefyCommitment;
     BeefyKey: BeefyKey;
     BeefyNextAuthoritySet: BeefyNextAuthoritySet;
