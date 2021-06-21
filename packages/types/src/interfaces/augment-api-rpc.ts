@@ -588,7 +588,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.
        **/
-      getEstimateLptoken: AugmentedRpc<(asset_0: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, asset_1: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, amount_0_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_0_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      getEstimateLptoken: AugmentedRpc<(asset_0: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, asset_1: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, amount_0_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_0_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<u128>>;
       /**
        * Get ownership of all exchange pairs for a particular account.
        **/

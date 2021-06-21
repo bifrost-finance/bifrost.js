@@ -169,7 +169,7 @@ export default {
           isOptional: true,
         },
       ],
-      type: "String",
+      type: "u128",
     },
   },
   types: {
