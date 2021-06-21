@@ -29,6 +29,13 @@
       "reserved": "Balance",
       "frozen": "Balance"
     },
+    "BancorPool": {
+      "currency_id": "CurrencyId",
+      "token_pool": "Balance",
+      "vstoken_pool": "Balance",
+      "token_base_supply": "Balance",
+      "vstoken_base_supply": "Balance"
+    },
     "PalletBalanceOf": "Balance",
     "BlockNumberFor": "BlockNumber",
     "NumberOrHex": {
@@ -66,21 +73,21 @@
         "Clinchd"
       ]
     },
-    "AssetId": {
+    "ZenlinkAssetId": {
       "chain_id": "u32",
       "asset_type": "u8",
       "asset_index": "u32"
     },
     "ZenlinkAssetBalance": "u128",
     "PairInfo": {
-      "asset_0": "AssetId",
-      "asset_1": "AssetId",
+      "asset0": "ZenlinkAssetId",
+      "asset1": "ZenlinkAssetId",
       "account": "AccountId",
-      "total_liquidity": "ZenlinkAssetBalance",
-      "holding_liquidity": "ZenlinkAssetBalance",
-      "reserve_0": "ZenlinkAssetBalance",
-      "reserve_1": "ZenlinkAssetBalance",
-      "lp_asset_id": "AssetId"
+      "totalLiquidity": "ZenlinkAssetBalance",
+      "holdingLiquidity": "ZenlinkAssetBalance",
+      "reserve0": "ZenlinkAssetBalance",
+      "reserve1": "ZenlinkAssetBalance",
+      "lpAssetId": "ZenlinkAssetId"
     }
   },
   "typesBundle": {
@@ -162,7 +169,7 @@
             "isOptional": true
           }
         ],
-        "type": "Vec<AssetId>",
+        "type": "Vec<ZenlinkAssetId>",
         "isSubscription": false,
         "jsonrpc": "zenlinkProtocol_getAllAssets",
         "method": "getAllAssets",
@@ -173,7 +180,7 @@
         "params": [
           {
             "name": "asset_id",
-            "type": "AssetId"
+            "type": "ZenlinkAssetId"
           },
           {
             "name": "account",
@@ -196,7 +203,7 @@
         "params": [
           {
             "name": "asset_id",
-            "type": "AssetId"
+            "type": "ZenlinkAssetId"
           },
           {
             "name": "at",
@@ -252,11 +259,11 @@
         "params": [
           {
             "name": "asset_0",
-            "type": "AssetId"
+            "type": "ZenlinkAssetId"
           },
           {
             "name": "asset_1",
-            "type": "AssetId"
+            "type": "ZenlinkAssetId"
           },
           {
             "name": "at",
@@ -280,7 +287,7 @@
           },
           {
             "name": "path",
-            "type": "Vec<AssetId>"
+            "type": "Vec<ZenlinkAssetId>"
           },
           {
             "name": "at",
@@ -304,7 +311,7 @@
           },
           {
             "name": "path",
-            "type": "Vec<AssetId>"
+            "type": "Vec<ZenlinkAssetId>"
           },
           {
             "name": "at",
@@ -324,11 +331,11 @@
         "params": [
           {
             "name": "asset_0",
-            "type": "AssetId"
+            "type": "ZenlinkAssetId"
           },
           {
             "name": "asset_1",
-            "type": "AssetId"
+            "type": "ZenlinkAssetId"
           },
           {
             "name": "amount_0_desired",
@@ -362,11 +369,12 @@
     }
   },
   "typesAlias": {
-    "Assets": {
+    "assets": {
       "AccountData": "OrmlAccountData"
     },
     "ZenlinkProtocol": {
-      "AssetBalance": "ZenlinkAssetBalance"
+      "AssetBalance": "ZenlinkAssetBalance",
+      "AssetId": "ZenlinkAssetId"
     }
   }
 }

@@ -180,20 +180,20 @@ export default {
     },
     ZenlinkAssetBalance: "u128",
     PairInfo: {
-      asset_0: "ZenlinkAssetId",
-      asset_1: "ZenlinkAssetId",
+      asset0: "ZenlinkAssetId",
+      asset1: "ZenlinkAssetId",
       account: "AccountId",
-      total_liquidity: "ZenlinkAssetBalance",
-      holding_liquidity: "ZenlinkAssetBalance",
-      reserve_0: "ZenlinkAssetBalance",
-      reserve_1: "ZenlinkAssetBalance",
-      lp_asset_id: "ZenlinkAssetId",
-    },
+      totalLiquidity: "ZenlinkAssetBalance",
+      holdingLiquidity: "ZenlinkAssetBalance",
+      reserve0: "ZenlinkAssetBalance",
+      reserve1: "ZenlinkAssetBalance",
+      lpAssetId: "ZenlinkAssetId",
+    }
   },
-  typesAlias: {
-    ZenlinkProtocol: {
-      AssetBalance: "ZenlinkAssetBalance",
-      AssetId: "ZenlinkAssetId",
-    },
-  },
+    typesAlias: {
+      ZenlinkProtocol: {
+        AssetBalance: "ZenlinkAssetBalance",
+        AssetId: "ZenlinkAssetId",
+      },
+  }
 };

@@ -6,14 +6,14 @@ import type { AccountId } from '@polkadot/types/interfaces/runtime';
 
 /** @name PairInfo */
 export interface PairInfo extends Struct {
-  readonly asset_0: ZenlinkAssetId;
-  readonly asset_1: ZenlinkAssetId;
+  readonly asset0: ZenlinkAssetId;
+  readonly asset1: ZenlinkAssetId;
   readonly account: AccountId;
-  readonly total_liquidity: ZenlinkAssetBalance;
-  readonly holding_liquidity: ZenlinkAssetBalance;
-  readonly reserve_0: ZenlinkAssetBalance;
-  readonly reserve_1: ZenlinkAssetBalance;
-  readonly lp_asset_id: ZenlinkAssetId;
+  readonly totalLiquidity: ZenlinkAssetBalance;
+  readonly holdingLiquidity: ZenlinkAssetBalance;
+  readonly reserve0: ZenlinkAssetBalance;
+  readonly reserve1: ZenlinkAssetBalance;
+  readonly lpAssetId: ZenlinkAssetId;
 }
 
 /** @name ZenlinkAssetBalance */

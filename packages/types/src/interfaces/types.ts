@@ -3,6 +3,7 @@
 
 export * from './aSharePrimitives/types';
 export * from './assets/types';
+export * from './bancor/types';
 export * from './chargeTransactionFee/types';
 export * from './minterReward/types';
 export * from './stakingReward/types';

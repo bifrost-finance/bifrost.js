@@ -53,6 +53,14 @@ declare module '@polkadot/api/types/errors' {
        **/
       VestingBalance: AugmentedError<ApiType>;
     };
+    bancor: {
+      AmountNotGreaterThanZero: AugmentedError<ApiType>;
+      BancorPoolNotExist: AugmentedError<ApiType>;
+      ConversionError: AugmentedError<ApiType>;
+      CurrencyIdNotExist: AugmentedError<ApiType>;
+      NotEnoughBalance: AugmentedError<ApiType>;
+      TokenSupplyNotEnought: AugmentedError<ApiType>;
+    };
     bifrostAssets: {
       /**
        * This operation will cause balance to overflow

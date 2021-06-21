@@ -1341,13 +1341,6 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bifrost-finance/types@^1.1.22":
-  version "1.1.22"
-  resolved "https://registry.yarnpkg.com/@bifrost-finance/types/-/types-1.1.22.tgz#441d91c0aea3f43cc7daecea9db95e30dac1da26"
-  integrity sha512-U7zqLpBcEP7Wkqahafl4FjaJSU/kb/9Pi9hb1yj9oC/Zba1v34nAXSoPfh0nKoLFe2aBPx/OO0y1yA+eDzF0HA==
-  dependencies:
-    "@open-web3/orml-type-definitions" "^0.9.1"
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
