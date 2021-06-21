@@ -4,7 +4,6 @@
 
 export { default as aSharePrimitives } from "./aSharePrimitives/definitions";
 export { default as assets } from "./assets/definitions";
-export { default as bancor } from "./bancor/definitions";
 // export { default as bid } from "./bid/definitions";
 // export { default as bridgeEos } from "./bridgeEos/definitions";
 // export { default as bridgeIost } from "./bridgeIost/definitions";

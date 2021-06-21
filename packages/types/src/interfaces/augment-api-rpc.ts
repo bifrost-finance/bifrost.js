@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { Metadata } from '@polkadot/metadata';
-import type { Bytes, HashMap, Json, Null, Option, StorageKey, Text, U256, U64, Vec, bool, u32, u64 } from '@polkadot/types';
+import type { Bytes, HashMap, Json, Null, Option, StorageKey, Text, U256, U64, Vec, bool, u128, u32, u64 } from '@polkadot/types';
 import type { AnyNumber, Codec, IExtrinsic, ITuple, Observable } from '@polkadot/types/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { NumberOrHex } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
@@ -576,11 +576,11 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get the output token amount for an exact input token amount.
        **/
-      getAmountInPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<ZenlinkAssetId> | (ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      getAmountInPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<ZenlinkAssetId> | (ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<u128>>;
       /**
        * Get the input token amount for an exact output token amount.
        **/
-      getAmountOutPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<ZenlinkAssetId> | (ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      getAmountOutPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<ZenlinkAssetId> | (ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<u128>>;
       /**
        * zenlinkProtocol getBalance
        **/
