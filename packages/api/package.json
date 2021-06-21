@@ -1,6 +1,10 @@
 {
   "name": "@bifrost-finance/api",
+<<<<<<< HEAD
   "version": "1.1.36",
+=======
+  "version": "1.1.28",
+>>>>>>> 67cb5414de4b4e77dbb79998b3036d6fbbdb7306
   "description": "Promise and RxJS wrappers around the Bifrost JS RPC",
   "main": "index.js",
   "keywords": [

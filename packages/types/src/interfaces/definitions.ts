@@ -16,3 +16,4 @@ export { default as vesting } from "./vesting/definitions";
 export { default as vsbondAuction } from "./vsbondAuction/definitions";
 export { default as vtokenMint } from "./vtokenMint/definitions";
 export { default as zenlinkProtocol } from "./zenlinkProtocol/definitions";
+export { default as bancor } from "./bancor/definitions";

@@ -183,11 +183,24 @@ export default {
       asset0: "ZenlinkAssetId",
       asset1: "ZenlinkAssetId",
       account: "AccountId",
+<<<<<<< HEAD
       totalLiquidity: "ZenlinkAssetBalance",
       holdingLiquidity: "ZenlinkAssetBalance",
       reserve0: "ZenlinkAssetBalance",
       reserve1: "ZenlinkAssetBalance",
       lpAssetId: "ZenlinkAssetId",
+=======
+      total_liquidity: "ZenlinkAssetBalance",
+      holding_liquidity: "ZenlinkAssetBalance",
+      reserve_0: "ZenlinkAssetBalance",
+      reserve_1: "ZenlinkAssetBalance",
+      lp_asset_id: "AssetId"
+    },
+  },
+  typesAlias: {
+    zenlinkProtocol: {
+      AssetBalance: "ZenlinkAssetBalance"
+>>>>>>> 67cb5414de4b4e77dbb79998b3036d6fbbdb7306
     }
   },
     typesAlias: {
