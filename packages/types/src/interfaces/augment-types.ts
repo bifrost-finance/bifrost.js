@@ -10,7 +10,7 @@ import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfac
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { MaxLocksOf, VestingInfo } from '@bifrost-finance/types/interfaces/vesting';
 import type { OrderId, OrderInfo, OrderState } from '@bifrost-finance/types/interfaces/vsbondAuction';
-import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
+import type { AssetBalance, PairInfo } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
 import type { RawAuraPreDigest } from '@polkadot/types/interfaces/aura';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -71,6 +71,7 @@ declare module '@polkadot/types/types/registry' {
     'Compact<AccountIndex>': Compact<AccountIndex>;
     'Compact<ActiveIndex>': Compact<ActiveIndex>;
     'Compact<ApprovalFlag>': Compact<ApprovalFlag>;
+    'Compact<AssetBalance>': Compact<AssetBalance>;
     'Compact<AssetId>': Compact<AssetId>;
     'Compact<AuctionIndex>': Compact<AuctionIndex>;
     'Compact<AuthIndex>': Compact<AuthIndex>;
@@ -166,7 +167,6 @@ declare module '@polkadot/types/types/registry' {
     'Compact<VoteIndex>': Compact<VoteIndex>;
     'Compact<VoteWeight>': Compact<VoteWeight>;
     'Compact<Weight>': Compact<Weight>;
-    'Compact<ZenlinkAssetBalance>': Compact<ZenlinkAssetBalance>;
     'Option<AbridgedCandidateReceipt>': Option<AbridgedCandidateReceipt>;
     'Option<AbridgedHostConfiguration>': Option<AbridgedHostConfiguration>;
     'Option<AbridgedHrmpChannel>': Option<AbridgedHrmpChannel>;
@@ -202,6 +202,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<ApprovalFlag>': Option<ApprovalFlag>;
     'Option<Approvals>': Option<Approvals>;
     'Option<ArithmeticError>': Option<ArithmeticError>;
+    'Option<AssetBalance>': Option<AssetBalance>;
     'Option<AssetId>': Option<AssetId>;
     'Option<AssetInstance>': Option<AssetInstance>;
     'Option<AssetOptions>': Option<AssetOptions>;
@@ -1053,8 +1054,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<XcmTransferAsset>': Option<XcmTransferAsset>;
     'Option<XcmTransferReserveAsset>': Option<XcmTransferReserveAsset>;
     'Option<XcmWithdrawAsset>': Option<XcmWithdrawAsset>;
-    'Option<ZenlinkAssetBalance>': Option<ZenlinkAssetBalance>;
-    'Option<ZenlinkAssetId>': Option<ZenlinkAssetId>;
     'Vec<AbridgedCandidateReceipt>': Vec<AbridgedCandidateReceipt>;
     'Vec<AbridgedHostConfiguration>': Vec<AbridgedHostConfiguration>;
     'Vec<AbridgedHrmpChannel>': Vec<AbridgedHrmpChannel>;
@@ -1090,6 +1089,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ApprovalFlag>': Vec<ApprovalFlag>;
     'Vec<Approvals>': Vec<Approvals>;
     'Vec<ArithmeticError>': Vec<ArithmeticError>;
+    'Vec<AssetBalance>': Vec<AssetBalance>;
     'Vec<AssetId>': Vec<AssetId>;
     'Vec<AssetInstance>': Vec<AssetInstance>;
     'Vec<AssetOptions>': Vec<AssetOptions>;
@@ -1941,8 +1941,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<XcmTransferAsset>': Vec<XcmTransferAsset>;
     'Vec<XcmTransferReserveAsset>': Vec<XcmTransferReserveAsset>;
     'Vec<XcmWithdrawAsset>': Vec<XcmWithdrawAsset>;
-    'Vec<ZenlinkAssetBalance>': Vec<ZenlinkAssetBalance>;
-    'Vec<ZenlinkAssetId>': Vec<ZenlinkAssetId>;
     AbridgedCandidateReceipt: AbridgedCandidateReceipt;
     AbridgedHostConfiguration: AbridgedHostConfiguration;
     AbridgedHrmpChannel: AbridgedHrmpChannel;
@@ -1978,6 +1976,7 @@ declare module '@polkadot/types/types/registry' {
     ApprovalFlag: ApprovalFlag;
     Approvals: Approvals;
     ArithmeticError: ArithmeticError;
+    AssetBalance: AssetBalance;
     AssetId: AssetId;
     AssetInstance: AssetInstance;
     AssetOptions: AssetOptions;
@@ -2829,7 +2828,5 @@ declare module '@polkadot/types/types/registry' {
     XcmTransferAsset: XcmTransferAsset;
     XcmTransferReserveAsset: XcmTransferReserveAsset;
     XcmWithdrawAsset: XcmWithdrawAsset;
-    ZenlinkAssetBalance: ZenlinkAssetBalance;
-    ZenlinkAssetId: ZenlinkAssetId;
   }
 }
