@@ -20,7 +20,7 @@
 ##### 方法一：无正在运行的节点时：
 
 1. 在本地跑起来一条链。
-2. 在 bifrost.js 工程根目录下，输入命令行：yarn update-metadata 。 则 packages/bypes/bifrost.json 文件会根据本地跑的链，进行相应的更新。
+2. 在 bifrost.js 工程根目录下，输入命令行：yarn update-metadata 。 则 packages/types/bifrost.json 文件会根据本地跑的链，进行相应的更新。
 
 ##### 方法二：有正在运行的节点时：
 
