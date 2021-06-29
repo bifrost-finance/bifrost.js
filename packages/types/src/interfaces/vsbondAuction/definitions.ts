@@ -4,10 +4,10 @@ export default {
         OrderId: "u64",
         OrderInfo: {
             owner: "AccountIdOf",
-            currency_sold: "CurrencyIdOf",
-            amount_sold: "BalanceOf",
-            currency_expected: "CurrencyIdOf",
-            amount_expected: "BalanceOf",
+            vsbond: "CurrencyIdOf",
+            supply: "BalanceOf",
+            remain: "BalanceOf",
+            unit_price: "BalanceOf",
             order_id: "OrderId",
             order_state: "OrderState"
         },
