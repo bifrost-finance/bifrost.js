@@ -8,7 +8,7 @@ export default {
       },
     },
     typesAlias: {
-      assets: {
+      tokens: {
         AccountData: "OrmlAccountData"
       }
     }

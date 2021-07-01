@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 export * from './aSharePrimitives/types';
-export * from './assets/types';
+export * from './tokens/types';
 export * from './chargeTransactionFee/types';
 export * from './minterReward/types';
 export * from './stakingReward/types';

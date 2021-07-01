@@ -11,4 +11,4 @@ export interface OrmlAccountData extends Struct {
   readonly frozen: Balance;
 }
 
-export type PHANTOM_ASSETS = 'assets';
+export type PHANTOM_TOKENS = 'tokens';

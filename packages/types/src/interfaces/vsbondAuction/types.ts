@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { Enum, Struct, u64 } from '@polkadot/types';
-import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { AccountIdOf, BalanceOf } from '@polkadot/types/interfaces/runtime';
 
 /** @name OrderId */
@@ -11,10 +11,10 @@ export interface OrderId extends u64 {}
 /** @name OrderInfo */
 export interface OrderInfo extends Struct {
   readonly owner: AccountIdOf;
-  readonly currency_sold: CurrencyIdOf;
-  readonly amount_sold: BalanceOf;
-  readonly currency_expected: CurrencyIdOf;
-  readonly amount_expected: BalanceOf;
+  readonly vsbond: CurrencyId;
+  readonly supply: BalanceOf;
+  readonly remain: BalanceOf;
+  readonly unit_price: BalanceOf;
   readonly order_id: OrderId;
   readonly order_state: OrderState;
 }

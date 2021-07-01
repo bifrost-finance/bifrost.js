@@ -8,7 +8,7 @@ import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { IsExtended } from '@bifrost-finance/types/interfaces/minterReward';
 import type { OrderId, OrderInfo } from '@bifrost-finance/types/interfaces/vsbondAuction';
-import type { AssetBalance } from '@polkadot/types/interfaces/assets';
+import type { ZenlinkAssetBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { Votes } from '@polkadot/types/interfaces/collective';
 import type { FundInfo, TrieIndex } from '@polkadot/types/interfaces/crowdloan';
@@ -28,7 +28,7 @@ declare module '@polkadot/api/types/storage' {
     balances: {
       /**
        * The balance of an account.
-       * 
+       *
        * NOTE: This is only used in the case that this pallet is used to store balances.
        **/
       account: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<AccountData>, [AccountId]>;
@@ -39,7 +39,7 @@ declare module '@polkadot/api/types/storage' {
       locks: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Vec<BalanceLock>>, [AccountId]>;
       /**
        * Storage version of the pallet.
-       * 
+       *
        * This is set to v2.0.0 for new networks.
        **/
       storageVersion: AugmentedQuery<ApiType, () => Observable<Releases>, []>;
@@ -93,7 +93,7 @@ declare module '@polkadot/api/types/storage' {
       cancellations: AugmentedQuery<ApiType, (arg: Hash | string | Uint8Array) => Observable<bool>, [Hash]>;
       /**
        * Those who have locked a deposit.
-       * 
+       *
        * TWOX-NOTE: Safe, as increasing integer keys are safe.
        **/
       depositOf: AugmentedQuery<ApiType, (arg: PropIndex | AnyNumber | Uint8Array) => Observable<Option<ITuple<[Vec<AccountId>, BalanceOf]>>>, [PropIndex]>;
@@ -105,7 +105,7 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Accounts for which there are locks in action which may be removed at some point in the
        * future. The value is the block number at which the lock expires and may be removed.
-       * 
+       *
        * TWOX-NOTE: OK ― `AccountId` is a secure hash.
        **/
       locks: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<BlockNumber>>, [AccountId]>;
@@ -140,20 +140,20 @@ declare module '@polkadot/api/types/storage' {
       referendumCount: AugmentedQuery<ApiType, () => Observable<ReferendumIndex>, []>;
       /**
        * Information concerning any given referendum.
-       * 
+       *
        * TWOX-NOTE: SAFE as indexes are not under an attacker’s control.
        **/
       referendumInfoOf: AugmentedQuery<ApiType, (arg: ReferendumIndex | AnyNumber | Uint8Array) => Observable<Option<ReferendumInfo>>, [ReferendumIndex]>;
       /**
        * Storage version of the pallet.
-       * 
+       *
        * New networks start with last version.
        **/
       storageVersion: AugmentedQuery<ApiType, () => Observable<Option<Releases>>, []>;
       /**
        * All votes for a particular voter. We store the balance for the number of votes that we
        * have recorded. The second item is the total amount of delegations, that will be added.
-       * 
+       *
        * TWOX-NOTE: SAFE as `AccountId`s are crypto hashes anyway.
        **/
       votingOf: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Voting>, [AccountId]>;
@@ -233,35 +233,35 @@ declare module '@polkadot/api/types/storage' {
       didSetValidationCode: AugmentedQuery<ApiType, () => Observable<bool>, []>;
       /**
        * The parachain host configuration that was obtained from the relay parent.
-       * 
+       *
        * This field is meant to be updated each block with the validation data inherent. Therefore,
        * before processing of the inherent, e.g. in `on_initialize` this data may be stale.
-       * 
+       *
        * This data is also absent from the genesis.
        **/
       hostConfiguration: AugmentedQuery<ApiType, () => Observable<Option<AbridgedHostConfiguration>>, []>;
       /**
        * HRMP messages that were sent in a block.
-       * 
+       *
        * This will be cleared in `on_initialize` of each new block.
        **/
       hrmpOutboundMessages: AugmentedQuery<ApiType, () => Observable<Vec<OutboundHrmpMessage>>, []>;
       /**
        * HRMP watermark that was set in a block.
-       * 
+       *
        * This will be cleared in `on_initialize` of each new block.
        **/
       hrmpWatermark: AugmentedQuery<ApiType, () => Observable<BlockNumber>, []>;
       /**
        * The last downward message queue chain head we have observed.
-       * 
+       *
        * This value is loaded before and saved after processing inbound downward messages carried
        * by the system inherent.
        **/
       lastDmqMqcHead: AugmentedQuery<ApiType, () => Observable<MessageQueueChain>, []>;
       /**
        * The message queue chain heads we have observed per each channel incoming channel.
-       * 
+       *
        * This value is loaded before and saved after processing inbound downward messages carried
        * by the system inherent.
        **/
@@ -272,7 +272,7 @@ declare module '@polkadot/api/types/storage' {
       lastUpgrade: AugmentedQuery<ApiType, () => Observable<BlockNumber>, []>;
       /**
        * New validation code that was set in a block.
-       * 
+       *
        * This will be cleared in `on_initialize` of each new block if no other pallet already set
        * the value.
        **/
@@ -296,17 +296,17 @@ declare module '@polkadot/api/types/storage' {
       pendingValidationCode: AugmentedQuery<ApiType, () => Observable<Bytes>, []>;
       /**
        * Number of downward messages processed in a block.
-       * 
+       *
        * This will be cleared in `on_initialize` of each new block.
        **/
       processedDownwardMessages: AugmentedQuery<ApiType, () => Observable<u32>, []>;
       /**
        * The snapshot of some state related to messaging relevant to the current parachain as per
        * the relay parent.
-       * 
+       *
        * This field is meant to be updated each block with the validation data inherent. Therefore,
        * before processing of the inherent, e.g. in `on_initialize` this data may be stale.
-       * 
+       *
        * This data is also absent from the genesis.
        **/
       relevantMessagingState: AugmentedQuery<ApiType, () => Observable<Option<MessagingStateSnapshot>>, []>;
@@ -322,7 +322,7 @@ declare module '@polkadot/api/types/storage' {
       reservedXcmpWeightOverride: AugmentedQuery<ApiType, () => Observable<Option<Weight>>, []>;
       /**
        * Upward messages that were sent in a block.
-       * 
+       *
        * This will be cleared in `on_initialize` of each new block.
        **/
       upwardMessages: AugmentedQuery<ApiType, () => Observable<Vec<UpwardMessage>>, []>;
@@ -365,7 +365,7 @@ declare module '@polkadot/api/types/storage' {
       lookup: AugmentedQuery<ApiType, (arg: Bytes | string | Uint8Array) => Observable<Option<TaskAddress>>, [Bytes]>;
       /**
        * Storage version of the pallet.
-       * 
+       *
        * New networks start with last version.
        **/
       storageVersion: AugmentedQuery<ApiType, () => Observable<Releases>, []>;
@@ -408,11 +408,11 @@ declare module '@polkadot/api/types/storage' {
       /**
        * Mapping between a topic (represented by T::Hash) and a vector of indexes
        * of events in the `<Events<T>>` list.
-       * 
+       *
        * All topic vectors have deterministic storage locations depending on the topic. This
        * allows light-clients to leverage the changes trie storage tracking mechanism and
        * in case of changes fetch the list of events of interest.
-       * 
+       *
        * The value has the type `(T::BlockNumber, EventIndex)` because if we used only just
        * the `EventIndex` then in case if the topic has the same contents on the next block
        * no notification will be triggered thus the event might be lost.
@@ -491,9 +491,9 @@ declare module '@polkadot/api/types/storage' {
     tokens: {
       /**
        * The balance of a token type under an account.
-       * 
+       *
        * NOTE: If the total is ever zero, decrease account ref account.
-       * 
+       *
        * NOTE: This is only used in the case that this module is used to store
        * balances.
        **/
@@ -606,22 +606,22 @@ declare module '@polkadot/api/types/storage' {
        * Foreign foreign storage
        * The number of units of assets held by any given account.
        **/
-      foreignLedger: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AccountId]> | [AssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, AccountId | string | Uint8Array]) => Observable<AssetBalance>, [ITuple<[AssetId, AccountId]>]>;
+      foreignLedger: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AccountId]> | [AssetId | AnyNumber | Uint8Array, AccountId | string | Uint8Array]) => Observable<ZenlinkAssetBalance>, [ITuple<[AssetId, AccountId]>]>;
       foreignList: AugmentedQuery<ApiType, () => Observable<Vec<AssetId>>, []>;
       /**
        * TWOX-NOTE: `AssetId` is trusted, so this is safe.
        **/
-      foreignMeta: AugmentedQuery<ApiType, (arg: AssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array) => Observable<AssetBalance>, [AssetId]>;
+      foreignMeta: AugmentedQuery<ApiType, (arg: AssetId | AnyNumber | Uint8Array) => Observable<ZenlinkAssetBalance>, [AssetId]>;
       /**
-       * ((AssetId, AssetId), AccountId) -> AssetBalance
+       * ((AssetId, AssetId), AccountId) -> ZenlinkAssetBalance
        **/
-      liquidityLedger: AugmentedQuery<ApiType, (arg: ITuple<[ITuple<[AssetId, AssetId]>, AccountId]> | [ITuple<[AssetId, AssetId]> | [AssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, AssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array], AccountId | string | Uint8Array]) => Observable<AssetBalance>, [ITuple<[ITuple<[AssetId, AssetId]>, AccountId]>]>;
+      liquidityLedger: AugmentedQuery<ApiType, (arg: ITuple<[ITuple<[AssetId, AssetId]>, AccountId]> | [ITuple<[AssetId, AssetId]> | [AssetId | AnyNumber | Uint8Array, AssetId | AnyNumber | Uint8Array], AccountId | string | Uint8Array]) => Observable<ZenlinkAssetBalance>, [ITuple<[ITuple<[AssetId, AssetId]>, AccountId]>]>;
       /**
        * Swap liquidity storage
        * TWOX-NOTE: `AssetId` is trusted, so this is safe.
        * (AssetId, AssetId) -> (PairAccountId, TotalSupply)
        **/
-      liquidityMeta: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AssetId]> | [AssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, AssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array]) => Observable<Option<ITuple<[AccountId, AssetBalance]>>>, [ITuple<[AssetId, AssetId]>]>;
+      liquidityMeta: AugmentedQuery<ApiType, (arg: ITuple<[AssetId, AssetId]> | [AssetId | AnyNumber | Uint8Array, AssetId | AnyNumber | Uint8Array]) => Observable<Option<ITuple<[AccountId, ZenlinkAssetBalance]>>>, [ITuple<[AssetId, AssetId]>]>;
       liquidityPairs: AugmentedQuery<ApiType, () => Observable<Vec<ITuple<[AssetId, AssetId]>>>, []>;
     };
   }
