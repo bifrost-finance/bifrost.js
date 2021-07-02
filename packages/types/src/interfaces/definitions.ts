@@ -9,6 +9,7 @@ export { default as tokens } from "./tokens/definitions";
 // export { default as bridgeIost } from "./bridgeIost/definitions";
 export { default as chargeTransactionFee } from "./chargeTransactionFee/definitions";
 export { default as minterReward } from "./minterReward/definitions";
+export { default as salp } from "./salp/definitions";
 export { default as stakingReward } from "./stakingReward/definitions";
 // export { default as swap } from "./swap/definitions";
 export { default as vesting } from "./vesting/definitions";

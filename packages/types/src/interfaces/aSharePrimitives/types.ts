@@ -1,13 +1,13 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Enum, i128 } from '@polkadot/types';
+import type { Enum } from '@polkadot/types';
 import type { ITuple } from '@polkadot/types/types';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 import type { Balance, Releases } from '@polkadot/types/interfaces/runtime';
 
 /** @name AmountOf */
-export interface AmountOf extends i128 {}
+export interface AmountOf extends Balance {}
 
 /** @name CurrencyId */
 export interface CurrencyId extends Enum {
@@ -40,7 +40,7 @@ export interface TAssetBalance extends Balance {}
 /** @name TokenSymbol */
 export interface TokenSymbol extends Enum {
   readonly isAsg: boolean;
-  readonly isAUsd: boolean;
+  readonly isAusd: boolean;
   readonly isDot: boolean;
   readonly isKsm: boolean;
   readonly isEth: boolean;

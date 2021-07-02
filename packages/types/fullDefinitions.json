@@ -3,7 +3,7 @@
     "TokenSymbol": {
       "_enum": {
         "ASG": 0,
-        "aUSD": 2,
+        "AUSD": 2,
         "DOT": 3,
         "KSM": 4,
         "ETH": 5
@@ -21,7 +21,7 @@
     },
     "CurrencyIdOf": "CurrencyId",
     "TAssetBalance": "Balance",
-    "AmountOf": "i128",
+    "AmountOf": "Balance",
     "StorageVersion": "Releases",
     "ShareWeight": "Balance",
     "OrmlAccountData": {
@@ -39,6 +39,59 @@
     },
     "IsExtended": "bool",
     "SystemPalletId": "PalletId",
+    "TrieIndex": "u32",
+    "FundInfo": {
+      "depositor": "AccountId",
+      "deposit": "Balance",
+      "raised": "Balance",
+      "cap": "Balance",
+      "first_slot": "LeasePeriod",
+      "last_slot": "LeasePeriod",
+      "trie_index": "TrieIndex",
+      "status": "FundStatus"
+    },
+    "FundStatus": {
+      "_enum": [
+        "Ongoing",
+        "Retired",
+        "Success",
+        "Failed",
+        "Withdrew",
+        "End"
+      ]
+    },
+    "ContributionStatus": {
+      "_enum": [
+        "Contributing",
+        "Contributed",
+        "Redeeming",
+        "Redeemed"
+      ]
+    },
+    "CrowdloanContributeCall": {
+      "_enum": {
+        "CrowdloanContribute": "ContributeCall"
+      }
+    },
+    "ContributeCall": {
+      "_enum": {
+        "Contribute": "Contribution"
+      }
+    },
+    "Contribution": {
+      "index": "ParaId",
+      "value": "BalanceOf",
+      "signature": "Option<MultiSignature>"
+    },
+    "Withdraw": {
+      "who": "AccountIdOf",
+      "index": "ParaId"
+    },
+    "WithdrawCall": {
+      "_enum": {
+        "Withdraw": "Withdraw"
+      }
+    },
     "RewardRecord": {
       "account_id": "AccountId",
       "record_amount": "Balance"

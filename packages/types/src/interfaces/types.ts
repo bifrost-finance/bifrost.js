@@ -5,6 +5,7 @@ export * from './aSharePrimitives/types';
 export * from './tokens/types';
 export * from './chargeTransactionFee/types';
 export * from './minterReward/types';
+export * from './salp/types';
 export * from './stakingReward/types';
 export * from './vesting/types';
 export * from './vsbondAuction/types';

@@ -6,6 +6,7 @@ import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, T
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
+import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { OrmlAccountData } from '@bifrost-finance/types/interfaces/tokens';
 import type { MaxLocksOf, VestingInfo } from '@bifrost-finance/types/interfaces/vesting';
@@ -18,7 +19,7 @@ import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interface
 import type { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
 import type { AllowedSlots, BabeAuthorityWeight, BabeBlockWeight, BabeEpochConfiguration, BabeEquivocationProof, BabeWeight, EpochAuthorship, MaybeRandomness, MaybeVrf, NextConfigDescriptor, NextConfigDescriptorV1, Randomness, RawBabePreDigest, RawBabePreDigestCompat, RawBabePreDigestPrimary, RawBabePreDigestPrimaryTo159, RawBabePreDigestSecondaryPlain, RawBabePreDigestSecondaryTo159, RawBabePreDigestSecondaryVRF, RawBabePreDigestTo159, SlotNumber, VrfData, VrfOutput, VrfProof } from '@polkadot/types/interfaces/babe';
 import type { AccountData, BalanceLock, BalanceLockTo212, BalanceStatus, Reasons, ReserveData, ReserveIdentifier, VestingSchedule, WithdrawReasons } from '@polkadot/types/interfaces/balances';
-import type { BeefyCommitment, BeefyId, BeefyNextAuthoritySet, BeefyPayload, BeefySignedCommitment, MmrRootHash, ValidatorSetId } from '@polkadot/types/interfaces/beefy';
+import type { BeefyCommitment, BeefyNextAuthoritySet, BeefyPayload, BeefySignedCommitment, MmrRootHash, ValidatorSetId } from '@polkadot/types/interfaces/beefy';
 import type { BridgedBlockHash, BridgedBlockNumber, BridgedHeader, InitializationData } from '@polkadot/types/interfaces/bridges';
 import type { BlockHash } from '@polkadot/types/interfaces/chain';
 import type { PrefixedStorageKey } from '@polkadot/types/interfaces/childstate';
@@ -65,12 +66,13 @@ import type { Bounty, BountyIndex, BountyStatus, BountyStatusActive, BountyStatu
 import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
 import type { ClassDetails, ClassId, ClassMetadata, DepositBalance, DepositBalanceOf, DestroyWitness, InstanceDetails, InstanceId, InstanceMetadata } from '@polkadot/types/interfaces/uniques';
 import type { Multisig, Timepoint } from '@polkadot/types/interfaces/utility';
-import type { AccountId32Junction, AccountIndex64Junction, AccountKey20Junction, AssetInstance, BodyId, BodyPart, BodyPartAtLeastProportion, BodyPartFraction, BodyPartMoreThanProportion, DoubleEncodedCall, InboundStatus, Junction, MultiAsset, MultiAssetAbstractFungible, MultiAssetAbstractNonFungible, MultiAssetConcreteFungible, MultiAssetConcreteNonFungible, MultiLocation, NetworkId, OutboundStatus, Outcome, PluralityJunction, QueueConfigData, VersionedMultiAsset, VersionedMultiLocation, VersionedXcm, Xcm, XcmAssetEffects, XcmError, XcmHrmpChannelAccepted, XcmHrmpChannelClosing, XcmHrmpNewChannelOpenRequest, XcmOrder, XcmOrderBuyExecution, XcmOrderDepositAsset, XcmOrderDepositReserveAsset, XcmOrderExchangeAsset, XcmOrderInitiateReserveWithdraw, XcmOrderInitiateTeleport, XcmOrderQueryHolding, XcmOrigin, XcmOriginKind, XcmQueryResponse, XcmRelayedFrom, XcmReserveAssetDeposit, XcmResponse, XcmTeleportAsset, XcmTransact, XcmTransferAsset, XcmTransferReserveAsset, XcmWithdrawAsset, XcmpMessageFormat } from '@polkadot/types/interfaces/xcm';
+import type { AccountId32Junction, AccountIndex64Junction, AccountKey20Junction, AssetInstance, BodyId, BodyPart, BodyPartAtLeastProportion, BodyPartFraction, BodyPartMoreThanProportion, DoubleEncodedCall, InboundStatus, Junction, MultiAsset, MultiAssetAbstractFungible, MultiAssetAbstractNonFungible, MultiAssetConcreteFungible, MultiAssetConcreteNonFungible, MultiLocation, NetworkId, OutboundStatus, Outcome, PluralityJunction, QueueConfigData, VersionedMultiAsset, VersionedMultiLocation, VersionedXcm, Xcm, XcmAssetEffects, XcmError, XcmHrmpChannelAccepted, XcmHrmpChannelClosing, XcmHrmpNewChannelOpenRequest, XcmOrder, XcmOrderBuyExecution, XcmOrderDepositAsset, XcmOrderDepositReserveAsset, XcmOrderExchangeAsset, XcmOrderInitiateReserveWithdraw, XcmOrderInitiateTeleport, XcmOrderQueryHolding, XcmOriginKind, XcmQueryResponse, XcmRelayedFrom, XcmReserveAssetDeposit, XcmResponse, XcmTeleportAsset, XcmTransact, XcmTransferAsset, XcmTransferReserveAsset, XcmWithdrawAsset, XcmpMessageFormat } from '@polkadot/types/interfaces/xcm';
 
 declare module '@polkadot/types/types/registry' {
   export interface InterfaceTypes {
     'Compact<AccountIndex>': Compact<AccountIndex>;
     'Compact<ActiveIndex>': Compact<ActiveIndex>;
+    'Compact<AmountOf>': Compact<AmountOf>;
     'Compact<ApprovalFlag>': Compact<ApprovalFlag>;
     'Compact<AssetId>': Compact<AssetId>;
     'Compact<AuctionIndex>': Compact<AuctionIndex>;
@@ -242,7 +244,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<BalanceStatus>': Option<BalanceStatus>;
     'Option<BancorPool>': Option<BancorPool>;
     'Option<BeefyCommitment>': Option<BeefyCommitment>;
-    'Option<BeefyId>': Option<BeefyId>;
     'Option<BeefyKey>': Option<BeefyKey>;
     'Option<BeefyNextAuthoritySet>': Option<BeefyNextAuthoritySet>;
     'Option<BeefyPayload>': Option<BeefyPayload>;
@@ -350,11 +351,15 @@ declare module '@polkadot/types/types/registry' {
     'Option<ContractStorageKey>': Option<ContractStorageKey>;
     'Option<ContractStorageLayout>': Option<ContractStorageLayout>;
     'Option<ContractTypeSpec>': Option<ContractTypeSpec>;
+    'Option<ContributeCall>': Option<ContributeCall>;
+    'Option<Contribution>': Option<Contribution>;
+    'Option<ContributionStatus>': Option<ContributionStatus>;
     'Option<Conviction>': Option<Conviction>;
     'Option<CoreAssignment>': Option<CoreAssignment>;
     'Option<CoreIndex>': Option<CoreIndex>;
     'Option<CoreOccupied>': Option<CoreOccupied>;
     'Option<CreatedBlock>': Option<CreatedBlock>;
+    'Option<CrowdloanContributeCall>': Option<CrowdloanContributeCall>;
     'Option<CurrencyId>': Option<CurrencyId>;
     'Option<CurrencyIdOf>': Option<CurrencyIdOf>;
     'Option<Data>': Option<Data>;
@@ -509,6 +514,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<FunctionMetadataV9>': Option<FunctionMetadataV9>;
     'Option<FundIndex>': Option<FundIndex>;
     'Option<FundInfo>': Option<FundInfo>;
+    'Option<FundStatus>': Option<FundStatus>;
     'Option<Gas>': Option<Gas>;
     'Option<GiltBid>': Option<GiltBid>;
     'Option<GlobalValidationData>': Option<GlobalValidationData>;
@@ -1037,6 +1043,8 @@ declare module '@polkadot/types/types/registry' {
     'Option<WinnersDataTuple>': Option<WinnersDataTuple>;
     'Option<WinningData>': Option<WinningData>;
     'Option<WinningDataEntry>': Option<WinningDataEntry>;
+    'Option<Withdraw>': Option<Withdraw>;
+    'Option<WithdrawCall>': Option<WithdrawCall>;
     'Option<WithdrawReasons>': Option<WithdrawReasons>;
     'Option<Xcm>': Option<Xcm>;
     'Option<XcmAssetEffects>': Option<XcmAssetEffects>;
@@ -1052,7 +1060,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<XcmOrderInitiateReserveWithdraw>': Option<XcmOrderInitiateReserveWithdraw>;
     'Option<XcmOrderInitiateTeleport>': Option<XcmOrderInitiateTeleport>;
     'Option<XcmOrderQueryHolding>': Option<XcmOrderQueryHolding>;
-    'Option<XcmOrigin>': Option<XcmOrigin>;
     'Option<XcmOriginKind>': Option<XcmOriginKind>;
     'Option<XcmpMessageFormat>': Option<XcmpMessageFormat>;
     'Option<XcmQueryResponse>': Option<XcmQueryResponse>;
@@ -1139,7 +1146,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<BalanceStatus>': Vec<BalanceStatus>;
     'Vec<BancorPool>': Vec<BancorPool>;
     'Vec<BeefyCommitment>': Vec<BeefyCommitment>;
-    'Vec<BeefyId>': Vec<BeefyId>;
     'Vec<BeefyKey>': Vec<BeefyKey>;
     'Vec<BeefyNextAuthoritySet>': Vec<BeefyNextAuthoritySet>;
     'Vec<BeefyPayload>': Vec<BeefyPayload>;
@@ -1247,11 +1253,15 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ContractStorageKey>': Vec<ContractStorageKey>;
     'Vec<ContractStorageLayout>': Vec<ContractStorageLayout>;
     'Vec<ContractTypeSpec>': Vec<ContractTypeSpec>;
+    'Vec<ContributeCall>': Vec<ContributeCall>;
+    'Vec<Contribution>': Vec<Contribution>;
+    'Vec<ContributionStatus>': Vec<ContributionStatus>;
     'Vec<Conviction>': Vec<Conviction>;
     'Vec<CoreAssignment>': Vec<CoreAssignment>;
     'Vec<CoreIndex>': Vec<CoreIndex>;
     'Vec<CoreOccupied>': Vec<CoreOccupied>;
     'Vec<CreatedBlock>': Vec<CreatedBlock>;
+    'Vec<CrowdloanContributeCall>': Vec<CrowdloanContributeCall>;
     'Vec<CurrencyId>': Vec<CurrencyId>;
     'Vec<CurrencyIdOf>': Vec<CurrencyIdOf>;
     'Vec<Data>': Vec<Data>;
@@ -1406,6 +1416,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<FunctionMetadataV9>': Vec<FunctionMetadataV9>;
     'Vec<FundIndex>': Vec<FundIndex>;
     'Vec<FundInfo>': Vec<FundInfo>;
+    'Vec<FundStatus>': Vec<FundStatus>;
     'Vec<Gas>': Vec<Gas>;
     'Vec<GiltBid>': Vec<GiltBid>;
     'Vec<GlobalValidationData>': Vec<GlobalValidationData>;
@@ -1934,6 +1945,8 @@ declare module '@polkadot/types/types/registry' {
     'Vec<WinnersDataTuple>': Vec<WinnersDataTuple>;
     'Vec<WinningData>': Vec<WinningData>;
     'Vec<WinningDataEntry>': Vec<WinningDataEntry>;
+    'Vec<Withdraw>': Vec<Withdraw>;
+    'Vec<WithdrawCall>': Vec<WithdrawCall>;
     'Vec<WithdrawReasons>': Vec<WithdrawReasons>;
     'Vec<Xcm>': Vec<Xcm>;
     'Vec<XcmAssetEffects>': Vec<XcmAssetEffects>;
@@ -1949,7 +1962,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<XcmOrderInitiateReserveWithdraw>': Vec<XcmOrderInitiateReserveWithdraw>;
     'Vec<XcmOrderInitiateTeleport>': Vec<XcmOrderInitiateTeleport>;
     'Vec<XcmOrderQueryHolding>': Vec<XcmOrderQueryHolding>;
-    'Vec<XcmOrigin>': Vec<XcmOrigin>;
     'Vec<XcmOriginKind>': Vec<XcmOriginKind>;
     'Vec<XcmpMessageFormat>': Vec<XcmpMessageFormat>;
     'Vec<XcmQueryResponse>': Vec<XcmQueryResponse>;
@@ -2036,7 +2048,6 @@ declare module '@polkadot/types/types/registry' {
     BalanceStatus: BalanceStatus;
     BancorPool: BancorPool;
     BeefyCommitment: BeefyCommitment;
-    BeefyId: BeefyId;
     BeefyKey: BeefyKey;
     BeefyNextAuthoritySet: BeefyNextAuthoritySet;
     BeefyPayload: BeefyPayload;
@@ -2144,11 +2155,15 @@ declare module '@polkadot/types/types/registry' {
     ContractStorageKey: ContractStorageKey;
     ContractStorageLayout: ContractStorageLayout;
     ContractTypeSpec: ContractTypeSpec;
+    ContributeCall: ContributeCall;
+    Contribution: Contribution;
+    ContributionStatus: ContributionStatus;
     Conviction: Conviction;
     CoreAssignment: CoreAssignment;
     CoreIndex: CoreIndex;
     CoreOccupied: CoreOccupied;
     CreatedBlock: CreatedBlock;
+    CrowdloanContributeCall: CrowdloanContributeCall;
     CurrencyId: CurrencyId;
     CurrencyIdOf: CurrencyIdOf;
     Data: Data;
@@ -2303,6 +2318,7 @@ declare module '@polkadot/types/types/registry' {
     FunctionMetadataV9: FunctionMetadataV9;
     FundIndex: FundIndex;
     FundInfo: FundInfo;
+    FundStatus: FundStatus;
     Gas: Gas;
     GiltBid: GiltBid;
     GlobalValidationData: GlobalValidationData;
@@ -2831,6 +2847,8 @@ declare module '@polkadot/types/types/registry' {
     WinnersDataTuple: WinnersDataTuple;
     WinningData: WinningData;
     WinningDataEntry: WinningDataEntry;
+    Withdraw: Withdraw;
+    WithdrawCall: WithdrawCall;
     WithdrawReasons: WithdrawReasons;
     Xcm: Xcm;
     XcmAssetEffects: XcmAssetEffects;
@@ -2846,7 +2864,6 @@ declare module '@polkadot/types/types/registry' {
     XcmOrderInitiateReserveWithdraw: XcmOrderInitiateReserveWithdraw;
     XcmOrderInitiateTeleport: XcmOrderInitiateTeleport;
     XcmOrderQueryHolding: XcmOrderQueryHolding;
-    XcmOrigin: XcmOrigin;
     XcmOriginKind: XcmOriginKind;
     XcmpMessageFormat: XcmpMessageFormat;
     XcmQueryResponse: XcmQueryResponse;

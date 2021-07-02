@@ -4,7 +4,7 @@ export default {
     TokenSymbol: {
       _enum: {
         ASG: 0,
-        aUSD: 2,
+        AUSD: 2,
         DOT: 3,
         KSM: 4,
         ETH: 5,
@@ -22,7 +22,7 @@ export default {
     },
     CurrencyIdOf: "CurrencyId",
     TAssetBalance: "Balance",
-    AmountOf: "i128",
+    AmountOf: "Balance",
     // ChainId: {
     //   _enum: {
     //     RelayChain: "Null",
