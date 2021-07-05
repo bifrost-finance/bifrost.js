@@ -1,7 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Bytes, Option, U8aFixed, Vec, bool, u128, u32 } from '@polkadot/types';
+import type { Bytes, Option, U8aFixed, Vec, bool, u128, u16, u32 } from '@polkadot/types';
+import type { ITuple } from '@polkadot/types/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { OrderId, OrderInfo } from '@bifrost-finance/types/interfaces/vsbondAuction';
 import type { AssetBalance } from '@polkadot/types/interfaces/assets';
@@ -11,9 +12,13 @@ import type { MessageId, OverweightIndex } from '@polkadot/types/interfaces/cumu
 import type { PropIndex, ReferendumIndex } from '@polkadot/types/interfaces/democracy';
 import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
 import type { ParaId, RelayChainBlockNumber } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIdOf, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, Weight } from '@polkadot/types/interfaces/runtime';
+import type { ProxyType } from '@polkadot/types/interfaces/proxy';
+import type { AccountId, AccountIdOf, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, CallHash, Hash, PhantomData, Weight } from '@polkadot/types/interfaces/runtime';
 import type { TaskAddress } from '@polkadot/types/interfaces/scheduler';
+import type { SessionIndex } from '@polkadot/types/interfaces/session';
 import type { DispatchError, DispatchInfo, DispatchResult } from '@polkadot/types/interfaces/system';
+import type { BountyIndex } from '@polkadot/types/interfaces/treasury';
+import type { Timepoint } from '@polkadot/types/interfaces/utility';
 import type { MultiLocation, Outcome, Xcm, XcmError } from '@polkadot/types/interfaces/xcm';
 import type { ApiTypes } from '@polkadot/api/types';
 
@@ -78,8 +83,45 @@ declare module '@polkadot/api/types/events' {
        **/
       Issued: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
     };
+    bounties: {
+      /**
+       * A bounty is awarded to a beneficiary. \[index, beneficiary\]
+       **/
+      BountyAwarded: AugmentedEvent<ApiType, [BountyIndex, AccountId]>;
+      /**
+       * A bounty proposal is funded and became active. \[index\]
+       **/
+      BountyBecameActive: AugmentedEvent<ApiType, [BountyIndex]>;
+      /**
+       * A bounty is cancelled. \[index\]
+       **/
+      BountyCanceled: AugmentedEvent<ApiType, [BountyIndex]>;
+      /**
+       * A bounty is claimed by beneficiary. \[index, payout, beneficiary\]
+       **/
+      BountyClaimed: AugmentedEvent<ApiType, [BountyIndex, Balance, AccountId]>;
+      /**
+       * A bounty expiry is extended. \[index\]
+       **/
+      BountyExtended: AugmentedEvent<ApiType, [BountyIndex]>;
+      /**
+       * New bounty proposal. \[index\]
+       **/
+      BountyProposed: AugmentedEvent<ApiType, [BountyIndex]>;
+      /**
+       * A bounty proposal was rejected; funds were slashed. \[index, bond\]
+       **/
+      BountyRejected: AugmentedEvent<ApiType, [BountyIndex, Balance]>;
+    };
     chargeTransactionFee: {
       FlexibleFeeExchanged: AugmentedEvent<ApiType, [CurrencyId, u128]>;
+    };
+    collatorSelection: {
+      CandidateAdded: AugmentedEvent<ApiType, [AccountId, Balance]>;
+      CandidateRemoved: AugmentedEvent<ApiType, [AccountId]>;
+      NewCandidacyBond: AugmentedEvent<ApiType, [Balance]>;
+      NewDesiredCandidates: AugmentedEvent<ApiType, [u32]>;
+      NewInvulnerables: AugmentedEvent<ApiType, [Vec<AccountId>]>;
     };
     council: {
       /**
@@ -119,6 +161,32 @@ declare module '@polkadot/api/types/events' {
        * \[account, proposal_hash, voted, yes, no\]
        **/
       Voted: AugmentedEvent<ApiType, [AccountId, Hash, bool, MemberCount, MemberCount]>;
+    };
+    councilMembership: {
+      /**
+       * Phantom member, never used.
+       **/
+      Dummy: AugmentedEvent<ApiType, [PhantomData]>;
+      /**
+       * One of the members' keys changed.
+       **/
+      KeyChanged: AugmentedEvent<ApiType, []>;
+      /**
+       * The given member was added; see the transaction for who.
+       **/
+      MemberAdded: AugmentedEvent<ApiType, []>;
+      /**
+       * The given member was removed; see the transaction for who.
+       **/
+      MemberRemoved: AugmentedEvent<ApiType, []>;
+      /**
+       * The membership was reset; see the transaction for who the new set is.
+       **/
+      MembersReset: AugmentedEvent<ApiType, []>;
+      /**
+       * Two members were swapped; see the transaction for who.
+       **/
+      MembersSwapped: AugmentedEvent<ApiType, []>;
     };
     cumulusXcm: {
       /**
@@ -265,6 +333,45 @@ declare module '@polkadot/api/types/events' {
        **/
       WeightExhausted: AugmentedEvent<ApiType, [MessageId, Weight, Weight]>;
     };
+    elections: {
+      /**
+       * A \[candidate\] was slashed by \[amount\] due to failing to obtain a seat as member or
+       * runner-up.
+       * 
+       * Note that old members and runners-up are also candidates.
+       **/
+      CandidateSlashed: AugmentedEvent<ApiType, [AccountId, Balance]>;
+      /**
+       * Internal error happened while trying to perform election.
+       **/
+      ElectionError: AugmentedEvent<ApiType, []>;
+      /**
+       * No (or not enough) candidates existed for this round. This is different from
+       * `NewTerm(\[\])`. See the description of `NewTerm`.
+       **/
+      EmptyTerm: AugmentedEvent<ApiType, []>;
+      /**
+       * A \[member\] has been removed. This should always be followed by either `NewTerm` or
+       * `EmptyTerm`.
+       **/
+      MemberKicked: AugmentedEvent<ApiType, [AccountId]>;
+      /**
+       * A new term with \[new_members\]. This indicates that enough candidates existed to run
+       * the election, not that enough have has been elected. The inner value must be examined
+       * for this purpose. A `NewTerm(\[\])` indicates that some candidates got their bond
+       * slashed and none were elected, whilst `EmptyTerm` means that no candidates existed to
+       * begin with.
+       **/
+      NewTerm: AugmentedEvent<ApiType, [Vec<ITuple<[AccountId, Balance]>>]>;
+      /**
+       * Someone has renounced their candidacy.
+       **/
+      Renounced: AugmentedEvent<ApiType, [AccountId]>;
+      /**
+       * A \[seat holder\] was slashed by \[amount\] by being forcefully removed from the set.
+       **/
+      SeatHolderSlashed: AugmentedEvent<ApiType, [AccountId, Balance]>;
+    };
     indices: {
       /**
        * A account index was assigned. \[index, who\]
@@ -280,6 +387,25 @@ declare module '@polkadot/api/types/events' {
       IndexFrozen: AugmentedEvent<ApiType, [AccountIndex, AccountId]>;
     };
     minterReward: {
+    };
+    multisig: {
+      /**
+       * A multisig operation has been approved by someone.
+       * \[approving, timepoint, multisig, call_hash\]
+       **/
+      MultisigApproval: AugmentedEvent<ApiType, [AccountId, Timepoint, AccountId, CallHash]>;
+      /**
+       * A multisig operation has been cancelled. \[cancelling, timepoint, multisig, call_hash\]
+       **/
+      MultisigCancelled: AugmentedEvent<ApiType, [AccountId, Timepoint, AccountId, CallHash]>;
+      /**
+       * A multisig operation has been executed. \[approving, timepoint, multisig, call_hash\]
+       **/
+      MultisigExecuted: AugmentedEvent<ApiType, [AccountId, Timepoint, AccountId, CallHash, DispatchResult]>;
+      /**
+       * A new multisig operation has begun. \[approving, multisig, call_hash\]
+       **/
+      NewMultisig: AugmentedEvent<ApiType, [AccountId, AccountId, CallHash]>;
     };
     parachainSystem: {
       /**
@@ -309,6 +435,21 @@ declare module '@polkadot/api/types/events' {
     polkadotXcm: {
       Attempted: AugmentedEvent<ApiType, [Outcome]>;
       Sent: AugmentedEvent<ApiType, [MultiLocation, MultiLocation, Xcm]>;
+    };
+    proxy: {
+      /**
+       * An announcement was placed to make a call in the future. \[real, proxy, call_hash\]
+       **/
+      Announced: AugmentedEvent<ApiType, [AccountId, AccountId, Hash]>;
+      /**
+       * Anonymous account has been created by new proxy with given
+       * disambiguation index and proxy type. \[anonymous, who, proxy_type, disambiguation_index\]
+       **/
+      AnonymousCreated: AugmentedEvent<ApiType, [AccountId, AccountId, ProxyType, u16]>;
+      /**
+       * A proxy was executed correctly, with the given \[result\].
+       **/
+      ProxyExecuted: AugmentedEvent<ApiType, [DispatchResult]>;
     };
     salp: {
       /**
@@ -369,6 +510,13 @@ declare module '@polkadot/api/types/events' {
        * Scheduled some task. \[when, index\]
        **/
       Scheduled: AugmentedEvent<ApiType, [BlockNumber, u32]>;
+    };
+    session: {
+      /**
+       * New session has happened. Note that the argument is the \[session_index\], not the block
+       * number as the type might suggest.
+       **/
+      NewSession: AugmentedEvent<ApiType, [SessionIndex]>;
     };
     sudo: {
       /**
@@ -449,6 +597,54 @@ declare module '@polkadot/api/types/events' {
        **/
       Voted: AugmentedEvent<ApiType, [AccountId, Hash, bool, MemberCount, MemberCount]>;
     };
+    technicalMembership: {
+      /**
+       * Phantom member, never used.
+       **/
+      Dummy: AugmentedEvent<ApiType, [PhantomData]>;
+      /**
+       * One of the members' keys changed.
+       **/
+      KeyChanged: AugmentedEvent<ApiType, []>;
+      /**
+       * The given member was added; see the transaction for who.
+       **/
+      MemberAdded: AugmentedEvent<ApiType, []>;
+      /**
+       * The given member was removed; see the transaction for who.
+       **/
+      MemberRemoved: AugmentedEvent<ApiType, []>;
+      /**
+       * The membership was reset; see the transaction for who the new set is.
+       **/
+      MembersReset: AugmentedEvent<ApiType, []>;
+      /**
+       * Two members were swapped; see the transaction for who.
+       **/
+      MembersSwapped: AugmentedEvent<ApiType, []>;
+    };
+    tips: {
+      /**
+       * A new tip suggestion has been opened. \[tip_hash\]
+       **/
+      NewTip: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * A tip suggestion has been closed. \[tip_hash, who, payout\]
+       **/
+      TipClosed: AugmentedEvent<ApiType, [Hash, AccountId, Balance]>;
+      /**
+       * A tip suggestion has reached threshold and is closing. \[tip_hash\]
+       **/
+      TipClosing: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * A tip suggestion has been retracted. \[tip_hash\]
+       **/
+      TipRetracted: AugmentedEvent<ApiType, [Hash]>;
+      /**
+       * A tip suggestion has been slashed. \[tip_hash, finder, deposit\]
+       **/
+      TipSlashed: AugmentedEvent<ApiType, [Hash, AccountId, Balance]>;
+    };
     tokens: {
       /**
        * An account was removed whose balance was non-zero but below
@@ -476,6 +672,37 @@ declare module '@polkadot/api/types/events' {
        **/
       Unreserved: AugmentedEvent<ApiType, [CurrencyId, AccountId, Balance]>;
     };
+    treasury: {
+      /**
+       * Some funds have been allocated. \[proposal_index, award, beneficiary\]
+       **/
+      Awarded: AugmentedEvent<ApiType, [ProposalIndex, Balance, AccountId]>;
+      /**
+       * Some of our funds have been burnt. \[burn\]
+       **/
+      Burnt: AugmentedEvent<ApiType, [Balance]>;
+      /**
+       * Some funds have been deposited. \[deposit\]
+       **/
+      Deposit: AugmentedEvent<ApiType, [Balance]>;
+      /**
+       * New proposal. \[proposal_index\]
+       **/
+      Proposed: AugmentedEvent<ApiType, [ProposalIndex]>;
+      /**
+       * A proposal was rejected; funds were slashed. \[proposal_index, slashed\]
+       **/
+      Rejected: AugmentedEvent<ApiType, [ProposalIndex, Balance]>;
+      /**
+       * Spending has finished; this is the amount that rolls over until next spend.
+       * \[budget_remaining\]
+       **/
+      Rollover: AugmentedEvent<ApiType, [Balance]>;
+      /**
+       * We have ended a spend period and will now allocate funds. \[budget_remaining\]
+       **/
+      Spending: AugmentedEvent<ApiType, [Balance]>;
+    };
     utility: {
       /**
        * Batch of dispatches completed fully with no error.
@@ -486,6 +713,18 @@ declare module '@polkadot/api/types/events' {
        * well as the error. \[index, error\]
        **/
       BatchInterrupted: AugmentedEvent<ApiType, [u32, DispatchError]>;
+    };
+    vesting: {
+      /**
+       * An \[account\] has become fully vested. No further vesting can happen.
+       **/
+      VestingCompleted: AugmentedEvent<ApiType, [AccountId]>;
+      /**
+       * The amount vested has been updated. This could indicate more funds are available. The
+       * balance given is the amount which is left unvested (and thus locked).
+       * \[account, unvested\]
+       **/
+      VestingUpdated: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
     voucher: {
       DestroyedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;

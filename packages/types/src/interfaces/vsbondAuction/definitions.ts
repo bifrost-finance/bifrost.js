@@ -5,9 +5,9 @@ export default {
     OrderInfo: {
       owner: "AccountIdOf",
       vsbond: "CurrencyId",
-      supply: "BalanceOf",
-      remain: "BalanceOf",
-      unit_price: "BalanceOf",
+      supply: "u128",
+      remain: "u128",
+      unit_price: "u128",
       order_id: "OrderId",
       order_state: "OrderState",
     },
