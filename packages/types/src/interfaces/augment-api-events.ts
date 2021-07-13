@@ -73,16 +73,6 @@ declare module '@polkadot/api/types/events' {
        **/
       VSTokenSold: AugmentedEvent<ApiType, [AccountIdOf, CurrencyId, BalanceOf, BalanceOf]>;
     };
-    bifrostAssets: {
-      /**
-       * Token burn success, \[currency_id, dest, amount\]
-       **/
-      Burned: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
-      /**
-       * Token issue success, \[currency_id, dest, amount\]
-       **/
-      Issued: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
-    };
     bounties: {
       /**
        * A bounty is awarded to a beneficiary. \[index, beneficiary\]
@@ -725,13 +715,6 @@ declare module '@polkadot/api/types/events' {
        * \[account, unvested\]
        **/
       VestingUpdated: AugmentedEvent<ApiType, [AccountId, Balance]>;
-    };
-    voucher: {
-      DestroyedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
-      /**
-       * A event indicate user receives transaction.
-       **/
-      IssuedVoucher: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
     vsBondAuction: {
       /**

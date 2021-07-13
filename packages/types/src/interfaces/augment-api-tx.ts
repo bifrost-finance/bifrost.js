@@ -132,22 +132,6 @@ declare module '@polkadot/api/types/submittable' {
       exchangeForToken: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, vstokenAmount: BalanceOf | AnyNumber | Uint8Array, tokenOutMin: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, BalanceOf, BalanceOf]>;
       exchangeForVstoken: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, tokenAmount: BalanceOf | AnyNumber | Uint8Array, vstokenOutMin: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, BalanceOf, BalanceOf]>;
     };
-    bifrostAssets: {
-      /**
-       * Destroy some balance from an account.
-       *
-       * The dispatch origin for this call must be `Root` by the
-       * transactor.
-       **/
-      burn: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
-      /**
-       * Issue some balance to an account.
-       *
-       * The dispatch origin for this call must be `Root` by the
-       * transactor.
-       **/
-      issue: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
-    };
     bounties: {
       /**
        * Accept the curator role for a bounty.
@@ -2288,12 +2272,6 @@ declare module '@polkadot/api/types/submittable' {
        * # </weight>
        **/
       vestedTransfer: AugmentedSubmittable<(target: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, schedule: VestingInfo | { locked?: any; perBlock?: any; startingBlock?: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, VestingInfo]>;
-    };
-    voucher: {
-      destroyVoucher: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, Compact<Balance>]>;
-      exportAllVouchers: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
-      intializeAllVoucher: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
-      issueVoucher: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, Compact<Balance>]>;
     };
     vsBondAuction: {
       clinchOrder: AugmentedSubmittable<(orderId: Compact<OrderId> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<OrderId>]>;

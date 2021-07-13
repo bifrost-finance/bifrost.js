@@ -3,7 +3,7 @@
 
 import type { BTreeMap, BTreeSet, Bytes, Option, U8aFixed, Vec, bool, u16, u32, u8 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
-import type { CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { CurrencyId, CurrencyIdOf, ShareWeight, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
 import type { IsExtended } from '@bifrost-finance/types/interfaces/minterReward';
@@ -337,10 +337,6 @@ declare module '@polkadot/api/types/storage' {
        * Who mints vtoken
        **/
       minter: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<BalanceOf>, [AccountId, CurrencyIdOf]>;
-      /**
-       * Current storage version
-       **/
-      storageVersion: AugmentedQuery<ApiType, () => Observable<StorageVersion>, []>;
       totalVtokenMinted: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
       /**
        * Record a user how much bnc s/he reveives.
@@ -739,20 +735,6 @@ declare module '@polkadot/api/types/storage' {
        * Information regarding the vesting of a given account.
        **/
       vesting: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Option<VestingInfo>>, [AccountId]>;
-    };
-    voucher: {
-      /**
-       * How much voucher you have
-       **/
-      balancesVoucher: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Balance>, [AccountId]>;
-      /**
-       * Current remaining BNC adds all others vouchers, equaling to TotalSuppliedBNC
-       **/
-      remainingBnc: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
-      /**
-       * Total BNC in mainnet
-       **/
-      totalSuppliedBnc: AugmentedQuery<ApiType, () => Observable<Balance>, []>;
     };
     vsBondAuction: {
       clinchdOrderIds: AugmentedQuery<ApiType, (arg: AccountIdOf | string | Uint8Array) => Observable<Option<BTreeSet<OrderId>>>, [AccountIdOf]>;

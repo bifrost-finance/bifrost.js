@@ -80,20 +80,6 @@ declare module '@polkadot/api/types/errors' {
       TokenSupplyNotEnought: AugmentedError<ApiType>;
       VSTokenSupplyNotEnought: AugmentedError<ApiType>;
     };
-    bifrostAssets: {
-      /**
-       * This operation will cause balance to overflow
-       **/
-      BalanceOverflow: AugmentedError<ApiType>;
-      /**
-       * The balance is too low
-       **/
-      BalanceTooLow: AugmentedError<ApiType>;
-      /**
-       * Destroy balance too much
-       **/
-      BurnTooMuch: AugmentedError<ApiType>;
-    };
     bounties: {
       /**
        * Proposer's balance is too low.
@@ -137,13 +123,42 @@ declare module '@polkadot/api/types/errors' {
       ConversionError: AugmentedError<ApiType>;
     };
     collatorSelection: {
+      /**
+       * User is already a candidate
+       **/
       AlreadyCandidate: AugmentedError<ApiType>;
+      /**
+       * User is already an Invulnerable
+       **/
       AlreadyInvulnerable: AugmentedError<ApiType>;
-      InvalidProof: AugmentedError<ApiType>;
+      /**
+       * Account has no associated validator ID
+       **/
+      NoAssociatedValidatorId: AugmentedError<ApiType>;
+      /**
+       * User is not a candidate
+       **/
       NotCandidate: AugmentedError<ApiType>;
+      /**
+       * Permission issue
+       **/
       Permission: AugmentedError<ApiType>;
+      /**
+       * Too few candidates
+       **/
+      TooFewCandidates: AugmentedError<ApiType>;
+      /**
+       * Too many candidates
+       **/
       TooManyCandidates: AugmentedError<ApiType>;
+      /**
+       * Unknown error
+       **/
       Unknown: AugmentedError<ApiType>;
+      /**
+       * Validator ID is not yet registered
+       **/
+      ValidatorNotRegistered: AugmentedError<ApiType>;
     };
     council: {
       /**
@@ -904,18 +919,15 @@ declare module '@polkadot/api/types/errors' {
        **/
       NotVesting: AugmentedError<ApiType>;
     };
-    voucher: {
-      /**
-       * Transferring too big balance
-       **/
-      TransferringTooBigBalance: AugmentedError<ApiType>;
-    };
     vsBondAuction: {
+      CantPayThePrice: AugmentedError<ApiType>;
       ExceedMaximumOrderInTrade: AugmentedError<ApiType>;
       ForbidClinchOrderNotInTrade: AugmentedError<ApiType>;
       ForbidClinchOrderWithinOwnership: AugmentedError<ApiType>;
       ForbidRevokeOrderNotInTrade: AugmentedError<ApiType>;
       ForbidRevokeOrderWithoutOwnership: AugmentedError<ApiType>;
+      NotEnoughBalanceToReserve: AugmentedError<ApiType>;
+      NotEnoughBalanceToUnreserve: AugmentedError<ApiType>;
       NotEnoughSupply: AugmentedError<ApiType>;
       NotFindOrderInfo: AugmentedError<ApiType>;
       Overflow: AugmentedError<ApiType>;

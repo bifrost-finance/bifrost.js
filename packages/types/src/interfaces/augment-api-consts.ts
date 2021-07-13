@@ -219,6 +219,7 @@ declare module '@polkadot/api/types/consts' {
       proxyDepositFactor: BalanceOf & AugmentedConst<ApiType>;
     };
     salp: {
+      depositToken: CurrencyId & AugmentedConst<ApiType>;
       /**
        * The number of blocks over which a single period lasts.
        **/
