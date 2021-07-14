@@ -5,7 +5,7 @@ import type { BTreeMap, BTreeSet, Bytes, Option, U8aFixed, Vec, bool, u16, u32, 
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
 import type { CurrencyId, CurrencyIdOf, ShareWeight, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
-import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
+import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { IsExtended } from '@bifrost-finance/types/interfaces/minterReward';
 import type { OrderId, OrderInfo } from '@bifrost-finance/types/interfaces/vsbondAuction';
 import type { ZenlinkAssetBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';

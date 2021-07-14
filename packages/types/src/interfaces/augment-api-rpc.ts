@@ -5,7 +5,7 @@ import type { Metadata } from '@polkadot/metadata';
 import type { Bytes, HashMap, Json, Null, Option, StorageKey, Text, U256, U64, Vec, bool, u128, u32, u64 } from '@polkadot/types';
 import type { AnyNumber, Codec, IExtrinsic, ITuple, Observable } from '@polkadot/types/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
-import type { NumberOrHex } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
+import type { NumberOrHex } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
 import type { EpochAuthorship } from '@polkadot/types/interfaces/babe';
@@ -103,12 +103,6 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Retrieves the best header via subscription
        **/
       subscribeNewHeads: AugmentedRpc<() => Observable<Header>>;
-    };
-    chargeTransactionFee: {
-      /**
-       * Get charging token type and amount in terms of flexible transaction fee.
-       **/
-      getFeeTokenAndAmount: AugmentedRpc<(who: AccountId | string | Uint8Array, extrinsic: Bytes | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[CurrencyId, NumberOrHex]>>>;
     };
     childstate: {
       /**
@@ -325,6 +319,12 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Uninstalls filter.
        **/
       uninstallFilter: AugmentedRpc<(index: U256 | AnyNumber | Uint8Array) => Observable<bool>>;
+    };
+    flexibleFee: {
+      /**
+       * Get charging token type and amount in terms of flexible transaction fee.
+       **/
+      getFeeTokenAndAmount: AugmentedRpc<(who: AccountId | string | Uint8Array, extrinsic: Bytes | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[CurrencyId, NumberOrHex]>>>;
     };
     grandpa: {
       /**

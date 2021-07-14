@@ -3,7 +3,7 @@
 
 import type { Vec, u16, u32 } from '@polkadot/types';
 import type { CurrencyId, CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
-import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
+import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { LeasePeriod } from '@polkadot/types/interfaces/parachains';
 import type { Balance, BalanceOf, BlockNumber, LockIdentifier, Moment, PalletId, Percent, Permill, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';

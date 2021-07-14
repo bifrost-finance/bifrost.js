@@ -18,4 +18,4 @@ export interface NumberOrHex extends Enum {
 /** @name PalletBalanceOf */
 export interface PalletBalanceOf extends Balance {}
 
-export type PHANTOM_CHARGETRANSACTIONFEE = 'chargeTransactionFee';
+export type PHANTOM_FLEXIBLEFEE = 'flexibleFee';

@@ -3,7 +3,7 @@
 
 export * from './aSharePrimitives/types';
 export * from './tokens/types';
-export * from './chargeTransactionFee/types';
+export * from './flexibleFee/types';
 export * from './minterReward/types';
 export * from './salp/types';
 export * from './stakingReward/types';

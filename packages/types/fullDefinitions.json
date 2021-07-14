@@ -139,6 +139,7 @@
       "currency_id": "CurrencyId",
       "token_pool": "Balance",
       "vstoken_pool": "Balance",
+      "token_ceiling": "Balance",
       "token_base_supply": "Balance",
       "vstoken_base_supply": "Balance"
     }
@@ -164,7 +165,7 @@
     }
   },
   "rpc": {
-    "chargeTransactionFee": {
+    "flexibleFee": {
       "getFeeTokenAndAmount": {
         "description": "Get charging token type and amount in terms of flexible transaction fee.",
         "params": [
@@ -185,9 +186,9 @@
         ],
         "type": "(CurrencyId, NumberOrHex)",
         "isSubscription": false,
-        "jsonrpc": "chargeTransactionFee_getFeeTokenAndAmount",
+        "jsonrpc": "flexibleFee_getFeeTokenAndAmount",
         "method": "getFeeTokenAndAmount",
-        "section": "chargeTransactionFee"
+        "section": "flexibleFee"
       }
     },
     "vtokenMint": {

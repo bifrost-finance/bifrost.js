@@ -10,6 +10,7 @@ export interface BancorPool extends Struct {
   readonly currency_id: CurrencyId;
   readonly token_pool: Balance;
   readonly vstoken_pool: Balance;
+  readonly token_ceiling: Balance;
   readonly token_base_supply: Balance;
   readonly vstoken_base_supply: Balance;
 }

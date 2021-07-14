@@ -7,7 +7,7 @@ export { default as tokens } from "./tokens/definitions";
 // export { default as bid } from "./bid/definitions";
 // export { default as bridgeEos } from "./bridgeEos/definitions";
 // export { default as bridgeIost } from "./bridgeIost/definitions";
-export { default as chargeTransactionFee } from "./chargeTransactionFee/definitions";
+export { default as flexibleFee } from "./flexibleFee/definitions";
 export { default as minterReward } from "./minterReward/definitions";
 export { default as salp } from "./salp/definitions";
 export { default as stakingReward } from "./stakingReward/definitions";

@@ -4,7 +4,7 @@
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
-import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/chargeTransactionFee';
+import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
