@@ -1,18 +1,9 @@
 {
-  "name": "@bifrost-finance/api",
+  "name": "@bifrost-finance/type-definitions",
   "version": "1.1.58",
-  "description": "Promise and RxJS wrappers around the Bifrost JS RPC",
+  "description": "Polkadot.js type definations for Acala Network",
   "main": "index.js",
-  "keywords": [
-    "Polkadot",
-    "Bifrost",
-    "RxJs"
-  ],
   "author": "Edwin Wang <lark930@gmail.com>",
-  "maintainers": [
-    "Edwin Wang <lark930@gmail.com>"
-  ],
-  "contributors": [],
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
@@ -27,8 +18,6 @@
   },
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/api#readme",
   "dependencies": {
-    "@babel/runtime": "^7.12.5",
-    "@bifrost-finance/types": "^1.1.58",
-    "@polkadot/api": "4.16.2"
+    "@open-web3/orml-type-definitions": "^0.9.4-7"
   }
 }

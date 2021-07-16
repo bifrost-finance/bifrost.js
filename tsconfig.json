@@ -1,9 +1,10 @@
 {
-  "extends": "./node_modules/@polkadot/dev/config/tsconfig",
+  "extends": "@open-web3/dev-config/config/tsconfig.json",
   "exclude": ["build/**/*", "**/build/**/*"],
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "ES6",
+    "resolveJsonModule": true,
+    "target": "es2019",
     "module": "commonjs",
     "paths": {
       "@bifrost-finance/api": ["packages/api/src"],
@@ -13,7 +14,8 @@
       "@bifrost-finance/api-derive": ["packages/api-derive/src"],
       "@bifrost-finance/api-derive/*": ["packages/api-derive/src/*"],
       "@polkadot/api/augment": ["packages/types/src/interfaces/augment-api.ts"],
-      "@polkadot/types/augment": ["packages/types/src/interfaces/augment-types.ts"]
+      "@polkadot/types/augment": ["packages/types/src/interfaces/augment-types.ts"],
+      "@bifrost-finance/type-definitions": ["packages/type-definitions/src"]
     },
     "skipLibCheck": true,
     "typeRoots": ["./node_modules/@polkadot/ts", "./node_modules/@types"]

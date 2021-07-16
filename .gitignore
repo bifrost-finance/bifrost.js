@@ -63,11 +63,8 @@ typings/
 .npmrc
 
 build/
-.idea
 
-.DS_Store
-
-# dependencies of sub-directories
-packages/api/node_modules
-packages/api-derive/node_modules
-packages/types/node_modules
+/.yarn/cache
+/.yarn/versions
+/.yarn/build-state.yml
+/.yarn/install-state.gz
