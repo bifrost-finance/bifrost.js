@@ -5,7 +5,6 @@ import {jsonrpcFromDefs, typesAliasFromDefs, typesFromDefs} from '@open-web3/orm
 
 import {signedExtensions as bifrostSignedExtensions} from './signedExtensions';
 
-import aSharePrimitives from './aSharePrimitives';
 import bid from './bid';
 import bridgeEos from './bridgeEos';
 import bancor from './bancor';
@@ -22,13 +21,14 @@ import vtokenMint from './vtokenMint';
 import zenlinkProtocol from './zenlinkProtocol';
 
 import bifrostVersioned from './spec/bifrost';
+import asgardVersioned from './spec/asgard'
 
 const additionalOverride = {
   Keys: 'SessionKeys1'
 };
 
 const bifrostDefs = {
-  aSharePrimitives,
+
   bid,
   bridgeEos,
   bancor,
@@ -76,6 +76,7 @@ function getBundle(versioned: OverrideVersionedType[]) {
 export const typesBundle = {
   spec: {
     bifrost: getBundle(bifrostVersioned),
+    asgard: getBundle(asgardVersioned),
   }
 };
 
@@ -83,6 +84,7 @@ export const typesBundle = {
 export const typesBundleForPolkadot = {
   spec: {
     bifrost: getBundle(bifrostVersioned),
+    asgard: getBundle(asgardVersioned),
   }
 };
 

@@ -33,7 +33,7 @@ curl -H "Content-Type: application/json" -d '{"id":"1", "jsonrpc":"2.0", "method
 ## 包的上传操作
 
 1. 做好上面提到的准备工作
-2. 在项目根目录下，输入命令行： c ，创建新的版本编码。
+2. 在项目根目录下，输入命令行： lerna version --skip-git ，创建新的版本编码。
 3. 在项目根目录下，输入命令行：yarn generate 。这个命令，会把 definitions 和 metadata 进行匹配，自动生成 packages/types 文件夹下面的一些 api 文件。
 4. 在项目根目录下，输入命令行：yarn build 。这个命令，把整个工程的 ts 文件生成可执行的 js 文件，放在各个包的 build 文件夹下。
 5. 分别进入到 api、api-derive、types 文件夹下的 build 文件夹内，输入命令 yarn publish，输入前面 lerna 生成的版本号，并填入 npmjs 的密码，即可把新版本发布上去，供他人下载和使用。如：用 cd bifrost.js/packages/types/build，进入 types 下面的 build 文件夹，然后 yarn publish 进行发布。

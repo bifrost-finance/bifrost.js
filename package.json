@@ -24,7 +24,6 @@
     "generate:defs": "ts-node --skip-project node_modules/.bin/polkadot-types-from-defs --package @bifrost-finance/types/interfaces --input types/src/interfaces",
     "generate:meta": "ts-node --skip-project node_modules/.bin/polkadot-types-from-chain --package @bifrost-finance/types/interfaces --endpoint types/bifrost.json --output ./packages/types/src/interfaces --strict",
     "update-metadata": "ts-node --project ./tsconfig.json types/scripts/updateMetadata.ts",
-    "generate-full-definitions": "ts-node --project ./tsconfig.json types/scripts/printFullJson"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
