@@ -4,14 +4,10 @@
 
 export { default as aSharePrimitives } from "./aSharePrimitives/definitions";
 export { default as tokens } from "./tokens/definitions";
-// export { default as bid } from "./bid/definitions";
-// export { default as bridgeEos } from "./bridgeEos/definitions";
-// export { default as bridgeIost } from "./bridgeIost/definitions";
 export { default as flexibleFee } from "./flexibleFee/definitions";
 export { default as minterReward } from "./minterReward/definitions";
 export { default as salp } from "./salp/definitions";
 export { default as stakingReward } from "./stakingReward/definitions";
-// export { default as swap } from "./swap/definitions";
 export { default as vesting } from "./vesting/definitions";
 export { default as vsbondAuction } from "./vsbondAuction/definitions";
 export { default as vtokenMint } from "./vtokenMint/definitions";

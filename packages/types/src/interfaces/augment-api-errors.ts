@@ -76,9 +76,10 @@ declare module '@polkadot/api/types/errors' {
       ConversionError: AugmentedError<ApiType>;
       CurrencyIdNotExist: AugmentedError<ApiType>;
       NotEnoughBalance: AugmentedError<ApiType>;
+      NotSupportTokenType: AugmentedError<ApiType>;
       PriceNotQualified: AugmentedError<ApiType>;
-      TokenSupplyNotEnought: AugmentedError<ApiType>;
-      VSTokenSupplyNotEnought: AugmentedError<ApiType>;
+      TokenSupplyNotEnough: AugmentedError<ApiType>;
+      VSTokenSupplyNotEnough: AugmentedError<ApiType>;
     };
     bounties: {
       /**
@@ -118,9 +119,6 @@ declare module '@polkadot/api/types/errors' {
        * The bounty status is unexpected.
        **/
       UnexpectedStatus: AugmentedError<ApiType>;
-    };
-    chargeTransactionFee: {
-      ConversionError: AugmentedError<ApiType>;
     };
     collatorSelection: {
       /**
@@ -437,6 +435,9 @@ declare module '@polkadot/api/types/errors' {
        **/
       UnableToVote: AugmentedError<ApiType>;
     };
+    flexibleFee: {
+      ConversionError: AugmentedError<ApiType>;
+    };
     indices: {
       /**
        * The index was not available.
@@ -460,6 +461,8 @@ declare module '@polkadot/api/types/errors' {
       Permanent: AugmentedError<ApiType>;
     };
     minterReward: {
+      CalculationOverflow: AugmentedError<ApiType>;
+      ConversionError: AugmentedError<ApiType>;
       /**
        * There's no price at all.
        **/
@@ -606,25 +609,9 @@ declare module '@polkadot/api/types/errors' {
     };
     salp: {
       /**
-       * This parachain's bid or lease is still active and withdraw cannot yet begin.
-       **/
-      BidOrLeaseActive: AugmentedError<ApiType>;
-      /**
-       * The campaign ends before the current block number. The end must be in the future.
-       **/
-      CannotEndInPast: AugmentedError<ApiType>;
-      /**
        * Contributions exceed maximum amount.
        **/
       CapExceeded: AugmentedError<ApiType>;
-      /**
-       * Contribute Invalid
-       **/
-      ContributionInvalid: AugmentedError<ApiType>;
-      /**
-       * The contribution period has already ended.
-       **/
-      ContributionPeriodOver: AugmentedError<ApiType>;
       /**
        * The contribution was below the minimum, `MinContribution`.
        **/
@@ -636,47 +623,23 @@ declare module '@polkadot/api/types/errors' {
       /**
        * The fund has been registered.
        **/
-      FundExisted: AugmentedError<ApiType>;
+      FundAlreadyCreated: AugmentedError<ApiType>;
       /**
-       * The crowdloan has not yet ended.
+       * Invalid contribution status.
        **/
-      FundNotEnded: AugmentedError<ApiType>;
-      /**
-       * Fund has not yet retired.
-       **/
-      FundNotRetired: AugmentedError<ApiType>;
-      /**
-       * Fund has not withdrew.
-       **/
-      FundNotWithdrew: AugmentedError<ApiType>;
-      /**
-       * Funds have not yet been returned.
-       **/
-      FundsNotReturned: AugmentedError<ApiType>;
-      /**
-       * This crowdloan has an active parachain and cannot be dissolved.
-       **/
-      HasActiveParachain: AugmentedError<ApiType>;
-      /**
-       * Insufficient Balance.
-       **/
-      InsufficientBalance: AugmentedError<ApiType>;
+      InvalidContributionStatus: AugmentedError<ApiType>;
       /**
        * Invalid fund status.
        **/
       InvalidFundStatus: AugmentedError<ApiType>;
       /**
-       * The origin of this call is invalid.
-       **/
-      InvalidOrigin: AugmentedError<ApiType>;
-      /**
        * Invalid fund index.
        **/
       InvalidParaId: AugmentedError<ApiType>;
       /**
-       * Invalid signature.
+       * Invalid redeem status
        **/
-      InvalidSignature: AugmentedError<ApiType>;
+      InvalidRedeemStatus: AugmentedError<ApiType>;
       /**
        * Last slot must be greater than first slot.
        **/
@@ -686,34 +649,53 @@ declare module '@polkadot/api/types/errors' {
        **/
       LastSlotTooFarInFuture: AugmentedError<ApiType>;
       /**
-       * This parachain lease is still active and retirement cannot yet begin.
+       * Don't have enough token to redeem by users
        **/
-      LeaseActive: AugmentedError<ApiType>;
+      NotEnoughBalanceInRedeemPool: AugmentedError<ApiType>;
       /**
-       * There are no contributions stored in this crowdloan.
+       * Don't have enough token to refund by users
        **/
-      NoContributions: AugmentedError<ApiType>;
+      NotEnoughBalanceInRefundPool: AugmentedError<ApiType>;
       /**
-       * This crowdloan does not correspond to a parachain.
+       * Don't have enough vsToken/vsBond to unlock
        **/
-      NotParachain: AugmentedError<ApiType>;
+      NotEnoughBalanceToUnlock: AugmentedError<ApiType>;
       /**
-       * The crowdloan is not ready to dissolve. Potentially still has a slot or in retirement
-       * period.
+       * Dont have enough vsToken/vsBond to redeem
        **/
-      NotReadyToDissolve: AugmentedError<ApiType>;
+      NotEnoughFreeAssetsToRedeem: AugmentedError<ApiType>;
+      /**
+       * Don't have enough vsToken/vsBond to refund
+       **/
+      NotEnoughReservedAssetsToRefund: AugmentedError<ApiType>;
+      /**
+       * Dont have enough vsToken/vsBond to unlock when redeem failed
+       **/
+      NotEnoughReservedAssetsToUnlockWhenRedeemFailed: AugmentedError<ApiType>;
       /**
        * There was an overflow.
        **/
       Overflow: AugmentedError<ApiType>;
       /**
-       * Fund has been expired.
+       * The origin of this call is invalid.
+       **/
+      UnauthorizedAccount: AugmentedError<ApiType>;
+      /**
+       * The vsBond cannot be redeemed by now
+       **/
+      UnRedeemableNow: AugmentedError<ApiType>;
+      /**
+       * The vsBond is expired now
        **/
       VSBondExpired: AugmentedError<ApiType>;
       /**
        * Crosschain xcm failed
        **/
       XcmFailed: AugmentedError<ApiType>;
+      /**
+       * The account doesn't have any contribution to the fund.
+       **/
+      ZeroContribution: AugmentedError<ApiType>;
     };
     scheduler: {
       /**
@@ -943,6 +925,10 @@ declare module '@polkadot/api/types/errors' {
        **/
       BalanceZero: AugmentedError<ApiType>;
       /**
+       * Calculation Overflow
+       **/
+      CalculationOverflow: AugmentedError<ApiType>;
+      /**
        * Empty vtoken pool, cause there's no price at all.
        **/
       EmptyVtokenPool: AugmentedError<ApiType>;
@@ -954,10 +940,6 @@ declare module '@polkadot/api/types/errors' {
        * Token type not support.
        **/
       NotSupportTokenType: AugmentedError<ApiType>;
-      /**
-       * User's token still under staking while he want to redeem.
-       **/
-      UnderStaking: AugmentedError<ApiType>;
     };
     xcmpQueue: {
       /**

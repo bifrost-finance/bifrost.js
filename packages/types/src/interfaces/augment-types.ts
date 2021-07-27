@@ -2,15 +2,15 @@
 /* eslint-disable */
 
 import type { BitVec, Bool, Bytes, Compact, Data, DoNotConstruct, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
-import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TokenSymbol, TransferOriginType } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { BlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
-import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
+import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, RedeemStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { OrmlAccountData } from '@bifrost-finance/types/interfaces/tokens';
 import type { BifrostVestingInfo, MaxLocksOf } from '@bifrost-finance/types/interfaces/vesting';
-import type { OrderId, OrderInfo, OrderState } from '@bifrost-finance/types/interfaces/vsbondAuction';
+import type { OrderId, OrderInfo, OrderState, U64F64 } from '@bifrost-finance/types/interfaces/vsbondAuction';
 import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { AssetApproval, AssetApprovalKey, AssetBalance, AssetDestroyWitness, AssetDetails, AssetMetadata, TAssetBalance, TAssetDepositBalance } from '@polkadot/types/interfaces/assets';
 import type { BlockAttestations, IncludedBlocks, MoreAttestations } from '@polkadot/types/interfaces/attestations';
@@ -58,10 +58,10 @@ import type { SiField, SiLookupTypeId, SiPath, SiType, SiTypeDef, SiTypeDefArray
 import type { Period, Priority, SchedulePeriod, SchedulePriority, Scheduled, ScheduledTo254, TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { BeefyKey, FullIdentification, IdentificationTuple, Keys, MembershipProof, SessionIndex, SessionKeys1, SessionKeys10, SessionKeys10B, SessionKeys2, SessionKeys3, SessionKeys4, SessionKeys5, SessionKeys6, SessionKeys6B, SessionKeys7, SessionKeys7B, SessionKeys8, SessionKeys8B, SessionKeys9, SessionKeys9B, ValidatorCount } from '@polkadot/types/interfaces/session';
 import type { Bid, BidKind, SocietyJudgement, SocietyVote, StrikeCount, VouchingStatus } from '@polkadot/types/interfaces/society';
-import type { ActiveEraInfo, CompactAssignments, CompactAssignmentsTo257, CompactAssignmentsTo265, CompactAssignmentsWith16, CompactAssignmentsWith24, CompactScore, CompactScoreCompact, ElectionCompute, ElectionPhase, ElectionResult, ElectionScore, ElectionSize, ElectionStatus, EraIndex, EraPoints, EraRewardPoints, EraRewards, Exposure, ExtendedBalance, Forcing, IndividualExposure, KeyType, MomentOf, Nominations, NominatorIndex, NominatorIndexCompact, OffchainAccuracy, OffchainAccuracyCompact, PhragmenScore, Points, RawSolution, RawSolutionTo265, RawSolutionWith16, RawSolutionWith24, ReadySolution, RewardDestination, RewardPoint, RoundSnapshot, SeatHolder, SlashJournalEntry, SlashingSpans, SlashingSpansTo204, SolutionOrSnapshotSize, SolutionSupport, SolutionSupports, SpanIndex, SpanRecord, StakingLedger, StakingLedgerTo223, StakingLedgerTo240, UnappliedSlash, UnappliedSlashOther, UnlockChunk, ValidatorIndex, ValidatorIndexCompact, ValidatorPrefs, ValidatorPrefsTo145, ValidatorPrefsTo196, ValidatorPrefsWithBlocked, ValidatorPrefsWithCommission, VoteWeight, Voter } from '@polkadot/types/interfaces/staking';
+import type { ActiveEraInfo, CompactAssignments, CompactAssignmentsTo257, CompactAssignmentsTo265, CompactAssignmentsWith16, CompactAssignmentsWith24, CompactScore, CompactScoreCompact, ElectionCompute, ElectionPhase, ElectionResult, ElectionScore, ElectionSize, ElectionStatus, EraIndex, EraPoints, EraRewardPoints, EraRewards, Exposure, ExtendedBalance, Forcing, IndividualExposure, KeyType, MomentOf, Nominations, NominatorIndex, NominatorIndexCompact, OffchainAccuracy, OffchainAccuracyCompact, PhragmenScore, Points, RawSolution, RawSolutionTo265, RawSolutionWith16, RawSolutionWith24, ReadySolution, RewardDestination, RewardPoint, RoundSnapshot, SeatHolder, SignedSubmission, SignedSubmissionOf, SlashJournalEntry, SlashingSpans, SlashingSpansTo204, SolutionOrSnapshotSize, SolutionSupport, SolutionSupports, SpanIndex, SpanRecord, StakingLedger, StakingLedgerTo223, StakingLedgerTo240, SubmissionIndicesOf, UnappliedSlash, UnappliedSlashOther, UnlockChunk, ValidatorIndex, ValidatorIndexCompact, ValidatorPrefs, ValidatorPrefsTo145, ValidatorPrefsTo196, ValidatorPrefsWithBlocked, ValidatorPrefsWithCommission, VoteWeight, Voter } from '@polkadot/types/interfaces/staking';
 import type { ApiId, BlockTrace, BlockTraceEvent, BlockTraceEventData, BlockTraceSpan, KeyValueOption, ReadProof, RuntimeVersion, RuntimeVersionApi, RuntimeVersionPartial, StorageChangeSet, TraceBlockResponse, TraceError } from '@polkadot/types/interfaces/state';
 import type { WeightToFeeCoefficient } from '@polkadot/types/interfaces/support';
-import type { AccountInfo, AccountInfoWithDualRefCount, AccountInfoWithProviders, AccountInfoWithRefCount, AccountInfoWithTripleRefCount, ApplyExtrinsicResult, ArithmeticError, BlockLength, BlockWeights, ChainProperties, ChainType, ConsumedWeight, DigestOf, DispatchClass, DispatchError, DispatchErrorModule, DispatchErrorTo198, DispatchInfo, DispatchInfoTo190, DispatchInfoTo244, DispatchOutcome, DispatchResult, DispatchResultOf, DispatchResultTo198, Event, EventId, EventIndex, EventRecord, Health, InvalidTransaction, Key, LastRuntimeUpgradeInfo, NetworkState, NetworkStatePeerset, NetworkStatePeersetInfo, NodeRole, NotConnectedPeer, Peer, PeerEndpoint, PeerEndpointAddr, PeerInfo, PeerPing, PerDispatchClassU32, PerDispatchClassWeight, PerDispatchClassWeightsPerClass, Phase, RawOrigin, RefCount, RefCountTo259, SyncState, SystemOrigin, TokenError, TransactionValidityError, UnknownTransaction, WeightPerClass } from '@polkadot/types/interfaces/system';
+import type { AccountInfo, AccountInfoWithDualRefCount, AccountInfoWithProviders, AccountInfoWithRefCount, AccountInfoWithRefCountU8, AccountInfoWithTripleRefCount, ApplyExtrinsicResult, ArithmeticError, BlockLength, BlockWeights, ChainProperties, ChainType, ConsumedWeight, DigestOf, DispatchClass, DispatchError, DispatchErrorModule, DispatchErrorTo198, DispatchInfo, DispatchInfoTo190, DispatchInfoTo244, DispatchOutcome, DispatchResult, DispatchResultOf, DispatchResultTo198, Event, EventId, EventIndex, EventRecord, Health, InvalidTransaction, Key, LastRuntimeUpgradeInfo, NetworkState, NetworkStatePeerset, NetworkStatePeersetInfo, NodeRole, NotConnectedPeer, Peer, PeerEndpoint, PeerEndpointAddr, PeerInfo, PeerPing, PerDispatchClassU32, PerDispatchClassWeight, PerDispatchClassWeightsPerClass, Phase, RawOrigin, RefCount, RefCountTo259, SyncState, SystemOrigin, TokenError, TransactionValidityError, UnknownTransaction, WeightPerClass } from '@polkadot/types/interfaces/system';
 import type { Bounty, BountyIndex, BountyStatus, BountyStatusActive, BountyStatusCuratorProposed, BountyStatusPendingPayout, OpenTip, OpenTipFinderTo225, OpenTipTip, OpenTipTo225, TreasuryProposal } from '@polkadot/types/interfaces/treasury';
 import type { Multiplier } from '@polkadot/types/interfaces/txpayment';
 import type { ClassDetails, ClassId, ClassMetadata, DepositBalance, DepositBalanceOf, DestroyWitness, InstanceDetails, InstanceId, InstanceMetadata } from '@polkadot/types/interfaces/uniques';
@@ -127,6 +127,7 @@ declare module '@polkadot/types/types/registry' {
     'Compact<Priority>': Compact<Priority>;
     'Compact<PropIndex>': Compact<PropIndex>;
     'Compact<ProposalIndex>': Compact<ProposalIndex>;
+    'Compact<RedeemStatus>': Compact<RedeemStatus>;
     'Compact<RefCount>': Compact<RefCount>;
     'Compact<RefCountTo259>': Compact<RefCountTo259>;
     'Compact<ReferendumIndex>': Compact<ReferendumIndex>;
@@ -160,6 +161,7 @@ declare module '@polkadot/types/types/registry' {
     'Compact<U32F32>': Compact<U32F32>;
     'Compact<u64>': Compact<u64>;
     'Compact<U64>': Compact<U64>;
+    'Compact<U64F64>': Compact<U64F64>;
     'Compact<u8>': Compact<u8>;
     'Compact<U8>': Compact<U8>;
     'Compact<usize>': Compact<usize>;
@@ -184,6 +186,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<AccountInfoWithDualRefCount>': Option<AccountInfoWithDualRefCount>;
     'Option<AccountInfoWithProviders>': Option<AccountInfoWithProviders>;
     'Option<AccountInfoWithRefCount>': Option<AccountInfoWithRefCount>;
+    'Option<AccountInfoWithRefCountU8>': Option<AccountInfoWithRefCountU8>;
     'Option<AccountInfoWithTripleRefCount>': Option<AccountInfoWithTripleRefCount>;
     'Option<AccountKey20Junction>': Option<AccountKey20Junction>;
     'Option<AccountStatus>': Option<AccountStatus>;
@@ -800,6 +803,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<ReadySolution>': Option<ReadySolution>;
     'Option<Reasons>': Option<Reasons>;
     'Option<RecoveryConfig>': Option<RecoveryConfig>;
+    'Option<RedeemStatus>': Option<RedeemStatus>;
     'Option<RefCount>': Option<RefCount>;
     'Option<RefCountTo259>': Option<RefCountTo259>;
     'Option<ReferendumIndex>': Option<ReferendumIndex>;
@@ -879,6 +883,8 @@ declare module '@polkadot/types/types/registry' {
     'Option<SignedBlock>': Option<SignedBlock>;
     'Option<SignedBlockWithJustification>': Option<SignedBlockWithJustification>;
     'Option<SignedBlockWithJustifications>': Option<SignedBlockWithJustifications>;
+    'Option<SignedSubmission>': Option<SignedSubmission>;
+    'Option<SignedSubmissionOf>': Option<SignedSubmissionOf>;
     'Option<SignerPayload>': Option<SignerPayload>;
     'Option<SigningContext>': Option<SigningContext>;
     'Option<SiLookupTypeId>': Option<SiLookupTypeId>;
@@ -951,6 +957,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<StoredState>': Option<StoredState>;
     'Option<StrikeCount>': Option<StrikeCount>;
     'Option<SubId>': Option<SubId>;
+    'Option<SubmissionIndicesOf>': Option<SubmissionIndicesOf>;
     'Option<SyncState>': Option<SyncState>;
     'Option<SystemInherentData>': Option<SystemInherentData>;
     'Option<SystemOrigin>': Option<SystemOrigin>;
@@ -970,6 +977,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<TransactionPriority>': Option<TransactionPriority>;
     'Option<TransactionStorageProof>': Option<TransactionStorageProof>;
     'Option<TransactionValidityError>': Option<TransactionValidityError>;
+    'Option<TransferOriginType>': Option<TransferOriginType>;
     'Option<TransientValidationData>': Option<TransientValidationData>;
     'Option<TreasuryProposal>': Option<TreasuryProposal>;
     'Option<TrieId>': Option<TrieId>;
@@ -986,6 +994,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<U32F32>': Option<U32F32>;
     'Option<u64>': Option<u64>;
     'Option<U64>': Option<U64>;
+    'Option<U64F64>': Option<U64F64>;
     'Option<u8>': Option<u8>;
     'Option<U8>': Option<U8>;
     'Option<UnappliedSlash>': Option<UnappliedSlash>;
@@ -1088,6 +1097,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<AccountInfoWithDualRefCount>': Vec<AccountInfoWithDualRefCount>;
     'Vec<AccountInfoWithProviders>': Vec<AccountInfoWithProviders>;
     'Vec<AccountInfoWithRefCount>': Vec<AccountInfoWithRefCount>;
+    'Vec<AccountInfoWithRefCountU8>': Vec<AccountInfoWithRefCountU8>;
     'Vec<AccountInfoWithTripleRefCount>': Vec<AccountInfoWithTripleRefCount>;
     'Vec<AccountKey20Junction>': Vec<AccountKey20Junction>;
     'Vec<AccountStatus>': Vec<AccountStatus>;
@@ -1704,6 +1714,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ReadySolution>': Vec<ReadySolution>;
     'Vec<Reasons>': Vec<Reasons>;
     'Vec<RecoveryConfig>': Vec<RecoveryConfig>;
+    'Vec<RedeemStatus>': Vec<RedeemStatus>;
     'Vec<RefCount>': Vec<RefCount>;
     'Vec<RefCountTo259>': Vec<RefCountTo259>;
     'Vec<ReferendumIndex>': Vec<ReferendumIndex>;
@@ -1783,6 +1794,8 @@ declare module '@polkadot/types/types/registry' {
     'Vec<SignedBlock>': Vec<SignedBlock>;
     'Vec<SignedBlockWithJustification>': Vec<SignedBlockWithJustification>;
     'Vec<SignedBlockWithJustifications>': Vec<SignedBlockWithJustifications>;
+    'Vec<SignedSubmission>': Vec<SignedSubmission>;
+    'Vec<SignedSubmissionOf>': Vec<SignedSubmissionOf>;
     'Vec<SignerPayload>': Vec<SignerPayload>;
     'Vec<SigningContext>': Vec<SigningContext>;
     'Vec<SiLookupTypeId>': Vec<SiLookupTypeId>;
@@ -1855,6 +1868,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<StoredState>': Vec<StoredState>;
     'Vec<StrikeCount>': Vec<StrikeCount>;
     'Vec<SubId>': Vec<SubId>;
+    'Vec<SubmissionIndicesOf>': Vec<SubmissionIndicesOf>;
     'Vec<SyncState>': Vec<SyncState>;
     'Vec<SystemInherentData>': Vec<SystemInherentData>;
     'Vec<SystemOrigin>': Vec<SystemOrigin>;
@@ -1874,6 +1888,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<TransactionPriority>': Vec<TransactionPriority>;
     'Vec<TransactionStorageProof>': Vec<TransactionStorageProof>;
     'Vec<TransactionValidityError>': Vec<TransactionValidityError>;
+    'Vec<TransferOriginType>': Vec<TransferOriginType>;
     'Vec<TransientValidationData>': Vec<TransientValidationData>;
     'Vec<TreasuryProposal>': Vec<TreasuryProposal>;
     'Vec<TrieId>': Vec<TrieId>;
@@ -1890,6 +1905,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<U32F32>': Vec<U32F32>;
     'Vec<u64>': Vec<u64>;
     'Vec<U64>': Vec<U64>;
+    'Vec<U64F64>': Vec<U64F64>;
     'Vec<u8>': Vec<u8>;
     'Vec<U8>': Vec<U8>;
     'Vec<UnappliedSlash>': Vec<UnappliedSlash>;
@@ -1992,6 +2008,7 @@ declare module '@polkadot/types/types/registry' {
     AccountInfoWithDualRefCount: AccountInfoWithDualRefCount;
     AccountInfoWithProviders: AccountInfoWithProviders;
     AccountInfoWithRefCount: AccountInfoWithRefCount;
+    AccountInfoWithRefCountU8: AccountInfoWithRefCountU8;
     AccountInfoWithTripleRefCount: AccountInfoWithTripleRefCount;
     AccountKey20Junction: AccountKey20Junction;
     AccountStatus: AccountStatus;
@@ -2608,6 +2625,7 @@ declare module '@polkadot/types/types/registry' {
     ReadySolution: ReadySolution;
     Reasons: Reasons;
     RecoveryConfig: RecoveryConfig;
+    RedeemStatus: RedeemStatus;
     RefCount: RefCount;
     RefCountTo259: RefCountTo259;
     ReferendumIndex: ReferendumIndex;
@@ -2687,6 +2705,8 @@ declare module '@polkadot/types/types/registry' {
     SignedBlock: SignedBlock;
     SignedBlockWithJustification: SignedBlockWithJustification;
     SignedBlockWithJustifications: SignedBlockWithJustifications;
+    SignedSubmission: SignedSubmission;
+    SignedSubmissionOf: SignedSubmissionOf;
     SignerPayload: SignerPayload;
     SigningContext: SigningContext;
     SiLookupTypeId: SiLookupTypeId;
@@ -2759,6 +2779,7 @@ declare module '@polkadot/types/types/registry' {
     StoredState: StoredState;
     StrikeCount: StrikeCount;
     SubId: SubId;
+    SubmissionIndicesOf: SubmissionIndicesOf;
     SyncState: SyncState;
     SystemInherentData: SystemInherentData;
     SystemOrigin: SystemOrigin;
@@ -2778,6 +2799,7 @@ declare module '@polkadot/types/types/registry' {
     TransactionPriority: TransactionPriority;
     TransactionStorageProof: TransactionStorageProof;
     TransactionValidityError: TransactionValidityError;
+    TransferOriginType: TransferOriginType;
     TransientValidationData: TransientValidationData;
     TreasuryProposal: TreasuryProposal;
     TrieId: TrieId;
@@ -2794,6 +2816,7 @@ declare module '@polkadot/types/types/registry' {
     U32F32: U32F32;
     u64: u64;
     U64: U64;
+    U64F64: U64F64;
     u8: u8;
     U8: U8;
     UnappliedSlash: UnappliedSlash;

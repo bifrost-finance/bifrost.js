@@ -12,6 +12,7 @@ export default {
       trie_index: "TrieIndex",
       status: "FundStatus",
     },
+    RedeemStatus: 'BalanceOf',
     FundStatus: {
       _enum: ["Ongoing", "Retired", "Success", "Failed", "Withdrew", "End"],
     },

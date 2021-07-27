@@ -46,4 +46,11 @@ export interface TokenSymbol extends Enum {
   readonly isEth: boolean;
 }
 
+/** @name TransferOriginType */
+export interface TransferOriginType extends Enum {
+  readonly isFromSelf: boolean;
+  readonly isFromRelayChain: boolean;
+  readonly isFromSiblingParaChain: boolean;
+}
+
 export type PHANTOM_ASHAREPRIMITIVES = 'aSharePrimitives';

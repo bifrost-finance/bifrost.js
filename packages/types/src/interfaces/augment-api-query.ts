@@ -3,10 +3,10 @@
 
 import type { BTreeMap, BTreeSet, Bytes, Option, U8aFixed, Vec, bool, u16, u32, u8 } from '@polkadot/types';
 import type { AnyNumber, ITuple, Observable } from '@polkadot/types/types';
-import type { CurrencyId, CurrencyIdOf, ShareWeight, TokenSymbol } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { CurrencyId, CurrencyIdOf, ShareWeight } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/flexibleFee';
-import type { IsExtended } from '@bifrost-finance/types/interfaces/minterReward';
+import type { RedeemStatus } from '@bifrost-finance/types/interfaces/salp';
 import type { OrderId, OrderInfo } from '@bifrost-finance/types/interfaces/vsbondAuction';
 import type { ZenlinkAssetBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { UncleEntryItem } from '@polkadot/types/interfaces/authorship';
@@ -17,9 +17,9 @@ import type { FundInfo, TrieIndex } from '@polkadot/types/interfaces/crowdloan';
 import type { ConfigData, OverweightIndex, PageCounter, PageIndexData } from '@polkadot/types/interfaces/cumulus';
 import type { PreimageStatus, PropIndex, Proposal, ReferendumIndex, ReferendumInfo, Voting } from '@polkadot/types/interfaces/democracy';
 import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
-import type { AbridgedHostConfiguration, CandidateInfo, MessageQueueChain, MessagingStateSnapshot, OutboundHrmpMessage, ParaId, PersistedValidationData, RelayBlockNumber, RelayChainBlockNumber, UpwardMessage } from '@polkadot/types/interfaces/parachains';
+import type { AbridgedHostConfiguration, CandidateInfo, LeasePeriod, MessageQueueChain, MessagingStateSnapshot, OutboundHrmpMessage, ParaId, PersistedValidationData, RelayBlockNumber, RelayChainBlockNumber, UpwardMessage } from '@polkadot/types/interfaces/parachains';
 import type { ProxyAnnouncement, ProxyDefinition } from '@polkadot/types/interfaces/proxy';
-import type { AccountId, AccountIdOf, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, KeyTypeId, Moment, OpaqueCall, Permill, Releases, Slot, ValidatorId, Weight } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, AccountIdOf, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, Hash, KeyTypeId, Moment, OpaqueCall, Releases, Slot, ValidatorId, Weight } from '@polkadot/types/interfaces/runtime';
 import type { Scheduled, TaskAddress } from '@polkadot/types/interfaces/scheduler';
 import type { Keys, SessionIndex } from '@polkadot/types/interfaces/session';
 import type { SeatHolder, Voter } from '@polkadot/types/interfaces/staking';
@@ -98,6 +98,10 @@ declare module '@polkadot/api/types/storage' {
     };
     bancor: {
       bancorPools: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<Option<BancorPool>>, [CurrencyId]>;
+      /**
+       * Reserve for releasing Tokens to the bancor pool
+       **/
+      bancorReserve: AugmentedQuery<ApiType, (arg: CurrencyId | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<Option<BalanceOf>>, [CurrencyId]>;
     };
     bounties: {
       /**
@@ -116,10 +120,6 @@ declare module '@polkadot/api/types/storage' {
        * The description of each bounty.
        **/
       bountyDescriptions: AugmentedQuery<ApiType, (arg: BountyIndex | AnyNumber | Uint8Array) => Observable<Option<Bytes>>, [BountyIndex]>;
-    };
-    chargeTransactionFee: {
-      defaultFeeChargeOrderList: AugmentedQuery<ApiType, () => Observable<Vec<CurrencyId>>, []>;
-      userFeeChargeOrderList: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Vec<CurrencyId>>, [AccountId]>;
     };
     collatorSelection: {
       /**
@@ -310,6 +310,10 @@ declare module '@polkadot/api/types/storage' {
        **/
       voting: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Voter>, [AccountId]>;
     };
+    flexibleFee: {
+      defaultFeeChargeOrderList: AugmentedQuery<ApiType, () => Observable<Vec<CurrencyId>>, []>;
+      userFeeChargeOrderList: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<Vec<CurrencyId>>, [AccountId]>;
+    };
     indices: {
       /**
        * The lookup from index to account.
@@ -317,32 +321,32 @@ declare module '@polkadot/api/types/storage' {
       accounts: AugmentedQuery<ApiType, (arg: AccountIndex | AnyNumber | Uint8Array) => Observable<Option<ITuple<[AccountId, BalanceOf, bool]>>>, [AccountIndex]>;
     };
     minterReward: {
-      /**
-       * How much BNC will be issued to minters each block after.
-       **/
-      bncRewardByOneBlock: AugmentedQuery<ApiType, () => Observable<BalanceOf>, []>;
+      currencyWeights: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<ShareWeight>, [CurrencyIdOf]>;
       /**
        * Record maximum vtoken value is minted and when minted
        **/
-      currentRound: AugmentedQuery<ApiType, () => Observable<u8>, []>;
+      currentCycle: AugmentedQuery<ApiType, () => Observable<u8>, []>;
       /**
-       * Ieally, BNC reward will be issued after each 50 blocks.
+       * Ideally, BNC reward will be issued after each 50 blocks.
        **/
       currentRoundStartAt: AugmentedQuery<ApiType, () => Observable<BlockNumberFor>, []>;
       /**
        * Record maximum vtoken value is minted and when minted
        **/
-      maximumVtokenMinted: AugmentedQuery<ApiType, () => Observable<ITuple<[BlockNumberFor, BalanceOf, CurrencyIdOf, IsExtended]>>, []>;
+      maximumVtokenMinted: AugmentedQuery<ApiType, () => Observable<ITuple<[BlockNumberFor, BalanceOf, CurrencyIdOf]>>, []>;
       /**
        * Who mints vtoken
        **/
       minter: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<BalanceOf>, [AccountId, CurrencyIdOf]>;
+      /**
+       * How much BNC will be issued to minters each block after.
+       **/
+      rewardPerBlock: AugmentedQuery<ApiType, () => Observable<BalanceOf>, []>;
       totalVtokenMinted: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
       /**
-       * Record a user how much bnc s/he reveives.
+       * Record a user how much bnc s/he receives.
        **/
-      userBncReward: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<BalanceOf>, [AccountId]>;
-      weights: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<ShareWeight>, [CurrencyIdOf]>;
+      userReward: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<BalanceOf>, [AccountId]>;
     };
     multisig: {
       calls: AugmentedQuery<ApiType, (arg: U8aFixed | string | Uint8Array) => Observable<Option<ITuple<[OpaqueCall, AccountId, BalanceOf]>>>, [U8aFixed]>;
@@ -496,10 +500,15 @@ declare module '@polkadot/api/types/storage' {
        * Info on all of the funds.
        **/
       funds: AugmentedQuery<ApiType, (arg: ParaId | AnyNumber | Uint8Array) => Observable<Option<FundInfo>>, [ParaId]>;
+      redeemExtras: AugmentedQuery<ApiType, (arg1: AccountIdOf | string | Uint8Array, arg2: ITuple<[ParaId, LeasePeriod, LeasePeriod]> | [ParaId | AnyNumber | Uint8Array, LeasePeriod | AnyNumber | Uint8Array, LeasePeriod | AnyNumber | Uint8Array]) => Observable<RedeemStatus>, [AccountIdOf, ITuple<[ParaId, LeasePeriod, LeasePeriod]>]>;
       /**
-       * The balance of the token(rely-chain) can be redeemed.
+       * The balance can be redeemed to users.
        **/
       redeemPool: AugmentedQuery<ApiType, () => Observable<BalanceOf>, []>;
+      /**
+       * The balance can be refunded to users.
+       **/
+      refundPool: AugmentedQuery<ApiType, () => Observable<BalanceOf>, []>;
     };
     scheduler: {
       /**
@@ -745,40 +754,17 @@ declare module '@polkadot/api/types/storage' {
     };
     vtokenMint: {
       /**
-       * Referer channels for all users.
-       **/
-      allReferrerChannels: AugmentedQuery<ApiType, () => Observable<ITuple<[BTreeMap<AccountId, BalanceOf>, BalanceOf]>>, []>;
-      /**
        * Total mint pool
        **/
       mintPool: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
-      /**
-       * The ROI of each token by every block.
-       **/
-      rateOfInterestEachBlock: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<BalanceOf>, [CurrencyIdOf]>;
       /**
        * Record when and how much balance user want to redeem.
        **/
       redeemRecord: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<Vec<ITuple<[BlockNumber, BalanceOf]>>>, [AccountId, CurrencyIdOf]>;
       /**
-       * Collect referrer, minter => ([(referrer1, 1000), (referrer2, 2000), ...], total_point)
-       * total_point = 1000 + 2000 + ...
-       * referrer must be unique, so check it unique while a new referrer incoming.
-       * and insert the new channel to the
-       **/
-      referrerChannels: AugmentedQuery<ApiType, (arg: AccountId | string | Uint8Array) => Observable<ITuple<[Vec<ITuple<[AccountId, BalanceOf]>>, BalanceOf]>>, [AccountId]>;
-      /**
        * List lock period while staking.
        **/
       stakingLockPeriod: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<BlockNumber>, [CurrencyIdOf]>;
-      /**
-       * List user staking revenue.
-       **/
-      userStakingRevenue: AugmentedQuery<ApiType, (arg1: AccountId | string | Uint8Array, arg2: TokenSymbol | 'ASG' | 'AUSD' | 'DOT' | 'KSM' | 'ETH' | number | Uint8Array) => Observable<BalanceOf>, [AccountId, TokenSymbol]>;
-      /**
-       * Yeild rate for each token
-       **/
-      yieldRate: AugmentedQuery<ApiType, (arg: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array) => Observable<Permill>, [CurrencyIdOf]>;
     };
     xcmpQueue: {
       /**

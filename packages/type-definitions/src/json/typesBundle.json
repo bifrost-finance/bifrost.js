@@ -593,6 +593,7 @@
                             "trie_index": "TrieIndex",
                             "status": "FundStatus"
                         },
+                        "RedeemStatus": "BalanceOf",
                         "FundStatus": {
                             "_enum": [
                                 "Ongoing",
@@ -665,7 +666,7 @@
                             "vsbond": "CurrencyId",
                             "supply": "u128",
                             "remain": "u128",
-                            "unit_price": "u128",
+                            "unit_price": "U64F64",
                             "order_id": "OrderId",
                             "order_state": "OrderState"
                         },
@@ -676,6 +677,7 @@
                                 "Clinchd"
                             ]
                         },
+                        "U64F64": "u128",
                         "ZenlinkAssetId": {
                             "chain_id": "u32",
                             "asset_type": "u8",
@@ -716,7 +718,14 @@
                         "TAssetBalance": "Balance",
                         "AmountOf": "Balance",
                         "StorageVersion": "Releases",
-                        "ShareWeight": "Balance"
+                        "ShareWeight": "Balance",
+                        "TransferOriginType": {
+                            "_enum": {
+                                "FromSelf": 0,
+                                "FromRelayChain": 1,
+                                "FromSiblingParaChain": 2
+                            }
+                        }
                     }
                 }
             ],
@@ -1326,6 +1335,7 @@
                             "trie_index": "TrieIndex",
                             "status": "FundStatus"
                         },
+                        "RedeemStatus": "BalanceOf",
                         "FundStatus": {
                             "_enum": [
                                 "Ongoing",
@@ -1398,7 +1408,7 @@
                             "vsbond": "CurrencyId",
                             "supply": "u128",
                             "remain": "u128",
-                            "unit_price": "u128",
+                            "unit_price": "U64F64",
                             "order_id": "OrderId",
                             "order_state": "OrderState"
                         },
@@ -1409,6 +1419,7 @@
                                 "Clinchd"
                             ]
                         },
+                        "U64F64": "u128",
                         "ZenlinkAssetId": {
                             "chain_id": "u32",
                             "asset_type": "u8",
@@ -1449,7 +1460,14 @@
                         "TAssetBalance": "Balance",
                         "AmountOf": "Balance",
                         "StorageVersion": "Releases",
-                        "ShareWeight": "Balance"
+                        "ShareWeight": "Balance",
+                        "TransferOriginType": {
+                            "_enum": {
+                                "FromSelf": 0,
+                                "FromRelayChain": 1,
+                                "FromSiblingParaChain": 2
+                            }
+                        }
                     }
                 }
             ],

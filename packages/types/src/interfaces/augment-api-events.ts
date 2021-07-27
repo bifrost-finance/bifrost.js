@@ -11,7 +11,7 @@ import type { MemberCount, ProposalIndex } from '@polkadot/types/interfaces/coll
 import type { MessageId, OverweightIndex } from '@polkadot/types/interfaces/cumulus';
 import type { PropIndex, ReferendumIndex } from '@polkadot/types/interfaces/democracy';
 import type { VoteThreshold } from '@polkadot/types/interfaces/elections';
-import type { ParaId, RelayChainBlockNumber } from '@polkadot/types/interfaces/parachains';
+import type { LeasePeriod, ParaId, RelayChainBlockNumber } from '@polkadot/types/interfaces/parachains';
 import type { ProxyType } from '@polkadot/types/interfaces/proxy';
 import type { AccountId, AccountIdOf, AccountIndex, AssetId, Balance, BalanceOf, BlockNumber, CallHash, Hash, PhantomData, Weight } from '@polkadot/types/interfaces/runtime';
 import type { TaskAddress } from '@polkadot/types/interfaces/scheduler';
@@ -102,9 +102,6 @@ declare module '@polkadot/api/types/events' {
        * A bounty proposal was rejected; funds were slashed. \[index, bond\]
        **/
       BountyRejected: AugmentedEvent<ApiType, [BountyIndex, Balance]>;
-    };
-    chargeTransactionFee: {
-      FlexibleFeeExchanged: AugmentedEvent<ApiType, [CurrencyId, u128]>;
     };
     collatorSelection: {
       CandidateAdded: AugmentedEvent<ApiType, [AccountId, Balance]>;
@@ -362,6 +359,9 @@ declare module '@polkadot/api/types/events' {
        **/
       SeatHolderSlashed: AugmentedEvent<ApiType, [AccountId, Balance]>;
     };
+    flexibleFee: {
+      FlexibleFeeExchanged: AugmentedEvent<ApiType, [CurrencyId, u128]>;
+    };
     indices: {
       /**
        * A account index was assigned. \[index, who\]
@@ -463,17 +463,33 @@ declare module '@polkadot/api/types/events' {
        **/
       Dissolved: AugmentedEvent<ApiType, [ParaId]>;
       /**
-       * Redeemed token(rely-chain) by vsToken/vsBond. [who, fund_index, amount]
+       * Redeemed to account. [who, fund_index, first_slot, last_slot, value]
        **/
-      Redeemed: AugmentedEvent<ApiType, [AccountIdOf, BalanceOf]>;
+      Redeemed: AugmentedEvent<ApiType, [AccountIdOf, ParaId, LeasePeriod, LeasePeriod, BalanceOf]>;
       /**
-       * Fail on redeem token(rely-chain) by vsToken/vsBond. [who, fund_index, amount]
+       * Fail on redeem to account. [who, fund_index, first_slot, last_slot, value]
        **/
-      RedeemFailed: AugmentedEvent<ApiType, [AccountIdOf, BalanceOf]>;
+      RedeemFailed: AugmentedEvent<ApiType, [AccountIdOf, ParaId, LeasePeriod, LeasePeriod, BalanceOf]>;
       /**
-       * Redeeming token(rely-chain) by vsToken/vsBond. [who, fund_index, amount]
+       * Redeeming to account. [who, fund_index, first_slot, last_slot, value]
        **/
-      Redeeming: AugmentedEvent<ApiType, [AccountIdOf, BalanceOf]>;
+      Redeeming: AugmentedEvent<ApiType, [AccountIdOf, ParaId, LeasePeriod, LeasePeriod, BalanceOf]>;
+      /**
+       * Refunded to account. [who, fund_index, amount]
+       **/
+      Refunded: AugmentedEvent<ApiType, [AccountIdOf, ParaId, BalanceOf]>;
+      /**
+       * Fail on refund to account. [who,fund_index, amount]
+       **/
+      RefundFailed: AugmentedEvent<ApiType, [AccountIdOf, ParaId, BalanceOf]>;
+      /**
+       * Refunding to account. [who, fund_index, amount]
+       **/
+      Refunding: AugmentedEvent<ApiType, [AccountIdOf, ParaId, BalanceOf]>;
+      /**
+       * The vsToken/vsBond was be unlocked. [who, fund_index, value]
+       **/
+      Unlocked: AugmentedEvent<ApiType, [AccountIdOf, ParaId, BalanceOf]>;
       /**
        * Fail on withdraw full balance of a contributor. [who, fund_index, amount]
        **/
@@ -738,9 +754,7 @@ declare module '@polkadot/api/types/events' {
     };
     vtokenMint: {
       Minted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance]>;
-      RedeemedPointsSuccess: AugmentedEvent<ApiType, []>;
       RedeemStarted: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance, BlockNumber]>;
-      UpdateRatePerBlockSuccess: AugmentedEvent<ApiType, []>;
       UpdateVtokenPoolSuccess: AugmentedEvent<ApiType, []>;
     };
     xcmpQueue: {

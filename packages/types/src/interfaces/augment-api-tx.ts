@@ -4,7 +4,7 @@
 import type { Bytes, Compact, Option, U8aFixed, Vec, bool, u16, u32, u64 } from '@polkadot/types';
 import type { AnyNumber } from '@polkadot/types/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
-import type { OrderId } from '@bifrost-finance/types/interfaces/vsbondAuction';
+import type { OrderId, U64F64 } from '@bifrost-finance/types/interfaces/vsbondAuction';
 import type { ZenlinkAssetBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { MemberCount, ProposalIndex } from '@polkadot/types/interfaces/collective';
 import type { OverweightIndex } from '@polkadot/types/interfaces/cumulus';
@@ -129,6 +129,7 @@ declare module '@polkadot/api/types/submittable' {
       transferKeepAlive: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, value: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, Compact<Balance>]>;
     };
     bancor: {
+      addTokenToPool: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, tokenAmount: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, BalanceOf]>;
       exchangeForToken: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, vstokenAmount: BalanceOf | AnyNumber | Uint8Array, tokenOutMin: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, BalanceOf, BalanceOf]>;
       exchangeForVstoken: AugmentedSubmittable<(currencyId: CurrencyId | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, tokenAmount: BalanceOf | AnyNumber | Uint8Array, vstokenOutMin: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, BalanceOf, BalanceOf]>;
     };
@@ -252,12 +253,6 @@ declare module '@polkadot/api/types/submittable' {
        * # </weight>
        **/
       unassignCurator: AugmentedSubmittable<(bountyId: Compact<BountyIndex> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<BountyIndex>]>;
-    };
-    chargeTransactionFee: {
-      /**
-       * Set user fee charge assets order.
-       **/
-      setUserFeeChargeOrder: AugmentedSubmittable<(assetOrderListVec: Option<Vec<CurrencyId>> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<Vec<CurrencyId>>]>;
     };
     collatorSelection: {
       leaveIntent: AugmentedSubmittable<() => SubmittableExtrinsic<ApiType>, []>;
@@ -928,6 +923,12 @@ declare module '@polkadot/api/types/submittable' {
        **/
       vote: AugmentedSubmittable<(votes: Vec<AccountId> | (AccountId | string | Uint8Array)[], value: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Vec<AccountId>, Compact<BalanceOf>]>;
     };
+    flexibleFee: {
+      /**
+       * Set user fee charge assets order.
+       **/
+      setUserFeeChargeOrder: AugmentedSubmittable<(assetOrderListVec: Option<Vec<CurrencyId>> | null | object | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [Option<Vec<CurrencyId>>]>;
+    };
     indices: {
       /**
        * Assign an previously unassigned index.
@@ -1447,22 +1448,22 @@ declare module '@polkadot/api/types/submittable' {
       /**
        * Confirm contribute
        **/
-      confirmContribute: AugmentedSubmittable<(who: AccountIdOf | string | Uint8Array, index: ParaId | AnyNumber | Uint8Array, value: Compact<BalanceOf> | AnyNumber | Uint8Array, isSuccess: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountIdOf, ParaId, Compact<BalanceOf>, bool]>;
-      /**
-       * Confirm redeem by fund owner temporarily
-       **/
-      confirmRedeem: AugmentedSubmittable<(who: AccountIdOf | string | Uint8Array, index: ParaId | AnyNumber | Uint8Array, value: BalanceOf | AnyNumber | Uint8Array, isSuccess: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountIdOf, ParaId, BalanceOf, bool]>;
+      confirmContribute: AugmentedSubmittable<(who: AccountIdOf | string | Uint8Array, index: Compact<ParaId> | AnyNumber | Uint8Array, isSuccess: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountIdOf, Compact<ParaId>, bool]>;
+      confirmRedeem: AugmentedSubmittable<(who: AccountIdOf | string | Uint8Array, index: Compact<ParaId> | AnyNumber | Uint8Array, firstSlot: Compact<LeasePeriod> | AnyNumber | Uint8Array, lastSlot: Compact<LeasePeriod> | AnyNumber | Uint8Array, isSuccess: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountIdOf, Compact<ParaId>, Compact<LeasePeriod>, Compact<LeasePeriod>, bool]>;
+      confirmRefund: AugmentedSubmittable<(who: AccountIdOf | string | Uint8Array, index: Compact<ParaId> | AnyNumber | Uint8Array, isSuccess: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountIdOf, Compact<ParaId>, bool]>;
       /**
        * Confirm withdraw by fund owner temporarily
        **/
-      confirmWithdraw: AugmentedSubmittable<(index: ParaId | AnyNumber | Uint8Array, isSuccess: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [ParaId, bool]>;
+      confirmWithdraw: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array, isSuccess: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>, bool]>;
       /**
+       * TODO: Refactor the docs.
        * Contribute to a crowd sale. This will transfer some balance over to fund a parachain
        * slot. It will be withdrawable in two instances: the parachain becomes retired; or the
        * slot is unable to be purchased and the timeout expires.
        **/
       contribute: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array, value: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>, Compact<BalanceOf>]>;
       /**
+       * TODO: Refactor the docs.
        * Create a new crowdloaning campaign for a parachain slot deposit for the current auction.
        **/
       create: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array, cap: Compact<BalanceOf> | AnyNumber | Uint8Array, firstSlot: Compact<LeasePeriod> | AnyNumber | Uint8Array, lastSlot: Compact<LeasePeriod> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>, Compact<BalanceOf>, Compact<LeasePeriod>, Compact<LeasePeriod>]>;
@@ -1474,7 +1475,12 @@ declare module '@polkadot/api/types/submittable' {
       fundFail: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>]>;
       fundRetire: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>]>;
       fundSuccess: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>]>;
-      redeem: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array, value: BalanceOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>, BalanceOf]>;
+      redeem: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array, firstSlot: Compact<LeasePeriod> | AnyNumber | Uint8Array, lastSlot: Compact<LeasePeriod> | AnyNumber | Uint8Array, value: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>, Compact<LeasePeriod>, Compact<LeasePeriod>, Compact<BalanceOf>]>;
+      refund: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>]>;
+      /**
+       * Unlock the reserved vsToken/vsBond after fund success
+       **/
+      unlock: AugmentedSubmittable<(who: AccountIdOf | string | Uint8Array, index: Compact<ParaId> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [AccountIdOf, Compact<ParaId>]>;
       /**
        * Withdraw full balance of the parachain. this function may need to be called multiple
        * times
@@ -2275,7 +2281,7 @@ declare module '@polkadot/api/types/submittable' {
     };
     vsBondAuction: {
       clinchOrder: AugmentedSubmittable<(orderId: Compact<OrderId> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<OrderId>]>;
-      createOrder: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array, firstSlot: Compact<LeasePeriodOf> | AnyNumber | Uint8Array, lastSlot: Compact<LeasePeriodOf> | AnyNumber | Uint8Array, supply: Compact<BalanceOf> | AnyNumber | Uint8Array, unitPrice: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>, Compact<LeasePeriodOf>, Compact<LeasePeriodOf>, Compact<BalanceOf>, Compact<BalanceOf>]>;
+      createOrder: AugmentedSubmittable<(index: Compact<ParaId> | AnyNumber | Uint8Array, firstSlot: Compact<LeasePeriodOf> | AnyNumber | Uint8Array, lastSlot: Compact<LeasePeriodOf> | AnyNumber | Uint8Array, supply: Compact<BalanceOf> | AnyNumber | Uint8Array, unitPrice: U64F64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<ParaId>, Compact<LeasePeriodOf>, Compact<LeasePeriodOf>, Compact<BalanceOf>, U64F64]>;
       partialClinchOrder: AugmentedSubmittable<(orderId: Compact<OrderId> | AnyNumber | Uint8Array, quantity: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<OrderId>, Compact<BalanceOf>]>;
       revokeOrder: AugmentedSubmittable<(orderId: Compact<OrderId> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [Compact<OrderId>]>;
     };
@@ -2299,6 +2305,10 @@ declare module '@polkadot/api/types/submittable' {
        *
        * The dispatch origin for this call must be `Root` by the
        * transactor.
+       **/
+      setTokenStakingLockPeriod: AugmentedSubmittable<(tokenId: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, lockingBlocks: BlockNumber | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, BlockNumber]>;
+      /**
+       * Set staking lock period for a token
        **/
       setVtokenPool: AugmentedSubmittable<(tokenId: CurrencyIdOf | { Token: any } | { VToken: any } | { Native: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, newTokenPool: Compact<BalanceOf> | AnyNumber | Uint8Array, newVtokenPool: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyIdOf, Compact<BalanceOf>, Compact<BalanceOf>]>;
     };

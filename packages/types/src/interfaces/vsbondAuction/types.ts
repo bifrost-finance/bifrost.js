@@ -14,7 +14,7 @@ export interface OrderInfo extends Struct {
   readonly vsbond: CurrencyId;
   readonly supply: u128;
   readonly remain: u128;
-  readonly unit_price: u128;
+  readonly unit_price: U64F64;
   readonly order_id: OrderId;
   readonly order_state: OrderState;
 }
@@ -25,5 +25,8 @@ export interface OrderState extends Enum {
   readonly isRevoked: boolean;
   readonly isClinchd: boolean;
 }
+
+/** @name U64F64 */
+export interface U64F64 extends u128 {}
 
 export type PHANTOM_VSBONDAUCTION = 'vsbondAuction';

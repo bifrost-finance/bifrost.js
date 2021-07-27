@@ -2,9 +2,8 @@
 /* eslint-disable */
 
 import type { Vec, u16, u32 } from '@polkadot/types';
-import type { CurrencyId, CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { CurrencyId, CurrencyIdOf, TransferOriginType } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BlockNumberFor } from '@bifrost-finance/types/interfaces/flexibleFee';
-import type { SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { LeasePeriod } from '@polkadot/types/interfaces/parachains';
 import type { Balance, BalanceOf, BlockNumber, LockIdentifier, Moment, PalletId, Percent, Permill, RuntimeDbWeight } from '@polkadot/types/interfaces/runtime';
 import type { RuntimeVersion } from '@polkadot/types/interfaces/state';
@@ -21,7 +20,8 @@ declare module '@polkadot/api/types/consts' {
       existentialDeposit: Balance & AugmentedConst<ApiType>;
     };
     bancor: {
-      interventionPercentage: BalanceOf & AugmentedConst<ApiType>;
+      dailyReleasePercentage: Percent & AugmentedConst<ApiType>;
+      interventionPercentage: Percent & AugmentedConst<ApiType>;
     };
     bounties: {
       /**
@@ -52,9 +52,6 @@ declare module '@polkadot/api/types/consts' {
        * Maximum acceptable reason length.
        **/
       maximumReasonLength: u32 & AugmentedConst<ApiType>;
-    };
-    chargeTransactionFee: {
-      nativeCurrencyId: CurrencyId & AugmentedConst<ApiType>;
     };
     currencies: {
       getNativeCurrencyId: CurrencyIdOf & AugmentedConst<ApiType>;
@@ -135,6 +132,9 @@ declare module '@polkadot/api/types/consts' {
        **/
       votingBondFactor: BalanceOf & AugmentedConst<ApiType>;
     };
+    flexibleFee: {
+      nativeCurrencyId: CurrencyId & AugmentedConst<ApiType>;
+    };
     indices: {
       /**
        * The deposit needed for reserving an index.
@@ -143,21 +143,21 @@ declare module '@polkadot/api/types/consts' {
     };
     minterReward: {
       /**
+       * Two year as a cycle, 600 * 24 * 365 * 2, which results in reward being cut half
+       **/
+      halvingCycle: BlockNumberFor & AugmentedConst<ApiType>;
+      /**
        * Allow maximum blocks can be extended.
        **/
       maximumExtendedPeriod: BlockNumberFor & AugmentedConst<ApiType>;
       /**
        * Reward period, normally it's 50 blocks after.
        **/
-      rewardPeriod: BlockNumberFor & AugmentedConst<ApiType>;
+      rewardWindow: BlockNumberFor & AugmentedConst<ApiType>;
       /**
-       * Identifier for adjusting weight
+       * stable currency id currently used in the chain
        **/
-      systemPalletId: SystemPalletId & AugmentedConst<ApiType>;
-      /**
-       * Two year as a round, 600 * 24 * 365 * 2
-       **/
-      twoYear: BlockNumberFor & AugmentedConst<ApiType>;
+      stableCurrencyId: CurrencyId & AugmentedConst<ApiType>;
     };
     multisig: {
       /**
@@ -234,6 +234,7 @@ declare module '@polkadot/api/types/consts' {
        * ```ModuleId(*b"py/cfund")```
        **/
       palletId: PalletId & AugmentedConst<ApiType>;
+      relayChainToken: CurrencyId & AugmentedConst<ApiType>;
       /**
        * The time interval from 1:1 redeem-pool to bancor-pool to release.
        **/
@@ -244,10 +245,10 @@ declare module '@polkadot/api/types/consts' {
        * **NOTE: THE RELEASE RATIO MUST BE IN [0, 1].**
        **/
       releaseRatio: Percent & AugmentedConst<ApiType>;
-      relyChainToken: CurrencyId & AugmentedConst<ApiType>;
       removeKeysLimit: u32 & AugmentedConst<ApiType>;
       slotLength: LeasePeriod & AugmentedConst<ApiType>;
       vsBondValidPeriod: BlockNumberFor & AugmentedConst<ApiType>;
+      xcmTransferOrigin: TransferOriginType & AugmentedConst<ApiType>;
     };
     system: {
       /**
@@ -362,12 +363,6 @@ declare module '@polkadot/api/types/consts' {
        * The sale quantity needs to be greater than `MinimumSupply` to create an order
        **/
       minimumSupply: BalanceOf & AugmentedConst<ApiType>;
-    };
-    vtokenMint: {
-      /**
-       * Identifier for the staking lock.
-       **/
-      palletId: PalletId & AugmentedConst<ApiType>;
     };
   }
 

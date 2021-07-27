@@ -55,6 +55,9 @@ export interface FundStatus extends Enum {
   readonly isEnd: boolean;
 }
 
+/** @name RedeemStatus */
+export interface RedeemStatus extends BalanceOf {}
+
 /** @name TrieIndex */
 export interface TrieIndex extends u32 {}
 

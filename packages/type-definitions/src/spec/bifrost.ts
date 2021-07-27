@@ -28,6 +28,13 @@ const versioned: OverrideVersionedType[] = [
       AmountOf: "Balance",
       StorageVersion: "Releases",
       ShareWeight: "Balance",
+      TransferOriginType:{
+        _enum: {
+          FromSelf : 0,
+          FromRelayChain : 1,
+          FromSiblingParaChain : 2,
+        },
+      }
     },
   },
 ];
