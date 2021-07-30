@@ -4,7 +4,7 @@
 import type { BitVec, Bool, Bytes, Compact, Data, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TokenSymbol, TransferOriginType } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
-import type { BifrostBlockNumberFor, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
+import type { NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { AccountId, AccountId20, AccountId32, AccountIdOf, AccountIndex, Address, AssetId, Balance, BalanceOf, Block, BlockNumber, BlockNumberFor, BlockNumberOf, Call, CallHash, CallHashOf, ChangesTrieConfiguration, ChangesTrieSignal, CodecHash, Consensus, ConsensusEngineId, Digest, DigestItem, EncodedJustification, ExtrinsicsWeight, Fixed128, Fixed64, FixedI128, FixedI64, FixedU128, FixedU64, H1024, H128, H160, H2048, H256, H32, H512, H64, Hash, Header, HeaderPartial, I32F32, Index, IndicesLookupSource, Justification, Justifications, KeyTypeId, KeyValue, LockIdentifier, LookupSource, LookupTarget, ModuleId, Moment, MultiAddress, MultiSigner, OpaqueCall, OracleKey, OracleValue, Origin, OriginCaller, PalletId, PalletVersion, PalletsOrigin, Pays, PerU16, Perbill, Percent, Permill, Perquintill, Phantom, PhantomData, PreRuntime, Releases, RuntimeDbWeight, Seal, SealV0, SignedBlock, SignedBlockWithJustification, SignedBlockWithJustifications, Slot, StorageData, StorageProof, TransactionInfo, TransactionPriority, TransactionStorageProof, U32F32, ValidatorId, ValidatorIdOf, Weight, WeightMultiplier } from '@bifrost-finance/types/interfaces/runtime';
 import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, RedeemStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
@@ -91,7 +91,6 @@ declare module '@polkadot/types/types/registry' {
     'Compact<BabeWeight>': Compact<BabeWeight>;
     'Compact<Balance>': Compact<Balance>;
     'Compact<BalanceOf>': Compact<BalanceOf>;
-    'Compact<BifrostBlockNumberFor>': Compact<BifrostBlockNumberFor>;
     'Compact<BlockNumber>': Compact<BlockNumber>;
     'Compact<BlockNumberFor>': Compact<BlockNumberFor>;
     'Compact<BlockNumberOf>': Compact<BlockNumberOf>;
@@ -274,7 +273,6 @@ declare module '@polkadot/types/types/registry' {
     'Option<Bid>': Option<Bid>;
     'Option<Bidder>': Option<Bidder>;
     'Option<BidKind>': Option<BidKind>;
-    'Option<BifrostBlockNumberFor>': Option<BifrostBlockNumberFor>;
     'Option<BifrostVestingInfo>': Option<BifrostVestingInfo>;
     'Option<BitVec>': Option<BitVec>;
     'Option<Block>': Option<Block>;
@@ -1244,7 +1242,6 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Bid>': Vec<Bid>;
     'Vec<Bidder>': Vec<Bidder>;
     'Vec<BidKind>': Vec<BidKind>;
-    'Vec<BifrostBlockNumberFor>': Vec<BifrostBlockNumberFor>;
     'Vec<BifrostVestingInfo>': Vec<BifrostVestingInfo>;
     'Vec<BitVec>': Vec<BitVec>;
     'Vec<Block>': Vec<Block>;
@@ -2214,7 +2211,6 @@ declare module '@polkadot/types/types/registry' {
     Bid: Bid;
     Bidder: Bidder;
     BidKind: BidKind;
-    BifrostBlockNumberFor: BifrostBlockNumberFor;
     BifrostVestingInfo: BifrostVestingInfo;
     BitVec: BitVec;
     Block: Block;

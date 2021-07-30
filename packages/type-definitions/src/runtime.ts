@@ -2,6 +2,7 @@ export default {
   rpc: {},
   types: {
     OracleKey: 'CurrencyId',
-    OracleValue: 'Price'
-  }
+    OracleValue: 'Price',
+    BlockNumberFor: 'BlockNumber',
+  },
 };

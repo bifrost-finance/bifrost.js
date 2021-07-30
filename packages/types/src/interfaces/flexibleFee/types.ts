@@ -2,10 +2,7 @@
 /* eslint-disable */
 
 import type { Enum, U256, u64 } from '@polkadot/types';
-import type { Balance, BlockNumber } from '@bifrost-finance/types/interfaces/runtime';
-
-/** @name BifrostBlockNumberFor */
-export interface BifrostBlockNumberFor extends BlockNumber {}
+import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name NumberOrHex */
 export interface NumberOrHex extends Enum {

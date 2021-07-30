@@ -23,12 +23,11 @@ export default {
   },
   types: {
     PalletBalanceOf: 'Balance',
-    BlockNumberFor: "BlockNumber",
     NumberOrHex: {
       _enum: {
         Number: 'u64',
         Hex: 'U256'
       }
     }
-  }
+  },
 };

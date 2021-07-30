@@ -255,7 +255,6 @@
         }
     },
     "PalletBalanceOf": "Balance",
-    "BifrostBlockNumberFor": "BlockNumber",
     "NumberOrHex": {
         "_enum": {
             "Number": "u64",
@@ -343,6 +342,7 @@
         "starting_block": "BlockNumber"
     },
     "OracleKey": "CurrencyId",
+    "BlockNumberFor": "BlockNumber",
     "OrderId": "u64",
     "OrderInfo": {
         "owner": "AccountIdOf",

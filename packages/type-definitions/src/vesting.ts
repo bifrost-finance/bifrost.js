@@ -7,5 +7,5 @@ export default {
       per_block: 'Balance',
       starting_block: 'BlockNumber'
     }
-  },
+  }
 };
