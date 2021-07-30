@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { Struct, u128, u32, u8 } from '@polkadot/types';
-import type { AccountId } from '@polkadot/types/interfaces/runtime';
+import type { AccountId } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name PairInfo */
 export interface PairInfo extends Struct {

@@ -1,21 +1,21 @@
 export default {
   rpc: {
     getVtokenMintRate: {
-      description: "Get current vtoken mint rate.",
+      description: 'Get current vtoken mint rate.',
       params: [
         {
-          name: "asset_id",
-          type: "CurrencyId",
+          name: 'asset_id',
+          type: 'CurrencyId'
         },
         {
-          name: "at",
-          type: "BlockHash",
+          name: 'at',
+          type: 'BlockHash',
           isHistoric: true,
-          isOptional: true,
-        },
+          isOptional: true
+        }
       ],
-      type: "String",
-    },
+      type: 'String'
+    }
   },
-  types: {},
+  types: {}
 };

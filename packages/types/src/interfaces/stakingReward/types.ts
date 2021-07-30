@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { Struct } from '@polkadot/types';
-import type { AccountId, Balance } from '@polkadot/types/interfaces/runtime';
+import type { AccountId, Balance } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name RewardRecord */
 export interface RewardRecord extends Struct {

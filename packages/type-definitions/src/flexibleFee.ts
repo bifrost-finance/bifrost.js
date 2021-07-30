@@ -1,34 +1,34 @@
 export default {
   rpc: {
     getFeeTokenAndAmount: {
-      description: "Get charging token type and amount in terms of flexible transaction fee.",
+      description: 'Get charging token type and amount in terms of flexible transaction fee.',
       params: [
         {
-          name: "who",
-          type: "AccountId",
+          name: 'who',
+          type: 'AccountId'
         },
         {
-          name: "extrinsic",
-          type: "Bytes",
+          name: 'extrinsic',
+          type: 'Bytes'
         },
         {
-          name: "at",
-          type: "BlockHash",
+          name: 'at',
+          type: 'BlockHash',
           isHistoric: true,
-          isOptional: true,
-        },
+          isOptional: true
+        }
       ],
-      type: "(CurrencyId, NumberOrHex)",
-    },
+      type: '(CurrencyId, NumberOrHex)'
+    }
   },
   types: {
-    PalletBalanceOf: "Balance",
+    PalletBalanceOf: 'Balance',
     BlockNumberFor: "BlockNumber",
     NumberOrHex: {
       _enum: {
-        Number: "u64",
-        Hex: "U256",
-      },
-    },
-  },
+        Number: 'u64',
+        Hex: 'U256'
+      }
+    }
+  }
 };

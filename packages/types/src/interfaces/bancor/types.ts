@@ -3,7 +3,7 @@
 
 import type { Struct } from '@polkadot/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
-import type { Balance } from '@polkadot/types/interfaces/runtime';
+import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name BancorPool */
 export interface BancorPool extends Struct {

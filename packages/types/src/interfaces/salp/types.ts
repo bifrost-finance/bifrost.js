@@ -2,9 +2,9 @@
 /* eslint-disable */
 
 import type { Enum, Option, Struct, u32 } from '@polkadot/types';
+import type { AccountId, AccountIdOf, Balance, BalanceOf } from '@bifrost-finance/types/interfaces/runtime';
 import type { MultiSignature } from '@polkadot/types/interfaces/extrinsics';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
-import type { AccountId, AccountIdOf, Balance, BalanceOf } from '@polkadot/types/interfaces/runtime';
 
 /** @name ContributeCall */
 export interface ContributeCall extends Enum {

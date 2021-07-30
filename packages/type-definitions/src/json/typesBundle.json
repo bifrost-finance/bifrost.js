@@ -381,7 +381,7 @@
                             "totalWithdrawnRewards": "Compact<Balance>"
                         },
                         "Share": "u128",
-                        "OracleValue": "FixedU128",
+                        "OracleValue": "Price",
                         "BiddingOrderId": "u64",
                         "EraId": "u32",
                         "BiddingOrderUnit": {
@@ -573,7 +573,7 @@
                             }
                         },
                         "PalletBalanceOf": "Balance",
-                        "BlockNumberFor": "BlockNumber",
+                        "BifrostBlockNumberFor": "BlockNumber",
                         "NumberOrHex": {
                             "_enum": {
                                 "Number": "u64",
@@ -660,6 +660,7 @@
                             "per_block": "Balance",
                             "starting_block": "BlockNumber"
                         },
+                        "OracleKey": "CurrencyId",
                         "OrderId": "u64",
                         "OrderInfo": {
                             "owner": "AccountIdOf",
@@ -694,7 +695,6 @@
                             "reserve1": "ZenlinkAssetBalance",
                             "lpAssetId": "ZenlinkAssetId"
                         },
-                        "Keys": "SessionKeys1",
                         "TokenSymbol": {
                             "_enum": {
                                 "BNC": 0,
@@ -725,20 +725,25 @@
                                 "FromRelayChain": 1,
                                 "FromSiblingParaChain": 2
                             }
-                        }
+                        },
+                        "Keys": "SessionKeys1"
                     }
                 }
             ],
             "alias": {
-                "tokens": {
-                    "AccountData": "OrmlAccountData"
+                "zenlinkProtocol": {
+                    "AssetBalance": "ZenlinkAssetBalance",
+                    "AssetId": "ZenlinkAssetId"
                 },
                 "vesting": {
                     "VestingInfo": "BifrostVestingInfo"
                 },
-                "zenlinkProtocol": {
-                    "AssetBalance": "ZenlinkAssetBalance",
-                    "AssetId": "ZenlinkAssetId"
+                "tokens": {
+                    "AccountData": "OrmlAccountData",
+                    "BalanceLock": "OrmlBalanceLock"
+                },
+                "flexibleFee": {
+                    "BlockNumberFor": "BifrostBlockNumberFor"
                 }
             }
         },
@@ -1123,7 +1128,7 @@
                             "totalWithdrawnRewards": "Compact<Balance>"
                         },
                         "Share": "u128",
-                        "OracleValue": "FixedU128",
+                        "OracleValue": "Price",
                         "BiddingOrderId": "u64",
                         "EraId": "u32",
                         "BiddingOrderUnit": {
@@ -1315,7 +1320,7 @@
                             }
                         },
                         "PalletBalanceOf": "Balance",
-                        "BlockNumberFor": "BlockNumber",
+                        "BifrostBlockNumberFor": "BlockNumber",
                         "NumberOrHex": {
                             "_enum": {
                                 "Number": "u64",
@@ -1402,6 +1407,7 @@
                             "per_block": "Balance",
                             "starting_block": "BlockNumber"
                         },
+                        "OracleKey": "CurrencyId",
                         "OrderId": "u64",
                         "OrderInfo": {
                             "owner": "AccountIdOf",
@@ -1436,7 +1442,6 @@
                             "reserve1": "ZenlinkAssetBalance",
                             "lpAssetId": "ZenlinkAssetId"
                         },
-                        "Keys": "SessionKeys1",
                         "TokenSymbol": {
                             "_enum": {
                                 "ASG": 0,
@@ -1467,20 +1472,25 @@
                                 "FromRelayChain": 1,
                                 "FromSiblingParaChain": 2
                             }
-                        }
+                        },
+                        "Keys": "SessionKeys1"
                     }
                 }
             ],
             "alias": {
-                "tokens": {
-                    "AccountData": "OrmlAccountData"
+                "zenlinkProtocol": {
+                    "AssetBalance": "ZenlinkAssetBalance",
+                    "AssetId": "ZenlinkAssetId"
                 },
                 "vesting": {
                     "VestingInfo": "BifrostVestingInfo"
                 },
-                "zenlinkProtocol": {
-                    "AssetBalance": "ZenlinkAssetBalance",
-                    "AssetId": "ZenlinkAssetId"
+                "tokens": {
+                    "AccountData": "OrmlAccountData",
+                    "BalanceLock": "OrmlBalanceLock"
+                },
+                "flexibleFee": {
+                    "BlockNumberFor": "BifrostBlockNumberFor"
                 }
             }
         }

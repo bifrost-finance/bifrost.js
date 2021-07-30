@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { bool } from '@polkadot/types';
-import type { PalletId } from '@polkadot/types/interfaces/runtime';
+import type { PalletId } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name IsExtended */
 export interface IsExtended extends bool {}

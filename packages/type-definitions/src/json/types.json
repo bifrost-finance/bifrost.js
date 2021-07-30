@@ -63,7 +63,7 @@
         "totalWithdrawnRewards": "Compact<Balance>"
     },
     "Share": "u128",
-    "OracleValue": "FixedU128",
+    "OracleValue": "Price",
     "BiddingOrderId": "u64",
     "EraId": "u32",
     "BiddingOrderUnit": {
@@ -255,7 +255,7 @@
         }
     },
     "PalletBalanceOf": "Balance",
-    "BlockNumberFor": "BlockNumber",
+    "BifrostBlockNumberFor": "BlockNumber",
     "NumberOrHex": {
         "_enum": {
             "Number": "u64",
@@ -342,6 +342,7 @@
         "per_block": "Balance",
         "starting_block": "BlockNumber"
     },
+    "OracleKey": "CurrencyId",
     "OrderId": "u64",
     "OrderInfo": {
         "owner": "AccountIdOf",
@@ -375,6 +376,37 @@
         "reserve0": "ZenlinkAssetBalance",
         "reserve1": "ZenlinkAssetBalance",
         "lpAssetId": "ZenlinkAssetId"
+    },
+    "TokenSymbol": {
+        "_enum": {
+            "ASG": 0,
+            "AUSD": 2,
+            "DOT": 3,
+            "KSM": 4,
+            "ETH": 5
+        }
+    },
+    "CurrencyId": {
+        "_enum": {
+            "Token": "TokenSymbol",
+            "VToken": "TokenSymbol",
+            "Native": "TokenSymbol",
+            "Stable": "TokenSymbol",
+            "VSToken": "TokenSymbol",
+            "VSBond": "(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)"
+        }
+    },
+    "CurrencyIdOf": "CurrencyId",
+    "TAssetBalance": "Balance",
+    "AmountOf": "Balance",
+    "StorageVersion": "Releases",
+    "ShareWeight": "Balance",
+    "TransferOriginType": {
+        "_enum": {
+            "FromSelf": 0,
+            "FromRelayChain": 1,
+            "FromSiblingParaChain": 2
+        }
     },
     "Keys": "SessionKeys1"
 }

@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { Struct } from '@polkadot/types';
-import type { Balance } from '@polkadot/types/interfaces/runtime';
+import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name OrmlAccountData */
 export interface OrmlAccountData extends Struct {

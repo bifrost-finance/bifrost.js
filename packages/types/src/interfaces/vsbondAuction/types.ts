@@ -3,7 +3,7 @@
 
 import type { Enum, Struct, u128, u64 } from '@polkadot/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
-import type { AccountIdOf } from '@polkadot/types/interfaces/runtime';
+import type { AccountIdOf } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name OrderId */
 export interface OrderId extends u64 {}

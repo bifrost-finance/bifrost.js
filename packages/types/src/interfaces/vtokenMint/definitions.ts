@@ -1,22 +1,4 @@
-export default {
-    rpc: {
-        getVtokenMintRate: {
-            description: "Get current vtoken mint rate.",
-            params: [
-            {
-                name: "asset_id",
-                type: "CurrencyId",
-            },
-            {
-                name: "at",
-                type: "BlockHash",
-                isHistoric: true,
-                isOptional: true,
-            },
-            ],
-            type: "String",
-      },
-    },
-    types: {},
-  };
-  
+import { Definitions } from '@polkadot/types/types';
+import vtokenMint from '@bifrost-finance/type-definitions/vtokenMint';
+
+export default vtokenMint as Definitions;

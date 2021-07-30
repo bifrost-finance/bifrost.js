@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import type {OverrideVersionedType} from '@polkadot/types/types';
-import {rpc as ormlRpc, types as ormlTypes, typesAlias as ormlAlias} from '@open-web3/orml-type-definitions';
-import {jsonrpcFromDefs, typesAliasFromDefs, typesFromDefs} from '@open-web3/orml-type-definitions/utils';
+import type { OverrideVersionedType } from '@polkadot/types/types';
+import { rpc as ormlRpc, types as ormlTypes, typesAlias as ormlAlias } from '@open-web3/orml-type-definitions';
+import { jsonrpcFromDefs, typesAliasFromDefs, typesFromDefs } from '@open-web3/orml-type-definitions/utils';
 
-import {signedExtensions as bifrostSignedExtensions} from './signedExtensions';
+import { signedExtensions as bifrostSignedExtensions } from './signedExtensions';
 
+import aSharePrimitives from './aSharePrimitives';
 import bid from './bid';
 import bridgeEos from './bridgeEos';
 import bancor from './bancor';
@@ -19,16 +20,16 @@ import vesting from './vesting';
 import vsbondAuction from './vsbondAuction';
 import vtokenMint from './vtokenMint';
 import zenlinkProtocol from './zenlinkProtocol';
+import runtime from './runtime';
 
 import bifrostVersioned from './spec/bifrost';
-import asgardVersioned from './spec/asgard'
+import asgardVersioned from './spec/asgard';
 
 const additionalOverride = {
   Keys: 'SessionKeys1'
 };
 
 const bifrostDefs = {
-
   bid,
   bridgeEos,
   bancor,
@@ -40,9 +41,11 @@ const bifrostDefs = {
   swap,
   tokens,
   vesting,
+  runtime,
   vsbondAuction,
   vtokenMint,
-  zenlinkProtocol
+  zenlinkProtocol,
+  aSharePrimitives
 };
 
 export const types = {
@@ -51,8 +54,8 @@ export const types = {
   ...additionalOverride
 };
 
-export const rpc = jsonrpcFromDefs(bifrostDefs, {...ormlRpc});
-export const typesAlias = typesAliasFromDefs(bifrostDefs, {...ormlAlias});
+export const rpc = jsonrpcFromDefs(bifrostDefs, { ...ormlRpc });
+export const typesAlias = typesAliasFromDefs(bifrostDefs, { ...ormlAlias });
 
 function getBundle(versioned: OverrideVersionedType[]) {
   return {
@@ -76,7 +79,7 @@ function getBundle(versioned: OverrideVersionedType[]) {
 export const typesBundle = {
   spec: {
     bifrost: getBundle(bifrostVersioned),
-    asgard: getBundle(asgardVersioned),
+    asgard: getBundle(asgardVersioned)
   }
 };
 
@@ -84,7 +87,7 @@ export const typesBundle = {
 export const typesBundleForPolkadot = {
   spec: {
     bifrost: getBundle(bifrostVersioned),
-    asgard: getBundle(asgardVersioned),
+    asgard: getBundle(asgardVersioned)
   }
 };
 

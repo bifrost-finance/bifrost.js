@@ -1,16 +1,4 @@
-export default {
-  rpc: {},
-  types: {
-    MaxLocksOf: "u32",
-    BifrostVestingInfo: {
-        locked: "Balance",
-        per_block: "Balance",
-        starting_block: "BlockNumber"
-    }
-  },
-  typesAlias: {
-    vesting:{
-      VestingInfo: "BifrostVestingInfo",
-    }
-  }
-};
+import { Definitions } from '@polkadot/types/types';
+import vesting from '@bifrost-finance/type-definitions/vesting';
+
+export default vesting as Definitions;

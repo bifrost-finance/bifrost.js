@@ -1,9 +1,4 @@
-export default {
-    rpc: {},
-    types: {
-        RewardRecord: {
-            account_id: "AccountId",
-            record_amount: "Balance",
-      },
-    },
-  };
+import { Definitions } from '@polkadot/types/types';
+import stakingReward from '@bifrost-finance/type-definitions/stakingReward';
+
+export default stakingReward as Definitions;

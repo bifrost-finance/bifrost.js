@@ -1,16 +1,4 @@
-export default {
-  rpc: {},
-  types: {
-    BiddingOrderId: "u64",
-    EraId: "u32",
-    BiddingOrderUnit: {
-      bidder_id: "AccountId",
-      token_id: "AssetId",
-      block_num: "BlockNumber",
-      votes: "Balance",
-      annual_roi: "Permill",
-      validator: "AccountId",
-    },
-    BiddingOrderUnitOf: "BiddingOrderUnit",
-  },
-};
+import { Definitions } from '@polkadot/types/types';
+import bid from '@bifrost-finance/type-definitions/bid';
+
+export default bid as Definitions;

@@ -3,8 +3,8 @@
 
 import type { Enum } from '@polkadot/types';
 import type { ITuple } from '@polkadot/types/types';
+import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
-import type { Balance, Releases } from '@polkadot/types/interfaces/runtime';
 
 /** @name AmountOf */
 export interface AmountOf extends Balance {}

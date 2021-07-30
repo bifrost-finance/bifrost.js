@@ -1,15 +1,4 @@
-export default {
-    rpc: {},
-    types: {
-      OrmlAccountData: {
-        free: "Balance",
-        reserved: "Balance",
-        frozen: "Balance"
-      },
-    },
-    typesAlias: {
-      tokens: {
-        AccountData: "OrmlAccountData"
-      }
-    }
-};
+import { Definitions } from '@polkadot/types/types';
+import tokens from '@bifrost-finance/type-definitions/tokens';
+
+export default tokens as Definitions;
