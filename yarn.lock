@@ -1466,12 +1466,12 @@ __metadata:
   resolution: "@bifrost-finance/api@workspace:packages/api"
   dependencies:
     "@babel/runtime": ^7.12.5
-    "@bifrost-finance/types": ^1.1.61
+    "@bifrost-finance/types": ^1.2.3
     "@polkadot/api": ^5.2.1
   languageName: unknown
   linkType: soft
 
-"@bifrost-finance/type-definitions@1.1.61, @bifrost-finance/type-definitions@workspace:packages/type-definitions":
+"@bifrost-finance/type-definitions@^1.2.3, @bifrost-finance/type-definitions@workspace:packages/type-definitions":
   version: 0.0.0-use.local
   resolution: "@bifrost-finance/type-definitions@workspace:packages/type-definitions"
   dependencies:
@@ -1479,12 +1479,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@bifrost-finance/types@^1.1.61, @bifrost-finance/types@workspace:packages/types":
+"@bifrost-finance/types@^1.2.3, @bifrost-finance/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@bifrost-finance/types@workspace:packages/types"
   dependencies:
     "@babel/runtime": ^7.10.2
-    "@bifrost-finance/type-definitions": 1.1.61
+    "@bifrost-finance/type-definitions": ^1.2.3
     "@open-web3/api-mobx": ^0.9.4-19
     "@open-web3/orml-types": ^0.9.4-19
     "@polkadot/api": ^5.2.1

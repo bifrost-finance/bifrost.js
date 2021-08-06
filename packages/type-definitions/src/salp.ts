@@ -12,12 +12,14 @@ export default {
       trie_index: 'TrieIndex',
       status: 'FundStatus'
     },
-    RedeemStatus: 'BalanceOf',
     FundStatus: {
-      _enum: ['Ongoing', 'Retired', 'Success', 'Failed', 'Withdrew', 'End']
+      _enum: ['Ongoing', 'Retired', 'Success', 'Failed', 'RefundWithdrew', 'RedeemWithdrew', 'End']
     },
     ContributionStatus: {
-      _enum: ['Contributing', 'Contributed', 'Redeeming', 'Redeemed']
+      _enum: ['Idle', 'Refunded', 'Unlocked', 'Refunding', 'Contributing(BalanceOf)']
+    },
+    RedeemStatus: {
+      _enum: ['Idle', 'Redeeming(BalanceOf)']
     },
     CrowdloanContributeCall: {
       _enum: {

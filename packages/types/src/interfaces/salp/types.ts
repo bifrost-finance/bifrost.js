@@ -21,10 +21,11 @@ export interface Contribution extends Struct {
 
 /** @name ContributionStatus */
 export interface ContributionStatus extends Enum {
-  readonly isContributing: boolean;
-  readonly isContributed: boolean;
-  readonly isRedeeming: boolean;
-  readonly isRedeemed: boolean;
+  readonly isIdle: boolean;
+  readonly isRefunded: boolean;
+  readonly isUnlocked: boolean;
+  readonly isRefunding: boolean;
+  readonly isContributingBalanceOf: boolean;
 }
 
 /** @name CrowdloanContributeCall */
@@ -51,12 +52,16 @@ export interface FundStatus extends Enum {
   readonly isRetired: boolean;
   readonly isSuccess: boolean;
   readonly isFailed: boolean;
-  readonly isWithdrew: boolean;
+  readonly isRefundWithdrew: boolean;
+  readonly isRedeemWithdrew: boolean;
   readonly isEnd: boolean;
 }
 
 /** @name RedeemStatus */
-export interface RedeemStatus extends BalanceOf {}
+export interface RedeemStatus extends Enum {
+  readonly isIdle: boolean;
+  readonly isRedeemingBalanceOf: boolean;
+}
 
 /** @name TrieIndex */
 export interface TrieIndex extends u32 {}
