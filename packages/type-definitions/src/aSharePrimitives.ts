@@ -4,7 +4,8 @@ export default {
     TokenSymbol: {
       _enum: {
         ASG: 0,
-        AUSD: 2,
+        BNC: 1,
+        KUSD: 2,
         DOT: 3,
         KSM: 4,
         ETH: 5
@@ -12,12 +13,13 @@ export default {
     },
     CurrencyId: {
       _enum: {
-        Token: 'TokenSymbol',
-        VToken: 'TokenSymbol',
         Native: 'TokenSymbol',
+        VToken: 'TokenSymbol',
+        Token: 'TokenSymbol',
         Stable: 'TokenSymbol',
         VSToken: 'TokenSymbol',
-        VSBond: '(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)'
+        VSBond: '(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)',
+        LPToken: '(TokenSymbol, u8, TokenSymbol, u8)'
       }
     },
     CurrencyIdOf: 'CurrencyId',
