@@ -1,7 +1,7 @@
 export default {
   rpc: {},
   types: {
-    CurrencyIdOf: 'CurrencyId',
-    AmountOf: 'Balance',
+    Currency: 'CurrencyIdOf',
+    Amount: 'AmountOf',
   },
 };

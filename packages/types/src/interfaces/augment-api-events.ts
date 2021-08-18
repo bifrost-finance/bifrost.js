@@ -2,6 +2,7 @@
 /* eslint-disable */
 
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { Amount, Currency } from '@bifrost-finance/types/interfaces/currencies';
 import type { AccountId, Balance } from '@bifrost-finance/types/interfaces/runtime';
 import type { ApiTypes } from '@polkadot/api/types';
 

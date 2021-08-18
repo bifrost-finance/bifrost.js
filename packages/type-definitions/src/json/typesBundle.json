@@ -572,8 +572,8 @@
                                 "Fail": "Failed"
                             }
                         },
-                        "CurrencyIdOf": "CurrencyId",
-                        "AmountOf": "Balance",
+                        "Currency": "CurrencyIdOf",
+                        "Amount": "AmountOf",
                         "PalletBalanceOf": "Balance",
                         "NumberOrHex": {
                             "_enum": {
@@ -724,7 +724,9 @@
                                 "VSBond": "(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)"
                             }
                         },
+                        "CurrencyIdOf": "CurrencyId",
                         "TAssetBalance": "Balance",
+                        "AmountOf": "Balance",
                         "StorageVersion": "Releases",
                         "ShareWeight": "Balance",
                         "TransferOriginType": {
@@ -1321,8 +1323,8 @@
                                 "Fail": "Failed"
                             }
                         },
-                        "CurrencyIdOf": "CurrencyId",
-                        "AmountOf": "Balance",
+                        "Currency": "CurrencyIdOf",
+                        "Amount": "AmountOf",
                         "PalletBalanceOf": "Balance",
                         "NumberOrHex": {
                             "_enum": {
@@ -1473,7 +1475,9 @@
                                 "VSBond": "(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)"
                             }
                         },
+                        "CurrencyIdOf": "CurrencyId",
                         "TAssetBalance": "Balance",
+                        "AmountOf": "Balance",
                         "StorageVersion": "Releases",
                         "ShareWeight": "Balance",
                         "TransferOriginType": {

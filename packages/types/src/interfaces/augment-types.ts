@@ -4,6 +4,7 @@
 import type { BitVec, Bool, Bytes, Compact, Data, I128, I16, I256, I32, I64, I8, Json, Null, Option, Raw, StorageKey, Text, Type, U128, U16, U256, U32, U64, U8, USize, Vec, bool, i128, i16, i256, i32, i64, i8, u128, u16, u256, u32, u64, u8, usize } from '@polkadot/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TokenSymbol, TransferOriginType } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
+import type { Amount, Currency } from '@bifrost-finance/types/interfaces/currencies';
 import type { NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { AccountId, AccountId20, AccountId32, AccountIdOf, AccountIndex, Address, AssetId, Balance, BalanceOf, Block, BlockNumber, BlockNumberFor, BlockNumberOf, Call, CallHash, CallHashOf, ChangesTrieConfiguration, ChangesTrieSignal, CodecHash, Consensus, ConsensusEngineId, Digest, DigestItem, EncodedJustification, ExtrinsicsWeight, Fixed128, Fixed64, FixedI128, FixedI64, FixedU128, FixedU64, H1024, H128, H160, H2048, H256, H32, H512, H64, Hash, Header, HeaderPartial, I32F32, Index, IndicesLookupSource, Justification, Justifications, KeyTypeId, KeyValue, LockIdentifier, LookupSource, LookupTarget, ModuleId, Moment, MultiAddress, MultiSigner, OpaqueCall, OracleKey, OracleValue, Origin, OriginCaller, PalletId, PalletVersion, PalletsOrigin, Pays, PerU16, Perbill, Percent, Permill, Perquintill, Phantom, PhantomData, PreRuntime, Releases, RuntimeDbWeight, Seal, SealV0, SignedBlock, SignedBlockWithJustification, SignedBlockWithJustifications, Slot, StorageData, StorageProof, TransactionInfo, TransactionPriority, TransactionStorageProof, U32F32, ValidatorId, ValidatorIdOf, Weight, WeightMultiplier } from '@bifrost-finance/types/interfaces/runtime';
@@ -79,6 +80,7 @@ declare module '@polkadot/types/types/registry' {
   export interface InterfaceTypes {
     'Compact<AccountIndex>': Compact<AccountIndex>;
     'Compact<ActiveIndex>': Compact<ActiveIndex>;
+    'Compact<Amount>': Compact<Amount>;
     'Compact<AmountOf>': Compact<AmountOf>;
     'Compact<ApprovalFlag>': Compact<ApprovalFlag>;
     'Compact<AssetId>': Compact<AssetId>;
@@ -217,6 +219,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<Address>': Option<Address>;
     'Option<AliveContractInfo>': Option<AliveContractInfo>;
     'Option<AllowedSlots>': Option<AllowedSlots>;
+    'Option<Amount>': Option<Amount>;
     'Option<AmountOf>': Option<AmountOf>;
     'Option<AnySignature>': Option<AnySignature>;
     'Option<ApiId>': Option<ApiId>;
@@ -385,6 +388,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<CoreOccupied>': Option<CoreOccupied>;
     'Option<CreatedBlock>': Option<CreatedBlock>;
     'Option<CrowdloanContributeCall>': Option<CrowdloanContributeCall>;
+    'Option<Currency>': Option<Currency>;
     'Option<CurrencyId>': Option<CurrencyId>;
     'Option<CurrencyIdOf>': Option<CurrencyIdOf>;
     'Option<Data>': Option<Data>;
@@ -1186,6 +1190,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<Address>': Vec<Address>;
     'Vec<AliveContractInfo>': Vec<AliveContractInfo>;
     'Vec<AllowedSlots>': Vec<AllowedSlots>;
+    'Vec<Amount>': Vec<Amount>;
     'Vec<AmountOf>': Vec<AmountOf>;
     'Vec<AnySignature>': Vec<AnySignature>;
     'Vec<ApiId>': Vec<ApiId>;
@@ -1354,6 +1359,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<CoreOccupied>': Vec<CoreOccupied>;
     'Vec<CreatedBlock>': Vec<CreatedBlock>;
     'Vec<CrowdloanContributeCall>': Vec<CrowdloanContributeCall>;
+    'Vec<Currency>': Vec<Currency>;
     'Vec<CurrencyId>': Vec<CurrencyId>;
     'Vec<CurrencyIdOf>': Vec<CurrencyIdOf>;
     'Vec<Data>': Vec<Data>;
@@ -2155,6 +2161,7 @@ declare module '@polkadot/types/types/registry' {
     Address: Address;
     AliveContractInfo: AliveContractInfo;
     AllowedSlots: AllowedSlots;
+    Amount: Amount;
     AmountOf: AmountOf;
     AnySignature: AnySignature;
     ApiId: ApiId;
@@ -2323,6 +2330,7 @@ declare module '@polkadot/types/types/registry' {
     CoreOccupied: CoreOccupied;
     CreatedBlock: CreatedBlock;
     CrowdloanContributeCall: CrowdloanContributeCall;
+    Currency: Currency;
     CurrencyId: CurrencyId;
     CurrencyIdOf: CurrencyIdOf;
     Data: Data;
