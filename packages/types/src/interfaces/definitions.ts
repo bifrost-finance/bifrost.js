@@ -14,3 +14,4 @@ export { default as vtokenMint } from './vtokenMint/definitions';
 export { default as zenlinkProtocol } from './zenlinkProtocol/definitions';
 export { default as bancor } from './bancor/definitions';
 export { default as runtime } from './runtime/definitions';
+export { default as currencies } from './currencies/definitions';

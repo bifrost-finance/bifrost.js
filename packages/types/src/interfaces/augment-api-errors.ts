@@ -29,6 +29,10 @@ declare module '@polkadot/api/types/errors' {
        **/
       BalanceTooLow: AugmentedError<ApiType>;
       /**
+       * Beneficiary account must pre-exist
+       **/
+      DeadAccount: AugmentedError<ApiType>;
+      /**
        * Value too low to create account due to existential deposit
        **/
       ExistentialDeposit: AugmentedError<ApiType>;

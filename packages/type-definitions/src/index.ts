@@ -21,6 +21,7 @@ import vsbondAuction from './vsbondAuction';
 import vtokenMint from './vtokenMint';
 import zenlinkProtocol from './zenlinkProtocol';
 import runtime from './runtime';
+import currencies from "./currencies";
 
 import bifrostVersioned from './spec/bifrost';
 import asgardVersioned from './spec/asgard';
@@ -34,6 +35,7 @@ const bifrostDefs = {
   bridgeEos,
   bancor,
   bridgeIost,
+  currencies,
   flexibleFee,
   minterReward,
   salp,

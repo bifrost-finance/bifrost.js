@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Compact } from '@polkadot/types';
+import type { Compact, bool } from '@polkadot/types';
 import type { AnyNumber } from '@polkadot/types/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { Balance, BalanceOf, Call, LookupSource } from '@bifrost-finance/types/interfaces/runtime';
@@ -17,7 +17,7 @@ declare module '@polkadot/api/types/submittable' {
        * The dispatch origin for this call must be `Signed` by the
        * transactor.
        **/
-      transfer: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
+      transfer: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, amount: Compact<BalanceOf> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, Compact<BalanceOf>]>;
       /**
        * Transfer some native currency to another account.
        * 
@@ -30,7 +30,7 @@ declare module '@polkadot/api/types/submittable' {
        * 
        * The dispatch origin of this call must be _Root_.
        **/
-      updateBalance: AugmentedSubmittable<(who: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, amount: AmountOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, AmountOf]>;
+      updateBalance: AugmentedSubmittable<(who: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyIdOf | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, amount: AmountOf | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyIdOf, AmountOf]>;
       /**
        * Generic tx
        **/
@@ -38,19 +38,80 @@ declare module '@polkadot/api/types/submittable' {
     };
     tokens: {
       /**
-       * Transfer some balance to another account.
+       * Exactly as `transfer`, except the origin must be root and the source
+       * account may be specified.
+       * 
+       * The dispatch origin for this call must be _Root_.
+       * 
+       * - `source`: The sender of the transfer.
+       * - `dest`: The recipient of the transfer.
+       * - `currency_id`: currency type.
+       * - `amount`: free balance amount to tranfer.
+       **/
+      forceTransfer: AugmentedSubmittable<(source: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, LookupSource, CurrencyId, Compact<Balance>]>;
+      /**
+       * Set the balances of a given account.
+       * 
+       * This will alter `FreeBalance` and `ReservedBalance` in storage. it
+       * will also decrease the total issuance of the system
+       * (`TotalIssuance`). If the new free or reserved balance is below the
+       * existential deposit, it will reap the `AccountInfo`.
+       * 
+       * The dispatch origin for this call is `root`.
+       **/
+      setBalance: AugmentedSubmittable<(who: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, newFree: Compact<Balance> | AnyNumber | Uint8Array, newReserved: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyId, Compact<Balance>, Compact<Balance>]>;
+      /**
+       * Transfer some liquid free balance to another account.
+       * 
+       * `transfer` will set the `FreeBalance` of the sender and receiver.
+       * It will decrease the total issuance of the system by the
+       * `TransferFee`. If the sender's account is below the existential
+       * deposit as a result of the transfer, the account will be reaped.
        * 
        * The dispatch origin for this call must be `Signed` by the
        * transactor.
+       * 
+       * - `dest`: The recipient of the transfer.
+       * - `currency_id`: currency type.
+       * - `amount`: free balance amount to tranfer.
        **/
-      transfer: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyId, Compact<Balance>]>;
+      transfer: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyId, Compact<Balance>]>;
       /**
        * Transfer all remaining balance to the given account.
        * 
+       * NOTE: This function only attempts to transfer _transferable_
+       * balances. This means that any locked, reserved, or existential
+       * deposits (when `keep_alive` is `true`), will not be transferred by
+       * this function. To ensure that this function results in a killed
+       * account, you might need to prepare the account by removing any
+       * reference counters, storage deposits, etc...
+       * 
        * The dispatch origin for this call must be `Signed` by the
        * transactor.
+       * 
+       * - `dest`: The recipient of the transfer.
+       * - `currency_id`: currency type.
+       * - `keep_alive`: A boolean to determine if the `transfer_all`
+       * operation should send all of the funds the account has, causing
+       * the sender account to be killed (false), or transfer everything
+       * except at least the existential deposit, which will guarantee to
+       * keep the sender account alive (true).
        **/
-      transferAll: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyId]>;
+      transferAll: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, keepAlive: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyId, bool]>;
+      /**
+       * Same as the [`transfer`] call, but with a check that the transfer
+       * will not kill the origin account.
+       * 
+       * 99% of the time you want [`transfer`] instead.
+       * 
+       * The dispatch origin for this call must be `Signed` by the
+       * transactor.
+       * 
+       * - `dest`: The recipient of the transfer.
+       * - `currency_id`: currency type.
+       * - `amount`: free balance amount to tranfer.
+       **/
+      transferKeepAlive: AugmentedSubmittable<(dest: LookupSource | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, amount: Compact<Balance> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [LookupSource, CurrencyId, Compact<Balance>]>;
       /**
        * Generic tx
        **/

@@ -13,3 +13,4 @@ export * from './vtokenMint/types';
 export * from './zenlinkProtocol/types';
 export * from './bancor/types';
 export * from './runtime/types';
+export * from './currencies/types';
