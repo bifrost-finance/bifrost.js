@@ -6,12 +6,9 @@ const versioned: OverrideVersionedType[] = [
     types: {
       TokenSymbol: {
         _enum: {
-          ASG: 0,
           BNC: 1,
           KUSD: 2,
-          DOT: 3,
           KSM: 4,
-          ETH: 5
         }
       },
       CurrencyId: {
