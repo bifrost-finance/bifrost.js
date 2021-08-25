@@ -8,7 +8,7 @@ import type { Amount, Currency } from '@bifrost-finance/types/interfaces/currenc
 import type { NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { AccountId, AccountId20, AccountId32, AccountIdOf, AccountIndex, Address, AssetId, Balance, BalanceOf, Block, BlockNumber, BlockNumberFor, BlockNumberOf, Call, CallHash, CallHashOf, ChangesTrieConfiguration, ChangesTrieSignal, CodecHash, Consensus, ConsensusEngineId, Digest, DigestItem, EncodedJustification, ExtrinsicsWeight, Fixed128, Fixed64, FixedI128, FixedI64, FixedU128, FixedU64, H1024, H128, H160, H2048, H256, H32, H512, H64, Hash, Header, HeaderPartial, I32F32, Index, IndicesLookupSource, Justification, Justifications, KeyTypeId, KeyValue, LockIdentifier, LookupSource, LookupTarget, ModuleId, Moment, MultiAddress, MultiSigner, OpaqueCall, OracleKey, OracleValue, Origin, OriginCaller, PalletId, PalletVersion, PalletsOrigin, Pays, PerU16, Perbill, Percent, Permill, Perquintill, Phantom, PhantomData, PreRuntime, Releases, RuntimeDbWeight, Seal, SealV0, SignedBlock, SignedBlockWithJustification, SignedBlockWithJustifications, Slot, StorageData, StorageProof, TransactionInfo, TransactionPriority, TransactionStorageProof, U32F32, ValidatorId, ValidatorIdOf, Weight, WeightMultiplier } from '@bifrost-finance/types/interfaces/runtime';
-import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, RedeemStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
+import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, ParachainDerivedProxyAccountType, ParachainTransactProxyType, RedeemStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { BifrostVestingInfo, MaxLocksOf } from '@bifrost-finance/types/interfaces/vesting';
 import type { OrderId, OrderInfo, OrderState, U64F64 } from '@bifrost-finance/types/interfaces/vsbondAuction';
@@ -756,10 +756,12 @@ declare module '@polkadot/types/types/registry' {
     'Option<PalletStorageMetadataLatest>': Option<PalletStorageMetadataLatest>;
     'Option<PalletStorageMetadataV14>': Option<PalletStorageMetadataV14>;
     'Option<PalletVersion>': Option<PalletVersion>;
+    'Option<ParachainDerivedProxyAccountType>': Option<ParachainDerivedProxyAccountType>;
     'Option<ParachainDispatchOrigin>': Option<ParachainDispatchOrigin>;
     'Option<ParachainInherentData>': Option<ParachainInherentData>;
     'Option<ParachainProposal>': Option<ParachainProposal>;
     'Option<ParachainsInherentData>': Option<ParachainsInherentData>;
+    'Option<ParachainTransactProxyType>': Option<ParachainTransactProxyType>;
     'Option<ParaGenesisArgs>': Option<ParaGenesisArgs>;
     'Option<ParaId>': Option<ParaId>;
     'Option<ParaInfo>': Option<ParaInfo>;
@@ -1727,10 +1729,12 @@ declare module '@polkadot/types/types/registry' {
     'Vec<PalletStorageMetadataLatest>': Vec<PalletStorageMetadataLatest>;
     'Vec<PalletStorageMetadataV14>': Vec<PalletStorageMetadataV14>;
     'Vec<PalletVersion>': Vec<PalletVersion>;
+    'Vec<ParachainDerivedProxyAccountType>': Vec<ParachainDerivedProxyAccountType>;
     'Vec<ParachainDispatchOrigin>': Vec<ParachainDispatchOrigin>;
     'Vec<ParachainInherentData>': Vec<ParachainInherentData>;
     'Vec<ParachainProposal>': Vec<ParachainProposal>;
     'Vec<ParachainsInherentData>': Vec<ParachainsInherentData>;
+    'Vec<ParachainTransactProxyType>': Vec<ParachainTransactProxyType>;
     'Vec<ParaGenesisArgs>': Vec<ParaGenesisArgs>;
     'Vec<ParaId>': Vec<ParaId>;
     'Vec<ParaInfo>': Vec<ParaInfo>;
@@ -2698,10 +2702,12 @@ declare module '@polkadot/types/types/registry' {
     PalletStorageMetadataLatest: PalletStorageMetadataLatest;
     PalletStorageMetadataV14: PalletStorageMetadataV14;
     PalletVersion: PalletVersion;
+    ParachainDerivedProxyAccountType: ParachainDerivedProxyAccountType;
     ParachainDispatchOrigin: ParachainDispatchOrigin;
     ParachainInherentData: ParachainInherentData;
     ParachainProposal: ParachainProposal;
     ParachainsInherentData: ParachainsInherentData;
+    ParachainTransactProxyType: ParachainTransactProxyType;
     ParaGenesisArgs: ParaGenesisArgs;
     ParaId: ParaId;
     ParaInfo: ParaInfo;

@@ -57,6 +57,18 @@ export interface FundStatus extends Enum {
   readonly isEnd: boolean;
 }
 
+/** @name ParachainDerivedProxyAccountType */
+export interface ParachainDerivedProxyAccountType extends Enum {
+  readonly isSalp: boolean;
+  readonly isStaking: boolean;
+}
+
+/** @name ParachainTransactProxyType */
+export interface ParachainTransactProxyType extends Enum {
+  readonly isPrimary: boolean;
+  readonly isDerived: boolean;
+}
+
 /** @name RedeemStatus */
 export interface RedeemStatus extends Enum {
   readonly isIdle: boolean;

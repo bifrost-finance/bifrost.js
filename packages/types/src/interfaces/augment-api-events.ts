@@ -4,6 +4,7 @@
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { Amount, Currency } from '@bifrost-finance/types/interfaces/currencies';
 import type { AccountId, Balance } from '@bifrost-finance/types/interfaces/runtime';
+import type { MultiAsset, MultiLocation } from '@polkadot/types/interfaces/xcm';
 import type { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/events' {
@@ -60,6 +61,20 @@ declare module '@polkadot/api/types/events' {
        * \[currency_id, who, value\]
        **/
       Unreserved: AugmentedEvent<ApiType, [CurrencyId, AccountId, Balance]>;
+      /**
+       * Generic event
+       **/
+      [key: string]: AugmentedEvent<ApiType>;
+    };
+    xTokens: {
+      /**
+       * Transferred. \[sender, currency_id, amount, dest\]
+       **/
+      Transferred: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance, MultiLocation]>;
+      /**
+       * Transferred `MultiAsset`. \[sender, asset, dest\]
+       **/
+      TransferredMultiAsset: AugmentedEvent<ApiType, [AccountId, MultiAsset, MultiLocation]>;
       /**
        * Generic event
        **/

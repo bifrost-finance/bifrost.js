@@ -305,11 +305,6 @@
                     }
                 }
             },
-            "instances": {
-                "council": [
-                    "generalCouncil"
-                ]
-            },
             "types": [
                 {
                     "minmax": [
@@ -628,6 +623,18 @@
                         "ContributeCall": {
                             "_enum": {
                                 "Contribute": "Contribution"
+                            }
+                        },
+                        "ParachainTransactProxyType": {
+                            "_enum": {
+                                "Primary": 0,
+                                "Derived": 1
+                            }
+                        },
+                        "ParachainDerivedProxyAccountType": {
+                            "_enum": {
+                                "Salp": 0,
+                                "Staking": 1
                             }
                         },
                         "Contribution": {
@@ -1053,11 +1060,6 @@
                     }
                 }
             },
-            "instances": {
-                "council": [
-                    "generalCouncil"
-                ]
-            },
             "types": [
                 {
                     "minmax": [
@@ -1376,6 +1378,18 @@
                         "ContributeCall": {
                             "_enum": {
                                 "Contribute": "Contribution"
+                            }
+                        },
+                        "ParachainTransactProxyType": {
+                            "_enum": {
+                                "Primary": 0,
+                                "Derived": 1
+                            }
+                        },
+                        "ParachainDerivedProxyAccountType": {
+                            "_enum": {
+                                "Salp": 0,
+                                "Staking": 1
                             }
                         },
                         "Contribution": {

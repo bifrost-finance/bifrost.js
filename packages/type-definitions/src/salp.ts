@@ -31,6 +31,18 @@ export default {
         Contribute: 'Contribution'
       }
     },
+    ParachainTransactProxyType: {
+      _enum: {
+        Primary: 0,
+        Derived: 1
+      }
+    },
+    ParachainDerivedProxyAccountType: {
+      _enum: {
+        Salp: 0,
+        Staking: 1
+      }
+    },
     Contribution: {
       index: 'ParaId',
       value: 'BalanceOf',
