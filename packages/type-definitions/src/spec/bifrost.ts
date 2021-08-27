@@ -8,7 +8,7 @@ const versioned: OverrideVersionedType[] = [
         _enum: {
           BNC: 1,
           KUSD: 2,
-          KSM: 4,
+          KSM: 4
         }
       },
       CurrencyId: {
@@ -18,7 +18,7 @@ const versioned: OverrideVersionedType[] = [
           Token: 'TokenSymbol',
           Stable: 'TokenSymbol',
           VSToken: 'TokenSymbol',
-          VSBond: '(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)',
+          VSBond: '(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)'
         }
       },
       CurrencyIdOf: 'CurrencyId',

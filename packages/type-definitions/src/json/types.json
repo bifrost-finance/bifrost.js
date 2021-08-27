@@ -58,9 +58,18 @@
     },
     "VestingScheduleOf": "OrmlVestingSchedule",
     "PoolInfo": {
-        "totalShares": "Compact<Share>",
-        "totalRewards": "Compact<Balance>",
-        "totalWithdrawnRewards": "Compact<Balance>"
+        "pool_id": "PoolId",
+        "creator": "AccountId",
+        "trading_pair": "(CurrencyId, CurrencyId)",
+        "min_deposit_to_start": "Balance",
+        "duration": "BlockNumber",
+        "after_block_to_start": "BlockNumber",
+        "update_b": "BlockNumber",
+        "deposit": "Balance",
+        "rewards": "(CurrencyId, RewardData)",
+        "state": "PoolState",
+        "type": "PoolType",
+        "block_startup": "BlockNumber"
     },
     "Share": "u128",
     "OracleValue": "Price",
@@ -342,7 +351,7 @@
         "account_id": "AccountId",
         "record_amount": "Balance"
     },
-    "PoolId": "u32",
+    "PoolId": "u128",
     "SwapFee": "u128",
     "PoolDetails": {
         "owner": "AccountId",
@@ -429,6 +438,32 @@
             "FromRelayChain": 1,
             "FromSiblingParaChain": 2
         }
+    },
+    "PoolType": {
+        "_enum": [
+            "Mining",
+            "Farming"
+        ]
+    },
+    "PoolState": {
+        "_enum": [
+            "UnderAudit",
+            "Approved",
+            "Ongoing",
+            "Retired",
+            "Dead"
+        ]
+    },
+    "DepositData": {
+        "deposit": "Balance",
+        "gain_avgs": "(CurrencyId, FixedU128)",
+        "update_b": "BlockNumber"
+    },
+    "RewardData": {
+        "total": "BalanceOf",
+        "per_block": "BalanceOf",
+        "claimed": "BalanceOf",
+        "gain_avg": "FixedU128"
     },
     "Keys": "SessionKeys1"
 }

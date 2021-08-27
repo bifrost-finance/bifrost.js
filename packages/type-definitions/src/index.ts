@@ -21,7 +21,8 @@ import vsbondAuction from './vsbondAuction';
 import vtokenMint from './vtokenMint';
 import zenlinkProtocol from './zenlinkProtocol';
 import runtime from './runtime';
-import currencies from "./currencies";
+import currencies from './currencies';
+import liquidityMining from './liquidityMining';
 
 import bifrostVersioned from './spec/bifrost';
 import asgardVersioned from './spec/asgard';
@@ -47,7 +48,8 @@ const bifrostDefs = {
   vsbondAuction,
   vtokenMint,
   zenlinkProtocol,
-  aSharePrimitives
+  aSharePrimitives,
+  liquidityMining
 };
 
 export const types = {

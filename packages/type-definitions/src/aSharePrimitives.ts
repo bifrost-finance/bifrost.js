@@ -18,7 +18,7 @@ export default {
         Token: 'TokenSymbol',
         Stable: 'TokenSymbol',
         VSToken: 'TokenSymbol',
-        VSBond: '(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)',
+        VSBond: '(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)'
       }
     },
     CurrencyIdOf: 'CurrencyId',

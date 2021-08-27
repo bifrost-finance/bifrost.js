@@ -6,6 +6,7 @@ import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, T
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { Amount, Currency } from '@bifrost-finance/types/interfaces/currencies';
 import type { NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
+import type { DepositData, PoolId, PoolState, PoolType, RewardData } from '@bifrost-finance/types/interfaces/liquidityMining';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { AccountId, AccountId20, AccountId32, AccountIdOf, AccountIndex, Address, AssetId, Balance, BalanceOf, Block, BlockNumber, BlockNumberFor, BlockNumberOf, Call, CallHash, CallHashOf, ChangesTrieConfiguration, ChangesTrieSignal, CodecHash, Consensus, ConsensusEngineId, Digest, DigestItem, EncodedJustification, ExtrinsicsWeight, Fixed128, Fixed64, FixedI128, FixedI64, FixedU128, FixedU64, H1024, H128, H160, H2048, H256, H32, H512, H64, Hash, Header, HeaderPartial, I32F32, Index, IndicesLookupSource, Justification, Justifications, KeyTypeId, KeyValue, LockIdentifier, LookupSource, LookupTarget, ModuleId, Moment, MultiAddress, MultiSigner, OpaqueCall, OracleKey, OracleValue, Origin, OriginCaller, PalletId, PalletVersion, PalletsOrigin, Pays, PerU16, Perbill, Percent, Permill, Perquintill, Phantom, PhantomData, PreRuntime, Releases, RuntimeDbWeight, Seal, SealV0, SignedBlock, SignedBlockWithJustification, SignedBlockWithJustifications, Slot, StorageData, StorageProof, TransactionInfo, TransactionPriority, TransactionStorageProof, U32F32, ValidatorId, ValidatorIdOf, Weight, WeightMultiplier } from '@bifrost-finance/types/interfaces/runtime';
 import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, ParachainDerivedProxyAccountType, ParachainTransactProxyType, RedeemStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
@@ -137,6 +138,7 @@ declare module '@polkadot/types/types/registry' {
     'Compact<Perquintill>': Compact<Perquintill>;
     'Compact<PerU16>': Compact<PerU16>;
     'Compact<Points>': Compact<Points>;
+    'Compact<PoolId>': Compact<PoolId>;
     'Compact<Price>': Compact<Price>;
     'Compact<Priority>': Compact<Priority>;
     'Compact<PropIndex>': Compact<PropIndex>;
@@ -403,6 +405,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<DeletedContract>': Option<DeletedContract>;
     'Option<DepositBalance>': Option<DepositBalance>;
     'Option<DepositBalanceOf>': Option<DepositBalanceOf>;
+    'Option<DepositData>': Option<DepositData>;
     'Option<DestroyWitness>': Option<DestroyWitness>;
     'Option<Digest>': Option<Digest>;
     'Option<DigestItem>': Option<DigestItem>;
@@ -800,7 +803,10 @@ declare module '@polkadot/types/types/registry' {
     'Option<PhragmenScore>': Option<PhragmenScore>;
     'Option<PluralityJunction>': Option<PluralityJunction>;
     'Option<Points>': Option<Points>;
+    'Option<PoolId>': Option<PoolId>;
     'Option<PoolInfo>': Option<PoolInfo>;
+    'Option<PoolState>': Option<PoolState>;
+    'Option<PoolType>': Option<PoolType>;
     'Option<PortableRegistry>': Option<PortableRegistry>;
     'Option<PortableType>': Option<PortableType>;
     'Option<Precommits>': Option<Precommits>;
@@ -871,6 +877,7 @@ declare module '@polkadot/types/types/registry' {
     'Option<ReserveData>': Option<ReserveData>;
     'Option<ReserveIdentifier>': Option<ReserveIdentifier>;
     'Option<Retriable>': Option<Retriable>;
+    'Option<RewardData>': Option<RewardData>;
     'Option<RewardDestination>': Option<RewardDestination>;
     'Option<RewardPoint>': Option<RewardPoint>;
     'Option<RewardRecord>': Option<RewardRecord>;
@@ -1376,6 +1383,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<DeletedContract>': Vec<DeletedContract>;
     'Vec<DepositBalance>': Vec<DepositBalance>;
     'Vec<DepositBalanceOf>': Vec<DepositBalanceOf>;
+    'Vec<DepositData>': Vec<DepositData>;
     'Vec<DestroyWitness>': Vec<DestroyWitness>;
     'Vec<Digest>': Vec<Digest>;
     'Vec<DigestItem>': Vec<DigestItem>;
@@ -1773,7 +1781,10 @@ declare module '@polkadot/types/types/registry' {
     'Vec<PhragmenScore>': Vec<PhragmenScore>;
     'Vec<PluralityJunction>': Vec<PluralityJunction>;
     'Vec<Points>': Vec<Points>;
+    'Vec<PoolId>': Vec<PoolId>;
     'Vec<PoolInfo>': Vec<PoolInfo>;
+    'Vec<PoolState>': Vec<PoolState>;
+    'Vec<PoolType>': Vec<PoolType>;
     'Vec<PortableRegistry>': Vec<PortableRegistry>;
     'Vec<PortableType>': Vec<PortableType>;
     'Vec<Precommits>': Vec<Precommits>;
@@ -1844,6 +1855,7 @@ declare module '@polkadot/types/types/registry' {
     'Vec<ReserveData>': Vec<ReserveData>;
     'Vec<ReserveIdentifier>': Vec<ReserveIdentifier>;
     'Vec<Retriable>': Vec<Retriable>;
+    'Vec<RewardData>': Vec<RewardData>;
     'Vec<RewardDestination>': Vec<RewardDestination>;
     'Vec<RewardPoint>': Vec<RewardPoint>;
     'Vec<RewardRecord>': Vec<RewardRecord>;
@@ -2349,6 +2361,7 @@ declare module '@polkadot/types/types/registry' {
     DeletedContract: DeletedContract;
     DepositBalance: DepositBalance;
     DepositBalanceOf: DepositBalanceOf;
+    DepositData: DepositData;
     DestroyWitness: DestroyWitness;
     Digest: Digest;
     DigestItem: DigestItem;
@@ -2746,7 +2759,10 @@ declare module '@polkadot/types/types/registry' {
     PhragmenScore: PhragmenScore;
     PluralityJunction: PluralityJunction;
     Points: Points;
+    PoolId: PoolId;
     PoolInfo: PoolInfo;
+    PoolState: PoolState;
+    PoolType: PoolType;
     PortableRegistry: PortableRegistry;
     PortableType: PortableType;
     Precommits: Precommits;
@@ -2817,6 +2833,7 @@ declare module '@polkadot/types/types/registry' {
     ReserveData: ReserveData;
     ReserveIdentifier: ReserveIdentifier;
     Retriable: Retriable;
+    RewardData: RewardData;
     RewardDestination: RewardDestination;
     RewardPoint: RewardPoint;
     RewardRecord: RewardRecord;

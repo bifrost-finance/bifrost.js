@@ -3,6 +3,6 @@ export default {
   types: {
     OracleKey: 'CurrencyId',
     OracleValue: 'Price',
-    BlockNumberFor: 'BlockNumber',
-  },
+    BlockNumberFor: 'BlockNumber'
+  }
 };

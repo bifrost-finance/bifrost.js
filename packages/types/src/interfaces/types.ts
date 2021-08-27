@@ -14,3 +14,4 @@ export * from './zenlinkProtocol/types';
 export * from './bancor/types';
 export * from './runtime/types';
 export * from './currencies/types';
+export * from './liquidityMining/types';
