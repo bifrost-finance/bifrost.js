@@ -37,6 +37,12 @@ export default {
         Derived: 1
       }
     },
+    ParachainTransactType: {
+      _enum: {
+        Xcm: 0,
+        Proxy: 1
+      }
+    },
     ParachainDerivedProxyAccountType: {
       _enum: {
         Salp: 0,

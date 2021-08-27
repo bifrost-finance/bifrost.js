@@ -69,6 +69,12 @@ export interface ParachainTransactProxyType extends Enum {
   readonly isDerived: boolean;
 }
 
+/** @name ParachainTransactType */
+export interface ParachainTransactType extends Enum {
+  readonly isXcm: boolean;
+  readonly isProxy: boolean;
+}
+
 /** @name RedeemStatus */
 export interface RedeemStatus extends Enum {
   readonly isIdle: boolean;

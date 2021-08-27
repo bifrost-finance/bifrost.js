@@ -29,6 +29,10 @@ declare module '@polkadot/api/types/errors' {
        **/
       BalanceTooLow: AugmentedError<ApiType>;
       /**
+       * Beneficiary account must pre-exist
+       **/
+      DeadAccount: AugmentedError<ApiType>;
+      /**
        * Value too low to create account due to existential deposit
        **/
       ExistentialDeposit: AugmentedError<ApiType>;
@@ -44,6 +48,36 @@ declare module '@polkadot/api/types/errors' {
        * Failed because the maximum locks was exceeded
        **/
       MaxLocksExceeded: AugmentedError<ApiType>;
+      /**
+       * Generic error
+       **/
+      [key: string]: AugmentedError<ApiType>;
+    };
+    xTokens: {
+      /**
+       * Asset has no reserve location.
+       **/
+      AssetHasNoReserve: AugmentedError<ApiType>;
+      /**
+       * Invalid transfer destination.
+       **/
+      InvalidDest: AugmentedError<ApiType>;
+      /**
+       * Not cross-chain transfer.
+       **/
+      NotCrossChainTransfer: AugmentedError<ApiType>;
+      /**
+       * Currency is not cross-chain transferable.
+       **/
+      NotCrossChainTransferableCurrency: AugmentedError<ApiType>;
+      /**
+       * The message's weight could not be determined.
+       **/
+      UnweighableMessage: AugmentedError<ApiType>;
+      /**
+       * XCM execution failed.
+       **/
+      XcmExecutionFailed: AugmentedError<ApiType>;
       /**
        * Generic error
        **/
