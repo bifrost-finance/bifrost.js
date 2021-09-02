@@ -2,9 +2,10 @@
 /* eslint-disable */
 
 import type { Enum, Option, Struct, u32 } from '@polkadot/types';
-import type { AccountId, AccountIdOf, Balance, BalanceOf } from '@bifrost-finance/types/interfaces/runtime';
+import type { AccountIdOf, Balance, BalanceOf } from '@bifrost-finance/types/interfaces/runtime';
 import type { MultiSignature } from '@polkadot/types/interfaces/extrinsics';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
+import type { SessionKeys1 } from '@polkadot/types/interfaces/session';
 
 /** @name ContributeCall */
 export interface ContributeCall extends Enum {
@@ -25,7 +26,6 @@ export interface ContributionStatus extends Enum {
   readonly isRefunded: boolean;
   readonly isUnlocked: boolean;
   readonly isRefunding: boolean;
-  readonly isContributingBalanceOf: boolean;
 }
 
 /** @name CrowdloanContributeCall */
@@ -36,8 +36,6 @@ export interface CrowdloanContributeCall extends Enum {
 
 /** @name FundInfo */
 export interface FundInfo extends Struct {
-  readonly depositor: AccountId;
-  readonly deposit: Balance;
   readonly raised: Balance;
   readonly cap: Balance;
   readonly first_slot: LeasePeriod;
@@ -56,6 +54,9 @@ export interface FundStatus extends Enum {
   readonly isRedeemWithdrew: boolean;
   readonly isEnd: boolean;
 }
+
+/** @name Keys */
+export interface Keys extends SessionKeys1 {}
 
 /** @name ParachainDerivedProxyAccountType */
 export interface ParachainDerivedProxyAccountType extends Enum {
@@ -76,10 +77,7 @@ export interface ParachainTransactType extends Enum {
 }
 
 /** @name RedeemStatus */
-export interface RedeemStatus extends Enum {
-  readonly isIdle: boolean;
-  readonly isRedeemingBalanceOf: boolean;
-}
+export interface RedeemStatus extends BalanceOf {}
 
 /** @name TrieIndex */
 export interface TrieIndex extends u32 {}

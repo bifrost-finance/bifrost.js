@@ -143,6 +143,7 @@ declare module '@polkadot/types/types/registry' {
     'Compact<Priority>': Compact<Priority>;
     'Compact<PropIndex>': Compact<PropIndex>;
     'Compact<ProposalIndex>': Compact<ProposalIndex>;
+    'Compact<RedeemStatus>': Compact<RedeemStatus>;
     'Compact<RefCount>': Compact<RefCount>;
     'Compact<RefCountTo259>': Compact<RefCountTo259>;
     'Compact<ReferendumIndex>': Compact<ReferendumIndex>;
