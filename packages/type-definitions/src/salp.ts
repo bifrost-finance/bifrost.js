@@ -1,5 +1,20 @@
 export default {
-  rpc: {},
+  rpc: {
+    getContribution: {
+      description: 'salp getContribution',
+      params: [
+        {
+          name: 'index',
+          type: 'ParaId',
+        },
+        {
+          name:"who",
+          type:"AccountIdOf"
+        }
+      ],
+      type: 'Balance'
+    },
+  },
   types: {
     TrieIndex: "u32",
     FundInfo: {

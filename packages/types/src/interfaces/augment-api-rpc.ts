@@ -5,7 +5,7 @@ import type { Bytes, HashMap, Json, Metadata, Null, Option, StorageKey, Text, U2
 import type { AnyNumber, Codec, IExtrinsic, ITuple, Observable } from '@polkadot/types/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { NumberOrHex } from '@bifrost-finance/types/interfaces/flexibleFee';
-import type { AccountId, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@bifrost-finance/types/interfaces/runtime';
+import type { AccountId, AccountIdOf, Balance, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@bifrost-finance/types/interfaces/runtime';
 import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { RpcDataProviderId, TimestampedValue } from '@open-web3/orml-types/interfaces/oracle';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -21,6 +21,7 @@ import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
 import type { EncodedFinalityProofs, JustificationNotification, ReportedRoundStates } from '@polkadot/types/interfaces/grandpa';
 import type { MmrLeafProof } from '@polkadot/types/interfaces/mmr';
 import type { StorageKind } from '@polkadot/types/interfaces/offchain';
+import type { ParaId } from '@polkadot/types/interfaces/parachains';
 import type { FeeDetails, RuntimeDispatchInfo } from '@polkadot/types/interfaces/payment';
 import type { RpcMethods } from '@polkadot/types/interfaces/rpc';
 import type { ReadProof, RuntimeVersion, TraceBlockResponse } from '@polkadot/types/interfaces/state';
@@ -395,6 +396,12 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Retrieves the list of RPC methods that are exposed by the node
        **/
       methods: AugmentedRpc<() => Observable<RpcMethods>>;
+    };
+    salp: {
+      /**
+       * salp getContribution
+       **/
+      getContribution: AugmentedRpc<(index: ParaId | AnyNumber | Uint8Array, who: AccountIdOf | string | Uint8Array) => Observable<Balance>>;
     };
     state: {
       /**

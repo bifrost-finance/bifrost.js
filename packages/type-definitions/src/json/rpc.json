@@ -71,6 +71,26 @@
             "section": "flexibleFee"
         }
     },
+    "salp": {
+        "getContribution": {
+            "description": "salp getContribution",
+            "params": [
+                {
+                    "name": "index",
+                    "type": "ParaId"
+                },
+                {
+                    "name": "who",
+                    "type": "AccountIdOf"
+                }
+            ],
+            "type": "Balance",
+            "isSubscription": false,
+            "jsonrpc": "salp_getContribution",
+            "method": "getContribution",
+            "section": "salp"
+        }
+    },
     "vtokenMint": {
         "getVtokenMintRate": {
             "description": "Get current vtoken mint rate.",
