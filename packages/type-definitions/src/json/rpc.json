@@ -84,7 +84,7 @@
                     "type": "AccountIdOf"
                 }
             ],
-            "type": "Balance",
+            "type": "NumberOrHex",
             "isSubscription": false,
             "jsonrpc": "salp_getContribution",
             "method": "getContribution",
