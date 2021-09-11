@@ -12,7 +12,7 @@ export default {
           type:"AccountIdOf"
         }
       ],
-      type: 'NumberOrHex'
+      type: 'Balance'
     },
   },
   types: {

@@ -10,8 +10,8 @@
     "packages/*"
   ],
   "resolutions": {
-    "@polkadot/api": "^5.2.1",
-    "@polkadot/types": "^5.2.1"
+    "@polkadot/api": "^5.8.3",
+    "@polkadot/types": "^5.8.3"
   },
   "scripts": {
     "build": "yarn build:interfaces && polkadot-dev-build-ts",
