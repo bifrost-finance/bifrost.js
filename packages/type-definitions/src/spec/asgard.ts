@@ -4,6 +4,7 @@ const versioned: OverrideVersionedType[] = [
   {
     minmax: [0, undefined],
     types: {
+      MultiLocation: 'MultiLocationV0',
       TokenSymbol: {
         _enum: {
           ASG: 0,

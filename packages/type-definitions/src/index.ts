@@ -23,6 +23,7 @@ import zenlinkProtocol from './zenlinkProtocol';
 import runtime from './runtime';
 import currencies from './currencies';
 import liquidityMining from './liquidityMining';
+import xTokens from './xTokens';
 
 import bifrostVersioned from './spec/bifrost';
 import asgardVersioned from './spec/asgard';
@@ -49,7 +50,8 @@ const bifrostDefs = {
   vtokenMint,
   zenlinkProtocol,
   aSharePrimitives,
-  liquidityMining
+  liquidityMining,
+  xTokens
 };
 
 export const types = {

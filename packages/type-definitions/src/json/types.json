@@ -463,5 +463,6 @@
         "per_block": "BalanceOf",
         "claimed": "BalanceOf",
         "gain_avg": "FixedU128"
-    }
+    },
+    "MultiLocation": "MultiLocationV0"
 }
