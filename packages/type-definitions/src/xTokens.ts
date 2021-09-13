@@ -1,6 +1,6 @@
 export default {
   rpc: {},
   types: {
-    MultiLocation: 'MultiLocationV0',
+    MultiLocation: 'MultiLocationV0'
   }
 };

@@ -5,11 +5,11 @@ import type { BitVec, Bool, Bytes, Data, I128, I16, I256, I32, I64, I8, Json, Nu
 import type { AmountOf, CurrencyId, CurrencyIdOf, ShareWeight, StorageVersion, TokenSymbol, TransferOriginType } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
 import type { Amount, Currency } from '@bifrost-finance/types/interfaces/currencies';
-import type { NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
+import type { ExtraFeeName, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { DepositData, PoolId, PoolState, PoolType, RewardData } from '@bifrost-finance/types/interfaces/liquidityMining';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { AccountId, AccountId20, AccountId32, AccountIdOf, AccountIndex, Address, AssetId, Balance, BalanceOf, Block, BlockNumber, BlockNumberFor, BlockNumberOf, Call, CallHash, CallHashOf, ChangesTrieConfiguration, ChangesTrieSignal, CodecHash, Consensus, ConsensusEngineId, Digest, DigestItem, EncodedJustification, ExtrinsicsWeight, Fixed128, Fixed64, FixedI128, FixedI64, FixedU128, FixedU64, H1024, H128, H160, H2048, H256, H32, H512, H64, Hash, Header, HeaderPartial, I32F32, Index, IndicesLookupSource, Justification, Justifications, KeyTypeId, KeyValue, LockIdentifier, LookupSource, LookupTarget, ModuleId, Moment, MultiAddress, MultiSigner, OpaqueCall, OracleKey, OracleValue, Origin, OriginCaller, PalletId, PalletVersion, PalletsOrigin, Pays, PerU16, Perbill, Percent, Permill, Perquintill, Phantom, PhantomData, PreRuntime, Releases, RuntimeDbWeight, Seal, SealV0, SignedBlock, SignedBlockWithJustification, SignedBlockWithJustifications, Slot, StorageData, StorageProof, TransactionInfo, TransactionPriority, TransactionStorageProof, U32F32, ValidatorId, ValidatorIdOf, Weight, WeightMultiplier } from '@bifrost-finance/types/interfaces/runtime';
-import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, ParachainDerivedProxyAccountType, ParachainTransactProxyType, ParachainTransactType, RedeemStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
+import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, ParachainDerivedProxyAccountType, ParachainTransactProxyType, ParachainTransactType, RedeemStatus, RpcContributionStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { BifrostVestingInfo, MaxLocksOf } from '@bifrost-finance/types/interfaces/vesting';
 import type { OrderId, OrderInfo, OrderState, U64F64 } from '@bifrost-finance/types/interfaces/vsbondAuction';
@@ -395,6 +395,7 @@ declare module '@polkadot/types/types/registry' {
     ExplicitDisputeStatement: ExplicitDisputeStatement;
     Exposure: Exposure;
     ExtendedBalance: ExtendedBalance;
+    ExtraFeeName: ExtraFeeName;
     Extrinsic: Extrinsic;
     ExtrinsicEra: ExtrinsicEra;
     ExtrinsicMetadataLatest: ExtrinsicMetadataLatest;
@@ -819,6 +820,7 @@ declare module '@polkadot/types/types/registry' {
     RewardRecord: RewardRecord;
     RoundSnapshot: RoundSnapshot;
     RoundState: RoundState;
+    RpcContributionStatus: RpcContributionStatus;
     RpcDataProviderId: RpcDataProviderId;
     RpcMethods: RpcMethods;
     RuntimeDbWeight: RuntimeDbWeight;

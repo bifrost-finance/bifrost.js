@@ -4,6 +4,12 @@
 import type { Enum, U256, u64 } from '@polkadot/types';
 import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
 
+/** @name ExtraFeeName */
+export interface ExtraFeeName extends Enum {
+  readonly isSalpContribute: boolean;
+  readonly isNoExtraFee: boolean;
+}
+
 /** @name NumberOrHex */
 export interface NumberOrHex extends Enum {
   readonly isNumber: boolean;

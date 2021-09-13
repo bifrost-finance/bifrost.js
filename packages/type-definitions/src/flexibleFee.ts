@@ -28,6 +28,9 @@ export default {
         Number: 'u64',
         Hex: 'U256'
       }
+    },
+    ExtraFeeName: {
+      _enum: ['SalpContribute', 'NoExtraFee']
     }
   }
 };

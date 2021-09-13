@@ -5,27 +5,27 @@ export default {
       params: [
         {
           name: 'index',
-          type: 'ParaId',
+          type: 'ParaId'
         },
         {
-          name:"who",
-          type:"AccountIdOf"
+          name: 'who',
+          type: 'AccountIdOf'
         }
       ],
       type: 'Balance'
-    },
+    }
   },
   types: {
-    TrieIndex: "u32",
+    TrieIndex: 'u32',
     FundInfo: {
-      raised: "Balance",
-      cap: "Balance",
-      first_slot: "LeasePeriod",
-      last_slot: "LeasePeriod",
-      trie_index: "TrieIndex",
-      status: "FundStatus"
+      raised: 'Balance',
+      cap: 'Balance',
+      first_slot: 'LeasePeriod',
+      last_slot: 'LeasePeriod',
+      trie_index: 'TrieIndex',
+      status: 'FundStatus'
     },
-    RedeemStatus: "BalanceOf",
+    RedeemStatus: 'BalanceOf',
     FundStatus: {
       _enum: {
         Ongoing: 0,
@@ -38,35 +38,30 @@ export default {
       }
     },
     ContributionStatus: {
-      _enum: [
-        "Idle",
-        "Refunded",
-        "Unlocked",
-        "Refunding"
-      ]
+      _enum: ['Idle', 'Refunded', 'Unlocked', 'Refunding']
     },
     CrowdloanContributeCall: {
       _enum: {
-        CrowdloanContribute: "ContributeCall"
+        CrowdloanContribute: 'ContributeCall'
       }
     },
     ContributeCall: {
       _enum: {
-        Contribute: "Contribution"
+        Contribute: 'Contribution'
       }
     },
     Contribution: {
-      index: "ParaId",
-      value: "BalanceOf",
-      signature: "Option<MultiSignature>"
+      index: 'ParaId',
+      value: 'BalanceOf',
+      signature: 'Option<MultiSignature>'
     },
     Withdraw: {
-      who: "AccountIdOf",
-      index: "ParaId"
+      who: 'AccountIdOf',
+      index: 'ParaId'
     },
     WithdrawCall: {
       _enum: {
-        Withdraw: "Withdraw"
+        Withdraw: 'Withdraw'
       }
     },
     ParachainTransactProxyType: {
@@ -81,12 +76,21 @@ export default {
         Staking: 1
       }
     },
-    Keys: "SessionKeys1",
+    Keys: 'SessionKeys1',
     ParachainTransactType: {
       _enum: {
         Xcm: 0,
         Proxy: 1
       }
     },
+    RpcContributionStatus: {
+      _enum: {
+        Idle: 0,
+        Contributing: 1,
+        Refunded: 2,
+        Unlocked: 3,
+        Redeemed: 4
+      }
+    }
   }
-}
+};

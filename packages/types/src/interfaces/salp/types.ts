@@ -79,6 +79,15 @@ export interface ParachainTransactType extends Enum {
 /** @name RedeemStatus */
 export interface RedeemStatus extends BalanceOf {}
 
+/** @name RpcContributionStatus */
+export interface RpcContributionStatus extends Enum {
+  readonly isIdle: boolean;
+  readonly isContributing: boolean;
+  readonly isRefunded: boolean;
+  readonly isUnlocked: boolean;
+  readonly isRedeemed: boolean;
+}
+
 /** @name TrieIndex */
 export interface TrieIndex extends u32 {}
 

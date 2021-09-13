@@ -605,6 +605,12 @@
                                 "Hex": "U256"
                             }
                         },
+                        "ExtraFeeName": {
+                            "_enum": [
+                                "SalpContribute",
+                                "NoExtraFee"
+                            ]
+                        },
                         "IsExtended": "bool",
                         "SystemPalletId": "PalletId",
                         "TrieIndex": "u32",
@@ -677,6 +683,15 @@
                             "_enum": {
                                 "Xcm": 0,
                                 "Proxy": 1
+                            }
+                        },
+                        "RpcContributionStatus": {
+                            "_enum": {
+                                "Idle": 0,
+                                "Contributing": 1,
+                                "Refunded": 2,
+                                "Unlocked": 3,
+                                "Redeemed": 4
                             }
                         },
                         "RewardRecord": {
@@ -1414,6 +1429,12 @@
                                 "Hex": "U256"
                             }
                         },
+                        "ExtraFeeName": {
+                            "_enum": [
+                                "SalpContribute",
+                                "NoExtraFee"
+                            ]
+                        },
                         "IsExtended": "bool",
                         "SystemPalletId": "PalletId",
                         "TrieIndex": "u32",
@@ -1486,6 +1507,15 @@
                             "_enum": {
                                 "Xcm": 0,
                                 "Proxy": 1
+                            }
+                        },
+                        "RpcContributionStatus": {
+                            "_enum": {
+                                "Idle": 0,
+                                "Contributing": 1,
+                                "Refunded": 2,
+                                "Unlocked": 3,
+                                "Redeemed": 4
                             }
                         },
                         "RewardRecord": {
