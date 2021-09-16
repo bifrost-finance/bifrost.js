@@ -12,7 +12,7 @@ export default {
           type: 'AccountIdOf'
         }
       ],
-      type: 'Balance'
+      type: '(Balance, ContributionStatus)',
     }
   },
   types: {

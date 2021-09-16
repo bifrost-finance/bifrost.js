@@ -87,7 +87,7 @@
                                 "type": "AccountIdOf"
                             }
                         ],
-                        "type": "Balance",
+                        "type": "(Balance, ContributionStatus)",
                         "isSubscription": false,
                         "jsonrpc": "salp_getContribution",
                         "method": "getContribution",
@@ -911,7 +911,7 @@
                                 "type": "AccountIdOf"
                             }
                         ],
-                        "type": "Balance",
+                        "type": "(Balance, ContributionStatus)",
                         "isSubscription": false,
                         "jsonrpc": "salp_getContribution",
                         "method": "getContribution",

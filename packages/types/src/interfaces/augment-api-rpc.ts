@@ -6,6 +6,7 @@ import type { AnyNumber, Codec, IExtrinsic, ITuple, Observable } from '@polkadot
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { NumberOrHex } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { AccountId, AccountIdOf, Balance, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@bifrost-finance/types/interfaces/runtime';
+import type { ContributionStatus } from '@bifrost-finance/types/interfaces/salp';
 import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { RpcDataProviderId, TimestampedValue } from '@open-web3/orml-types/interfaces/oracle';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -401,7 +402,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * salp getContribution
        **/
-      getContribution: AugmentedRpc<(index: ParaId | AnyNumber | Uint8Array, who: AccountIdOf | string | Uint8Array) => Observable<Balance>>;
+      getContribution: AugmentedRpc<(index: ParaId | AnyNumber | Uint8Array, who: AccountIdOf | string | Uint8Array) => Observable<ITuple<[Balance, ContributionStatus]>>>;
     };
     state: {
       /**
