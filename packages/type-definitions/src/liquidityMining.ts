@@ -4,27 +4,28 @@ export default {
     PoolId: 'u128',
     PoolInfo: {
       pool_id: 'PoolId',
-      creator: 'AccountId',
+      keeper: 'AccountId',
+      investor: 'AccountId',
       trading_pair: '(CurrencyId, CurrencyId)',
-      min_deposit_to_start: 'Balance',
       duration: 'BlockNumber',
-      after_block_to_start: 'BlockNumber',
-      update_b: 'BlockNumber',
-      deposit: 'Balance',
-      rewards: '(CurrencyId, RewardData)',
-      state: 'PoolState',
       type: 'PoolType',
+      min_deposit_to_start: 'Balance',
+      after_block_to_start: 'BlockNumber',
+      deposit: 'Balance',
+      update_b: 'BlockNumber',
+      rewards: 'BTreeMap<CurrencyId, RewardData>',
+      state: 'PoolState',
       block_startup: 'BlockNumber'
     },
     PoolType: {
-      _enum: ['Mining', 'Farming']
+      _enum: ['Mining', 'Farming', 'EBFarming']
     },
     PoolState: {
-      _enum: ['UnderAudit', 'Approved', 'Ongoing', 'Retired', 'Dead']
+      _enum: ['UnCharged', 'Charged', 'Ongoing', 'Retired', 'Dead']
     },
     DepositData: {
       deposit: 'Balance',
-      gain_avgs: '(CurrencyId, FixedU128)',
+      gain_avgs: 'BTreeMap<CurrencyId, FixedU128>',
       update_b: 'BlockNumber'
     },
     RewardData: {
