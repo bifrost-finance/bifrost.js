@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Enum, U256, u64 } from '@polkadot/types';
 import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
+import type { Enum, U256, u64 } from '@polkadot/types';
 
 /** @name ExtraFeeName */
 export interface ExtraFeeName extends Enum {

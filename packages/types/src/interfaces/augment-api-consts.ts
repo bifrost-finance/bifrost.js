@@ -1,12 +1,12 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { u32 } from '@polkadot/types';
-import type { Codec } from '@polkadot/types/types';
 import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { Weight } from '@bifrost-finance/types/interfaces/runtime';
-import type { MultiLocation } from '@polkadot/types/interfaces/xcm';
 import type { ApiTypes } from '@polkadot/api/types';
+import type { u32 } from '@polkadot/types';
+import type { MultiLocation } from '@polkadot/types/interfaces/xcm';
+import type { Codec } from '@polkadot/types/types';
 
 declare module '@polkadot/api/types/consts' {
   export interface AugmentedConsts<ApiType> {

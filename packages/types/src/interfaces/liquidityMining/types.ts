@@ -1,10 +1,10 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { BTreeMap, Enum, Struct, u128 } from '@polkadot/types';
-import type { ITuple } from '@polkadot/types/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
-import type { AccountId, Balance, BalanceOf, BlockNumber, FixedU128 } from '@bifrost-finance/types/interfaces/runtime';
+import type { AccountId, Balance, BlockNumber, FixedU128 } from '@bifrost-finance/types/interfaces/runtime';
+import type { BTreeMap, Enum, Option, Struct, u128 } from '@polkadot/types';
+import type { ITuple } from '@polkadot/types/types';
 
 /** @name DepositData */
 export interface DepositData extends Struct {
@@ -20,17 +20,18 @@ export interface PoolId extends u128 {}
 export interface PoolInfo extends Struct {
   readonly pool_id: PoolId;
   readonly keeper: AccountId;
-  readonly investor: AccountId;
+  readonly investor: Option<AccountId>;
   readonly trading_pair: ITuple<[CurrencyId, CurrencyId]>;
   readonly duration: BlockNumber;
   readonly type: PoolType;
   readonly min_deposit_to_start: Balance;
   readonly after_block_to_start: BlockNumber;
   readonly deposit: Balance;
-  readonly update_b: BlockNumber;
   readonly rewards: BTreeMap<CurrencyId, RewardData>;
+  readonly update_b: BlockNumber;
   readonly state: PoolState;
-  readonly block_startup: BlockNumber;
+  readonly block_startup: Option<BlockNumber>;
+  readonly block_retired: Option<BlockNumber>;
 }
 
 /** @name PoolState */
@@ -51,9 +52,9 @@ export interface PoolType extends Enum {
 
 /** @name RewardData */
 export interface RewardData extends Struct {
-  readonly total: BalanceOf;
-  readonly per_block: BalanceOf;
-  readonly claimed: BalanceOf;
+  readonly total: Balance;
+  readonly per_block: Balance;
+  readonly claimed: Balance;
   readonly gain_avg: FixedU128;
 }
 

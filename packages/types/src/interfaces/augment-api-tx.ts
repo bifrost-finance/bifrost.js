@@ -1,13 +1,13 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Compact, bool } from '@polkadot/types';
-import type { AnyNumber } from '@polkadot/types/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { Balance, BalanceOf, Call, LookupSource, Weight } from '@bifrost-finance/types/interfaces/runtime';
+import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
+import type { Compact, bool } from '@polkadot/types';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
 import type { MultiAsset, MultiLocation } from '@polkadot/types/interfaces/xcm';
-import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
+import type { AnyNumber } from '@polkadot/types/types';
 
 declare module '@polkadot/api/types/submittable' {
   export interface AugmentedSubmittables<ApiType> {

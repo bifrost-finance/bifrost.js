@@ -393,17 +393,18 @@
                         "PoolInfo": {
                             "pool_id": "PoolId",
                             "keeper": "AccountId",
-                            "investor": "AccountId",
+                            "investor": "Option<AccountId>",
                             "trading_pair": "(CurrencyId, CurrencyId)",
                             "duration": "BlockNumber",
                             "type": "PoolType",
                             "min_deposit_to_start": "Balance",
                             "after_block_to_start": "BlockNumber",
                             "deposit": "Balance",
-                            "update_b": "BlockNumber",
                             "rewards": "BTreeMap<CurrencyId, RewardData>",
+                            "update_b": "BlockNumber",
                             "state": "PoolState",
-                            "block_startup": "BlockNumber"
+                            "block_startup": "Option<BlockNumber>",
+                            "block_retired": "Option<BlockNumber>"
                         },
                         "Share": "u128",
                         "OracleValue": "Price",
@@ -785,20 +786,20 @@
                             }
                         },
                         "PoolType": {
-                            "_enum": [
-                                "Mining",
-                                "Farming",
-                                "EBFarming"
-                            ]
+                            "_enum": {
+                                "Mining": 0,
+                                "Farming": 1,
+                                "EBFarming": 2
+                            }
                         },
                         "PoolState": {
-                            "_enum": [
-                                "UnCharged",
-                                "Charged",
-                                "Ongoing",
-                                "Retired",
-                                "Dead"
-                            ]
+                            "_enum": {
+                                "UnCharged": 0,
+                                "Charged": 1,
+                                "Ongoing": 2,
+                                "Retired": 3,
+                                "Dead": 4
+                            }
                         },
                         "DepositData": {
                             "deposit": "Balance",
@@ -806,9 +807,9 @@
                             "update_b": "BlockNumber"
                         },
                         "RewardData": {
-                            "total": "BalanceOf",
-                            "per_block": "BalanceOf",
-                            "claimed": "BalanceOf",
+                            "total": "Balance",
+                            "per_block": "Balance",
+                            "claimed": "Balance",
                             "gain_avg": "FixedU128"
                         },
                         "MultiLocation": "MultiLocationV0"
@@ -1219,17 +1220,18 @@
                         "PoolInfo": {
                             "pool_id": "PoolId",
                             "keeper": "AccountId",
-                            "investor": "AccountId",
+                            "investor": "Option<AccountId>",
                             "trading_pair": "(CurrencyId, CurrencyId)",
                             "duration": "BlockNumber",
                             "type": "PoolType",
                             "min_deposit_to_start": "Balance",
                             "after_block_to_start": "BlockNumber",
                             "deposit": "Balance",
-                            "update_b": "BlockNumber",
                             "rewards": "BTreeMap<CurrencyId, RewardData>",
+                            "update_b": "BlockNumber",
                             "state": "PoolState",
-                            "block_startup": "BlockNumber"
+                            "block_startup": "Option<BlockNumber>",
+                            "block_retired": "Option<BlockNumber>"
                         },
                         "Share": "u128",
                         "OracleValue": "Price",
@@ -1614,20 +1616,20 @@
                             }
                         },
                         "PoolType": {
-                            "_enum": [
-                                "Mining",
-                                "Farming",
-                                "EBFarming"
-                            ]
+                            "_enum": {
+                                "Mining": 0,
+                                "Farming": 1,
+                                "EBFarming": 2
+                            }
                         },
                         "PoolState": {
-                            "_enum": [
-                                "UnCharged",
-                                "Charged",
-                                "Ongoing",
-                                "Retired",
-                                "Dead"
-                            ]
+                            "_enum": {
+                                "UnCharged": 0,
+                                "Charged": 1,
+                                "Ongoing": 2,
+                                "Retired": 3,
+                                "Dead": 4
+                            }
                         },
                         "DepositData": {
                             "deposit": "Balance",
@@ -1635,9 +1637,9 @@
                             "update_b": "BlockNumber"
                         },
                         "RewardData": {
-                            "total": "BalanceOf",
-                            "per_block": "BalanceOf",
-                            "claimed": "BalanceOf",
+                            "total": "Balance",
+                            "per_block": "Balance",
+                            "claimed": "Balance",
                             "gain_avg": "FixedU128"
                         },
                         "MultiLocation": "MultiLocationV0"

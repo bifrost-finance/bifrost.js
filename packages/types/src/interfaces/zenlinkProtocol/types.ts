@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Struct, u128, u32, u8 } from '@polkadot/types';
 import type { AccountId } from '@bifrost-finance/types/interfaces/runtime';
+import type { Struct, u128, u32, u8 } from '@polkadot/types';
 
 /** @name PairInfo */
 export interface PairInfo extends Struct {
