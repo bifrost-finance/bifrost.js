@@ -26,6 +26,7 @@ export interface ContributionStatus extends Enum {
   readonly isRefunded: boolean;
   readonly isUnlocked: boolean;
   readonly isRefunding: boolean;
+  readonly isContributing: boolean;
 }
 
 /** @name CrowdloanContributeCall */

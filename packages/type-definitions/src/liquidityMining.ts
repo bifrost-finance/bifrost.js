@@ -1,7 +1,7 @@
 export default {
   rpc: {},
   types: {
-    PoolId: 'u128',
+    PoolId: 'u32',
     PoolInfo: {
       pool_id: 'PoolId',
       keeper: 'AccountId',

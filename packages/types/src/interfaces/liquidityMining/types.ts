@@ -3,7 +3,7 @@
 
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { AccountId, Balance, BlockNumber, FixedU128 } from '@bifrost-finance/types/interfaces/runtime';
-import type { BTreeMap, Enum, Option, Struct, u128 } from '@polkadot/types';
+import type { BTreeMap, Enum, Option, Struct, u32 } from '@polkadot/types';
 import type { ITuple } from '@polkadot/types/types';
 
 /** @name DepositData */
@@ -14,7 +14,7 @@ export interface DepositData extends Struct {
 }
 
 /** @name PoolId */
-export interface PoolId extends u128 {}
+export interface PoolId extends u32 {}
 
 /** @name PoolInfo */
 export interface PoolInfo extends Struct {

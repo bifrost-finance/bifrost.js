@@ -308,7 +308,8 @@
             "Idle",
             "Refunded",
             "Unlocked",
-            "Refunding"
+            "Refunding",
+            "Contributing"
         ]
     },
     "CrowdloanContributeCall": {
@@ -367,7 +368,7 @@
         "account_id": "AccountId",
         "record_amount": "Balance"
     },
-    "PoolId": "u128",
+    "PoolId": "u32",
     "SwapFee": "u128",
     "PoolDetails": {
         "owner": "AccountId",

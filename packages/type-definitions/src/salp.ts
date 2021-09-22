@@ -38,7 +38,7 @@ export default {
       }
     },
     ContributionStatus: {
-      _enum: ['Idle', 'Refunded', 'Unlocked', 'Refunding']
+      _enum: ['Idle', 'Refunded', 'Unlocked', 'Refunding', 'Contributing']
     },
     CrowdloanContributeCall: {
       _enum: {
