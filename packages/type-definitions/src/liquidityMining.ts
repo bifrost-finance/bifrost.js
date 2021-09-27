@@ -1,5 +1,25 @@
 export default {
-  rpc: {},
+  rpc: {
+    getRewards: {
+      description: 'Get the rewards users deserve',
+      params: [
+        {
+          name: 'who',
+          type: 'AccountId'
+        },
+        {
+          name: 'pid',
+          type: 'PoolId'
+        },
+        {
+          name: 'at',
+          type: 'Hash',
+          isOptional: true
+        }
+      ],
+      type: 'Vec<(CurrencyId, Balance)>'
+    }
+  },
   types: {
     PoolId: 'u32',
     PoolInfo: {

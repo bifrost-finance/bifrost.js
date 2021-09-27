@@ -3,6 +3,7 @@
 
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { NumberOrHex } from '@bifrost-finance/types/interfaces/flexibleFee';
+import type { PoolId } from '@bifrost-finance/types/interfaces/liquidityMining';
 import type { AccountId, AccountIdOf, Balance, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@bifrost-finance/types/interfaces/runtime';
 import type { ContributionStatus } from '@bifrost-finance/types/interfaces/salp';
 import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
@@ -341,6 +342,12 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Subscribes to grandpa justifications
        **/
       subscribeJustifications: AugmentedRpc<() => Observable<JustificationNotification>>;
+    };
+    liquidityMining: {
+      /**
+       * Get the rewards users deserve
+       **/
+      getRewards: AugmentedRpc<(who: AccountId | string | Uint8Array, pid: PoolId | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Vec<ITuple<[CurrencyId, Balance]>>>>;
     };
     mmr: {
       /**

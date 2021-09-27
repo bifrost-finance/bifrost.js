@@ -320,5 +320,30 @@
             "method": "getEstimateLptoken",
             "section": "zenlinkProtocol"
         }
+    },
+    "liquidityMining": {
+        "getRewards": {
+            "description": "Get the rewards users deserve",
+            "params": [
+                {
+                    "name": "who",
+                    "type": "AccountId"
+                },
+                {
+                    "name": "pid",
+                    "type": "PoolId"
+                },
+                {
+                    "name": "at",
+                    "type": "Hash",
+                    "isOptional": true
+                }
+            ],
+            "type": "Vec<(CurrencyId, Balance)>",
+            "isSubscription": false,
+            "jsonrpc": "liquidityMining_getRewards",
+            "method": "getRewards",
+            "section": "liquidityMining"
+        }
     }
 }
