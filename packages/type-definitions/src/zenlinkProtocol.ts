@@ -9,14 +9,14 @@ export default {
           isOptional: true
         }
       ],
-      type: 'Vec<AssetId>'
+      type: 'Vec<ZenlinkAssetId>'
     },
     getBalance: {
       description: 'zenlinkProtocol getBalance',
       params: [
         {
           name: 'asset_id',
-          type: 'AssetId'
+          type: 'ZenlinkAssetId'
         },
         {
           name: 'account',
@@ -35,7 +35,7 @@ export default {
       params: [
         {
           name: 'asset_id',
-          type: 'AssetId'
+          type: 'ZenlinkAssetId'
         },
         {
           name: 'at',
@@ -79,11 +79,11 @@ export default {
       params: [
         {
           name: 'asset_0',
-          type: 'AssetId'
+          type: 'ZenlinkAssetId'
         },
         {
           name: 'asset_1',
-          type: 'AssetId'
+          type: 'ZenlinkAssetId'
         },
         {
           name: 'at',
@@ -103,7 +103,7 @@ export default {
         },
         {
           name: 'path',
-          type: 'Vec<AssetId>'
+          type: 'Vec<ZenlinkAssetId>'
         },
         {
           name: 'at',
@@ -123,7 +123,7 @@ export default {
         },
         {
           name: 'path',
-          type: 'Vec<AssetId>'
+          type: 'Vec<ZenlinkAssetId>'
         },
         {
           name: 'at',
@@ -140,11 +140,11 @@ export default {
       params: [
         {
           name: 'asset_0',
-          type: 'AssetId'
+          type: 'ZenlinkAssetId'
         },
         {
           name: 'asset_1',
-          type: 'AssetId'
+          type: 'ZenlinkAssetId'
         },
         {
           name: 'amount_0_desired',
@@ -173,16 +173,21 @@ export default {
     }
   },
   types: {
+    ZenlinkAssetId: {
+      chain_id: 'u32',
+      asset_type: 'u8',
+      asset_index: 'u64'
+    },
     ZenlinkAssetBalance: 'u128',
     PairInfo: {
-      asset0: 'AssetId',
-      asset1: 'AssetId',
+      asset0: 'ZenlinkAssetId',
+      asset1: 'ZenlinkAssetId',
       account: 'AccountId',
       totalLiquidity: 'ZenlinkAssetBalance',
       holdingLiquidity: 'ZenlinkAssetBalance',
       reserve0: 'ZenlinkAssetBalance',
       reserve1: 'ZenlinkAssetBalance',
-      lpAssetId: 'AssetId'
+      lpAssetId: 'ZenlinkAssetId'
     },
     AssetBalance: "u128",
     PairMetadata:{

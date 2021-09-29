@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { AccountId, AssetId, BlockNumber } from '@bifrost-finance/types/interfaces/runtime';
-import type { Enum, Struct, u128 } from '@polkadot/types';
+import type { AccountId, BlockNumber } from '@bifrost-finance/types/interfaces/runtime';
+import type { Enum, Struct, u128, u32, u64, u8 } from '@polkadot/types';
 import type { ITuple } from '@polkadot/types/types';
 
 /** @name AssetBalance */
@@ -19,14 +19,14 @@ export interface BootstrapParamter extends Struct {
 
 /** @name PairInfo */
 export interface PairInfo extends Struct {
-  readonly asset0: AssetId;
-  readonly asset1: AssetId;
+  readonly asset0: ZenlinkAssetId;
+  readonly asset1: ZenlinkAssetId;
   readonly account: AccountId;
   readonly totalLiquidity: ZenlinkAssetBalance;
   readonly holdingLiquidity: ZenlinkAssetBalance;
   readonly reserve0: ZenlinkAssetBalance;
   readonly reserve1: ZenlinkAssetBalance;
-  readonly lpAssetId: AssetId;
+  readonly lpAssetId: ZenlinkAssetId;
 }
 
 /** @name PairMetadata */
@@ -46,5 +46,12 @@ export interface PairStatus extends Enum {
 
 /** @name ZenlinkAssetBalance */
 export interface ZenlinkAssetBalance extends u128 {}
+
+/** @name ZenlinkAssetId */
+export interface ZenlinkAssetId extends Struct {
+  readonly chain_id: u32;
+  readonly asset_type: u8;
+  readonly asset_index: u64;
+}
 
 export type PHANTOM_ZENLINKPROTOCOL = 'zenlinkProtocol';

@@ -408,16 +408,21 @@
         ]
     },
     "U64F64": "u128",
+    "ZenlinkAssetId": {
+        "chain_id": "u32",
+        "asset_type": "u8",
+        "asset_index": "u64"
+    },
     "ZenlinkAssetBalance": "u128",
     "PairInfo": {
-        "asset0": "AssetId",
-        "asset1": "AssetId",
+        "asset0": "ZenlinkAssetId",
+        "asset1": "ZenlinkAssetId",
         "account": "AccountId",
         "totalLiquidity": "ZenlinkAssetBalance",
         "holdingLiquidity": "ZenlinkAssetBalance",
         "reserve0": "ZenlinkAssetBalance",
         "reserve1": "ZenlinkAssetBalance",
-        "lpAssetId": "AssetId"
+        "lpAssetId": "ZenlinkAssetId"
     },
     "AssetBalance": "u128",
     "PairMetadata": {
@@ -445,7 +450,9 @@
             "KUSD": 2,
             "DOT": 3,
             "KSM": 4,
-            "ETH": 5
+            "ETH": 5,
+            "KAR": 6,
+            "ZLK": 7
         }
     },
     "CurrencyId": {

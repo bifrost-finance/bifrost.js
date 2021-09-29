@@ -4,9 +4,9 @@
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { NumberOrHex } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { PoolId } from '@bifrost-finance/types/interfaces/liquidityMining';
-import type { AccountId, AccountIdOf, AssetId, Balance, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@bifrost-finance/types/interfaces/runtime';
+import type { AccountId, AccountIdOf, Balance, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@bifrost-finance/types/interfaces/runtime';
 import type { ContributionStatus } from '@bifrost-finance/types/interfaces/salp';
-import type { PairInfo, ZenlinkAssetBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
+import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { RpcDataProviderId, TimestampedValue } from '@open-web3/orml-types/interfaces/oracle';
 import type { Bytes, HashMap, Json, Metadata, Null, Option, StorageKey, Text, U256, U64, Vec, bool, u128, u32, u64 } from '@polkadot/types';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
@@ -597,7 +597,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * zenlinkProtocol getAllAssets
        **/
-      getAllAssets: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<Vec<AssetId>>>;
+      getAllAssets: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<Vec<ZenlinkAssetId>>>;
       /**
        * Get the information of all the exchange pairs.
        **/
@@ -605,19 +605,19 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get the output token amount for an exact input token amount.
        **/
-      getAmountInPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | AnyNumber | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<u128>>;
+      getAmountInPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<ZenlinkAssetId> | (ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<u128>>;
       /**
        * Get the input token amount for an exact output token amount.
        **/
-      getAmountOutPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<AssetId> | (AssetId | AnyNumber | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<u128>>;
+      getAmountOutPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<ZenlinkAssetId> | (ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<u128>>;
       /**
        * zenlinkProtocol getBalance
        **/
-      getBalance: AugmentedRpc<(asset_id: AssetId | AnyNumber | Uint8Array, account: AccountId | string | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Text>>;
+      getBalance: AugmentedRpc<(asset_id: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, account: AccountId | string | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Text>>;
       /**
        * Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.
        **/
-      getEstimateLptoken: AugmentedRpc<(asset_0: AssetId | AnyNumber | Uint8Array, asset_1: AssetId | AnyNumber | Uint8Array, amount_0_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_0_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<u128>>;
+      getEstimateLptoken: AugmentedRpc<(asset_0: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, asset_1: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, amount_0_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_0_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<u128>>;
       /**
        * Get ownership of all exchange pairs for a particular account.
        **/
@@ -625,11 +625,11 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get the detailed information of a particular exchange pair.
        **/
-      getPairByAssetId: AugmentedRpc<(asset_0: AssetId | AnyNumber | Uint8Array, asset_1: AssetId | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<PairInfo>>;
+      getPairByAssetId: AugmentedRpc<(asset_0: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, asset_1: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<PairInfo>>;
       /**
        * Get the ownership of a certain currency for each parachain.
        **/
-      getSovereignsInfo: AugmentedRpc<(asset_id: AssetId | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[u32, AccountId, Text]>>>;
+      getSovereignsInfo: AugmentedRpc<(asset_id: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[u32, AccountId, Text]>>>;
     };
   }
 }

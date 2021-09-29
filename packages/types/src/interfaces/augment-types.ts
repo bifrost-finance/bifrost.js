@@ -12,7 +12,7 @@ import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContrib
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { BifrostVestingInfo, MaxLocksOf } from '@bifrost-finance/types/interfaces/vesting';
 import type { OrderId, OrderInfo, OrderState, U64F64 } from '@bifrost-finance/types/interfaces/vsbondAuction';
-import type { BootstrapParamter, PairInfo, PairMetadata, PairStatus, ZenlinkAssetBalance } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
+import type { BootstrapParamter, PairInfo, PairMetadata, PairStatus, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { AuthorityOrigin, CallOf, DelayedOrigin, DispatchTime, ScheduleTaskIndex } from '@open-web3/orml-types/interfaces/authority';
 import type { GraduallyUpdate, StorageKeyBytes, StorageValue, StorageValueBytes } from '@open-web3/orml-types/interfaces/graduallyUpdates';
 import type { DataProviderId, OrderedSet, RpcDataProviderId, TimestampedValue, TimestampedValueOf } from '@open-web3/orml-types/interfaces/oracle';
@@ -1112,5 +1112,6 @@ declare module '@polkadot/types/types/registry' {
     XcmV2: XcmV2;
     XcmVersion: XcmVersion;
     ZenlinkAssetBalance: ZenlinkAssetBalance;
+    ZenlinkAssetId: ZenlinkAssetId;
   }
 }
