@@ -123,7 +123,7 @@
                     "isOptional": true
                 }
             ],
-            "type": "Vec<ZenlinkAssetId>",
+            "type": "Vec<AssetId>",
             "isSubscription": false,
             "jsonrpc": "zenlinkProtocol_getAllAssets",
             "method": "getAllAssets",
@@ -134,7 +134,7 @@
             "params": [
                 {
                     "name": "asset_id",
-                    "type": "ZenlinkAssetId"
+                    "type": "AssetId"
                 },
                 {
                     "name": "account",
@@ -157,7 +157,7 @@
             "params": [
                 {
                     "name": "asset_id",
-                    "type": "ZenlinkAssetId"
+                    "type": "AssetId"
                 },
                 {
                     "name": "at",
@@ -213,11 +213,11 @@
             "params": [
                 {
                     "name": "asset_0",
-                    "type": "ZenlinkAssetId"
+                    "type": "AssetId"
                 },
                 {
                     "name": "asset_1",
-                    "type": "ZenlinkAssetId"
+                    "type": "AssetId"
                 },
                 {
                     "name": "at",
@@ -241,7 +241,7 @@
                 },
                 {
                     "name": "path",
-                    "type": "Vec<ZenlinkAssetId>"
+                    "type": "Vec<AssetId>"
                 },
                 {
                     "name": "at",
@@ -265,7 +265,7 @@
                 },
                 {
                     "name": "path",
-                    "type": "Vec<ZenlinkAssetId>"
+                    "type": "Vec<AssetId>"
                 },
                 {
                     "name": "at",
@@ -285,11 +285,11 @@
             "params": [
                 {
                     "name": "asset_0",
-                    "type": "ZenlinkAssetId"
+                    "type": "AssetId"
                 },
                 {
                     "name": "asset_1",
-                    "type": "ZenlinkAssetId"
+                    "type": "AssetId"
                 },
                 {
                     "name": "amount_0_desired",

@@ -9,14 +9,14 @@ export default {
           isOptional: true
         }
       ],
-      type: 'Vec<ZenlinkAssetId>'
+      type: 'Vec<AssetId>'
     },
     getBalance: {
       description: 'zenlinkProtocol getBalance',
       params: [
         {
           name: 'asset_id',
-          type: 'ZenlinkAssetId'
+          type: 'AssetId'
         },
         {
           name: 'account',
@@ -35,7 +35,7 @@ export default {
       params: [
         {
           name: 'asset_id',
-          type: 'ZenlinkAssetId'
+          type: 'AssetId'
         },
         {
           name: 'at',
@@ -79,11 +79,11 @@ export default {
       params: [
         {
           name: 'asset_0',
-          type: 'ZenlinkAssetId'
+          type: 'AssetId'
         },
         {
           name: 'asset_1',
-          type: 'ZenlinkAssetId'
+          type: 'AssetId'
         },
         {
           name: 'at',
@@ -103,7 +103,7 @@ export default {
         },
         {
           name: 'path',
-          type: 'Vec<ZenlinkAssetId>'
+          type: 'Vec<AssetId>'
         },
         {
           name: 'at',
@@ -123,7 +123,7 @@ export default {
         },
         {
           name: 'path',
-          type: 'Vec<ZenlinkAssetId>'
+          type: 'Vec<AssetId>'
         },
         {
           name: 'at',
@@ -140,11 +140,11 @@ export default {
       params: [
         {
           name: 'asset_0',
-          type: 'ZenlinkAssetId'
+          type: 'AssetId'
         },
         {
           name: 'asset_1',
-          type: 'ZenlinkAssetId'
+          type: 'AssetId'
         },
         {
           name: 'amount_0_desired',
@@ -173,27 +173,35 @@ export default {
     }
   },
   types: {
-    ZenlinkAssetId: {
-      chain_id: 'u32',
-      asset_type: 'u8',
-      asset_index: 'u32'
-    },
     ZenlinkAssetBalance: 'u128',
     PairInfo: {
-      asset0: 'ZenlinkAssetId',
-      asset1: 'ZenlinkAssetId',
+      asset0: 'AssetId',
+      asset1: 'AssetId',
       account: 'AccountId',
       totalLiquidity: 'ZenlinkAssetBalance',
       holdingLiquidity: 'ZenlinkAssetBalance',
       reserve0: 'ZenlinkAssetBalance',
       reserve1: 'ZenlinkAssetBalance',
-      lpAssetId: 'ZenlinkAssetId'
-    }
-  },
-  typesAlias: {
-    zenlinkProtocol: {
-      AssetBalance: 'ZenlinkAssetBalance',
-      AssetId: 'ZenlinkAssetId'
+      lpAssetId: 'AssetId'
+    },
+    AssetBalance: "u128",
+    PairMetadata:{
+      pair_account:"AccountId",
+      target_supply: "AssetBalance"
+    },
+    BootstrapParamter: {
+      min_contribution: "(AssetBalance, AssetBalance)",
+      target_supply: "(AssetBalance, AssetBalance)",
+      accumulated_supply: "(AssetBalance, AssetBalance)",
+      end_block_number: "BlockNumber",
+      pair_account: "AccountId"
+    },
+    PairStatus:{
+      _enum: {
+        Trading: "PairMetadata",
+        Bootstrap: "BootstrapParamter",
+        Disable: null
+      }
     }
   }
 };
