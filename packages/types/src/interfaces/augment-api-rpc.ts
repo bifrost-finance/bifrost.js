@@ -387,7 +387,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Retrieves the oracle value for a given key.
        **/
-      getValue: AugmentedRpc<(providerId: RpcDataProviderId | string, key: OracleKey | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Option<TimestampedValue>>>;
+      getValue: AugmentedRpc<(providerId: RpcDataProviderId | string, key: OracleKey | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Option<TimestampedValue>>>;
     };
     payment: {
       /**
@@ -581,7 +581,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get current vtoken mint rate.
        **/
-      getVtokenMintRate: AugmentedRpc<(asset_id: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      getVtokenMintRate: AugmentedRpc<(asset_id: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Text>>;
     };
     web3: {
       /**

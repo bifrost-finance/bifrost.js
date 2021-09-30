@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
-import type { Enum } from '@polkadot/types';
+import type { Enum, u8 } from '@polkadot/types';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 import type { ITuple } from '@polkadot/types/types';
 
@@ -23,6 +23,8 @@ export interface CurrencyId extends Enum {
   readonly asVsToken: TokenSymbol;
   readonly isVsBond: boolean;
   readonly asVsBond: ITuple<[TokenSymbol, ParaId, LeasePeriod, LeasePeriod]>;
+  readonly isLpToken: boolean;
+  readonly asLpToken: ITuple<[TokenSymbol, u8, TokenSymbol, u8]>;
 }
 
 /** @name CurrencyIdOf */

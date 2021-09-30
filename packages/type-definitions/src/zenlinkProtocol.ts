@@ -176,7 +176,7 @@ export default {
     ZenlinkAssetId: {
       chain_id: 'u32',
       asset_type: 'u8',
-      asset_index: 'u32'
+      asset_index: 'u64'
     },
     ZenlinkAssetBalance: 'u128',
     PairInfo: {
@@ -188,12 +188,24 @@ export default {
       reserve0: 'ZenlinkAssetBalance',
       reserve1: 'ZenlinkAssetBalance',
       lpAssetId: 'ZenlinkAssetId'
-    }
-  },
-  typesAlias: {
-    zenlinkProtocol: {
-      AssetBalance: 'ZenlinkAssetBalance',
-      AssetId: 'ZenlinkAssetId'
+    },
+    PairMetadata: {
+      pair_account: 'AccountId',
+      target_supply: 'ZenlinkAssetBalance'
+    },
+    BootstrapParamter: {
+      min_contribution: '(ZenlinkAssetBalance, ZenlinkAssetBalance)',
+      target_supply: '(ZenlinkAssetBalance, ZenlinkAssetBalance)',
+      accumulated_supply: '(ZenlinkAssetBalance, ZenlinkAssetBalance)',
+      end_block_number: 'BlockNumber',
+      pair_account: 'AccountId'
+    },
+    PairStatus: {
+      _enum: {
+        Trading: 'PairMetadata',
+        Bootstrap: 'BootstrapParamter',
+        Disable: null
+      }
     }
   }
 };
