@@ -502,5 +502,7 @@
         "claimed": "Balance",
         "gain_avg": "FixedU128"
     },
-    "MultiLocation": "MultiLocationV0"
+    "MultiLocation": "MultiLocationV0",
+    "MultiAsset": "MultiAssetV0",
+    "Xcm": "XcmV0"
 }
