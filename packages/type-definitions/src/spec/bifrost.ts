@@ -4,39 +4,14 @@ const versioned: OverrideVersionedType[] = [
   {
     minmax: [0, undefined],
     types: {
-      MultiLocation: 'MultiLocationV0',
-      MultiAsset: 'MultiAssetV0',
-      Xcm: 'XcmV0',
       TokenSymbol: {
         _enum: {
           BNC: 1,
           KUSD: 2,
-          KSM: 4
+          KSM: 4,
+          KAR:6
         }
       },
-      CurrencyId: {
-        _enum: {
-          Native: 'TokenSymbol',
-          VToken: 'TokenSymbol',
-          Token: 'TokenSymbol',
-          Stable: 'TokenSymbol',
-          VSToken: 'TokenSymbol',
-          VSBond: '(TokenSymbol, ParaId, LeasePeriod, LeasePeriod)',
-          LPToken: '(TokenSymbol, u8, TokenSymbol, u8)'
-        }
-      },
-      CurrencyIdOf: 'CurrencyId',
-      TAssetBalance: 'Balance',
-      AmountOf: 'Balance',
-      StorageVersion: 'Releases',
-      ShareWeight: 'Balance',
-      TransferOriginType: {
-        _enum: {
-          FromSelf: 0,
-          FromRelayChain: 1,
-          FromSiblingParaChain: 2
-        }
-      }
     }
   }
 ];

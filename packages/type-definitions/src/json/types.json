@@ -449,7 +449,9 @@
             "KUSD": 2,
             "DOT": 3,
             "KSM": 4,
-            "ETH": 5
+            "ETH": 5,
+            "KAR": 6,
+            "ZLK": 7
         }
     },
     "CurrencyId": {

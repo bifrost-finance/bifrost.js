@@ -804,7 +804,8 @@
                             "_enum": {
                                 "BNC": 1,
                                 "KUSD": 2,
-                                "KSM": 4
+                                "KSM": 4,
+                                "KAR": 6
                             }
                         },
                         "CurrencyId": {
@@ -859,7 +860,7 @@
                         },
                         "MultiLocation": "MultiLocationV0",
                         "MultiAsset": "MultiAssetV0",
-                        "Xcm": "XcmV0"
+                        "Xcm": "XcmV1"
                     }
                 }
             ],
@@ -1734,7 +1735,7 @@
                         },
                         "MultiLocation": "MultiLocationV0",
                         "MultiAsset": "MultiAssetV0",
-                        "Xcm": "XcmV0"
+                        "Xcm": "XcmV1"
                     }
                 }
             ],
