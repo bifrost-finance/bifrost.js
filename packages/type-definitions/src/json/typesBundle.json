@@ -858,9 +858,11 @@
                             "claimed": "Balance",
                             "gain_avg": "FixedU128"
                         },
-                        "MultiLocation": "MultiLocationV0",
-                        "MultiAsset": "MultiAssetV0",
-                        "Xcm": "XcmV1"
+                        "AssetInstance": "AssetInstanceV1",
+                        "MultiLocation": "MultiLocationV1",
+                        "MultiAsset": "MultiAssetV1",
+                        "Xcm": "XcmV1",
+                        "XcmOrder": "XcmOrderV1"
                     }
                 }
             ],
@@ -1733,9 +1735,11 @@
                             "claimed": "Balance",
                             "gain_avg": "FixedU128"
                         },
-                        "MultiLocation": "MultiLocationV0",
-                        "MultiAsset": "MultiAssetV0",
-                        "Xcm": "XcmV1"
+                        "AssetInstance": "AssetInstanceV1",
+                        "MultiLocation": "MultiLocationV1",
+                        "MultiAsset": "MultiAssetV1",
+                        "Xcm": "XcmV1",
+                        "XcmOrder": "XcmOrderV1"
                     }
                 }
             ],

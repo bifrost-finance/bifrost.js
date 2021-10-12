@@ -9,9 +9,9 @@ const versioned: OverrideVersionedType[] = [
           BNC: 1,
           KUSD: 2,
           KSM: 4,
-          KAR:6
+          KAR: 6
         }
-      },
+      }
     }
   }
 ];

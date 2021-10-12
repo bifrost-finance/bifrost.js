@@ -1,8 +1,10 @@
 export default {
   rpc: {},
   types: {
-    MultiLocation: 'MultiLocationV0',
-    MultiAsset: 'MultiAssetV0',
+    AssetInstance: 'AssetInstanceV1',
+    MultiLocation: 'MultiLocationV1',
+    MultiAsset: 'MultiAssetV1',
     Xcm: 'XcmV1',
+    XcmOrder: 'XcmOrderV1'
   }
 };
