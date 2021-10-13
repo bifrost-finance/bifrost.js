@@ -1,10 +1,10 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
 import type { Enum, u8 } from '@polkadot/types';
-import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 import type { ITuple } from '@polkadot/types/types';
+import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
+import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 
 /** @name AmountOf */
 export interface AmountOf extends Balance {}

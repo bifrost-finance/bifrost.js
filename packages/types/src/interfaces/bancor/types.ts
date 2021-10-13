@@ -1,9 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
+import type { Struct } from '@polkadot/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
-import type { Struct } from '@polkadot/types';
 
 /** @name BancorPool */
 export interface BancorPool extends Struct {

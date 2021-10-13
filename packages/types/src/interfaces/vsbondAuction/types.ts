@@ -1,9 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
+import type { Enum, Struct, u128, u64 } from '@polkadot/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { AccountIdOf } from '@bifrost-finance/types/interfaces/runtime';
-import type { Enum, Struct, u128, u64 } from '@polkadot/types';
 
 /** @name OrderId */
 export interface OrderId extends u64 {}

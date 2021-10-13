@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { AccountId, Balance } from '@bifrost-finance/types/interfaces/runtime';
 import type { Struct } from '@polkadot/types';
+import type { AccountId, Balance } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name RewardRecord */
 export interface RewardRecord extends Struct {

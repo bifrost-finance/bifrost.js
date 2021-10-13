@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { AccountIdOf, Balance, BalanceOf } from '@bifrost-finance/types/interfaces/runtime';
 import type { Enum, Option, Struct, u32 } from '@polkadot/types';
+import type { AccountIdOf, Balance, BalanceOf } from '@bifrost-finance/types/interfaces/runtime';
 import type { MultiSignature } from '@polkadot/types/interfaces/extrinsics';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 import type { SessionKeys1 } from '@polkadot/types/interfaces/session';

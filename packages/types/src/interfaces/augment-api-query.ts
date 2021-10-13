@@ -1,12 +1,12 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
+import type { Vec } from '@polkadot/types';
+import type { Observable } from '@polkadot/types/types';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { AccountId, Balance } from '@bifrost-finance/types/interfaces/runtime';
-import type { ApiTypes } from '@polkadot/api/types';
-import type { Vec } from '@polkadot/types';
 import type { AccountData, BalanceLock } from '@polkadot/types/interfaces/balances';
-import type { Observable } from '@polkadot/types/types';
+import type { ApiTypes } from '@polkadot/api/types';
 
 declare module '@polkadot/api/types/storage' {
   export interface AugmentedQueries<ApiType> {

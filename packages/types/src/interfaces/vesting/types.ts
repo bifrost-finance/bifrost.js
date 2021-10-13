@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Balance, BlockNumber } from '@bifrost-finance/types/interfaces/runtime';
 import type { Struct, u32 } from '@polkadot/types';
+import type { Balance, BlockNumber } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name BifrostVestingInfo */
 export interface BifrostVestingInfo extends Struct {

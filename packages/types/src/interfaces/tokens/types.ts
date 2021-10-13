@@ -1,8 +1,8 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
 import type { Struct } from '@polkadot/types';
+import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name OrmlAccountData */
 export interface OrmlAccountData extends Struct {
