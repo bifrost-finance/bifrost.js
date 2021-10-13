@@ -1,9 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
+import type { AccountId, BlockNumber } from '@bifrost-finance/types/interfaces/runtime';
 import type { Enum, Struct, u128, u32, u64, u8 } from '@polkadot/types';
 import type { ITuple } from '@polkadot/types/types';
-import type { AccountId, BlockNumber } from '@bifrost-finance/types/interfaces/runtime';
 
 /** @name BootstrapParamter */
 export interface BootstrapParamter extends Struct {

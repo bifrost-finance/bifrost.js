@@ -4,8 +4,8 @@
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { Amount, Currency } from '@bifrost-finance/types/interfaces/currencies';
 import type { AccountId, Balance } from '@bifrost-finance/types/interfaces/runtime';
-import type { MultiAsset, MultiLocation } from '@polkadot/types/interfaces/xcm';
 import type { ApiTypes } from '@polkadot/api/types';
+import type { MultiAsset, MultiLocation } from '@polkadot/types/interfaces/xcm';
 
 declare module '@polkadot/api/types/events' {
   export interface AugmentedEvents<ApiType> {

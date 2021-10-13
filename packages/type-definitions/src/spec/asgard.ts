@@ -13,19 +13,32 @@ const TokenSymbol = {
   }
 };
 
+const xcmV0={
+  MultiAsset: 'MultiAssetV0',
+  Xcm: 'XcmV0',
+  XcmOrder: 'XcmOrderV0',
+  MultiLocation: 'MultiLocationV0'
+}
+
+const xcmV1={
+  MultiAsset: 'MultiAssetV1',
+  Xcm: 'XcmV1',
+  XcmOrder: 'XcmOrderV1',
+  MultiLocation: 'MultiLocationV1'
+}
+
 const versioned: OverrideVersionedType[] = [
   {
-    minmax: [0, 557119],
+    minmax: [0, 901],
     types: {
       TokenSymbol,
-      MultiLocation: 'MultiLocationV0'
+      ...xcmV0
     }
   },
   {
-    minmax: [557120, undefined],
+    minmax: [902, undefined],
     types: {
-      TokenSymbol,
-      MultiLocation: 'MultiLocationV1'
+      ...xcmV1
     }
   }
 ];

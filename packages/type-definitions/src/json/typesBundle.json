@@ -354,7 +354,7 @@
                 {
                     "minmax": [
                         0,
-                        557119
+                        901
                     ],
                     "types": {
                         "CallOf": "Call",
@@ -859,15 +859,15 @@
                             "gain_avg": "FixedU128"
                         },
                         "AssetInstance": "AssetInstanceV1",
-                        "MultiAsset": "MultiAssetV1",
-                        "Xcm": "XcmV1",
-                        "XcmOrder": "XcmOrderV1",
+                        "MultiAsset": "MultiAssetV0",
+                        "Xcm": "XcmV0",
+                        "XcmOrder": "XcmOrderV0",
                         "MultiLocation": "MultiLocationV0"
                     }
                 },
                 {
                     "minmax": [
-                        557120,
+                        902,
                         null
                     ],
                     "types": {
@@ -1741,7 +1741,7 @@
                 {
                     "minmax": [
                         0,
-                        557119
+                        901
                     ],
                     "types": {
                         "CallOf": "Call",
@@ -2250,15 +2250,15 @@
                             "gain_avg": "FixedU128"
                         },
                         "AssetInstance": "AssetInstanceV1",
-                        "MultiAsset": "MultiAssetV1",
-                        "Xcm": "XcmV1",
-                        "XcmOrder": "XcmOrderV1",
+                        "MultiAsset": "MultiAssetV0",
+                        "Xcm": "XcmV0",
+                        "XcmOrder": "XcmOrderV0",
                         "MultiLocation": "MultiLocationV0"
                     }
                 },
                 {
                     "minmax": [
-                        557120,
+                        902,
                         null
                     ],
                     "types": {

@@ -504,8 +504,5 @@
         "claimed": "Balance",
         "gain_avg": "FixedU128"
     },
-    "AssetInstance": "AssetInstanceV1",
-    "MultiAsset": "MultiAssetV1",
-    "Xcm": "XcmV1",
-    "XcmOrder": "XcmOrderV1"
+    "AssetInstance": "AssetInstanceV1"
 }

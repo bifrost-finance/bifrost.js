@@ -1,13 +1,13 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { Compact, bool } from '@polkadot/types';
-import type { AnyNumber } from '@polkadot/types/types';
 import type { AmountOf, CurrencyId, CurrencyIdOf } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { Balance, BalanceOf, Call, LookupSource, Weight } from '@bifrost-finance/types/interfaces/runtime';
+import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
+import type { Compact, bool } from '@polkadot/types';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
 import type { MultiAsset, MultiLocation } from '@polkadot/types/interfaces/xcm';
-import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
+import type { AnyNumber } from '@polkadot/types/types';
 
 declare module '@polkadot/api/types/submittable' {
   export interface AugmentedSubmittables<ApiType> {
@@ -133,7 +133,7 @@ declare module '@polkadot/api/types/submittable' {
        * by the network, and if the receiving chain would handle
        * messages correctly.
        **/
-      transfer: AugmentedSubmittable<(currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, amount: Balance | AnyNumber | Uint8Array, dest: MultiLocation | { Null: any } | { X1: any } | { X2: any } | { X3: any } | { X4: any } | { X5: any } | { X6: any } | { X7: any } | { X8: any } | string | Uint8Array, destWeight: Weight | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, Balance, MultiLocation, Weight]>;
+      transfer: AugmentedSubmittable<(currencyId: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, amount: Balance | AnyNumber | Uint8Array, dest: MultiLocation | { parents?: any; interior?: any } | string | Uint8Array, destWeight: Weight | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [CurrencyId, Balance, MultiLocation, Weight]>;
       /**
        * Transfer `MultiAsset`.
        * 
@@ -148,7 +148,7 @@ declare module '@polkadot/api/types/submittable' {
        * by the network, and if the receiving chain would handle
        * messages correctly.
        **/
-      transferMultiasset: AugmentedSubmittable<(asset: MultiAsset | { None: any } | { All: any } | { AllFungible: any } | { AllNonFungible: any } | { AllAbstractFungible: any } | { AllAbstractNonFungible: any } | { AllConcreteFungible: any } | { AllConcreteNonFungible: any } | { AbstractFungible: any } | { AbstractNonFungible: any } | { ConcreteFungible: any } | { ConcreteNonFungible: any } | string | Uint8Array, dest: MultiLocation | { Null: any } | { X1: any } | { X2: any } | { X3: any } | { X4: any } | { X5: any } | { X6: any } | { X7: any } | { X8: any } | string | Uint8Array, destWeight: Weight | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAsset, MultiLocation, Weight]>;
+      transferMultiasset: AugmentedSubmittable<(asset: MultiAsset | { id?: any; fungibility?: any } | string | Uint8Array, dest: MultiLocation | { parents?: any; interior?: any } | string | Uint8Array, destWeight: Weight | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAsset, MultiLocation, Weight]>;
       /**
        * Generic tx
        **/
