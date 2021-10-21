@@ -265,8 +265,6 @@
             "Fail": "Failed"
         }
     },
-    "Currency": "CurrencyIdOf",
-    "Amount": "AmountOf",
     "PalletBalanceOf": "Balance",
     "NumberOrHex": {
         "_enum": {
@@ -470,6 +468,9 @@
     "AmountOf": "Balance",
     "StorageVersion": "Releases",
     "ShareWeight": "Balance",
+    "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
+    "OrmlTokensBalanceLock": "BalanceLock",
+    "OrmlTokensAccountData": "OrmlAccountData",
     "TransferOriginType": {
         "_enum": {
             "FromSelf": 0,

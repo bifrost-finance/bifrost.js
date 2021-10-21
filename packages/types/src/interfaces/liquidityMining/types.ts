@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/primitives';
 import type { AccountId, Balance, BlockNumber, FixedU128 } from '@bifrost-finance/types/interfaces/runtime';
 import type { BTreeMap, Enum, Option, Struct, u32 } from '@polkadot/types';
 import type { ITuple } from '@polkadot/types/types';

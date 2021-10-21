@@ -1,9 +1,9 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
 import type { NumberOrHex } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { PoolId } from '@bifrost-finance/types/interfaces/liquidityMining';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/primitives';
 import type { AccountId, AccountIdOf, Balance, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@bifrost-finance/types/interfaces/runtime';
 import type { ContributionStatus } from '@bifrost-finance/types/interfaces/salp';
 import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
@@ -120,6 +120,10 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Returns a child storage entry at a specific block state
        **/
       getStorage: AugmentedRpc<(childKey: PrefixedStorageKey | string | Uint8Array, key: StorageKey | string | Uint8Array | any, at?: Hash | string | Uint8Array) => Observable<Option<StorageData>>>;
+      /**
+       * Returns child storage entries for multiple keys at a specific block state
+       **/
+      getStorageEntries: AugmentedRpc<(childKey: PrefixedStorageKey | string | Uint8Array, keys: Vec<StorageKey> | (StorageKey | string | Uint8Array | any)[], at?: Hash | string | Uint8Array) => Observable<Vec<Option<StorageData>>>>;
       /**
        * Returns the hash of a child storage entry at a block state
        **/
@@ -599,10 +603,6 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        **/
       getAllAssets: AugmentedRpc<(at?: Hash | string | Uint8Array) => Observable<Vec<ZenlinkAssetId>>>;
       /**
-       * Get the information of all the exchange pairs.
-       **/
-      getAllPairs: AugmentedRpc<(at?: BlockHash | string | Uint8Array) => Observable<Vec<PairInfo>>>;
-      /**
        * Get the output token amount for an exact input token amount.
        **/
       getAmountInPrice: AugmentedRpc<(supply: ZenlinkAssetBalance | AnyNumber | Uint8Array, path: Vec<ZenlinkAssetId> | (ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array)[], at?: BlockHash | string | Uint8Array) => Observable<u128>>;
@@ -618,10 +618,6 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * Get the estimated number of LP token acquired given the desired and minimum amount for both in-token and out-token.
        **/
       getEstimateLptoken: AugmentedRpc<(asset_0: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, asset_1: ZenlinkAssetId | { chain_id?: any; asset_type?: any; asset_index?: any } | string | Uint8Array, amount_0_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_desired: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_0_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, amount_1_min: ZenlinkAssetBalance | AnyNumber | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<u128>>;
-      /**
-       * Get ownership of all exchange pairs for a particular account.
-       **/
-      getOwnerPairs: AugmentedRpc<(owner: AccountId | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Vec<PairInfo>>>;
       /**
        * Get the detailed information of a particular exchange pair.
        **/

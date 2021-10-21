@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-export * from './aSharePrimitives/types';
+export * from './primitives/types';
 export * from './tokens/types';
 export * from './flexibleFee/types';
 export * from './minterReward/types';
@@ -13,5 +13,4 @@ export * from './vtokenMint/types';
 export * from './zenlinkProtocol/types';
 export * from './bancor/types';
 export * from './runtime/types';
-export * from './currencies/types';
 export * from './liquidityMining/types';

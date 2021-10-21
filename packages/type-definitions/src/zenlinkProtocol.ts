@@ -46,34 +46,6 @@ export default {
       ],
       type: '(u32, AccountId, String)'
     },
-    getAllPairs: {
-      description: 'Get the information of all the exchange pairs.',
-      params: [
-        {
-          name: 'at',
-          type: 'BlockHash',
-          isHistoric: true,
-          isOptional: true
-        }
-      ],
-      type: 'Vec<PairInfo>'
-    },
-    getOwnerPairs: {
-      description: 'Get ownership of all exchange pairs for a particular account.',
-      params: [
-        {
-          name: 'owner',
-          type: 'AccountId'
-        },
-        {
-          name: 'at',
-          type: 'BlockHash',
-          isHistoric: true,
-          isOptional: true
-        }
-      ],
-      type: 'Vec<PairInfo>'
-    },
     getPairByAssetId: {
       description: 'Get the detailed information of a particular exchange pair.',
       params: [

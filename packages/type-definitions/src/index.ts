@@ -5,7 +5,7 @@ import { jsonrpcFromDefs, typesAliasFromDefs, typesFromDefs } from '@open-web3/o
 
 import { signedExtensions as bifrostSignedExtensions } from './signedExtensions';
 
-import aSharePrimitives from './aSharePrimitives';
+import primitives from './primitives';
 import bid from './bid';
 import bridgeEos from './bridgeEos';
 import bancor from './bancor';
@@ -21,7 +21,6 @@ import vsbondAuction from './vsbondAuction';
 import vtokenMint from './vtokenMint';
 import zenlinkProtocol from './zenlinkProtocol';
 import runtime from './runtime';
-import currencies from './currencies';
 import liquidityMining from './liquidityMining';
 import xTokens from './xTokens';
 
@@ -37,7 +36,6 @@ const bifrostDefs = {
   bridgeEos,
   bancor,
   bridgeIost,
-  currencies,
   flexibleFee,
   minterReward,
   salp,
@@ -49,7 +47,7 @@ const bifrostDefs = {
   vsbondAuction,
   vtokenMint,
   zenlinkProtocol,
-  aSharePrimitives,
+  primitives,
   liquidityMining,
   xTokens
 };

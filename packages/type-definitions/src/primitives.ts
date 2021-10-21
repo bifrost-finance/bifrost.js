@@ -29,6 +29,9 @@ export default {
     AmountOf: 'Balance',
     StorageVersion: 'Releases',
     ShareWeight: 'Balance',
+    NodePrimitivesCurrencyCurrencyId:"CurrencyId",
+    OrmlTokensBalanceLock:'BalanceLock',
+    OrmlTokensAccountData:'OrmlAccountData',
     TransferOriginType: {
       _enum: {
         FromSelf: 0,

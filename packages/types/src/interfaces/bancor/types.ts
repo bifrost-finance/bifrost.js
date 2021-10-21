@@ -1,7 +1,7 @@
 // Auto-generated via `yarn polkadot-types-from-defs`, do not edit
 /* eslint-disable */
 
-import type { CurrencyId } from '@bifrost-finance/types/interfaces/aSharePrimitives';
+import type { CurrencyId } from '@bifrost-finance/types/interfaces/primitives';
 import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
 import type { Struct } from '@polkadot/types';
 
