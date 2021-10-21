@@ -2,14 +2,18 @@
 /* eslint-disable */
 
 import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
-import type { OrmlAccountData } from '@open-web3/orml-types/interfaces/tokens';
 import type { Enum, u8 } from '@polkadot/types';
-import type { BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 import type { ITuple } from '@polkadot/types/types';
 
+/** @name Amount */
+export interface Amount extends AmountOf {}
+
 /** @name AmountOf */
 export interface AmountOf extends Balance {}
+
+/** @name Currency */
+export interface Currency extends CurrencyIdOf {}
 
 /** @name CurrencyId */
 export interface CurrencyId extends Enum {
@@ -31,15 +35,6 @@ export interface CurrencyId extends Enum {
 
 /** @name CurrencyIdOf */
 export interface CurrencyIdOf extends CurrencyId {}
-
-/** @name NodePrimitivesCurrencyCurrencyId */
-export interface NodePrimitivesCurrencyCurrencyId extends CurrencyId {}
-
-/** @name OrmlTokensAccountData */
-export interface OrmlTokensAccountData extends OrmlAccountData {}
-
-/** @name OrmlTokensBalanceLock */
-export interface OrmlTokensBalanceLock extends BalanceLock {}
 
 /** @name ShareWeight */
 export interface ShareWeight extends Balance {}

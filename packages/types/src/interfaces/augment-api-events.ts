@@ -1,11 +1,10 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { NodePrimitivesCurrencyCurrencyId } from '@bifrost-finance/types/interfaces/primitives';
-import type { AccountId32 } from '@bifrost-finance/types/interfaces/runtime';
+import type { Amount, Currency, CurrencyId } from '@bifrost-finance/types/interfaces/primitives';
+import type { AccountId, Balance } from '@bifrost-finance/types/interfaces/runtime';
 import type { ApiTypes } from '@polkadot/api/types';
-import type { i128, u128 } from '@polkadot/types';
-import type { XcmV1MultiAsset, XcmV1MultiLocation } from '@polkadot/types/lookup';
+import type { MultiAsset, MultiLocation } from '@polkadot/types/interfaces/xcm';
 
 declare module '@polkadot/api/types/events' {
   export interface AugmentedEvents<ApiType> {
@@ -13,19 +12,19 @@ declare module '@polkadot/api/types/events' {
       /**
        * Update balance success. \[currency_id, who, amount\]
        **/
-      BalanceUpdated: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, i128]>;
+      BalanceUpdated: AugmentedEvent<ApiType, [Currency, AccountId, Amount]>;
       /**
        * Deposit success. \[currency_id, who, amount\]
        **/
-      Deposited: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128]>;
+      Deposited: AugmentedEvent<ApiType, [Currency, AccountId, Balance]>;
       /**
        * Currency transfer success. \[currency_id, from, to, amount\]
        **/
-      Transferred: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, AccountId32, u128]>;
+      Transferred: AugmentedEvent<ApiType, [Currency, AccountId, AccountId, Balance]>;
       /**
        * Withdraw success. \[currency_id, who, amount\]
        **/
-      Withdrawn: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128]>;
+      Withdrawn: AugmentedEvent<ApiType, [Currency, AccountId, Balance]>;
       /**
        * Generic event
        **/
@@ -35,32 +34,32 @@ declare module '@polkadot/api/types/events' {
       /**
        * A balance was set by root. \[who, free, reserved\]
        **/
-      BalanceSet: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128, u128]>;
+      BalanceSet: AugmentedEvent<ApiType, [CurrencyId, AccountId, Balance, Balance]>;
       /**
        * An account was removed whose balance was non-zero but below
        * ExistentialDeposit, resulting in an outright loss. \[currency_id,
        * account, balance\]
        **/
-      DustLost: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128]>;
+      DustLost: AugmentedEvent<ApiType, [CurrencyId, AccountId, Balance]>;
       /**
        * An account was created with some free balance. \[currency_id,
        * account, free_balance\]
        **/
-      Endowed: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128]>;
+      Endowed: AugmentedEvent<ApiType, [CurrencyId, AccountId, Balance]>;
       /**
        * Some balance was reserved (moved from free to reserved).
        * \[currency_id, who, value\]
        **/
-      Reserved: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128]>;
+      Reserved: AugmentedEvent<ApiType, [CurrencyId, AccountId, Balance]>;
       /**
        * Transfer succeeded. \[currency_id, from, to, value\]
        **/
-      Transfer: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, AccountId32, u128]>;
+      Transfer: AugmentedEvent<ApiType, [CurrencyId, AccountId, AccountId, Balance]>;
       /**
        * Some balance was unreserved (moved from reserved to free).
        * \[currency_id, who, value\]
        **/
-      Unreserved: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128]>;
+      Unreserved: AugmentedEvent<ApiType, [CurrencyId, AccountId, Balance]>;
       /**
        * Generic event
        **/
@@ -70,11 +69,11 @@ declare module '@polkadot/api/types/events' {
       /**
        * Transferred. \[sender, currency_id, amount, dest\]
        **/
-      Transferred: AugmentedEvent<ApiType, [AccountId32, NodePrimitivesCurrencyCurrencyId, u128, XcmV1MultiLocation]>;
+      Transferred: AugmentedEvent<ApiType, [AccountId, CurrencyId, Balance, MultiLocation]>;
       /**
        * Transferred `MultiAsset`. \[sender, asset, dest\]
        **/
-      TransferredMultiAsset: AugmentedEvent<ApiType, [AccountId32, XcmV1MultiAsset, XcmV1MultiLocation]>;
+      TransferredMultiAsset: AugmentedEvent<ApiType, [AccountId, MultiAsset, MultiLocation]>;
       /**
        * Generic event
        **/

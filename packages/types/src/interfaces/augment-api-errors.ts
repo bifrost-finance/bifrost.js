@@ -64,10 +64,6 @@ declare module '@polkadot/api/types/errors' {
        **/
       CannotReanchor: AugmentedError<ApiType>;
       /**
-       * The destination `MultiLocation` provided cannot be inverted.
-       **/
-      DestinationNotInvertible: AugmentedError<ApiType>;
-      /**
        * Could not get ancestry of asset reserve location.
        **/
       InvalidAncestry: AugmentedError<ApiType>;

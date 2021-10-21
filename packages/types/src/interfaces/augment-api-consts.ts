@@ -1,16 +1,17 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { NodePrimitivesCurrencyCurrencyId } from '@bifrost-finance/types/interfaces/primitives';
+import type { CurrencyIdOf } from '@bifrost-finance/types/interfaces/primitives';
+import type { Weight } from '@bifrost-finance/types/interfaces/runtime';
 import type { ApiTypes } from '@polkadot/api/types';
-import type { u32, u64 } from '@polkadot/types';
-import type { XcmV1MultiLocation } from '@polkadot/types/lookup';
+import type { u32 } from '@polkadot/types';
+import type { MultiLocation } from '@polkadot/types/interfaces/xcm';
 import type { Codec } from '@polkadot/types/types';
 
 declare module '@polkadot/api/types/consts' {
   export interface AugmentedConsts<ApiType> {
     currencies: {
-      getNativeCurrencyId: NodePrimitivesCurrencyCurrencyId & AugmentedConst<ApiType>;
+      getNativeCurrencyId: CurrencyIdOf & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
@@ -30,11 +31,11 @@ declare module '@polkadot/api/types/consts' {
        * The actually weight for an XCM message is `T::BaseXcmWeight +
        * T::Weigher::weight(&msg)`.
        **/
-      baseXcmWeight: u64 & AugmentedConst<ApiType>;
+      baseXcmWeight: Weight & AugmentedConst<ApiType>;
       /**
        * Self chain location.
        **/
-      selfLocation: XcmV1MultiLocation & AugmentedConst<ApiType>;
+      selfLocation: MultiLocation & AugmentedConst<ApiType>;
       /**
        * Generic const
        **/
