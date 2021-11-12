@@ -2,6 +2,7 @@ import type { OverrideVersionedType } from '@polkadot/types/types';
 
 const TokenSymbol = {
   _enum: {
+    ASG: 0,
     BNC: 1,
     KUSD: 2,
     DOT: 3,
