@@ -13,6 +13,20 @@ export default {
         }
       ],
       type: '(Balance, ContributionStatus)'
+    },
+    getLiteContribution: {
+      description: 'salp getLiteContribution',
+      params: [
+        {
+          name: 'index',
+          type: 'ParaId'
+        },
+        {
+          name: 'who',
+          type: 'AccountIdOf'
+        }
+      ],
+      type: '(Balance, ContributionStatus)'
     }
   },
   types: {

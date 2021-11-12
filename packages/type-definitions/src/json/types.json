@@ -506,6 +506,5 @@
         "per_block": "Balance",
         "claimed": "Balance",
         "gain_avg": "FixedU128"
-    },
-    "AssetInstance": "AssetInstanceV1"
+    }
 }

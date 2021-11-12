@@ -1,6 +1,7 @@
 export default {
   rpc: {},
   types: {
-    AssetInstance: 'AssetInstanceV1'
+    AssetInstance: 'AssetInstanceV1',
+    XcmVersionedMultiAsset:"XcmV1MultiAsset"
   }
 };

@@ -414,6 +414,10 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
        * salp getContribution
        **/
       getContribution: AugmentedRpc<(index: ParaId | AnyNumber | Uint8Array, who: AccountIdOf | string | Uint8Array) => Observable<ITuple<[Balance, ContributionStatus]>>>;
+      /**
+       * salp getLiteContribution
+       **/
+      getLiteContribution: AugmentedRpc<(index: ParaId | AnyNumber | Uint8Array, who: AccountIdOf | string | Uint8Array) => Observable<ITuple<[Balance, ContributionStatus]>>>;
     };
     state: {
       /**

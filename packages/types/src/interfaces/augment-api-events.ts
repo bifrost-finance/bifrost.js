@@ -5,7 +5,6 @@ import type { NodePrimitivesCurrencyCurrencyId } from '@bifrost-finance/types/in
 import type { AccountId32 } from '@bifrost-finance/types/interfaces/runtime';
 import type { ApiTypes } from '@polkadot/api/types';
 import type { i128, u128 } from '@polkadot/types';
-import type { XcmV1MultiAsset, XcmV1MultiLocation } from '@polkadot/types/lookup';
 
 declare module '@polkadot/api/types/events' {
   export interface AugmentedEvents<ApiType> {
@@ -61,20 +60,6 @@ declare module '@polkadot/api/types/events' {
        * \[currency_id, who, value\]
        **/
       Unreserved: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128]>;
-      /**
-       * Generic event
-       **/
-      [key: string]: AugmentedEvent<ApiType>;
-    };
-    xTokens: {
-      /**
-       * Transferred. \[sender, currency_id, amount, dest\]
-       **/
-      Transferred: AugmentedEvent<ApiType, [AccountId32, NodePrimitivesCurrencyCurrencyId, u128, XcmV1MultiLocation]>;
-      /**
-       * Transferred `MultiAsset`. \[sender, asset, dest\]
-       **/
-      TransferredMultiAsset: AugmentedEvent<ApiType, [AccountId32, XcmV1MultiAsset, XcmV1MultiLocation]>;
       /**
        * Generic event
        **/

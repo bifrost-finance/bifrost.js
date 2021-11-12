@@ -4,9 +4,8 @@
 import type { NodePrimitivesCurrencyCurrencyId } from '@bifrost-finance/types/interfaces/primitives';
 import type { Call, MultiAddress } from '@bifrost-finance/types/interfaces/runtime';
 import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
-import type { Compact, bool, i128, u128, u64 } from '@polkadot/types';
+import type { Compact, bool, i128, u128 } from '@polkadot/types';
 import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
-import type { XcmV1MultiAsset, XcmV1MultiLocation } from '@polkadot/types/lookup';
 import type { AnyNumber } from '@polkadot/types/types';
 
 declare module '@polkadot/api/types/submittable' {
@@ -113,42 +112,6 @@ declare module '@polkadot/api/types/submittable' {
        * - `amount`: free balance amount to tranfer.
        **/
       transferKeepAlive: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
-      /**
-       * Generic tx
-       **/
-      [key: string]: SubmittableExtrinsicFunction<ApiType>;
-    };
-    xTokens: {
-      /**
-       * Transfer native currencies.
-       * 
-       * `dest_weight` is the weight for XCM execution on the dest chain, and
-       * it would be charged from the transferred assets. If set below
-       * requirements, the execution may fail and assets wouldn't be
-       * received.
-       * 
-       * It's a no-op if any error on local XCM execution or message sending.
-       * Note sending assets out per se doesn't guarantee they would be
-       * received. Receiving depends on if the XCM message could be delivered
-       * by the network, and if the receiving chain would handle
-       * messages correctly.
-       **/
-      transfer: AugmentedSubmittable<(currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | string | Uint8Array, amount: u128 | AnyNumber | Uint8Array, dest: XcmV1MultiLocation | { parents?: any; interior?: any } | string | Uint8Array, destWeight: u64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [NodePrimitivesCurrencyCurrencyId, u128, XcmV1MultiLocation, u64]>;
-      /**
-       * Transfer `MultiAsset`.
-       * 
-       * `dest_weight` is the weight for XCM execution on the dest chain, and
-       * it would be charged from the transferred assets. If set below
-       * requirements, the execution may fail and assets wouldn't be
-       * received.
-       * 
-       * It's a no-op if any error on local XCM execution or message sending.
-       * Note sending assets out per se doesn't guarantee they would be
-       * received. Receiving depends on if the XCM message could be delivered
-       * by the network, and if the receiving chain would handle
-       * messages correctly.
-       **/
-      transferMultiasset: AugmentedSubmittable<(asset: XcmV1MultiAsset | { id?: any; fun?: any } | string | Uint8Array, dest: XcmV1MultiLocation | { parents?: any; interior?: any } | string | Uint8Array, destWeight: u64 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [XcmV1MultiAsset, XcmV1MultiLocation, u64]>;
       /**
        * Generic tx
        **/

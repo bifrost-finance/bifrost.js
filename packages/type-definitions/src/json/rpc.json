@@ -89,6 +89,24 @@
             "jsonrpc": "salp_getContribution",
             "method": "getContribution",
             "section": "salp"
+        },
+        "getLiteContribution": {
+            "description": "salp getLiteContribution",
+            "params": [
+                {
+                    "name": "index",
+                    "type": "ParaId"
+                },
+                {
+                    "name": "who",
+                    "type": "AccountIdOf"
+                }
+            ],
+            "type": "(Balance, ContributionStatus)",
+            "isSubscription": false,
+            "jsonrpc": "salp_getLiteContribution",
+            "method": "getLiteContribution",
+            "section": "salp"
         }
     },
     "vtokenMint": {

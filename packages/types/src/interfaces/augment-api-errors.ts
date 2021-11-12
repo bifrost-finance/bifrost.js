@@ -15,6 +15,10 @@ declare module '@polkadot/api/types/errors' {
        **/
       BalanceTooLow: AugmentedError<ApiType>;
       /**
+       * Deposit result is not expected
+       **/
+      DepositFailed: AugmentedError<ApiType>;
+      /**
        * Generic error
        **/
       [key: string]: AugmentedError<ApiType>;
@@ -48,53 +52,6 @@ declare module '@polkadot/api/types/errors' {
        * Failed because the maximum locks was exceeded
        **/
       MaxLocksExceeded: AugmentedError<ApiType>;
-      /**
-       * Generic error
-       **/
-      [key: string]: AugmentedError<ApiType>;
-    };
-    xTokens: {
-      /**
-       * Asset has no reserve location.
-       **/
-      AssetHasNoReserve: AugmentedError<ApiType>;
-      /**
-       * Could not re-anchor the assets to declare the fees for the
-       * destination chain.
-       **/
-      CannotReanchor: AugmentedError<ApiType>;
-      /**
-       * The destination `MultiLocation` provided cannot be inverted.
-       **/
-      DestinationNotInvertible: AugmentedError<ApiType>;
-      /**
-       * Could not get ancestry of asset reserve location.
-       **/
-      InvalidAncestry: AugmentedError<ApiType>;
-      /**
-       * Invalid transfer destination.
-       **/
-      InvalidDest: AugmentedError<ApiType>;
-      /**
-       * Not cross-chain transfer.
-       **/
-      NotCrossChainTransfer: AugmentedError<ApiType>;
-      /**
-       * Currency is not cross-chain transferable.
-       **/
-      NotCrossChainTransferableCurrency: AugmentedError<ApiType>;
-      /**
-       * Not fungible asset.
-       **/
-      NotFungible: AugmentedError<ApiType>;
-      /**
-       * The message's weight could not be determined.
-       **/
-      UnweighableMessage: AugmentedError<ApiType>;
-      /**
-       * XCM execution failed.
-       **/
-      XcmExecutionFailed: AugmentedError<ApiType>;
       /**
        * Generic error
        **/

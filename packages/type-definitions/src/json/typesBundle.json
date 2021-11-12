@@ -92,6 +92,24 @@
                         "jsonrpc": "salp_getContribution",
                         "method": "getContribution",
                         "section": "salp"
+                    },
+                    "getLiteContribution": {
+                        "description": "salp getLiteContribution",
+                        "params": [
+                            {
+                                "name": "index",
+                                "type": "ParaId"
+                            },
+                            {
+                                "name": "who",
+                                "type": "AccountIdOf"
+                            }
+                        ],
+                        "type": "(Balance, ContributionStatus)",
+                        "isSubscription": false,
+                        "jsonrpc": "salp_getLiteContribution",
+                        "method": "getLiteContribution",
+                        "section": "salp"
                     }
                 },
                 "vtokenMint": {
@@ -827,7 +845,6 @@
                             "claimed": "Balance",
                             "gain_avg": "FixedU128"
                         },
-                        "AssetInstance": "AssetInstanceV1",
                         "MultiAsset": "MultiAssetV0",
                         "Xcm": "XcmV0",
                         "XcmOrder": "XcmOrderV0",
@@ -1348,7 +1365,6 @@
                             "claimed": "Balance",
                             "gain_avg": "FixedU128"
                         },
-                        "AssetInstance": "AssetInstanceV1",
                         "MultiAsset": "MultiAssetV1",
                         "Xcm": "XcmV1",
                         "XcmOrder": "XcmOrderV1",
@@ -1456,6 +1472,24 @@
                         "isSubscription": false,
                         "jsonrpc": "salp_getContribution",
                         "method": "getContribution",
+                        "section": "salp"
+                    },
+                    "getLiteContribution": {
+                        "description": "salp getLiteContribution",
+                        "params": [
+                            {
+                                "name": "index",
+                                "type": "ParaId"
+                            },
+                            {
+                                "name": "who",
+                                "type": "AccountIdOf"
+                            }
+                        ],
+                        "type": "(Balance, ContributionStatus)",
+                        "isSubscription": false,
+                        "jsonrpc": "salp_getLiteContribution",
+                        "method": "getLiteContribution",
                         "section": "salp"
                     }
                 },
@@ -2194,7 +2228,6 @@
                             "claimed": "Balance",
                             "gain_avg": "FixedU128"
                         },
-                        "AssetInstance": "AssetInstanceV1",
                         "MultiAsset": "MultiAssetV0",
                         "Xcm": "XcmV0",
                         "XcmOrder": "XcmOrderV0",
@@ -2717,7 +2750,6 @@
                             "claimed": "Balance",
                             "gain_avg": "FixedU128"
                         },
-                        "AssetInstance": "AssetInstanceV1",
                         "MultiAsset": "MultiAssetV1",
                         "Xcm": "XcmV1",
                         "XcmOrder": "XcmOrderV1",
