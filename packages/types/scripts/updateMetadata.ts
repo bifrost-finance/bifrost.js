@@ -4,7 +4,7 @@ import fs from 'fs';
 import { w3cwebsocket as WebSocket } from 'websocket';
 
 const main = (): void => {
-  const endpoint = 'wss://bifrost-rpc.liebi.com/ws';
+  const endpoint = 'wss://bifrost-parachain.api.onfinality.io/public-ws';
   console.log('Connecting to ', endpoint);
   const ws = new WebSocket(endpoint);
   ws.onopen = (): void => {
