@@ -64,7 +64,7 @@
                     "isOptional": true
                 }
             ],
-            "type": "(CurrencyId, NumberOrHex)",
+            "type": "(CurrencyId, U256)",
             "isSubscription": false,
             "jsonrpc": "flexibleFee_getFeeTokenAndAmount",
             "method": "getFeeTokenAndAmount",
@@ -314,6 +314,10 @@
                 {
                     "name": "pid",
                     "type": "PoolId"
+                },
+                {
+                    "name": "pallet_instance",
+                    "type": "U32"
                 },
                 {
                     "name": "at",

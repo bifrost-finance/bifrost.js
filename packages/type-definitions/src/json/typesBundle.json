@@ -67,7 +67,7 @@
                                 "isOptional": true
                             }
                         ],
-                        "type": "(CurrencyId, NumberOrHex)",
+                        "type": "(CurrencyId, U256)",
                         "isSubscription": false,
                         "jsonrpc": "flexibleFee_getFeeTokenAndAmount",
                         "method": "getFeeTokenAndAmount",
@@ -317,6 +317,10 @@
                             {
                                 "name": "pid",
                                 "type": "PoolId"
+                            },
+                            {
+                                "name": "pallet_instance",
+                                "type": "U32"
                             },
                             {
                                 "name": "at",
@@ -606,12 +610,6 @@
                             }
                         },
                         "PalletBalanceOf": "Balance",
-                        "NumberOrHex": {
-                            "_enum": {
-                                "Number": "u64",
-                                "Hex": "U256"
-                            }
-                        },
                         "ExtraFeeName": {
                             "_enum": [
                                 "SalpContribute",
@@ -1127,12 +1125,6 @@
                             }
                         },
                         "PalletBalanceOf": "Balance",
-                        "NumberOrHex": {
-                            "_enum": {
-                                "Number": "u64",
-                                "Hex": "U256"
-                            }
-                        },
                         "ExtraFeeName": {
                             "_enum": [
                                 "SalpContribute",
@@ -1450,7 +1442,7 @@
                                 "isOptional": true
                             }
                         ],
-                        "type": "(CurrencyId, NumberOrHex)",
+                        "type": "(CurrencyId, U256)",
                         "isSubscription": false,
                         "jsonrpc": "flexibleFee_getFeeTokenAndAmount",
                         "method": "getFeeTokenAndAmount",
@@ -1700,6 +1692,10 @@
                             {
                                 "name": "pid",
                                 "type": "PoolId"
+                            },
+                            {
+                                "name": "pallet_instance",
+                                "type": "U32"
                             },
                             {
                                 "name": "at",
@@ -1989,12 +1985,6 @@
                             }
                         },
                         "PalletBalanceOf": "Balance",
-                        "NumberOrHex": {
-                            "_enum": {
-                                "Number": "u64",
-                                "Hex": "U256"
-                            }
-                        },
                         "ExtraFeeName": {
                             "_enum": [
                                 "SalpContribute",
@@ -2511,12 +2501,6 @@
                             }
                         },
                         "PalletBalanceOf": "Balance",
-                        "NumberOrHex": {
-                            "_enum": {
-                                "Number": "u64",
-                                "Hex": "U256"
-                            }
-                        },
                         "ExtraFeeName": {
                             "_enum": [
                                 "SalpContribute",

@@ -18,17 +18,11 @@ export default {
           isOptional: true
         }
       ],
-      type: '(CurrencyId, NumberOrHex)'
+      type: '(CurrencyId, U256)'
     }
   },
   types: {
     PalletBalanceOf: 'Balance',
-    NumberOrHex: {
-      _enum: {
-        Number: 'u64',
-        Hex: 'U256'
-      }
-    },
     ExtraFeeName: {
       _enum: ['SalpContribute', 'NoExtraFee']
     }

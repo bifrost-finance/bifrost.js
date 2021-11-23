@@ -12,6 +12,10 @@ export default {
           type: 'PoolId'
         },
         {
+          name: 'pallet_instance',
+          type: 'U32'
+        },
+        {
           name: 'at',
           type: 'Hash',
           isOptional: true

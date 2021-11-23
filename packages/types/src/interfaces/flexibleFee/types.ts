@@ -2,20 +2,12 @@
 /* eslint-disable */
 
 import type { Balance } from '@bifrost-finance/types/interfaces/runtime';
-import type { Enum, U256, u64 } from '@polkadot/types';
+import type { Enum } from '@polkadot/types';
 
 /** @name ExtraFeeName */
 export interface ExtraFeeName extends Enum {
   readonly isSalpContribute: boolean;
   readonly isNoExtraFee: boolean;
-}
-
-/** @name NumberOrHex */
-export interface NumberOrHex extends Enum {
-  readonly isNumber: boolean;
-  readonly asNumber: u64;
-  readonly isHex: boolean;
-  readonly asHex: U256;
 }
 
 /** @name PalletBalanceOf */

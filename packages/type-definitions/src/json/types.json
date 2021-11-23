@@ -266,12 +266,6 @@
         }
     },
     "PalletBalanceOf": "Balance",
-    "NumberOrHex": {
-        "_enum": {
-            "Number": "u64",
-            "Hex": "U256"
-        }
-    },
     "ExtraFeeName": {
         "_enum": [
             "SalpContribute",

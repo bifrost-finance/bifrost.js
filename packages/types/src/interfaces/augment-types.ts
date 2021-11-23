@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { BancorPool } from '@bifrost-finance/types/interfaces/bancor';
-import type { ExtraFeeName, NumberOrHex, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
+import type { ExtraFeeName, PalletBalanceOf } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { DepositData, PoolId, PoolState, PoolType, RewardData } from '@bifrost-finance/types/interfaces/liquidityMining';
 import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfaces/minterReward';
 import type { Amount, AmountOf, Currency, CurrencyId, CurrencyIdOf, NodePrimitivesCurrencyCurrencyId, OrmlTokensAccountData, OrmlTokensBalanceLock, ShareWeight, StorageVersion, TokenSymbol, TransferOriginType } from '@bifrost-finance/types/interfaces/primitives';
@@ -656,7 +656,6 @@ declare module '@polkadot/types/types/registry' {
     NominatorIndexCompact: NominatorIndexCompact;
     NotConnectedPeer: NotConnectedPeer;
     Null: Null;
-    NumberOrHex: NumberOrHex;
     OffchainAccuracy: OffchainAccuracy;
     OffchainAccuracyCompact: OffchainAccuracyCompact;
     OffenceDetails: OffenceDetails;

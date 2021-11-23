@@ -1,14 +1,13 @@
 // Auto-generated via `yarn polkadot-types-from-chain`, do not edit
 /* eslint-disable */
 
-import type { NumberOrHex } from '@bifrost-finance/types/interfaces/flexibleFee';
 import type { PoolId } from '@bifrost-finance/types/interfaces/liquidityMining';
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/primitives';
 import type { AccountId, AccountIdOf, Balance, BlockNumber, H160, H256, H64, Hash, Header, Index, Justification, KeyValue, OracleKey, SignedBlock, StorageData } from '@bifrost-finance/types/interfaces/runtime';
 import type { ContributionStatus } from '@bifrost-finance/types/interfaces/salp';
 import type { PairInfo, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { RpcDataProviderId, TimestampedValue } from '@open-web3/orml-types/interfaces/oracle';
-import type { Bytes, HashMap, Json, Metadata, Null, Option, StorageKey, Text, U256, U64, Vec, bool, u128, u32, u64 } from '@polkadot/types';
+import type { Bytes, HashMap, Json, Metadata, Null, Option, StorageKey, Text, U256, U32, U64, Vec, bool, u128, u32, u64 } from '@polkadot/types';
 import type { ExtrinsicOrHash, ExtrinsicStatus } from '@polkadot/types/interfaces/author';
 import type { EpochAuthorship } from '@polkadot/types/interfaces/babe';
 import type { BeefySignedCommitment } from '@polkadot/types/interfaces/beefy';
@@ -331,7 +330,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get charging token type and amount in terms of flexible transaction fee.
        **/
-      getFeeTokenAndAmount: AugmentedRpc<(who: AccountId | string | Uint8Array, extrinsic: Bytes | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[CurrencyId, NumberOrHex]>>>;
+      getFeeTokenAndAmount: AugmentedRpc<(who: AccountId | string | Uint8Array, extrinsic: Bytes | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<ITuple<[CurrencyId, U256]>>>;
     };
     grandpa: {
       /**
@@ -351,7 +350,7 @@ declare module '@polkadot/rpc-core/types.jsonrpc' {
       /**
        * Get the rewards users deserve
        **/
-      getRewards: AugmentedRpc<(who: AccountId | string | Uint8Array, pid: PoolId | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Vec<ITuple<[CurrencyId, Balance]>>>>;
+      getRewards: AugmentedRpc<(who: AccountId | string | Uint8Array, pid: PoolId | AnyNumber | Uint8Array, pallet_instance: U32 | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Vec<ITuple<[CurrencyId, Balance]>>>>;
     };
     mmr: {
       /**
