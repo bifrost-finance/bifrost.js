@@ -10,7 +10,7 @@ import type { AccountId, AccountId20, AccountId32, AccountIdOf, AccountIndex, Ad
 import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, ParachainDerivedProxyAccountType, ParachainTransactProxyType, ParachainTransactType, RedeemStatus, RpcContributionStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { BifrostVestingInfo, MaxLocksOf } from '@bifrost-finance/types/interfaces/vesting';
-import type { OrderId, OrderInfo, OrderState, U64F64 } from '@bifrost-finance/types/interfaces/vsbondAuction';
+import type { OrderId, OrderInfo, OrderType } from '@bifrost-finance/types/interfaces/vsbondAuction';
 import type { BootstrapParamter, PairInfo, PairMetadata, PairStatus, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { AuthorityOrigin, CallOf, DelayedOrigin, DispatchTime, ScheduleTaskIndex } from '@open-web3/orml-types/interfaces/authority';
 import type { GraduallyUpdate, StorageKeyBytes, StorageValue, StorageValueBytes } from '@open-web3/orml-types/interfaces/graduallyUpdates';
@@ -675,7 +675,7 @@ declare module '@polkadot/types/types/registry' {
     OrderedSet: OrderedSet;
     OrderId: OrderId;
     OrderInfo: OrderInfo;
-    OrderState: OrderState;
+    OrderType: OrderType;
     Origin: Origin;
     OriginCaller: OriginCaller;
     OriginKindV0: OriginKindV0;
@@ -1063,7 +1063,6 @@ declare module '@polkadot/types/types/registry' {
     U32F32: U32F32;
     u64: u64;
     U64: U64;
-    U64F64: U64F64;
     u8: u8;
     U8: U8;
     UnappliedSlash: UnappliedSlash;

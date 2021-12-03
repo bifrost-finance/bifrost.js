@@ -2,8 +2,8 @@
 /* eslint-disable */
 
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/primitives';
-import type { AccountIdOf } from '@bifrost-finance/types/interfaces/runtime';
-import type { Enum, Struct, u128, u64 } from '@polkadot/types';
+import type { AccountIdOf, BalanceOf } from '@bifrost-finance/types/interfaces/runtime';
+import type { Enum, Struct, u64 } from '@polkadot/types';
 
 /** @name OrderId */
 export interface OrderId extends u64 {}
@@ -12,21 +12,18 @@ export interface OrderId extends u64 {}
 export interface OrderInfo extends Struct {
   readonly owner: AccountIdOf;
   readonly vsbond: CurrencyId;
-  readonly supply: u128;
-  readonly remain: u128;
-  readonly unit_price: U64F64;
+  readonly amount: BalanceOf;
+  readonly remain: BalanceOf;
+  readonly total_price: BalanceOf;
   readonly order_id: OrderId;
-  readonly order_state: OrderState;
+  readonly order_type: OrderType;
+  readonly remain_price: BalanceOf;
 }
 
-/** @name OrderState */
-export interface OrderState extends Enum {
-  readonly isInTrade: boolean;
-  readonly isRevoked: boolean;
-  readonly isClinchd: boolean;
+/** @name OrderType */
+export interface OrderType extends Enum {
+  readonly isSell: boolean;
+  readonly isBuy: boolean;
 }
-
-/** @name U64F64 */
-export interface U64F64 extends u128 {}
 
 export type PHANTOM_VSBONDAUCTION = 'vsbondAuction';

@@ -1,19 +1,22 @@
 export default {
   rpc: {},
   types: {
-    OrderId: 'u64',
     OrderInfo: {
       owner: 'AccountIdOf',
       vsbond: 'CurrencyId',
-      supply: 'u128',
-      remain: 'u128',
-      unit_price: 'U64F64',
+      amount: 'BalanceOf',
+      remain: 'BalanceOf',
+      total_price: 'BalanceOf',
       order_id: 'OrderId',
-      order_state: 'OrderState'
+      order_type: 'OrderType',
+      remain_price: 'BalanceOf'
     },
-    OrderState: {
-      _enum: ['InTrade', 'Revoked', 'Clinchd']
-    },
-    U64F64: 'u128'
+    OrderId: 'u64',
+    OrderType: {
+      _enum: {
+        Sell: 0,
+        Buy: 1
+      }
+    }
   }
 };

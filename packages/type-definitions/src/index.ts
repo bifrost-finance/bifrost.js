@@ -47,7 +47,7 @@ const bifrostDefs = {
   vtokenMint,
   zenlinkProtocol,
   primitives,
-  liquidityMining,
+  liquidityMining
 };
 
 export const types = {
