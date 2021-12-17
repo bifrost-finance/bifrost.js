@@ -8,7 +8,8 @@ const TokenSymbol = {
     DOT: 3,
     KSM: 4,
     KAR: 6,
-    ZLK: 7
+    ZLK: 7,
+    PHA: 8
   }
 };
 

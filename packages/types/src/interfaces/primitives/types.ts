@@ -66,6 +66,7 @@ export interface TokenSymbol extends Enum {
   readonly isEth: boolean;
   readonly isKar: boolean;
   readonly isZlk: boolean;
+  readonly isPha: boolean;
 }
 
 /** @name TransferOriginType */

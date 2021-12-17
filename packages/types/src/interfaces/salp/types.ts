@@ -24,8 +24,9 @@ export interface Contribution extends Struct {
 export interface ContributionStatus extends Enum {
   readonly isIdle: boolean;
   readonly isRefunded: boolean;
+  readonly isRedeemed: boolean;
   readonly isUnlocked: boolean;
-  readonly isRefunding: boolean;
+  readonly isMigratedIdle: boolean;
   readonly isContributing: boolean;
 }
 

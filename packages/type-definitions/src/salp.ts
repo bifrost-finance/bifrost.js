@@ -52,7 +52,7 @@ export default {
       }
     },
     ContributionStatus: {
-      _enum: ['Idle', 'Refunded', 'Unlocked', 'Refunding', 'Contributing']
+      _enum: ['Idle', 'Refunded', 'Redeemed', 'Unlocked', 'MigratedIdle', 'Contributing']
     },
     CrowdloanContributeCall: {
       _enum: {
