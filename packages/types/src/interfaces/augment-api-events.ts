@@ -5,6 +5,7 @@ import type { NodePrimitivesCurrencyCurrencyId } from '@bifrost-finance/types/in
 import type { AccountId32 } from '@bifrost-finance/types/interfaces/runtime';
 import type { ApiTypes } from '@polkadot/api/types';
 import type { i128, u128 } from '@polkadot/types';
+import type { FrameSupportTokensMiscBalanceStatus } from '@polkadot/types/lookup';
 
 declare module '@polkadot/api/types/events' {
   export interface AugmentedEvents<ApiType> {
@@ -46,6 +47,12 @@ declare module '@polkadot/api/types/events' {
        * account, free_balance\]
        **/
       Endowed: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, u128]>;
+      /**
+       * Some reserved balance was repatriated (moved from reserved to
+       * another account).
+       * \[currency_id, from, to, amount_actually_moved, status\]
+       **/
+      RepatriatedReserve: AugmentedEvent<ApiType, [NodePrimitivesCurrencyCurrencyId, AccountId32, AccountId32, u128, FrameSupportTokensMiscBalanceStatus]>;
       /**
        * Some balance was reserved (moved from free to reserved).
        * \[currency_id, who, value\]
