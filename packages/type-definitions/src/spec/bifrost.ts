@@ -9,7 +9,8 @@ const TokenSymbol = {
     KSM: 4,
     KAR: 6,
     ZLK: 7,
-    PHA: 8
+    PHA: 8,
+    RMRK: 9
   }
 };
 

@@ -11,7 +11,8 @@ export default {
         ETH: 5,
         KAR: 6,
         ZLK: 7,
-        PHA: 8
+        PHA: 8,
+        RMRK: 9
       }
     },
     CurrencyId: {
