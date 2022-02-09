@@ -90,5 +90,4 @@ generateDefaultConsts('packages/types/src/interfaces/augment-api-consts.ts', met
 generateDefaultTx('packages/types/src/interfaces/augment-api-tx.ts', metadata, definations);
 generateDefaultQuery('packages/types/src/interfaces/augment-api-query.ts', metadata, definations);
 generateDefaultRpc('packages/types/src/interfaces/augment-api-rpc.ts', definations);
-generateDefaultEvents('packages/types/src/interfaces/augment-api-events.ts', metadata, definations);
 generateDefaultErrors('packages/types/src/interfaces/augment-api-errors.ts', metadata, definations);

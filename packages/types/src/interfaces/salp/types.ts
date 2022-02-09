@@ -2,7 +2,7 @@
 /* eslint-disable */
 
 import type { AccountIdOf, Balance, BalanceOf } from '@bifrost-finance/types/interfaces/runtime';
-import type { Enum, Option, Struct, u32 } from '@polkadot/types';
+import type { Enum, Option, Struct, u32 } from '@polkadot/types-codec';
 import type { MultiSignature } from '@polkadot/types/interfaces/extrinsics';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 import type { SessionKeys1 } from '@polkadot/types/interfaces/session';
@@ -11,6 +11,7 @@ import type { SessionKeys1 } from '@polkadot/types/interfaces/session';
 export interface ContributeCall extends Enum {
   readonly isContribute: boolean;
   readonly asContribute: Contribution;
+  readonly type: 'Contribute';
 }
 
 /** @name Contribution */
@@ -28,12 +29,14 @@ export interface ContributionStatus extends Enum {
   readonly isUnlocked: boolean;
   readonly isMigratedIdle: boolean;
   readonly isContributing: boolean;
+  readonly type: 'Idle' | 'Refunded' | 'Redeemed' | 'Unlocked' | 'MigratedIdle' | 'Contributing';
 }
 
 /** @name CrowdloanContributeCall */
 export interface CrowdloanContributeCall extends Enum {
   readonly isCrowdloanContribute: boolean;
   readonly asCrowdloanContribute: ContributeCall;
+  readonly type: 'CrowdloanContribute';
 }
 
 /** @name FundInfo */
@@ -55,6 +58,7 @@ export interface FundStatus extends Enum {
   readonly isRefundWithdrew: boolean;
   readonly isRedeemWithdrew: boolean;
   readonly isEnd: boolean;
+  readonly type: 'Ongoing' | 'Retired' | 'Success' | 'Failed' | 'RefundWithdrew' | 'RedeemWithdrew' | 'End';
 }
 
 /** @name Keys */
@@ -64,18 +68,21 @@ export interface Keys extends SessionKeys1 {}
 export interface ParachainDerivedProxyAccountType extends Enum {
   readonly isSalp: boolean;
   readonly isStaking: boolean;
+  readonly type: 'Salp' | 'Staking';
 }
 
 /** @name ParachainTransactProxyType */
 export interface ParachainTransactProxyType extends Enum {
   readonly isPrimary: boolean;
   readonly isDerived: boolean;
+  readonly type: 'Primary' | 'Derived';
 }
 
 /** @name ParachainTransactType */
 export interface ParachainTransactType extends Enum {
   readonly isXcm: boolean;
   readonly isProxy: boolean;
+  readonly type: 'Xcm' | 'Proxy';
 }
 
 /** @name RedeemStatus */
@@ -88,6 +95,7 @@ export interface RpcContributionStatus extends Enum {
   readonly isRefunded: boolean;
   readonly isUnlocked: boolean;
   readonly isRedeemed: boolean;
+  readonly type: 'Idle' | 'Contributing' | 'Refunded' | 'Unlocked' | 'Redeemed';
 }
 
 /** @name TrieIndex */
@@ -103,6 +111,7 @@ export interface Withdraw extends Struct {
 export interface WithdrawCall extends Enum {
   readonly isWithdraw: boolean;
   readonly asWithdraw: Withdraw;
+  readonly type: 'Withdraw';
 }
 
 export type PHANTOM_SALP = 'salp';

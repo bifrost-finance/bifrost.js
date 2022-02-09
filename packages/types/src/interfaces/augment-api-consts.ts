@@ -2,12 +2,12 @@
 /* eslint-disable */
 
 import type { NodePrimitivesCurrencyCurrencyId } from '@bifrost-finance/types/interfaces/primitives';
-import type { ApiTypes } from '@polkadot/api/types';
-import type { u32 } from '@polkadot/types';
-import type { Codec } from '@polkadot/types/types';
+import type { ApiTypes } from '@polkadot/api-base/types';
+import type { u32 } from '@polkadot/types-codec';
+import type { Codec } from '@polkadot/types-codec/types';
 
-declare module '@polkadot/api/types/consts' {
-  export interface AugmentedConsts<ApiType> {
+declare module '@polkadot/api-base/types/consts' {
+  export interface AugmentedConsts<ApiType extends ApiTypes> {
     currencies: {
       getNativeCurrencyId: NodePrimitivesCurrencyCurrencyId & AugmentedConst<ApiType>;
       /**
@@ -22,9 +22,5 @@ declare module '@polkadot/api/types/consts' {
        **/
       [key: string]: Codec;
     };
-  }
-
-  export interface QueryableConsts<ApiType extends ApiTypes> extends AugmentedConsts<ApiType> {
-    [key: string]: QueryableModuleConsts;
-  }
-}
+  } // AugmentedConsts
+} // declare module

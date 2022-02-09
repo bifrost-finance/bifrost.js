@@ -2,8 +2,8 @@
 /* eslint-disable */
 
 import type { AccountId, BlockNumber } from '@bifrost-finance/types/interfaces/runtime';
-import type { Enum, Struct, u128, u32, u64, u8 } from '@polkadot/types';
-import type { ITuple } from '@polkadot/types/types';
+import type { Enum, Struct, u128, u32, u64, u8 } from '@polkadot/types-codec';
+import type { ITuple } from '@polkadot/types-codec/types';
 
 /** @name BootstrapParamter */
 export interface BootstrapParamter extends Struct {
@@ -39,6 +39,7 @@ export interface PairStatus extends Enum {
   readonly isBootstrap: boolean;
   readonly asBootstrap: BootstrapParamter;
   readonly isDisable: boolean;
+  readonly type: 'Trading' | 'Bootstrap' | 'Disable';
 }
 
 /** @name ZenlinkAssetBalance */

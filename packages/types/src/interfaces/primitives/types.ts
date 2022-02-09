@@ -3,10 +3,10 @@
 
 import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
 import type { OrmlAccountData } from '@open-web3/orml-types/interfaces/tokens';
-import type { Enum, u8 } from '@polkadot/types';
+import type { Enum, u8 } from '@polkadot/types-codec';
+import type { ITuple } from '@polkadot/types-codec/types';
 import type { BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
-import type { ITuple } from '@polkadot/types/types';
 
 /** @name Amount */
 export interface Amount extends AmountOf {}
@@ -33,6 +33,7 @@ export interface CurrencyId extends Enum {
   readonly asVsBond: ITuple<[TokenSymbol, ParaId, LeasePeriod, LeasePeriod]>;
   readonly isLpToken: boolean;
   readonly asLpToken: ITuple<[TokenSymbol, u8, TokenSymbol, u8]>;
+  readonly type: 'Native' | 'VToken' | 'Token' | 'Stable' | 'VsToken' | 'VsBond' | 'LpToken';
 }
 
 /** @name CurrencyIdOf */
@@ -68,6 +69,7 @@ export interface TokenSymbol extends Enum {
   readonly isZlk: boolean;
   readonly isPha: boolean;
   readonly isRmrk: boolean;
+  readonly type: 'Asg' | 'Bnc' | 'Kusd' | 'Dot' | 'Ksm' | 'Eth' | 'Kar' | 'Zlk' | 'Pha' | 'Rmrk';
 }
 
 /** @name TransferOriginType */
@@ -75,6 +77,7 @@ export interface TransferOriginType extends Enum {
   readonly isFromSelf: boolean;
   readonly isFromRelayChain: boolean;
   readonly isFromSiblingParaChain: boolean;
+  readonly type: 'FromSelf' | 'FromRelayChain' | 'FromSiblingParaChain';
 }
 
 export type PHANTOM_PRIMITIVES = 'primitives';

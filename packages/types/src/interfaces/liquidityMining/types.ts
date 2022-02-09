@@ -3,8 +3,8 @@
 
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/primitives';
 import type { AccountId, Balance, BlockNumber, FixedU128 } from '@bifrost-finance/types/interfaces/runtime';
-import type { BTreeMap, Enum, Option, Struct, Vec, u32 } from '@polkadot/types';
-import type { ITuple } from '@polkadot/types/types';
+import type { BTreeMap, Enum, Option, Struct, Vec, u32 } from '@polkadot/types-codec';
+import type { ITuple } from '@polkadot/types-codec/types';
 
 /** @name DepositData */
 export interface DepositData extends Struct {
@@ -44,6 +44,7 @@ export interface PoolState extends Enum {
   readonly isOngoing: boolean;
   readonly isRetired: boolean;
   readonly isDead: boolean;
+  readonly type: 'UnCharged' | 'Charged' | 'Ongoing' | 'Retired' | 'Dead';
 }
 
 /** @name PoolType */
@@ -51,6 +52,7 @@ export interface PoolType extends Enum {
   readonly isMining: boolean;
   readonly isFarming: boolean;
   readonly isEbFarming: boolean;
+  readonly type: 'Mining' | 'Farming' | 'EbFarming';
 }
 
 /** @name RewardData */

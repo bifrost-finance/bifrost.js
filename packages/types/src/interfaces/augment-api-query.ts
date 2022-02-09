@@ -3,12 +3,12 @@
 
 import type { NodePrimitivesCurrencyCurrencyId, OrmlTokensAccountData, OrmlTokensBalanceLock } from '@bifrost-finance/types/interfaces/primitives';
 import type { AccountId32 } from '@bifrost-finance/types/interfaces/runtime';
-import type { ApiTypes } from '@polkadot/api/types';
-import type { Vec, u128 } from '@polkadot/types';
+import type { ApiTypes } from '@polkadot/api-base/types';
+import type { Vec, u128 } from '@polkadot/types-codec';
 import type { Observable } from '@polkadot/types/types';
 
-declare module '@polkadot/api/types/storage' {
-  export interface AugmentedQueries<ApiType> {
+declare module '@polkadot/api-base/types/storage' {
+  export interface AugmentedQueries<ApiType extends ApiTypes> {
     tokens: {
       /**
        * The balance of a token type under an account.
@@ -33,9 +33,5 @@ declare module '@polkadot/api/types/storage' {
        **/
       [key: string]: QueryableStorageEntry<ApiType>;
     };
-  }
-
-  export interface QueryableStorage<ApiType extends ApiTypes> extends AugmentedQueries<ApiType> {
-    [key: string]: QueryableModuleStorage<ApiType>;
-  }
-}
+  } // AugmentedQueries
+} // declare module

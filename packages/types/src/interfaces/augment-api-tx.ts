@@ -2,14 +2,13 @@
 /* eslint-disable */
 
 import type { NodePrimitivesCurrencyCurrencyId } from '@bifrost-finance/types/interfaces/primitives';
-import type { Call, MultiAddress } from '@bifrost-finance/types/interfaces/runtime';
-import type { ApiTypes, SubmittableExtrinsic } from '@polkadot/api/types';
-import type { Compact, bool, i128, u128 } from '@polkadot/types';
-import type { Extrinsic } from '@polkadot/types/interfaces/extrinsics';
-import type { AnyNumber } from '@polkadot/types/types';
+import type { MultiAddress } from '@bifrost-finance/types/interfaces/runtime';
+import type { ApiTypes } from '@polkadot/api-base/types';
+import type { Compact, bool, i128, u128 } from '@polkadot/types-codec';
+import type { AnyNumber } from '@polkadot/types-codec/types';
 
-declare module '@polkadot/api/types/submittable' {
-  export interface AugmentedSubmittables<ApiType> {
+declare module '@polkadot/api-base/types/submittable' {
+  export interface AugmentedSubmittables<ApiType extends ApiTypes> {
     currencies: {
       /**
        * Transfer some balance to another account under `currency_id`.
@@ -117,10 +116,5 @@ declare module '@polkadot/api/types/submittable' {
        **/
       [key: string]: SubmittableExtrinsicFunction<ApiType>;
     };
-  }
-
-  export interface SubmittableExtrinsics<ApiType extends ApiTypes> extends AugmentedSubmittables<ApiType> {
-    (extrinsic: Call | Extrinsic | Uint8Array | string): SubmittableExtrinsic<ApiType>;
-    [key: string]: SubmittableModuleExtrinsics<ApiType>;
-  }
-}
+  } // AugmentedSubmittables
+} // declare module

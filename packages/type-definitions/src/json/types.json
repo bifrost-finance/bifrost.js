@@ -57,6 +57,7 @@
         "perPeriod": "Compact<Balance>"
     },
     "VestingScheduleOf": "OrmlVestingSchedule",
+    "OrmlCurrencyId": "u8",
     "PoolInfo": {
         "pool_id": "PoolId",
         "keeper": "AccountId",
@@ -74,6 +75,12 @@
         "redeem_limit_time": "BlockNumber",
         "unlock_limit_nums": "u32",
         "pending_unlock_nums": "u32"
+    },
+    "CompactBalance": "Compact<Balance>",
+    "PoolInfoV0": {
+        "totalShares": "Compact<Share>",
+        "totalRewards": "CompactBalance",
+        "totalWithdrawnRewards": "CompactBalance"
     },
     "Share": "u128",
     "OracleValue": "Price",

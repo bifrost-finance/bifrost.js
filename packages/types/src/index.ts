@@ -19,8 +19,6 @@ import './interfaces/augment-api-rpc';
 import './interfaces/augment-api-tx';
 import './interfaces/augment-types';
 
-// export * from './interfaces/augment-api-events';
-
 export const types: RegistryTypes = bifrostTypes;
 
 export const rpc: Record<string, Record<string, DefinitionRpc | DefinitionRpcSub>> = bifrostRpc;
