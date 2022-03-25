@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/type-definitions",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Polkadot.js type definations for Acala Network",
   "main": "index.js",
   "author": "Edwin Wang <lark930@gmail.com>",

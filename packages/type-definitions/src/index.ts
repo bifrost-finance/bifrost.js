@@ -12,6 +12,7 @@ import bancor from './bancor';
 import bridgeIost from './bridgeIost';
 import flexibleFee from './flexibleFee';
 import minterReward from './minterReward';
+import slp from './slp';
 import salp from './salp';
 import stakingReward from './stakingReward';
 import swap from './swap';
@@ -19,6 +20,7 @@ import tokens from './tokens';
 import vesting from './vesting';
 import vsbondAuction from './vsbondAuction';
 import vtokenMint from './vtokenMint';
+import vtokenMinting from './vtokenMinting';
 import zenlinkProtocol from './zenlinkProtocol';
 import runtime from './runtime';
 import liquidityMining from './liquidityMining';
@@ -37,6 +39,7 @@ const bifrostDefs = {
   bridgeIost,
   flexibleFee,
   minterReward,
+  slp,
   salp,
   stakingReward,
   swap,
@@ -45,6 +48,7 @@ const bifrostDefs = {
   runtime,
   vsbondAuction,
   vtokenMint,
+  vtokenMinting,
   zenlinkProtocol,
   primitives,
   liquidityMining
