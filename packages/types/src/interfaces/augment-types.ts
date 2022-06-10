@@ -8,9 +8,11 @@ import type { IsExtended, SystemPalletId } from '@bifrost-finance/types/interfac
 import type { Amount, AmountOf, Currency, CurrencyId, CurrencyIdOf, NodePrimitivesCurrencyCurrencyId, OrmlTokensAccountData, OrmlTokensBalanceLock, ShareWeight, StorageVersion, TokenSymbol, TransferOriginType } from '@bifrost-finance/types/interfaces/primitives';
 import type { AccountId, AccountId20, AccountId32, AccountIdOf, AccountIndex, Address, AssetId, Balance, BalanceOf, Block, BlockNumber, BlockNumberFor, BlockNumberOf, Call, CallHash, CallHashOf, ChangesTrieConfiguration, ChangesTrieSignal, CodecHash, Consensus, ConsensusEngineId, CrateVersion, Digest, DigestItem, EncodedJustification, ExtrinsicsWeight, Fixed128, Fixed64, FixedI128, FixedI64, FixedU128, FixedU64, H1024, H128, H160, H2048, H256, H32, H512, H64, Hash, Header, HeaderPartial, I32F32, Index, IndicesLookupSource, Justification, Justifications, KeyTypeId, KeyValue, LockIdentifier, LookupSource, LookupTarget, ModuleId, Moment, MultiAddress, MultiSigner, OpaqueCall, OracleKey, OracleValue, Origin, OriginCaller, PalletId, PalletVersion, PalletsOrigin, Pays, PerU16, Perbill, Percent, Permill, Perquintill, Phantom, PhantomData, PreRuntime, Releases, RuntimeDbWeight, Seal, SealV0, SignedBlock, SignedBlockWithJustification, SignedBlockWithJustifications, Slot, StorageData, StorageProof, TransactionInfo, TransactionPriority, TransactionStorageProof, U32F32, ValidatorId, ValidatorIdOf, Weight, WeightMultiplier } from '@bifrost-finance/types/interfaces/runtime';
 import type { ContributeCall, Contribution, ContributionStatus, CrowdloanContributeCall, FundStatus, ParachainDerivedProxyAccountType, ParachainTransactProxyType, ParachainTransactType, RedeemStatus, RpcContributionStatus, Withdraw, WithdrawCall } from '@bifrost-finance/types/interfaces/salp';
+import type { MinimumsMaximums, SubstrateLedger, TimeUnit, ledger } from '@bifrost-finance/types/interfaces/slp';
 import type { RewardRecord } from '@bifrost-finance/types/interfaces/stakingReward';
 import type { BifrostVestingInfo, MaxLocksOf } from '@bifrost-finance/types/interfaces/vesting';
 import type { OrderId, OrderInfo, OrderType } from '@bifrost-finance/types/interfaces/vsbondAuction';
+import type { MintId } from '@bifrost-finance/types/interfaces/vtokenMinting';
 import type { BootstrapParamter, PairInfo, PairMetadata, PairStatus, ZenlinkAssetBalance, ZenlinkAssetId } from '@bifrost-finance/types/interfaces/zenlinkProtocol';
 import type { AuthorityOrigin, CallOf, DelayedOrigin, DispatchTime, ScheduleTaskIndex } from '@open-web3/orml-types/interfaces/authority';
 import type { GraduallyUpdate, StorageKeyBytes, StorageValue, StorageValueBytes } from '@open-web3/orml-types/interfaces/graduallyUpdates';
@@ -599,6 +601,7 @@ declare module '@polkadot/types/types/registry' {
     LastRuntimeUpgradeInfo: LastRuntimeUpgradeInfo;
     LeasePeriod: LeasePeriod;
     LeasePeriodOf: LeasePeriodOf;
+    ledger: ledger;
     LegacyTransaction: LegacyTransaction;
     Limits: Limits;
     LimitsTo264: LimitsTo264;
@@ -630,6 +633,8 @@ declare module '@polkadot/types/types/registry' {
     MetadataV13: MetadataV13;
     MetadataV14: MetadataV14;
     MetadataV9: MetadataV9;
+    MinimumsMaximums: MinimumsMaximums;
+    MintId: MintId;
     MmrLeafProof: MmrLeafProof;
     MmrRootHash: MmrRootHash;
     ModuleConstantMetadataV10: ModuleConstantMetadataV10;
@@ -1051,6 +1056,7 @@ declare module '@polkadot/types/types/registry' {
     StrikeCount: StrikeCount;
     SubId: SubId;
     SubmissionIndicesOf: SubmissionIndicesOf;
+    SubstrateLedger: SubstrateLedger;
     Supports: Supports;
     SyncState: SyncState;
     SystemInherentData: SystemInherentData;
@@ -1064,6 +1070,7 @@ declare module '@polkadot/types/types/registry' {
     Timepoint: Timepoint;
     TimestampedValue: TimestampedValue;
     TimestampedValueOf: TimestampedValueOf;
+    TimeUnit: TimeUnit;
     TokenError: TokenError;
     TokenSymbol: TokenSymbol;
     TombstoneContractInfo: TombstoneContractInfo;

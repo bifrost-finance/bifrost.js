@@ -1,6 +1,6 @@
 export default {
   rpc: {},
   types: {
-    MintId: "U32"
+    UnlockId: "U32"
   }
 };

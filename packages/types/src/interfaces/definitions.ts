@@ -15,3 +15,5 @@ export { default as zenlinkProtocol } from './zenlinkProtocol/definitions';
 export { default as bancor } from './bancor/definitions';
 export { default as runtime } from './runtime/definitions';
 export { default as liquidityMining } from './liquidityMining/definitions';
+export { default as vtokenMinting } from './vtokenMinting/definitions';
+export { default as slp } from './slp/definitions';
