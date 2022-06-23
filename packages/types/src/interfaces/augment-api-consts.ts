@@ -18,6 +18,10 @@ declare module '@polkadot/api-base/types/consts' {
     tokens: {
       maxLocks: u32 & AugmentedConst<ApiType>;
       /**
+       * The maximum number of named reserves that can exist on an account.
+       **/
+      maxReserves: u32 & AugmentedConst<ApiType>;
+      /**
        * Generic const
        **/
       [key: string]: Codec;

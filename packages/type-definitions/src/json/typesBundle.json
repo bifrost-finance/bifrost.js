@@ -48,6 +48,54 @@
                         "section": "oracle"
                     }
                 },
+                "farming": {
+                    "getFarmingRewards": {
+                        "description": "Get farming rewards",
+                        "params": [
+                            {
+                                "name": "who",
+                                "type": "AccountId"
+                            },
+                            {
+                                "name": "pid",
+                                "type": "PoolId"
+                            },
+                            {
+                                "name": "at",
+                                "type": "Hash",
+                                "isOptional": true
+                            }
+                        ],
+                        "type": "Vec<(CurrencyId, Balance)>",
+                        "isSubscription": false,
+                        "jsonrpc": "farming_getFarmingRewards",
+                        "method": "getFarmingRewards",
+                        "section": "farming"
+                    },
+                    "getGaugeRewards": {
+                        "description": "Get gauge rewards",
+                        "params": [
+                            {
+                                "name": "who",
+                                "type": "AccountId"
+                            },
+                            {
+                                "name": "pid",
+                                "type": "PoolId"
+                            },
+                            {
+                                "name": "at",
+                                "type": "Hash",
+                                "isOptional": true
+                            }
+                        ],
+                        "type": "Vec<(CurrencyId, Balance)>",
+                        "isSubscription": false,
+                        "jsonrpc": "farming_getGaugeRewards",
+                        "method": "getGaugeRewards",
+                        "section": "farming"
+                    }
+                },
                 "flexibleFee": {
                     "getFeeTokenAndAmount": {
                         "description": "Get charging token type and amount in terms of flexible transaction fee.",
@@ -779,7 +827,7 @@
                                 "Buy": 1
                             }
                         },
-                        "MintId": "U32",
+                        "UnlockId": "U32",
                         "ZenlinkAssetId": {
                             "chain_id": "u32",
                             "asset_type": "u8",
@@ -824,7 +872,8 @@
                                 "KAR": 6,
                                 "ZLK": 7,
                                 "PHA": 8,
-                                "RMRK": 9
+                                "RMRK": 9,
+                                "MOVR": 10
                             }
                         },
                         "CurrencyId": {
@@ -848,6 +897,7 @@
                         "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
                         "OrmlTokensBalanceLock": "BalanceLock",
                         "OrmlTokensAccountData": "OrmlAccountData",
+                        "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
                         "TransferOriginType": {
                             "_enum": {
                                 "FromSelf": 0,
@@ -1333,7 +1383,7 @@
                                 "Buy": 1
                             }
                         },
-                        "MintId": "U32",
+                        "UnlockId": "U32",
                         "ZenlinkAssetId": {
                             "chain_id": "u32",
                             "asset_type": "u8",
@@ -1378,7 +1428,8 @@
                                 "KAR": 6,
                                 "ZLK": 7,
                                 "PHA": 8,
-                                "RMRK": 9
+                                "RMRK": 9,
+                                "MOVR": 10
                             }
                         },
                         "CurrencyId": {
@@ -1402,6 +1453,7 @@
                         "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
                         "OrmlTokensBalanceLock": "BalanceLock",
                         "OrmlTokensAccountData": "OrmlAccountData",
+                        "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
                         "TransferOriginType": {
                             "_enum": {
                                 "FromSelf": 0,
@@ -1501,6 +1553,54 @@
                         "section": "oracle"
                     }
                 },
+                "farming": {
+                    "getFarmingRewards": {
+                        "description": "Get farming rewards",
+                        "params": [
+                            {
+                                "name": "who",
+                                "type": "AccountId"
+                            },
+                            {
+                                "name": "pid",
+                                "type": "PoolId"
+                            },
+                            {
+                                "name": "at",
+                                "type": "Hash",
+                                "isOptional": true
+                            }
+                        ],
+                        "type": "Vec<(CurrencyId, Balance)>",
+                        "isSubscription": false,
+                        "jsonrpc": "farming_getFarmingRewards",
+                        "method": "getFarmingRewards",
+                        "section": "farming"
+                    },
+                    "getGaugeRewards": {
+                        "description": "Get gauge rewards",
+                        "params": [
+                            {
+                                "name": "who",
+                                "type": "AccountId"
+                            },
+                            {
+                                "name": "pid",
+                                "type": "PoolId"
+                            },
+                            {
+                                "name": "at",
+                                "type": "Hash",
+                                "isOptional": true
+                            }
+                        ],
+                        "type": "Vec<(CurrencyId, Balance)>",
+                        "isSubscription": false,
+                        "jsonrpc": "farming_getGaugeRewards",
+                        "method": "getGaugeRewards",
+                        "section": "farming"
+                    }
+                },
                 "flexibleFee": {
                     "getFeeTokenAndAmount": {
                         "description": "Get charging token type and amount in terms of flexible transaction fee.",
@@ -2232,7 +2332,7 @@
                                 "Buy": 1
                             }
                         },
-                        "MintId": "U32",
+                        "UnlockId": "U32",
                         "ZenlinkAssetId": {
                             "chain_id": "u32",
                             "asset_type": "u8",
@@ -2278,7 +2378,8 @@
                                 "KAR": 6,
                                 "ZLK": 7,
                                 "PHA": 8,
-                                "RMRK": 9
+                                "RMRK": 9,
+                                "MOVR": 10
                             }
                         },
                         "CurrencyId": {
@@ -2302,6 +2403,7 @@
                         "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
                         "OrmlTokensBalanceLock": "BalanceLock",
                         "OrmlTokensAccountData": "OrmlAccountData",
+                        "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
                         "TransferOriginType": {
                             "_enum": {
                                 "FromSelf": 0,
@@ -2787,7 +2889,7 @@
                                 "Buy": 1
                             }
                         },
-                        "MintId": "U32",
+                        "UnlockId": "U32",
                         "ZenlinkAssetId": {
                             "chain_id": "u32",
                             "asset_type": "u8",
@@ -2833,7 +2935,8 @@
                                 "KAR": 6,
                                 "ZLK": 7,
                                 "PHA": 8,
-                                "RMRK": 9
+                                "RMRK": 9,
+                                "MOVR": 10
                             }
                         },
                         "CurrencyId": {
@@ -2857,6 +2960,7 @@
                         "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
                         "OrmlTokensBalanceLock": "BalanceLock",
                         "OrmlTokensAccountData": "OrmlAccountData",
+                        "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
                         "TransferOriginType": {
                             "_enum": {
                                 "FromSelf": 0,

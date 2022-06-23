@@ -337,6 +337,16 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
        **/
       uninstallFilter: AugmentedRpc<(index: U256 | AnyNumber | Uint8Array) => Observable<bool>>;
     };
+    farming: {
+      /**
+       * Get farming rewards
+       **/
+      getFarmingRewards: AugmentedRpc<(who: AccountId | string | Uint8Array, pid: PoolId | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Vec<ITuple<[CurrencyId, Balance]>>>>;
+      /**
+       * Get gauge rewards
+       **/
+      getGaugeRewards: AugmentedRpc<(who: AccountId | string | Uint8Array, pid: PoolId | AnyNumber | Uint8Array, at?: Hash | string | Uint8Array) => Observable<Vec<ITuple<[CurrencyId, Balance]>>>>;
+    };
     flexibleFee: {
       /**
        * Get charging token type and amount in terms of flexible transaction fee.

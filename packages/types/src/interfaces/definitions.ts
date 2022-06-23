@@ -17,3 +17,4 @@ export { default as runtime } from './runtime/definitions';
 export { default as liquidityMining } from './liquidityMining/definitions';
 export { default as vtokenMinting } from './vtokenMinting/definitions';
 export { default as slp } from './slp/definitions';
+export { default as farming } from './farming/definitions';

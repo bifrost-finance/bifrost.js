@@ -24,6 +24,7 @@ import vtokenMinting from './vtokenMinting';
 import zenlinkProtocol from './zenlinkProtocol';
 import runtime from './runtime';
 import liquidityMining from './liquidityMining';
+import farming from './farming';
 
 import bifrostVersioned from './spec/bifrost';
 import asgardVersioned from './spec/asgard';
@@ -37,6 +38,7 @@ const bifrostDefs = {
   bridgeEos,
   bancor,
   bridgeIost,
+  farming,
   flexibleFee,
   minterReward,
   slp,

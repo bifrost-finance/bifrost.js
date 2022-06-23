@@ -3,7 +3,7 @@
 
 import type { U32 } from '@polkadot/types-codec';
 
-/** @name MintId */
-export interface MintId extends U32 {}
+/** @name UnlockId */
+export interface UnlockId extends U32 {}
 
 export type PHANTOM_VTOKENMINTING = 'vtokenMinting';

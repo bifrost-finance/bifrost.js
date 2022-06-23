@@ -12,7 +12,8 @@ export default {
         KAR: 6,
         ZLK: 7,
         PHA: 8,
-        RMRK: 9
+        RMRK: 9,
+        MOVR: 10
       }
     },
     CurrencyId: {
@@ -36,6 +37,7 @@ export default {
     NodePrimitivesCurrencyCurrencyId: 'CurrencyId',
     OrmlTokensBalanceLock: 'BalanceLock',
     OrmlTokensAccountData: 'OrmlAccountData',
+    OrmlTokensReserveData:'(Currency, u8, Amount, u128)',
     TransferOriginType: {
       _enum: {
         FromSelf: 0,

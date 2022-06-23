@@ -45,6 +45,54 @@
             "section": "oracle"
         }
     },
+    "farming": {
+        "getFarmingRewards": {
+            "description": "Get farming rewards",
+            "params": [
+                {
+                    "name": "who",
+                    "type": "AccountId"
+                },
+                {
+                    "name": "pid",
+                    "type": "PoolId"
+                },
+                {
+                    "name": "at",
+                    "type": "Hash",
+                    "isOptional": true
+                }
+            ],
+            "type": "Vec<(CurrencyId, Balance)>",
+            "isSubscription": false,
+            "jsonrpc": "farming_getFarmingRewards",
+            "method": "getFarmingRewards",
+            "section": "farming"
+        },
+        "getGaugeRewards": {
+            "description": "Get gauge rewards",
+            "params": [
+                {
+                    "name": "who",
+                    "type": "AccountId"
+                },
+                {
+                    "name": "pid",
+                    "type": "PoolId"
+                },
+                {
+                    "name": "at",
+                    "type": "Hash",
+                    "isOptional": true
+                }
+            ],
+            "type": "Vec<(CurrencyId, Balance)>",
+            "isSubscription": false,
+            "jsonrpc": "farming_getGaugeRewards",
+            "method": "getGaugeRewards",
+            "section": "farming"
+        }
+    },
     "flexibleFee": {
         "getFeeTokenAndAmount": {
             "description": "Get charging token type and amount in terms of flexible transaction fee.",

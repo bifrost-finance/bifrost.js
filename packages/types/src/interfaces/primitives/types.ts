@@ -3,7 +3,7 @@
 
 import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
 import type { OrmlAccountData } from '@open-web3/orml-types/interfaces/tokens';
-import type { Enum, u8 } from '@polkadot/types-codec';
+import type { Enum, u128, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
@@ -48,6 +48,9 @@ export interface OrmlTokensAccountData extends OrmlAccountData {}
 /** @name OrmlTokensBalanceLock */
 export interface OrmlTokensBalanceLock extends BalanceLock {}
 
+/** @name OrmlTokensReserveData */
+export interface OrmlTokensReserveData extends ITuple<[Currency, u8, Amount, u128]> {}
+
 /** @name ShareWeight */
 export interface ShareWeight extends Balance {}
 
@@ -69,7 +72,8 @@ export interface TokenSymbol extends Enum {
   readonly isZlk: boolean;
   readonly isPha: boolean;
   readonly isRmrk: boolean;
-  readonly type: 'Asg' | 'Bnc' | 'Kusd' | 'Dot' | 'Ksm' | 'Eth' | 'Kar' | 'Zlk' | 'Pha' | 'Rmrk';
+  readonly isMovr: boolean;
+  readonly type: 'Asg' | 'Bnc' | 'Kusd' | 'Dot' | 'Ksm' | 'Eth' | 'Kar' | 'Zlk' | 'Pha' | 'Rmrk' | 'Movr';
 }
 
 /** @name TransferOriginType */

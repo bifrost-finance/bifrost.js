@@ -16,3 +16,4 @@ export * from './runtime/types';
 export * from './liquidityMining/types';
 export * from './vtokenMinting/types';
 export * from './slp/types';
+export * from './farming/types';
