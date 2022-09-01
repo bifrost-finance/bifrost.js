@@ -33,7 +33,15 @@ export interface CurrencyId extends Enum {
   readonly asVsBond: ITuple<[TokenSymbol, ParaId, LeasePeriod, LeasePeriod]>;
   readonly isLpToken: boolean;
   readonly asLpToken: ITuple<[TokenSymbol, u8, TokenSymbol, u8]>;
-  readonly type: 'Native' | 'VToken' | 'Token' | 'Stable' | 'VsToken' | 'VsBond' | 'LpToken';
+  readonly isToken2: boolean;
+  readonly asToken2: u8;
+  readonly isVToken2: boolean;
+  readonly asVToken2: u8;
+  readonly isVsToken2: boolean;
+  readonly asVsToken2: u8;
+  readonly isVsBond2: boolean;
+  readonly asVsBond2: u8;
+  readonly type: 'Native' | 'VToken' | 'Token' | 'Stable' | 'VsToken' | 'VsBond' | 'LpToken' | 'Token2' | 'VToken2' | 'VsToken2' | 'VsBond2';
 }
 
 /** @name CurrencyIdOf */

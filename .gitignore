@@ -59,7 +59,6 @@ typings/
 
 # next.js build output
 .next
-
 .npmrc
 
 build/
@@ -68,3 +67,5 @@ build/
 /.yarn/versions
 /.yarn/build-state.yml
 /.yarn/install-state.gz
+
+.idea
