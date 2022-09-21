@@ -81,7 +81,8 @@ export interface TokenSymbol extends Enum {
   readonly isPha: boolean;
   readonly isRmrk: boolean;
   readonly isMovr: boolean;
-  readonly type: 'Asg' | 'Bnc' | 'Kusd' | 'Dot' | 'Ksm' | 'Eth' | 'Kar' | 'Zlk' | 'Pha' | 'Rmrk' | 'Movr';
+  readonly isGlmr: boolean;
+  readonly type: 'Asg' | 'Bnc' | 'Kusd' | 'Dot' | 'Ksm' | 'Eth' | 'Kar' | 'Zlk' | 'Pha' | 'Rmrk' | 'Movr' | 'Glmr';
 }
 
 /** @name TransferOriginType */

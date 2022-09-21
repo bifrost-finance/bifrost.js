@@ -11,7 +11,8 @@ const TokenSymbol = {
     ZLK: 7,
     PHA: 8,
     RMRK: 9,
-    MOVR: 10
+    MOVR: 10,
+    GLMR: 11
   }
 };
 
