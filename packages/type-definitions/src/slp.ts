@@ -1,10 +1,6 @@
 export default {
   rpc: {},
   types: {
-    TimeUnit: {
-      Era: 'U32',
-      SlashingSpan: 'U32'
-    },
     ledger: {
       Substrate: 'SubstrateLedger'
     },
@@ -18,14 +14,14 @@ export default {
       value: 'Balance',
       unlock_time: 'TimeUnit'
     },
-    MinimumsMaximums: {
-      delegator_bonded_minimum: 'Balance',
-      bond_extra_minimum: 'Balance',
-      unbond_minimum: 'Balance',
-      rebond_minimum: 'Balance',
-      unbond_record_maximum: 'U32',
-      validators_back_maximum: 'U32',
-      delegator_active_staking_maximum: 'Balance'
+    FilecoinLedger: {
+      account:'MultiLocationV1',
+      initial_pledge:'Balance'
+    },
+    FilecoinOwnerByMinerEntry: {
+      currency_id:'AccountId',
+      miner_id:'MultiLocationV1',
+      owner_id:'MultiLocationV1'
     }
   }
 };

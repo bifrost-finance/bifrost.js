@@ -4,9 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7fecd88-56c0-46b5-a14f-93061df8e735" name="Changes" comment="feat: Update token2">
+    <list default="true" id="b7fecd88-56c0-46b5-a14f-93061df8e735" name="Changes" comment="feat: Add glmr,1.7.1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lerna.json" beforeDir="false" afterPath="$PROJECT_DIR$/lerna.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/type-definitions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/json/types.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/json/types.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/json/typesBundle.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/json/typesBundle.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/primitives.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/primitives.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/slp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/slp.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/scripts/updateMetadata.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/scripts/updateMetadata.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-query.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-rpc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-rpc.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-tx.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-tx.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/augment-types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/slp/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/slp/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/src/metadata/static-latest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/metadata/static-latest.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

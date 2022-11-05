@@ -16,7 +16,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * The dispatch origin for this call must be `Signed` by the
        * transactor.
        **/
-      transfer: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
+      transfer: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
       /**
        * Transfer some native currency to another account.
        * 
@@ -29,7 +29,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * 
        * The dispatch origin of this call must be _Root_.
        **/
-      updateBalance: AugmentedSubmittable<(who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | string | Uint8Array, amount: i128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, i128]>;
+      updateBalance: AugmentedSubmittable<(who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | string | Uint8Array, amount: i128 | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, i128]>;
       /**
        * Generic tx
        **/
@@ -47,7 +47,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * - `currency_id`: currency type.
        * - `amount`: free balance amount to tranfer.
        **/
-      forceTransfer: AugmentedSubmittable<(source: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
+      forceTransfer: AugmentedSubmittable<(source: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
       /**
        * Set the balances of a given account.
        * 
@@ -58,7 +58,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * 
        * The dispatch origin for this call is `root`.
        **/
-      setBalance: AugmentedSubmittable<(who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | string | Uint8Array, newFree: Compact<u128> | AnyNumber | Uint8Array, newReserved: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>, Compact<u128>]>;
+      setBalance: AugmentedSubmittable<(who: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | string | Uint8Array, newFree: Compact<u128> | AnyNumber | Uint8Array, newReserved: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>, Compact<u128>]>;
       /**
        * Transfer some liquid free balance to another account.
        * 
@@ -74,7 +74,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * - `currency_id`: currency type.
        * - `amount`: free balance amount to tranfer.
        **/
-      transfer: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
+      transfer: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
       /**
        * Transfer all remaining balance to the given account.
        * 
@@ -96,7 +96,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * except at least the existential deposit, which will guarantee to
        * keep the sender account alive (true).
        **/
-      transferAll: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | string | Uint8Array, keepAlive: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, bool]>;
+      transferAll: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | string | Uint8Array, keepAlive: bool | boolean | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, bool]>;
       /**
        * Same as the [`transfer`] call, but with a check that the transfer
        * will not kill the origin account.
@@ -110,7 +110,7 @@ declare module '@polkadot/api-base/types/submittable' {
        * - `currency_id`: currency type.
        * - `amount`: free balance amount to tranfer.
        **/
-      transferKeepAlive: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
+      transferKeepAlive: AugmentedSubmittable<(dest: MultiAddress | { Id: any } | { Index: any } | { Raw: any } | { Address32: any } | { Address20: any } | string | Uint8Array, currencyId: NodePrimitivesCurrencyCurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | string | Uint8Array, amount: Compact<u128> | AnyNumber | Uint8Array) => SubmittableExtrinsic<ApiType>, [MultiAddress, NodePrimitivesCurrencyCurrencyId, Compact<u128>]>;
       /**
        * Generic tx
        **/

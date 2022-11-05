@@ -3,7 +3,7 @@
 
 import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
 import type { OrmlAccountData } from '@open-web3/orml-types/interfaces/tokens';
-import type { Enum, u128, u8 } from '@polkadot/types-codec';
+import type { Enum, Struct, u128, u16, u32, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
@@ -33,6 +33,8 @@ export interface CurrencyId extends Enum {
   readonly asVsBond: ITuple<[TokenSymbol, ParaId, LeasePeriod, LeasePeriod]>;
   readonly isLpToken: boolean;
   readonly asLpToken: ITuple<[TokenSymbol, u8, TokenSymbol, u8]>;
+  readonly isForeignAsset: boolean;
+  readonly asForeignAsset: u32;
   readonly isToken2: boolean;
   readonly asToken2: u8;
   readonly isVToken2: boolean;
@@ -41,11 +43,28 @@ export interface CurrencyId extends Enum {
   readonly asVsToken2: u8;
   readonly isVsBond2: boolean;
   readonly asVsBond2: u8;
-  readonly type: 'Native' | 'VToken' | 'Token' | 'Stable' | 'VsToken' | 'VsBond' | 'LpToken' | 'Token2' | 'VToken2' | 'VsToken2' | 'VsBond2';
+  readonly isStableLpToken: boolean;
+  readonly asStableLpToken: u32;
+  readonly type: 'Native' | 'VToken' | 'Token' | 'Stable' | 'VsToken' | 'VsBond' | 'LpToken' | 'ForeignAsset' | 'Token2' | 'VToken2' | 'VsToken2' | 'VsBond2' | 'StableLpToken';
 }
 
 /** @name CurrencyIdOf */
 export interface CurrencyIdOf extends CurrencyId {}
+
+/** @name MinimumsMaximums */
+export interface MinimumsMaximums extends Struct {
+  readonly delegator_bonded_minimum: Balance;
+  readonly bond_extra_minimum: Balance;
+  readonly unbond_minimum: Balance;
+  readonly rebond_minimum: Balance;
+  readonly unbond_record_maximum: u32;
+  readonly validators_back_maximum: u32;
+  readonly delegator_active_staking_maximum: Balance;
+  readonly validators_reward_maximum: u32;
+  readonly delegation_amount_minimum: Balance;
+  readonly delegators_maximum: u16;
+  readonly validators_maximum: u16;
+}
 
 /** @name NodePrimitivesCurrencyCurrencyId */
 export interface NodePrimitivesCurrencyCurrencyId extends CurrencyId {}
@@ -67,6 +86,14 @@ export interface StorageVersion extends Releases {}
 
 /** @name TAssetBalance */
 export interface TAssetBalance extends Balance {}
+
+/** @name TimeUnit */
+export interface TimeUnit extends Struct {
+  readonly Era: u32;
+  readonly SlashingSpan: u32;
+  readonly Round: u32;
+  readonly Kblock: u32;
+}
 
 /** @name TokenSymbol */
 export interface TokenSymbol extends Enum {
