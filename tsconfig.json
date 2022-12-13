@@ -9,6 +9,7 @@
     "module": "CommonJS",
     "baseUrl": ".",
     "resolveJsonModule": true,
+    "declarationDir": "build",
     "paths": {
       "@bifrost-finance/api": ["packages/api/src"],
       "@bifrost-finance/api/*": ["packages/api/src/*"],
