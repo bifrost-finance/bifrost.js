@@ -1,4 +1,8 @@
 {
   "extends": "./tsconfig.json",
-  "references": []
+  "references": [
+    { "path": "./packages/api/tsconfig.json" },
+    { "path": "./packages/type-definitions/tsconfig.json" },
+    { "path": "./packages/types/tsconfig.json" }
+  ]
 }

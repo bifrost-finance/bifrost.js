@@ -4,317 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7fecd88-56c0-46b5-a14f-93061df8e735" name="Changes" comment="feat: update polkadot/api, 1.8.0">
-      <change afterPath="$PROJECT_DIR$/.yarn/plugins/@yarnpkg/plugin-typescript.cjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.yarn/plugins/@yarnpkg/plugin-workspace-tools.cjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.yarn/releases/yarn-3.5.0.cjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.yarnrc.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/api/src/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/api/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/api/src/packageInfo.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/api/src/packageInfo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/api/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/api/tsconfig.tsbuildinfo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/scripts/generate.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/scripts/generate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/bancor.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/bancor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/bid.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/bid.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/bridgeEos.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/bridgeEos.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/bridgeIost.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/bridgeIost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/farming.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/farming.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/flexibleFee.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/flexibleFee.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/liquidityMining.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/liquidityMining.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/minterReward.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/minterReward.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/packageInfo.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/packageInfo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/primitives.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/primitives.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/runtime.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/runtime.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/salp.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/salp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/signedExtensions/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/signedExtensions/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/slp.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/slp.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/spec/asgard.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/spec/asgard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/spec/bifrost.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/spec/bifrost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/stakingReward.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/stakingReward.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/swap.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/swap.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/tokens.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/tokens.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/vesting.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/vesting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/vsbondAuction.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/vsbondAuction.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/vtokenMint.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/vtokenMint.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/vtokenMinting.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/vtokenMinting.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/xTokens.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/xTokens.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/zenlinkProtocol.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/src/zenlinkProtocol.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/type-definitions/tsconfig.tsbuildinfo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/scripts/generate/lookup.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/scripts/generate/lookup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/scripts/generate/lookup.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/scripts/generateTypes.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/scripts/generateTypes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/scripts/generateTypes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/scripts/updateMetadata.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/scripts/updateMetadata.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-consts.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-consts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-consts.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-errors.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-errors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-errors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-events.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-events.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-events.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-query.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-query.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-query.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-rpc.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-rpc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-runtime.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-runtime.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-runtime.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-tx.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-tx.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api-tx.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/augment/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bancor/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bancor/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bancor/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bancor/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bancor/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bancor/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bid/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bid/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bid/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bid/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bid/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bid/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeEos/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeEos/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeEos/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeEos/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeEos/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeEos/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeIost/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeIost/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeIost/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeIost/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeIost/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bridgeIost/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/farming/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/farming/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/farming/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/farming/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/farming/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/farming/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/flexibleFee/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/flexibleFee/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/flexibleFee/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/flexibleFee/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/flexibleFee/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/flexibleFee/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/liquidityMining/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/liquidityMining/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/liquidityMining/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/liquidityMining/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/liquidityMining/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/liquidityMining/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/minterReward/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/minterReward/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/minterReward/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/minterReward/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/minterReward/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/minterReward/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/salp/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/salp/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/salp/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/salp/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/salp/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/salp/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/slp/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/slp/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/slp/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/slp/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/slp/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/slp/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/stakingReward/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/stakingReward/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/stakingReward/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/stakingReward/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/stakingReward/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/stakingReward/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/swap/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/swap/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/swap/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/swap/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/swap/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/swap/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/tokens/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/tokens/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/tokens/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/tokens/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/tokens/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/tokens/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vesting/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vesting/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vesting/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vesting/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vesting/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vesting/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vsbondAuction/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vsbondAuction/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vsbondAuction/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vsbondAuction/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vsbondAuction/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vsbondAuction/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMint/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMint/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMint/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMint/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMint/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMint/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/zenlinkProtocol/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/zenlinkProtocol/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/zenlinkProtocol/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/zenlinkProtocol/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/zenlinkProtocol/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/interfaces/zenlinkProtocol/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/bifrost.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/bifrost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/bifrost.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/definitions.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/definitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/definitions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/types-bifrost.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/types-bifrost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/types-bifrost.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/types.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/lookup/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/metadata/static-latest.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/metadata/static-latest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/packageInfo.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/packageInfo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/registry/bifrost.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/registry/bifrost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/registry/bifrost.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/registry/interfaces.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/src/registry/interfaces.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/types/tsconfig.tsbuildinfo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.base.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.build.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.eslint.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintignore" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+    <list default="true" id="b7fecd88-56c0-46b5-a14f-93061df8e735" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.pnp.loader.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.prettierrc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.yarn/plugins/@yarnpkg/plugin-version.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/.yarn/plugins/@yarnpkg/plugin-version.cjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.yarn/releases/yarn-2.4.2.cjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.yarn/releases/yarn-3.2.0.cjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/babel.config.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lerna.json" beforeDir="false" afterPath="$PROJECT_DIR$/lerna.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/.yarn/build-state.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/.yarn/install-state.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/.yarn/plugins/@yarnpkg/plugin-interactive-tools.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/.yarn/plugins/@yarnpkg/plugin-version.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/.yarn/releases/yarn-2.4.1.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/packageInfo.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/packageInfo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/src/packageInfo.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/api/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/api/tsconfig.tsbuildinfo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/type-definitions/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/type-definitions/scripts/generate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/scripts/generate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/json/rpc.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/json/rpc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/json/types.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/json/types.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/json/typesBundle.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/json/typesBundle.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/liquidityMining.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/liquidityMining.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/primitives.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/primitives.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/slp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/slp.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/type-definitions/src/vtokenMinting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/type-definitions/src/vtokenMinting.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/scripts/generate.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/scripts/updateMetadata.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/scripts/updateMetadata.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-consts.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-errors.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-query.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-rpc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/augment/api-rpc.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-api-tx.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/augment-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/registry/interfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/bancor/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/bancor/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/farming/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/farming/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/flexibleFee/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/flexibleFee/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/liquidityMining/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/liquidityMining/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/minterReward/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/minterReward/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/definitions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/definitions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/primitives/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/runtime/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/salp/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/salp/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/slp/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/slp/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/stakingReward/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/stakingReward/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/tokens/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/tokens/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/vesting/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vesting/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/vsbondAuction/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vsbondAuction/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMint/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMint/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/interfaces/zenlinkProtocol/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/interfaces/zenlinkProtocol/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/types/src/metadata/static-latest.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/src/metadata/static-latest.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/types/tsconfig.tsbuildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/packages/types/tsconfig.tsbuildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.build.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,6 +30,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -335,17 +48,17 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/vtokenMint.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/minterReward.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/types/scripts/generateTypes.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/types/src/interfaces/types.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/slp.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/types/scripts/updateMetadata.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/liquidityMining.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/types/scripts/updateMetadata.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/slp.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/types/src/interfaces/vtokenMinting/definitions.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/types/src/interfaces/slp/types.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/vtokenMinting.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/packages/types/src/interfaces/slp/definitions.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/types/src/interfaces/slp/types.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/stakingReward.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/types/src/interfaces/slp/definitions.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/spec/asgard.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/type-definitions/scripts/generate.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/type-definitions/src/spec/bifrost.ts" root0="FORCE_HIGHLIGHTING" />
@@ -368,7 +81,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/packages/types/build" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -378,15 +91,16 @@
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v18.16.0/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/types/build" />
+      <recent name="$PROJECT_DIR$/packages/type-definitions/build" />
+      <recent name="$PROJECT_DIR$/packages/api/build" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/packages/types/src/interfaces" />
-      <recent name="$PROJECT_DIR$/packages/types/src/interfaces/farming" />
-      <recent name="$PROJECT_DIR$/packages/type-definitions/src" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -649,9 +363,7 @@
         <option value="$PROJECT_DIR$/packages/types/scripts/generateTypes.d.ts" />
         <option value="$PROJECT_DIR$/packages/types/scripts/updateMetadata.js" />
         <option value="$PROJECT_DIR$/packages/api/src/index.js" />
-        <option value="$PROJECT_DIR$/packages/api/src/packageInfo.js" />
         <option value="$PROJECT_DIR$/packages/api/src/index.d.ts" />
-        <option value="$PROJECT_DIR$/packages/api/src/packageInfo.d.ts" />
         <option value="$PROJECT_DIR$/packages/type-definitions/src/xTokens.js" />
         <option value="$PROJECT_DIR$/packages/type-definitions/src/minterReward.d.ts" />
         <option value="$PROJECT_DIR$/packages/type-definitions/src/tokens.js" />

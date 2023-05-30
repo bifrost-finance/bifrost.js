@@ -17,9 +17,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "yarn build:interfaces; yarn workspaces foreach -pvit run build",
+    "build": "yarn build:interfaces && polkadot-dev-build-ts",
     "build:interfaces": "ts-node -r tsconfig-paths/register packages/types/scripts/generateTypes.ts && ts-node -r tsconfig-paths/register packages/type-definitions/scripts/generate.ts",
-    "build:release": "polkadot-ci-ghact-build",
     "check-deps": "./node_modules/@open-web3/util/scripts/check-deps.js yarn.lock @polkadot/ @open-web3/",
     "clean": "polkadot-dev-clean-build",
     "lint": "polkadot-dev-run-lint",
