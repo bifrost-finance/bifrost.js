@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/api",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "description": "Promise and RxJS wrappers around the Bifrost JS RPC",
   "main": "index.js",
   "keywords": [
@@ -14,6 +14,9 @@
   ],
   "contributors": [],
   "license": "Apache-2.0",
+  "scripts": {
+    "build": "tsc --build tsconfig.json"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
@@ -27,8 +30,12 @@
   },
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/api#readme",
   "dependencies": {
-    "@babel/runtime": "^7.17.0",
-    "@bifrost-finance/types": "^1.7.2",
-    "@polkadot/api": "^7.6.1"
+    "@bifrost-finance/types": "1.8.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  },
+  "peerDependencies": {
+    "@polkadot/api": "^10.7.3"
   }
 }

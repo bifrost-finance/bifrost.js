@@ -1,3 +1,7 @@
+import '@polkadot/types/lookup';
+import './augment/api';
+import './lookup/bifrost';
+
 import {
   typesBundle as bifrostTypesBundle,
   types as bifrostTypes,
@@ -13,11 +17,7 @@ import {
   DefinitionRpcSub
 } from '@polkadot/types/types';
 
-import './interfaces/augment-api-consts';
-import './interfaces/augment-api-query';
-import './interfaces/augment-api-rpc';
-import './interfaces/augment-api-tx';
-import './interfaces/augment-types';
+export * as lookupTypes from './lookup/bifrost';
 
 export const types: RegistryTypes = bifrostTypes;
 

@@ -506,10 +506,6 @@
     "ShareWeight": "Balance",
     "Currency": "CurrencyIdOf",
     "Amount": "AmountOf",
-    "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
-    "OrmlTokensBalanceLock": "BalanceLock",
-    "OrmlTokensAccountData": "OrmlAccountData",
-    "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
     "TransferOriginType": {
         "_enum": {
             "FromSelf": 0,

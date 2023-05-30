@@ -2,10 +2,8 @@
 /* eslint-disable */
 
 import type { Balance, Releases } from '@bifrost-finance/types/interfaces/runtime';
-import type { OrmlAccountData } from '@open-web3/orml-types/interfaces/tokens';
-import type { Enum, Struct, u128, u16, u32, u8 } from '@polkadot/types-codec';
+import type { Enum, Struct, u16, u32, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
-import type { BalanceLock } from '@polkadot/types/interfaces/balances';
 import type { LeasePeriod, ParaId } from '@polkadot/types/interfaces/parachains';
 
 /** @name Amount */
@@ -65,18 +63,6 @@ export interface MinimumsMaximums extends Struct {
   readonly delegators_maximum: u16;
   readonly validators_maximum: u16;
 }
-
-/** @name NodePrimitivesCurrencyCurrencyId */
-export interface NodePrimitivesCurrencyCurrencyId extends CurrencyId {}
-
-/** @name OrmlTokensAccountData */
-export interface OrmlTokensAccountData extends OrmlAccountData {}
-
-/** @name OrmlTokensBalanceLock */
-export interface OrmlTokensBalanceLock extends BalanceLock {}
-
-/** @name OrmlTokensReserveData */
-export interface OrmlTokensReserveData extends ITuple<[Currency, u8, Amount, u128]> {}
 
 /** @name ShareWeight */
 export interface ShareWeight extends Balance {}

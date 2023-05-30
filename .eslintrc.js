@@ -1,9 +1,8 @@
-const base = require('@open-web3/dev-config/config/eslint.cjs');
+const base = require('@polkadot/dev/config/eslint.cjs');
 
 module.exports = {
   ...base,
   ignorePatterns: [
-    '.eslintrc.cjs',
     '.eslintrc.js',
     '.github/**',
     '.vscode/**',
@@ -13,11 +12,16 @@ module.exports = {
     '**/node_modules/*'
   ],
   parserOptions: {
-    ...base.parserOptions,
-    project: ['./tsconfig.json']
+    project: ['./tsconfig.eslint.json']
   },
   rules: {
     ...base.rules,
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    'import/extensions': 'off',
+    'header/header': 'off',
+    'sort-keys': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
   }
 };

@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "lib": ["esnext"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "target": "esnext",
+    "skipLibCheck": true,
+    "strict": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "composite": true,
+    "paths": {
+      "@bifrost-finance/api": ["packages/api/src"],
+      "@bifrost-finance/api/*": ["packages/api/src/*"],
+      "@bifrost-finance/types": ["packages/types/src"],
+      "@bifrost-finance/types/*": ["packages/types/src/*"],
+      "@bifrost-finance/type-definitions": ["packages/type-definitions/src"],
+      "@bifrost-finance/type-definitions/*": ["packages/type-definitions/src/*"],
+      "@polkadot/types/lookup": ["packages/types/src/lookup/types-bifrost.ts"],
+      "@polkadot/api/augment": ["packages/types/src/argument/api.ts"],
+    }
+  },
+  "exclude": [
+    "build/**/*",
+    "**/build/**/*"
+  ]
+}

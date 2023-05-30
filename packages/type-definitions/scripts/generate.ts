@@ -1,4 +1,4 @@
-import { types, typesBundleForPolkadot, rpc } from '@bifrost-finance/type-definitions';
+import { rpc, types, typesBundleForPolkadot } from '@bifrost-finance/type-definitions';
 import fs from 'fs';
 
 fs.writeFileSync('packages/type-definitions/src/json/types.json', JSON.stringify(types, null, 4));

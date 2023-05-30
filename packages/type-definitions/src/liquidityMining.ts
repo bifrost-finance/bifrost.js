@@ -42,7 +42,7 @@ export default {
       block_startup: 'Option<BlockNumber>',
       redeem_limit_time: 'BlockNumber',
       unlock_limit_nums: 'u32',
-      pending_unlock_nums: 'u32',
+      pending_unlock_nums: 'u32'
     },
     PoolType: {
       _enum: {
@@ -64,7 +64,7 @@ export default {
       deposit: 'Balance',
       gain_avgs: 'BTreeMap<CurrencyId, FixedU128>',
       update_b: 'BlockNumber',
-      pending_unlocks:'Vec<(BlockNumber, Balance)>',
+      pending_unlocks: 'Vec<(BlockNumber, Balance)>'
     },
     RewardData: {
       total: 'Balance',

@@ -1,41 +1,47 @@
 {
-  "repository": "https://github.com/bifrost-finance/bifrost.js",
   "author": "Edwin Wang <lark930@gmail.com>",
-  "license": "Apache-2",
-  "private": true,
+  "bugs": "https://github.com/bifrost-finance/bifrost.js/issues",
   "engines": {
-    "yarn": "^1.10.1"
+    "node": ">=16"
   },
+  "homepage": "https://github.com/bifrost-finance/bifrost.js#readme",
+  "license": "Apache-2.0",
+  "packageManager": "yarn@3.5.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bifrost-finance/bifrost.js.git"
+  },
+  "sideEffects": false,
   "workspaces": [
     "packages/*"
   ],
-  "resolutions": {
-    "@polkadot/api": "^7.6.1",
-    "@polkadot/types": "^7.6.1"
-  },
   "scripts": {
-    "build": "yarn build:interfaces && polkadot-dev-build-ts",
-    "build:release": "polkadot-dev-build-ts",
-    "build:interfaces": "node -r ts-node/register -r tsconfig-paths/register packages/types/scripts/generate.ts && node -r ts-node/register -r tsconfig-paths/register packages/type-definitions/scripts/generate.ts",
-    "lint": "polkadot-dev-run-lint",
-    "clean": "polkadot-dev-clean-build",
-    "postinstall": "polkadot-dev-yarn-only",
-    "test": "polkadot-dev-run-test --coverage",
+    "build": "yarn build:interfaces; yarn workspaces foreach -pvit run build",
+    "build:interfaces": "ts-node -r tsconfig-paths/register packages/types/scripts/generateTypes.ts && ts-node -r tsconfig-paths/register packages/type-definitions/scripts/generate.ts",
+    "build:release": "polkadot-ci-ghact-build",
     "check-deps": "./node_modules/@open-web3/util/scripts/check-deps.js yarn.lock @polkadot/ @open-web3/",
+    "clean": "polkadot-dev-clean-build",
+    "lint": "polkadot-dev-run-lint",
+    "postinstall": "polkadot-dev-yarn-only",
+    "test": "echo noop",
     "update-metadata": "ts-node --project ./tsconfig.json packages/types/scripts/updateMetadata.ts"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/register": "^7.13.6",
-    "@babel/runtime": "^7.14.0",
-    "@open-web3/dev-config": "^0.2.3",
-    "@open-web3/util": "^1.0.2-3",
-    "@types/jest": "^25.2.3",
-    "ts-node": "^8.6.1",
-    "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.3.5"
   },
   "dependencies": {
     "lerna": "^5.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/register": "^7.21.0",
+    "@babel/runtime": "^7.21.5",
+    "@open-web3/util": "^2.0.1",
+    "@polkadot/api": "^10.7.3",
+    "@polkadot/dev": "^0.75.11",
+    "@polkadot/typegen": "^10.7.3",
+    "@types/jest": "^29.5.1",
+    "jest-config": "^29.5.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.4"
   }
 }

@@ -1,6 +1,6 @@
 export default {
   rpc: {},
   types: {
-    UnlockId: "U32"
+    UnlockId: 'U32'
   }
 };

@@ -1,4 +1,10 @@
-import { Definitions } from '@polkadot/types/types';
+import type { Definitions } from '@polkadot/types/types';
+
 import primitives from '@bifrost-finance/type-definitions/primitives';
 
-export default primitives as Definitions;
+export default {
+  rpc: {},
+  types: {
+    ...primitives.types
+  }
+} as Definitions;

@@ -48,6 +48,28 @@
                         "section": "oracle"
                     }
                 },
+                "tokens": {
+                    "queryExistentialDeposit": {
+                        "description": "Query Existential Deposit for a given currency.",
+                        "params": [
+                            {
+                                "name": "currencyId",
+                                "type": "CurrencyId"
+                            },
+                            {
+                                "name": "at",
+                                "type": "BlockHash",
+                                "isHistoric": true,
+                                "isOptional": true
+                            }
+                        ],
+                        "type": "NumberOrHex",
+                        "isSubscription": false,
+                        "jsonrpc": "tokens_queryExistentialDeposit",
+                        "method": "queryExistentialDeposit",
+                        "section": "tokens"
+                    }
+                },
                 "farming": {
                     "getFarmingRewards": {
                         "description": "Get farming rewards",
@@ -897,10 +919,6 @@
                         "ShareWeight": "Balance",
                         "Currency": "CurrencyIdOf",
                         "Amount": "AmountOf",
-                        "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
-                        "OrmlTokensBalanceLock": "BalanceLock",
-                        "OrmlTokensAccountData": "OrmlAccountData",
-                        "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
                         "TransferOriginType": {
                             "_enum": {
                                 "FromSelf": 0,
@@ -1475,10 +1493,6 @@
                         "ShareWeight": "Balance",
                         "Currency": "CurrencyIdOf",
                         "Amount": "AmountOf",
-                        "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
-                        "OrmlTokensBalanceLock": "BalanceLock",
-                        "OrmlTokensAccountData": "OrmlAccountData",
-                        "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
                         "TransferOriginType": {
                             "_enum": {
                                 "FromSelf": 0,
@@ -1597,6 +1611,28 @@
                         "section": "oracle"
                     }
                 },
+                "tokens": {
+                    "queryExistentialDeposit": {
+                        "description": "Query Existential Deposit for a given currency.",
+                        "params": [
+                            {
+                                "name": "currencyId",
+                                "type": "CurrencyId"
+                            },
+                            {
+                                "name": "at",
+                                "type": "BlockHash",
+                                "isHistoric": true,
+                                "isOptional": true
+                            }
+                        ],
+                        "type": "NumberOrHex",
+                        "isSubscription": false,
+                        "jsonrpc": "tokens_queryExistentialDeposit",
+                        "method": "queryExistentialDeposit",
+                        "section": "tokens"
+                    }
+                },
                 "farming": {
                     "getFarmingRewards": {
                         "description": "Get farming rewards",
@@ -2447,10 +2483,6 @@
                         "ShareWeight": "Balance",
                         "Currency": "CurrencyIdOf",
                         "Amount": "AmountOf",
-                        "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
-                        "OrmlTokensBalanceLock": "BalanceLock",
-                        "OrmlTokensAccountData": "OrmlAccountData",
-                        "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
                         "TransferOriginType": {
                             "_enum": {
                                 "FromSelf": 0,
@@ -3026,10 +3058,6 @@
                         "ShareWeight": "Balance",
                         "Currency": "CurrencyIdOf",
                         "Amount": "AmountOf",
-                        "NodePrimitivesCurrencyCurrencyId": "CurrencyId",
-                        "OrmlTokensBalanceLock": "BalanceLock",
-                        "OrmlTokensAccountData": "OrmlAccountData",
-                        "OrmlTokensReserveData": "(Currency, u8, Amount, u128)",
                         "TransferOriginType": {
                             "_enum": {
                                 "FromSelf": 0,

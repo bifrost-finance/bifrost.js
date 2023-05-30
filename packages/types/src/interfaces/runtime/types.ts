@@ -3,12 +3,12 @@
 
 import type { CurrencyId } from '@bifrost-finance/types/interfaces/primitives';
 import type { Price } from '@open-web3/orml-types/interfaces/traits';
-import type { GenericAccountId, GenericAccountIndex, GenericBlock, GenericCall, GenericConsensusEngineId, GenericEthereumAccountId, GenericLookupSource, GenericMultiAddress, StorageKey } from '@polkadot/types';
+import type { GenericAccountId32, GenericAccountId33, GenericAccountIndex, GenericBlock, GenericCall, GenericConsensusEngineId, GenericEthereumAccountId, GenericLookupSource, GenericMultiAddress, StorageKey } from '@polkadot/types';
 import type { Bytes, Compact, DoNotConstruct, Enum, Int, Null, Option, Struct, U8aFixed, UInt, Vec, u16, u32, u64, u8 } from '@polkadot/types-codec';
 import type { ITuple } from '@polkadot/types-codec/types';
 import type { AuthorityId } from '@polkadot/types/interfaces/consensus';
 import type { Signature } from '@polkadot/types/interfaces/extrinsics';
-import type { SystemOrigin } from '@polkadot/types/interfaces/system';
+import type { Event, SystemOrigin } from '@polkadot/types/interfaces/system';
 
 /** @name AccountId */
 export interface AccountId extends AccountId32 {}
@@ -17,7 +17,10 @@ export interface AccountId extends AccountId32 {}
 export interface AccountId20 extends GenericEthereumAccountId {}
 
 /** @name AccountId32 */
-export interface AccountId32 extends GenericAccountId {}
+export interface AccountId32 extends GenericAccountId32 {}
+
+/** @name AccountId33 */
+export interface AccountId33 extends GenericAccountId33 {}
 
 /** @name AccountIdOf */
 export interface AccountIdOf extends AccountId {}
@@ -311,11 +314,17 @@ export interface Releases extends Enum {
   readonly type: 'V1' | 'V2' | 'V3' | 'V4' | 'V5' | 'V6' | 'V7' | 'V8' | 'V9' | 'V10';
 }
 
+/** @name RuntimeCall */
+export interface RuntimeCall extends Call {}
+
 /** @name RuntimeDbWeight */
 export interface RuntimeDbWeight extends Struct {
   readonly read: Weight;
   readonly write: Weight;
 }
+
+/** @name RuntimeEvent */
+export interface RuntimeEvent extends Event {}
 
 /** @name Seal */
 export interface Seal extends ITuple<[ConsensusEngineId, Bytes]> {}
@@ -341,8 +350,20 @@ export interface SignedBlockWithJustifications extends Struct {
 /** @name Slot */
 export interface Slot extends u64 {}
 
+/** @name SlotDuration */
+export interface SlotDuration extends u64 {}
+
 /** @name StorageData */
 export interface StorageData extends Bytes {}
+
+/** @name StorageInfo */
+export interface StorageInfo extends Struct {
+  readonly palletName: Bytes;
+  readonly storage_name: Bytes;
+  readonly prefix: Bytes;
+  readonly maxValues: Option<u32>;
+  readonly maxSize: Option<u32>;
+}
 
 /** @name StorageProof */
 export interface StorageProof extends Struct {
@@ -357,6 +378,9 @@ export interface TransactionInfo extends Struct {
   readonly blockChunks: u32;
 }
 
+/** @name TransactionLongevity */
+export interface TransactionLongevity extends u64 {}
+
 /** @name TransactionPriority */
 export interface TransactionPriority extends u64 {}
 
@@ -365,6 +389,9 @@ export interface TransactionStorageProof extends Struct {
   readonly chunk: Bytes;
   readonly proof: Vec<Bytes>;
 }
+
+/** @name TransactionTag */
+export interface TransactionTag extends Bytes {}
 
 /** @name U32F32 */
 export interface U32F32 extends UInt {}
@@ -376,9 +403,21 @@ export interface ValidatorId extends AccountId {}
 export interface ValidatorIdOf extends ValidatorId {}
 
 /** @name Weight */
-export interface Weight extends u64 {}
+export interface Weight extends WeightV2 {}
 
 /** @name WeightMultiplier */
 export interface WeightMultiplier extends Fixed64 {}
+
+/** @name WeightV0 */
+export interface WeightV0 extends u32 {}
+
+/** @name WeightV1 */
+export interface WeightV1 extends u64 {}
+
+/** @name WeightV2 */
+export interface WeightV2 extends Struct {
+  readonly refTime: Compact<u64>;
+  readonly proofSize: Compact<u64>;
+}
 
 export type PHANTOM_RUNTIME = 'runtime';

@@ -1,0 +1,10 @@
+import '@polkadot/types/lookup';
+import './augment/api';
+import './lookup/bifrost';
+import { OverrideBundleType, OverrideModuleType, RegistryTypes, DefinitionRpc, DefinitionRpcSub } from '@polkadot/types/types';
+export * as lookupTypes from './lookup/bifrost';
+export declare const types: RegistryTypes;
+export declare const rpc: Record<string, Record<string, DefinitionRpc | DefinitionRpcSub>>;
+export declare const typesAlias: Record<string, OverrideModuleType>;
+export declare const typesBundle: OverrideBundleType;
+export declare const signedExtensions: import("@polkadot/types/extrinsic/signedExtensions/types").ExtDef;
