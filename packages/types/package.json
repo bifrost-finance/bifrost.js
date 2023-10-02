@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/types",
-  "version": "1.8.4",
+  "version": "1.9.0",
   "description": "Bifrost JS types",
   "keywords": [
     "Polkadot",
@@ -29,7 +29,7 @@
     "build": "tsc --build tsconfig.json"
   },
   "dependencies": {
-    "@bifrost-finance/type-definitions": "^1.8.4",
+    "@bifrost-finance/type-definitions": "^1.9.0",
     "@open-web3/orml-types": "^2.0.1"
   },
   "peerDependencies": {

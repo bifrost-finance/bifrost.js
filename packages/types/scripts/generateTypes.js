@@ -96,7 +96,7 @@ function main() {
         return content.replace('OrmlUtilitiesOrderedSet,', '');
     });
     (0, generate_1.generateDefaultRpc)(path_1.default.join(augmentPath, 'api-rpc.ts'), { [pkg]: userDefs });
-    (0, generate_1.generateDefaultTx)(path_1.default.join(augmentPath, 'api-tx.ts'), static_latest_1.default, allDefs, false, customLookupDefinitions);
+    // generateDefaultTx(path.join(augmentPath, 'api-tx.ts'), metadata, allDefs, false, customLookupDefinitions);
     (0, generate_1.generateDefaultRuntime)(path_1.default.join(augmentPath, 'api-runtime.ts'), static_latest_1.default, allDefs, false, customLookupDefinitions);
     (0, util_1.writeFile)(path_1.default.join(augmentPath, 'api.ts'), () => [
         (0, util_1.HEADER)('chain'),
