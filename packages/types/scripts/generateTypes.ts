@@ -87,7 +87,7 @@ export function main () {
   });
 
   generateDefaultRpc(path.join(augmentPath, 'api-rpc.ts'), {[pkg]: userDefs});
-  generateDefaultTx(path.join(augmentPath, 'api-tx.ts'), metadata, allDefs, false, customLookupDefinitions);
+  // generateDefaultTx(path.join(augmentPath, 'api-tx.ts'), metadata, allDefs, false, customLookupDefinitions);
 
   generateDefaultRuntime(path.join(augmentPath, 'api-runtime.ts'), metadata, allDefs, false, customLookupDefinitions);
   writeFile(path.join(augmentPath, 'api.ts'), (): string =>

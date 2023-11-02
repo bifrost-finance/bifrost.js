@@ -644,7 +644,7 @@ declare module '@polkadot/rpc-core/types/jsonrpc' {
       /**
        * Get current vtoken mint rate.
        **/
-      getVtokenMintRate: AugmentedRpc<(asset_id: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Text>>;
+      getVtokenMintRate: AugmentedRpc<(asset_id: CurrencyId | { Native: any } | { VToken: any } | { Token: any } | { Stable: any } | { VSToken: any } | { VSBond: any } | { LPToken: any } | { ForeignAsset: any } | { Token2: any } | { VToken2: any } | { VSToken2: any } | { VSBond2: any } | { StableLpToken: any } | { Blp: any } | string | Uint8Array, at?: BlockHash | string | Uint8Array) => Observable<Text>>;
     };
     web3: {
       /**

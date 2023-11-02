@@ -32,7 +32,7 @@ export default {
         VSToken2: 'u8',
         VSBond2: 'u8',
         StableLpToken: 'u32',
-        BLP: 'u32'
+        Blp: 'u32'
       }
     },
     CurrencyIdOf: 'CurrencyId',

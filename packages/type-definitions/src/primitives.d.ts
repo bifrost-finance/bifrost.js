@@ -32,7 +32,7 @@ declare const _default: {
                 VSToken2: string;
                 VSBond2: string;
                 StableLpToken: string;
-                BLP: string;
+                Blp: string;
             };
         };
         CurrencyIdOf: string;

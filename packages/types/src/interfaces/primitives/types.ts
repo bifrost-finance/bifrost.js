@@ -43,7 +43,9 @@ export interface CurrencyId extends Enum {
   readonly asVsBond2: u8;
   readonly isStableLpToken: boolean;
   readonly asStableLpToken: u32;
-  readonly type: 'Native' | 'VToken' | 'Token' | 'Stable' | 'VsToken' | 'VsBond' | 'LpToken' | 'ForeignAsset' | 'Token2' | 'VToken2' | 'VsToken2' | 'VsBond2' | 'StableLpToken';
+  readonly isBlp: boolean;
+  readonly asBlp: u32;
+  readonly type: 'Native' | 'VToken' | 'Token' | 'Stable' | 'VsToken' | 'VsBond' | 'LpToken' | 'ForeignAsset' | 'Token2' | 'VToken2' | 'VsToken2' | 'VsBond2' | 'StableLpToken' | 'Blp';
 }
 
 /** @name CurrencyIdOf */

@@ -909,7 +909,8 @@
                                 "VToken2": "u8",
                                 "VSToken2": "u8",
                                 "VSBond2": "u8",
-                                "StableLpToken": "u32"
+                                "StableLpToken": "u32",
+                                "Blp": "u32"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
@@ -1483,7 +1484,8 @@
                                 "VToken2": "u8",
                                 "VSToken2": "u8",
                                 "VSBond2": "u8",
-                                "StableLpToken": "u32"
+                                "StableLpToken": "u32",
+                                "Blp": "u32"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
@@ -2473,7 +2475,8 @@
                                 "VToken2": "u8",
                                 "VSToken2": "u8",
                                 "VSBond2": "u8",
-                                "StableLpToken": "u32"
+                                "StableLpToken": "u32",
+                                "Blp": "u32"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
@@ -3048,7 +3051,8 @@
                                 "VToken2": "u8",
                                 "VSToken2": "u8",
                                 "VSBond2": "u8",
-                                "StableLpToken": "u32"
+                                "StableLpToken": "u32",
+                                "Blp": "u32"
                             }
                         },
                         "CurrencyIdOf": "CurrencyId",
