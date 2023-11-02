@@ -33,7 +33,8 @@ exports.default = {
                 VToken2: 'u8',
                 VSToken2: 'u8',
                 VSBond2: 'u8',
-                StableLpToken: 'u32'
+                StableLpToken: 'u32',
+                BLP: 'u32'
             }
         },
         CurrencyIdOf: 'CurrencyId',
