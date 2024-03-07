@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/types",
-  "version": "1.11.2",
+  "version": "1.11.9",
   "description": "Bifrost JS types",
   "keywords": [
     "Polkadot",
@@ -25,20 +25,17 @@
     "url": "https://github.com/bifrost-finance/bifrost.js/issues"
   },
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/types#readme",
-  "files": [
-    "build"
-  ],
   "scripts": {
     "build": "tsc --build tsconfig.json"
   },
   "dependencies": {
-    "@bifrost-finance/type-definitions": "^1.11.2",
     "@open-web3/orml-types": "^2.0.1"
   },
   "peerDependencies": {
     "@polkadot/api": "^10.7.3"
   },
   "devDependencies": {
+    "@bifrost-finance/type-definitions": "^1.11.9",
     "@types/websocket": "^1.0.5",
     "typescript": "^5.0.4",
     "websocket": "^1.0.34"

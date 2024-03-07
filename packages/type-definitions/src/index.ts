@@ -26,6 +26,7 @@ import runtime from './runtime';
 import liquidityMining from './liquidityMining';
 import farming from './farming';
 import stablePool from './stablePool'
+import lend_market from './lend_market'
 
 import bifrostVersioned from './spec/bifrost';
 import asgardVersioned from './spec/asgard';
@@ -55,7 +56,8 @@ const bifrostDefs = {
   zenlinkProtocol,
   primitives,
   liquidityMining,
-  stablePool
+  stablePool,
+  lend_market
 };
 
 export const types = {

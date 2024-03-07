@@ -1,6 +1,6 @@
 {
   "name": "@bifrost-finance/type-definitions",
-  "version": "1.11.2",
+  "version": "1.11.9",
   "description": "Polkadot.js type definations for Bifrost Network",
   "main": "index.js",
   "author": "Edwin Wang <lark930@gmail.com>",
@@ -16,9 +16,6 @@
   "bugs": {
     "url": "https://github.com/bifrost-finance/bifrost.js/issues"
   },
-  "files": [
-    "build"
-  ],
   "homepage": "https://github.com/bifrost-finance/bifrost.js/tree/master/packages/api#readme",
   "scripts": {
     "build": "tsc --build tsconfig.json"
